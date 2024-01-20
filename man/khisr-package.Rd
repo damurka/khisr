@@ -6,7 +6,19 @@
 \alias{khisr-package}
 \title{khisr: Retrieve Data from Kenya Health Information System (KHIS)}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Tool providing powerful interface for efficient data retrieval from the Kenya Health Information System (KHIS) \url{https://hiskenya.org}. KHIS is a cornerstone in health information management in Kenya.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://khisr.damurka.com}
+  \item \url{https://github.com/damurka/khisr}
+  \item \url{https://khisr.damurka.com/}
+  \item Report bugs at \url{https://github.com/damurka/khisr/issues}
+}
+
 }
 \author{
 \strong{Maintainer}: David Kariuki \email{hello@damurka.com} (\href{https://orcid.org/0009-0003-6159-1107}{ORCID}) [copyright holder]
