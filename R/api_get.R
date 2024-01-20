@@ -37,7 +37,7 @@ api_get <- function(endpoint,
 
     check_required(endpoint, call = call)
 
-    params <- list2(
+    params <- list(
         ...,
         paging = FALSE,
         ignoreLimit = TRUE
