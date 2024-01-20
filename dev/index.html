@@ -77,35 +77,33 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9"><div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Code chunks will not be evaluated, because<span class="sc">:</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Set credential unsuccessful.</span></code></pre></div>
-<div class="section level1">
+  <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header">
 <img src="logo.png" class="logo" alt=""><h1 id="khisr-">khisr 
 <a class="anchor" aria-label="anchor" href="#khisr-"></a>
 </h1>
 </div>
 <!-- badges: start -->
-<!-- badges: end -->
+
 <p>The khisr package is designed to seamlessly integrate with the Kenya Health Information System (KHIS), providing R users with a powerful interface for efficient data retrieval. KHIS is a cornerstone in health information management in Kenya, and khisr simplifies the process of accessing and working with KHIS data directly within the R environment.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>You can install the development version of khisr like so:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#install.packages('pak')</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">'damurka/khisr'</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="load-khisr-package">Load khisr package<a class="anchor" aria-label="anchor" href="#load-khisr-package"></a>
 </h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://khisr.damurka.com">"khisr"</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="auth">Auth<a class="anchor" aria-label="anchor" href="#auth"></a>
 </h3>
 <p>khisr will, by default, help you interact with KHIS as an authenticated user. Before calling any function that makes an API call you need credentials to <a href="https://hiskenya.org" class="external-link">KHIS</a>. You will be expected to set this credential to download data.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Set the credentials using username and password</span></span>
 <span><span class="fu"><a href="reference/khis_cred.html">khis_cred</a></span><span class="op">(</span>username <span class="op">=</span> <span class="st">'KHIS username'</span>, password <span class="op">=</span> <span class="st">'KHIS password'</span><span class="op">)</span></span>
 <span></span>
@@ -121,7 +119,6 @@
 <p>Please note that the khisr project is released with a <a href="https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
-
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
@@ -159,7 +156,13 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/damurka/khisr/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/damurka/khisr/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://app.codecov.io/gh/damurka/khisr?branch=main" class="external-link"><img src="https://codecov.io/gh/damurka/khisr/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>
