@@ -1,7 +1,7 @@
 url: https://khisr.damurka.com
 
 development:
-  mode: auto
+  mode: release
 
 template:
   bootstrap: 5
