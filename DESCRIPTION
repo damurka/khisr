@@ -9,6 +9,9 @@ Authors@R:
     person("David", "Kariuki", , "hello@damurka.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0003-6159-1107"))
 License: MIT + file LICENSE
+URL: https://khisr.damurka.com,
+    https://github.com/damurka/khisr
+BugReports: https://github.com/damurka/khisr/issues
 Imports: 
     dplyr,
     tidyr,

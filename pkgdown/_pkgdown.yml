@@ -1,4 +1,27 @@
-url: ~
+url: https://khisr.damurka.com
+
+development:
+  mode: auto
+
 template:
   bootstrap: 5
+  bslib:
+    primary: "#0054AD"
+    border-radius: 0.5rem
+    btn-border-radius: 0.25rem
 
+articles:
+  - title: Common Uses
+    navbar: ~
+    contents:
+    - khisr
+
+reference:
+  - title: "Authorization Credentials"
+    desc: >
+      Set and securely store the KHIS authorization credentials
+    contents:
+      - khis_cred
+      - khis_has_cred
+      - khis_cred_clear
+      - khis_username
