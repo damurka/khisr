@@ -39,11 +39,11 @@ api_get <- function(endpoint,
 
     params <- list2(
         ...,
-        paging = FALSE,
-        ignoreLimit = TRUE
+        paging = 'false',
+        ignoreLimit = 'true'
     )
 
-    resp <- request('https://hiskenya.org/api') %>%
+    resp <- request(khis_base_url()) %>%
         req_url_path_append(endpoint) %>%
         req_url_query(!!!params) %>%
         req_headers('Accept' = 'application/json') %>%

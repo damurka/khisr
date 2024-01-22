@@ -242,7 +242,7 @@ metadata_filter <- function(property,
 
 '%.^like%' <- function(property, values) {
     property <- as.character(ensym(property))
-    metadata_filter(property, '!ilike', values)
+    metadata_filter(property, '$ilike', values)
 }
 
 #' @rdname metadata-filter

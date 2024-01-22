@@ -26,169 +26,51 @@
 \alias{get_dimensions}
 \title{Get Metadata from Specified Endpoints}
 \usage{
-get_categories(
-  values,
-  by = c("id", "name", "code", "shortName"),
-  fields = NULL,
-  ...
-)
+get_categories(..., fields = c("id", "name"))
 
-get_category_combos(
-  values,
-  by = c("id", "name", "code", "shortName"),
-  fields = NULL,
-  ...
-)
+get_category_combos(..., fields = c("id", "name"))
 
-get_category_option_combos(
-  values,
-  by = c("id", "name", "code", "shortName"),
-  fields = NULL,
-  ...
-)
+get_category_option_combos(..., fields = c("id", "name"))
 
-get_category_option_group_sets(
-  values,
-  by = c("id", "name", "code", "shortName"),
-  fields = NULL,
-  ...
-)
+get_category_option_group_sets(..., fields = c("id", "name"))
 
-get_category_option_groups(
-  values,
-  by = c("id", "name", "code", "shortName"),
-  fields = NULL,
-  ...
-)
+get_category_option_groups(..., fields = c("id", "name"))
 
-get_category_options(
-  values,
-  by = c("id", "name", "code", "shortName"),
-  fields = NULL,
-  ...
-)
+get_category_options(..., fields = c("id", "name"))
 
-get_data_element_group_sets(
-  values,
-  by = c("id", "name", "code", "shortName"),
-  fields = NULL,
-  ...
-)
+get_data_element_group_sets(v..., fields = c("id", "name"))
 
-get_data_element_groups(
-  values,
-  by = c("id", "name", "code", "shortName"),
-  fields = NULL,
-  ...
-)
+get_data_element_groups(..., fields = c("id", "name"))
 
-get_data_elements(
-  values,
-  by = c("id", "name", "code", "shortName"),
-  fields = NULL,
-  ...
-)
+get_data_elements(..., fields = c("id", "name"))
 
-get_data_sets(
-  values,
-  by = c("id", "name", "code", "shortName"),
-  fields = NULL,
-  ...
-)
+get_data_sets(..., fields = c("id", "name"))
 
-get_user_groups(
-  values,
-  by = c("id", "name", "code", "shortName"),
-  fields = NULL,
-  ...
-)
+get_user_groups(..., fields = c("id", "name"))
 
-get_indicator_group_sets(
-  values,
-  by = c("id", "name", "code", "shortName"),
-  fields = NULL,
-  ...
-)
+get_indicator_group_sets(..., fields = c("id", "name"))
 
-get_indicator_groups(
-  values,
-  by = c("id", "name", "code", "shortName"),
-  fields = NULL,
-  ...
-)
+get_indicator_groups(..., fields = c("id", "name"))
 
-get_indicators(
-  values,
-  by = c("id", "name", "code", "shortName"),
-  fields = NULL,
-  ...
-)
+get_indicators(..., fields = c("id", "name"))
 
-get_option_group_sets(
-  values,
-  by = c("id", "name", "code", "shortName"),
-  fields = NULL,
-  ...
-)
+get_option_group_sets(..., fields = c("id", "name"))
 
-get_option_groups(
-  values,
-  by = c("id", "name", "code", "shortName"),
-  fields = NULL,
-  ...
-)
+get_option_groups(..., fields = c("id", "name"))
 
-get_option_sets(
-  values,
-  by = c("id", "name", "code", "shortName"),
-  fields = NULL,
-  ...
-)
+get_option_sets(..., fields = c("id", "name"))
 
-get_options(
-  values,
-  by = c("id", "name", "code", "shortName"),
-  fields = NULL,
-  ...
-)
+get_options(..., fields = c("id", "name"))
 
-get_organisation_unit_groupsets(
-  values,
-  by = c("id", "name", "code", "shortName"),
-  fields = NULL,
-  ...
-)
+get_organisation_unit_groupsets(..., fields = c("id", "name"))
 
-get_organisation_unit_groups(
-  values,
-  by = c("id", "name", "code", "shortName"),
-  fields = NULL,
-  ...
-)
+get_organisation_unit_groups(..., fields = c("id", "name"))
 
-get_organisation_units(
-  values,
-  by = c("id", "name", "code", "shortName"),
-  fields = NULL,
-  ...
-)
+get_organisation_units(..., fields = c("id", "name"))
 
-get_dimensions(
-  values,
-  by = c("id", "name", "code", "shortName"),
-  fields = NULL,
-  ...
-)
+get_dimensions(..., fields = c("id", "name"))
 }
 \arguments{
-\item{values}{The values to filter against.}
-
-\item{by}{The property on the metadata you want to filter on. The options
-include \code{'id'} (default), \code{'name'},  \code{'code'} and \verb{'shortName}}
-
-\item{fields}{The specific columns to be returned in the tibble. The default
-NULL will return the \code{"id"} and \code{"name"}.}
-
 \item{...}{
   Arguments passed on to \code{\link[=get_metadata]{get_metadata}}
   \describe{
@@ -203,6 +85,8 @@ NULL will return the \code{"id"} and \code{"name"}.}
 }}
     \item{\code{timeout}}{Maximum number of seconds to wait for the API response.}
   }}
+
+\item{fields}{The specific columns to be returned in the tibble.}
 }
 \value{
 A tibble with the KHIS metadata response.

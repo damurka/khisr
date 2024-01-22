@@ -9,10 +9,12 @@
 #' @noRd
 
 init_AuthCred <- function(username = NA_character_,
-                          password = NULL) {
+                          password = NULL,
+                          base_url = 'https://hiskenya.org/api') {
     AuthCred$new(
         username = username,
-        password = password
+        password = password,
+        base_url = base_url
     )
 }
 
@@ -36,19 +38,26 @@ AuthCred <- R6::R6Class('AuthCred', list(
     username = NULL,
     #' @field password The KHIS password.
     password = NULL,
+    #' @field base_url The URL to the server
+    base_url = NULL,
+
     #' @description Create a new AuthCred
     #' @details For more details on the parameters, see [init_AuthCred()]
     initialize = function(username = NA_character_,
-                          password = NULL) {
+                          password = NULL,
+                          base_url = NULL) {
 
-        if (!rlang::is_scalar_character(username) || !is.null(password)) {
-            khis_abort(
-                c("x" = "Username has not been provided")
-            )
+        if (!is_scalar_character(username) || !is.null(password)) {
+            khis_abort(c("x" = "username has to be a scalar character."))
+        }
+
+        if (!is_scalar_character(base_url) || is_empty(base_url)) {
+            khis_abort(c("x" = "base_url has to be a scalar character."))
         }
 
         self$username <- username
         self$password <- password
+        self$base_url <- base_url
     },
     #' @description Set the KHIS username
     #' @param value The KHIS username
@@ -73,6 +82,19 @@ AuthCred <- R6::R6Class('AuthCred', list(
     #' @description Get password
     get_password = function() {
         self$password
+    },
+    #' @description Get the base URL API
+    get_base_url = function() {
+        self$base_url
+    },
+    #' @description Set the KHIS username
+    #' @param value The KHIS username
+    set_base_url = function(value) {
+        if (!is_scalar_character(value) || is_empty(value)) {
+            khis_abort(c("x" = "base_url has not been provided"))
+        }
+        self$base_url <- value
+        invisible(self)
     },
     #' @description Report if we have credentials
     has_cred = function() {

@@ -30,7 +30,9 @@
 
 khis_cred <- function(config_path = NULL,
                       username = NULL,
-                      password = NULL) {
+                      password = NULL,
+                      base_url = NULL) {
+
     if (is.null(config_path) && is.null(username)) {
         khis_abort(
             message = c(
@@ -75,6 +77,10 @@ khis_cred <- function(config_path = NULL,
 
     .auth$set_username(username)
     .auth$set_password(password)
+
+    if (!is.null(base_url)) {
+        .auth$set_base_url(base_url)
+    }
 
     cli::cli_inform(c('i' = 'The credentials have been set.'))
 
@@ -218,6 +224,27 @@ khis_cred_clear <- function() {
 
 khis_username <- function() {
     .auth$get_username()
+}
+
+#' Produces the Configured KHIS API Base URI
+#'
+#' @return the KHIS base URI
+#' @export
+#'
+#' @examples
+#'
+#' # Set the credentials
+#' khis_cred(username = 'KHIS username', password = 'KHIS password')
+#'
+#' # View the username expect 'KHIS username'
+#' khis_base_url()
+
+khis_base_url <- function() {
+    base_url <- .auth$get_base_url()
+    if (is_empty(base_url) || nchar(base_url) == 0) {
+        khis_abort(c('x' = 'The base url has not been set.'))
+    }
+    return(base_url)
 }
 
 

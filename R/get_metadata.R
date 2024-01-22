@@ -46,9 +46,10 @@ get_metadata <- function(endpoint,
     check_string_vector(fields)
 
     filters <- NULL
-    if (missing(...)) {
+    if (!missing(...)) {
         filters <- list2(...)
-        filters <- set_names(filters, rep('filter', length(filters)))
+        c <- which(is.null(names(filters)) | names(filters) == '')
+        names(filters)[c] <- 'filter'
     }
 
     response <- api_get(
