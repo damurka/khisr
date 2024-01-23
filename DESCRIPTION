@@ -20,7 +20,8 @@ Imports:
     curl,
     jsonlite,
     stringr,
-    magrittr
+    magrittr,
+    purrr
 Suggests: 
     knitr,
     rmarkdown,

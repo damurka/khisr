@@ -111,21 +111,19 @@ metadata_filter <- function(property,
     }
 
     if (operator %in% c('in', '!in')) {
-        return(
-            str_c(
-                property, ':', operator, ':[',
-                str_c(values, collapse = ','), ']'
-            )
+        filters <- str_c(
+            property, ':', operator, ':[',
+            str_c(values, collapse = ','), ']'
         )
     } else {
-        return(
-            if (is_empty(values) || is.na(values)) {
-                str_c(property, ':', operator)
-            } else {
-                str_c(property, ':', operator, ':', values)
-            }
-        )
+        filters <- if (is_empty(values) || is.na(values)) {
+            str_c(property, ':', operator)
+        } else {
+            str_c(property, ':', operator, ':', values)
+        }
     }
+
+    return(splice(list2(filter = filters)))
 }
 
 #' @rdname metadata-filter

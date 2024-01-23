@@ -4,7 +4,7 @@
 #'
 #' @param endpoint The KHIS API endpoint for the metadata of interest
 #'   (e.g. dataElements, organisationUnits).
-#' @param ... One or more metadata filters in key-value pairs.
+#' @param ... One or more [metadata filters](metadata-filter) in key-value pairs.
 #' @param fields The specific columns to be returned in the tibble.
 #' @param retry Number of times to retry the API call in case of failure
 #'   (defaults to 2).
@@ -45,16 +45,9 @@ get_metadata <- function(endpoint,
     check_scalar_character(endpoint)
     check_string_vector(fields)
 
-    filters <- NULL
-    if (!missing(...)) {
-        filters <- list2(...)
-        c <- which(is.null(names(filters)) | names(filters) == '')
-        names(filters)[c] <- 'filter'
-    }
-
     response <- api_get(
         endpoint = endpoint,
-        splice(filters),
+        ...,
         fields = str_c(fields, collapse=','),
         retry = retry,
         verbosity = verbosity,

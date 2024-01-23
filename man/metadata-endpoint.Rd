@@ -24,7 +24,7 @@
 \alias{get_organisation_unit_groups}
 \alias{get_organisation_units}
 \alias{get_dimensions}
-\title{Get Metadata from Specified Endpoints}
+\title{Metadata Wrapper Functions}
 \usage{
 get_categories(..., fields = c("id", "name"))
 

@@ -4,7 +4,12 @@
 \alias{khis_cred}
 \title{Sets the KHIS Credentials}
 \usage{
-khis_cred(config_path = NULL, username = NULL, password = NULL)
+khis_cred(
+  config_path = NULL,
+  username = NULL,
+  password = NULL,
+  base_url = NULL
+)
 }
 \arguments{
 \item{config_path}{An optional parameters that contains the path to

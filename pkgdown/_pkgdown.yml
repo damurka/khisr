@@ -25,3 +25,10 @@ reference:
       - khis_has_cred
       - khis_cred_clear
       - khis_username
+  - title: "KHIS Metadata"
+    desc: >
+      Download metadata information from KHIS
+    contents:
+      - get_metadata
+      - metadata-endpoint
+      - metadata-filter

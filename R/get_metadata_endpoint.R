@@ -1,4 +1,4 @@
-#' Get Metadata from Specified Endpoints
+#' Metadata Wrapper Functions
 #'
 #' Wrappers for [get_metadata()] that retrieves data from a specific KHIS API endpoint.
 #'
