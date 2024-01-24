@@ -45,12 +45,12 @@
 #' @param call description
 #'
 #'
-#' @return String in the format property:operator:value
+#' @return A spliced list with filter in the format property:operator:value
 #'
 #' @examples
 #'
 #' # Generate an equality filter
-#' 'id' %.eq% 'element_id'
+#' id %.eq% 'element_id'
 #'
 #' # Finding multiple ids
 #' 'id' %.in% c('id1', 'id2', 'id3')
@@ -65,9 +65,7 @@
 #' metadata_filter('optionSet', '!null', NULL)
 #'
 #' @name metadata-filter
-NULL
-
-#' @rdname metadata-filter
+#'
 #' @export
 
 metadata_filter <- function(property,

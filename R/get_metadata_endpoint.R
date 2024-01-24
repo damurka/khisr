@@ -77,7 +77,7 @@ get_category_options <- function(...,
 #' @rdname metadata-endpoint
 #' @export
 
-get_data_element_group_sets <- function(v...,
+get_data_element_group_sets <- function(...,
                                         fields = c('id', 'name')) {
     get_metadata('dataElementGroupSets',
                  ...,

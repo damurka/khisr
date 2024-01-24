@@ -11,6 +11,8 @@
 #'   already provided
 #' @param password The KHIS password. Can be optional if `config_path` is
 #'   already provided.
+#' @param base_url The base url used for the KHIS instance. The default is NULL
+#'   which is the <https://hiskenya.org/api>
 #'
 #' @family credential functions
 #'

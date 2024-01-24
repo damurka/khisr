@@ -4,8 +4,7 @@
 #'   given period and data element(s), without performing any aggregation.
 #'
 #' @param ... One or more metadata filters in key-value pairs.
-#' @param return_names FALSE for uids, TRUE for names
-#' @param fields The specific columns to be returned in the tibble.
+#' @param return_type The type to be return names of uid.
 #' @param retry Number of times to retry the API call in case of failure
 #'   (defaults to 2).
 #' @param verbosity Level of HTTP information to print during the call:
@@ -38,6 +37,7 @@ get_analytics <- function(...,
                           retry = 2,
                           verbosity = 0,
                           timeout = 60) {
+    x = NULL # due to NSE notes in R CMD check
 
     return_type <- str_to_upper(arg_match(return_type))
 

@@ -1,0 +1,47 @@
+---
+title: "Data Dimensions"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+DHIS2 utilizes a multi-dimensional data model, allowing you to analyze data across various aspects like data elements, periods, and organization units. This flexibility empowers you to gain deeper insights and answer complex questions.
+
+### Fixed and Dynamic Dimensions:
+
+DHIS2 offers three fixed dimensions:
+
+- **Data Elements (dx):** Represent specific data points like cases, deaths, or enrollments.
+- **Periods (pe):** Represent timeframes like months, quarters, or financial years.
+- **Organization Units (ou):** Represent geographical locations or organizational structures.
+
+Beyond these fixed dimensions, you can dynamically add additional dimensions through:
+
+- **Categories:** Group related data elements for thematic analysis (e.g., age groups for vaccination rates).
+- **Group Sets:** Predefined sets of data elements or organization units for efficient querying.
+
+### Understanding Dimension Items:
+
+Each dimension has its own set of dimension items, which are specific data points within that dimension. For example:
+
+- **Period dimension items:** Include ISO standard periods like 202401 for January 2024 and relative periods like LAST_WEEK.
+- **Organization unit dimension items:** Include specific health facilities, districts, or countries.
+
+### Building Analytics Queries:
+
+The good news is, you don't necessarily need to know the intricate details of every dimension item when building analytics queries! `khisr` provides functions to handle these complexities for you.
+
+### Focus on Dates and Periods:
+
+For queries involving dates and periods, the relevant dimensions are:
+
+- **Period dimension (pe):** Use its identifier and various period formats (e.g., `2024Q1` for first quarter 2024 or `LAST_6_MONTHS`) to filter data by specific timeframes.
+- **Organization unit dimension (ou):** Utilize keywords like `USER_ORGUNIT` or `USER_ORGUNIT_CHILDREN` to filter data based on your current location or its sub-units within the organizational hierarchy.
+
+### Further Resources:
+
+For deeper dives into specific dimensions and objects, refer to the comprehensive [DHIS2 API documentation](https://docs.dhis2.org/en/develop/using-the-api/dhis-core-version-240/analytics.html)

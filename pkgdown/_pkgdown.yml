@@ -15,6 +15,8 @@ articles:
     navbar: ~
     contents:
     - khisr
+    - articles/date-format
+    - articles/data-dimensions
 
 reference:
   - title: "Authorization Credentials"
@@ -25,6 +27,7 @@ reference:
       - khis_has_cred
       - khis_cred_clear
       - khis_username
+      - khis_base_url
   - title: "KHIS Metadata"
     desc: >
       Download metadata information from KHIS
@@ -32,3 +35,9 @@ reference:
       - get_metadata
       - metadata-endpoint
       - metadata-filter
+  - title: "KHIS Analytics"
+    desc: >
+      To access analytical, aggregated data in KHIS
+    contents:
+      - get_analytics
+      - analytics-dimension

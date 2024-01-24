@@ -103,7 +103,7 @@ property \%.~in\% values
 \item{call}{description}
 }
 \value{
-String in the format property:operator:value
+A spliced list with filter in the format property:operator:value
 }
 \description{
 Formats a metadata filter to DHIS 2 equivalent.
@@ -146,7 +146,7 @@ against (not all operators require value). To view the operator see
 \examples{
 
 # Generate an equality filter
-'id' \%.eq\% 'element_id'
+id \%.eq\% 'element_id'
 
 # Finding multiple ids
 'id' \%.in\% c('id1', 'id2', 'id3')

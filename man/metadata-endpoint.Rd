@@ -38,7 +38,7 @@ get_category_option_groups(..., fields = c("id", "name"))
 
 get_category_options(..., fields = c("id", "name"))
 
-get_data_element_group_sets(v..., fields = c("id", "name"))
+get_data_element_group_sets(..., fields = c("id", "name"))
 
 get_data_element_groups(..., fields = c("id", "name"))
 

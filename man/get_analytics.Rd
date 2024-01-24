@@ -15,6 +15,8 @@ get_analytics(
 \arguments{
 \item{...}{One or more metadata filters in key-value pairs.}
 
+\item{return_type}{The type to be return names of uid.}
+
 \item{retry}{Number of times to retry the API call in case of failure
 (defaults to 2).}
 
@@ -27,10 +29,6 @@ get_analytics(
 }}
 
 \item{timeout}{Maximum number of seconds to wait for the API response.}
-
-\item{return_names}{FALSE for uids, TRUE for names}
-
-\item{fields}{The specific columns to be returned in the tibble.}
 }
 \value{
 A tibble with detailed information
