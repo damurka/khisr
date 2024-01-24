@@ -49,6 +49,13 @@
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/date-format.html">Date and Period Format</a>
+    <a class="dropdown-item" href="../articles/data-dimensions.html">Data Dimensions</a>
+  </div>
+</li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
@@ -88,6 +95,125 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://khisr.damurka.com">khisr</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> The credentials have been set.</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="metadata-object-filter">Metadata object filter<a class="anchor" aria-label="anchor" href="#metadata-object-filter"></a>
+</h3>
+<p>To filter the metadata there are several filter operations that can
+be applied to the returned list of metadata. The format of the filter
+itself is straight-forward and follows the pattern
+property:operator:value, where property is the property on the metadata
+you want to filter on, operator is the comparison operator you want to
+perform and value is the value to check against (not all operators
+require value).</p>
+<table class="table">
+<colgroup>
+<col width="19%">
+<col width="19%">
+<col width="60%">
+</colgroup>
+<thead><tr class="header">
+<th>DHIS2 Operator</th>
+<th align="center">Infix Operator</th>
+<th align="right">Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>eq</code></td>
+<td align="center">%.eq%</td>
+<td align="right">Equality</td>
+</tr>
+<tr class="even">
+<td><code>!eq</code></td>
+<td align="center">%.~eq%</td>
+<td align="right">Inequality</td>
+</tr>
+<tr class="odd">
+<td><code>ieq</code></td>
+<td align="center">%.ieq%</td>
+<td align="right">Case insensitive string, match exact</td>
+</tr>
+<tr class="even">
+<td><code>ne</code></td>
+<td align="center">%.ne%</td>
+<td align="right">Inequality</td>
+</tr>
+<tr class="odd">
+<td><code>like</code></td>
+<td align="center">%.Like%</td>
+<td align="right">Case sensitive string, match anywhere</td>
+</tr>
+<tr class="even">
+<td><code>!like</code></td>
+<td align="center">%.~Like%</td>
+<td align="right">Case sensitive string, not match anywhere</td>
+</tr>
+<tr class="odd">
+<td><code>$like</code></td>
+<td align="center">%.^Like%</td>
+<td align="right">Case sensitive string, match start</td>
+</tr>
+<tr class="even">
+<td><code>!$like</code></td>
+<td align="center">%.~^Like%</td>
+<td align="right">Case sensitive string, not match start</td>
+</tr>
+<tr class="odd">
+<td><code>like$</code></td>
+<td align="center">%.Like<span class="math inline">\(% | Case sensitive
+string, match end | |
+`!like\)</span><code>| %.~Like$%       | Case sensitive string, not match end                | |</code>ilike<code>| %.like%         | Case insensitive string, match anywhere             | |</code>!ilike<code>| %.~like%        | Case insensitive string, not match anywhere         | |</code><span class="math inline">\(ilike` | %.^like% | Case insensitive string, match
+start | |
+`!\)</span>ilike<code>| %.~^like%       | Case insensitive string, not match start            | |</code>ilike<span class="math inline">\(` | %.like\)</span>%</td>
+<td align="right">Case insensitive string, match end</td>
+</tr>
+<tr class="even">
+<td><code>!ilike$</code></td>
+<td align="center">%.~like$%</td>
+<td align="right">Case insensitive string, not match end</td>
+</tr>
+<tr class="odd">
+<td><code>gt</code></td>
+<td align="center">%.gt%</td>
+<td align="right">Greater than</td>
+</tr>
+<tr class="even">
+<td><code>ge</code></td>
+<td align="center">%.ge%</td>
+<td align="right">Greater than or equal</td>
+</tr>
+<tr class="odd">
+<td><code>lt</code></td>
+<td align="center">%.lt%</td>
+<td align="right">Less than</td>
+</tr>
+<tr class="even">
+<td><code>le</code></td>
+<td align="center">%.le%</td>
+<td align="right">Less than or equal</td>
+</tr>
+<tr class="odd">
+<td><code>token</code></td>
+<td align="center">%.token%</td>
+<td align="right">Match on multiple tokens in search property</td>
+</tr>
+<tr class="even">
+<td><code>!token</code></td>
+<td align="center">%.~token%</td>
+<td align="right">Not match on multiple tokens in search property</td>
+</tr>
+<tr class="odd">
+<td><code>in</code></td>
+<td align="center">%.in%</td>
+<td align="right">Find objects matching 1 or more values</td>
+</tr>
+<tr class="even">
+<td><code>!in</code></td>
+<td align="center">%.~in%</td>
+<td align="right">Find objects not matching 1 or more values</td>
+</tr>
+</tbody>
+</table>
+</div>
   </main>
 </div>
 

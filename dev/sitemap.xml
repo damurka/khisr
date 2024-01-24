@@ -10,6 +10,12 @@
     <loc>https://khisr.damurka.com/dev/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://khisr.damurka.com/dev/articles/data-dimensions.html</loc>
+  </url>
+  <url>
+    <loc>https://khisr.damurka.com/dev/articles/date-format.html</loc>
+  </url>
+  <url>
     <loc>https://khisr.damurka.com/dev/articles/index.html</loc>
   </url>
   <url>
@@ -25,7 +31,19 @@
     <loc>https://khisr.damurka.com/dev/news/index.html</loc>
   </url>
   <url>
+    <loc>https://khisr.damurka.com/dev/reference/analytics-dimension.html</loc>
+  </url>
+  <url>
+    <loc>https://khisr.damurka.com/dev/reference/get_analytics.html</loc>
+  </url>
+  <url>
+    <loc>https://khisr.damurka.com/dev/reference/get_metadata.html</loc>
+  </url>
+  <url>
     <loc>https://khisr.damurka.com/dev/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://khisr.damurka.com/dev/reference/khis_base_url.html</loc>
   </url>
   <url>
     <loc>https://khisr.damurka.com/dev/reference/khis_cred.html</loc>
@@ -41,6 +59,12 @@
   </url>
   <url>
     <loc>https://khisr.damurka.com/dev/reference/khisr-package.html</loc>
+  </url>
+  <url>
+    <loc>https://khisr.damurka.com/dev/reference/metadata-endpoint.html</loc>
+  </url>
+  <url>
+    <loc>https://khisr.damurka.com/dev/reference/metadata-filter.html</loc>
   </url>
   <url>
     <loc>https://khisr.damurka.com/dev/reference/pipe.html</loc>
