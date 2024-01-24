@@ -1,0 +1,50 @@
+---
+title: "Date and Period Format"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+khisr leverages the powerful DHIS2 API, which utilizes specific formats for dates and periods. Understanding these formats is crucial for effectively interacting with khisr functions and retrieving the desired data.
+
+# Date and Period Format
+
+The date format use in KHIS/DHIS2 API is `yyyy-MM-dd`
+
+For example, to express March 20, 2014, you must use 2014-03-20.
+
+The period format is described in the following table (also available on [get_period_types()]):
+
+| Interval           | Format       | Example     | Description                              |
+|--------------------|--------------|-------------|------------------------------------------|
+| Day                | yyyyMMdd     | 20040315    | March 15, 2004                           |
+| Week               | yyyyWn       | 2004W10     | Week 10, 2004                            |
+| Week Wednesday     | yyyyWedWn    | 2015WedW5   | Week 5 with start on Wednesday           |
+| Week Thursday      | yyyyThuWn    | 2015ThuW6   | Week 6 with start on Thursday            |
+| Week Saturday      | yyyySatWn    | 2015SatW7   | Week 7 with start on Saturday            |
+| Week Sunday        | yyyySunWn    | 2015SunW8   | Week 8 with start on Sunday              |
+| Bi-week            | yyyyBiWn     | 2015BiW1    | Weeks 1-2, 2015                          |
+| Month              | yyyyMM       | 200403      | March 2004                               |
+| Bi-month           | yyyyMMB      | 200401B     | January-February 2004                    |
+| Quarter            | yyyyQn       | 2004Q1      | January-March 2004                       |
+| Six-month          | yyyySn       | 2004S1      | January-June 2004                        |
+| Six-month April    | yyyyAprilSn  | 2004AprilS1 | April-September 2004                     |
+| Year               | yyyy         | 2004        | 2004                                     |
+| Financial Year April | yyyyApril  | 2004April   | April 2004 - March 2005                  |
+| Financial Year July  | yyyyJuly   | 2004July    | July 2004 - June 2005                    |
+| Financial Year Oct   | yyyyOct    | 2004Oct     | October 2004 - September 2005            |
+
+## Relative Periods
+
+You can also utilize relative periods in addition to fixed periods (defined above). The available relative period values are:
+
+- THIS_WEEK, LAST_WEEK, LAST_4_WEEKS, LAST_12_WEEKS, LAST_52_WEEKS,
+- THIS_MONTH, LAST_MONTH, THIS_BIMONTH, LAST_BIMONTH, THIS_QUARTER, LAST_QUARTER,
+- THIS_SIX_MONTH, LAST_SIX_MONTH, MONTHS_THIS_YEAR, QUARTERS_THIS_YEAR,
+- THIS_YEAR, MONTHS_LAST_YEAR, QUARTERS_LAST_YEAR, LAST_YEAR, LAST_5_YEARS, LAST_10_YEARS, LAST_10_FINANCIAL_YEARS, LAST_12_MONTHS,
+- LAST_3_MONTHS, LAST_6_BIMONTHS, LAST_4_QUARTERS, LAST_2_SIXMONTHS, THIS_FINANCIAL_YEAR,
+- LAST_FINANCIAL_YEAR, LAST_5_FINANCIAL_YEARS

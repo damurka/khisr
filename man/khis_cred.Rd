@@ -4,7 +4,12 @@
 \alias{khis_cred}
 \title{Sets the KHIS Credentials}
 \usage{
-khis_cred(config_path = NULL, username = NULL, password = NULL)
+khis_cred(
+  config_path = NULL,
+  username = NULL,
+  password = NULL,
+  base_url = NULL
+)
 }
 \arguments{
 \item{config_path}{An optional parameters that contains the path to
@@ -15,6 +20,9 @@ already provided}
 
 \item{password}{The KHIS password. Can be optional if \code{config_path} is
 already provided.}
+
+\item{base_url}{The base url used for the KHIS instance. The default is NULL
+which is the \url{https://hiskenya.org/api}}
 }
 \value{
 No return value
