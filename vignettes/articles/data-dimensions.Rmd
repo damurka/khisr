@@ -2,45 +2,99 @@
 title: "Data Dimensions"
 ---
 
-```{r, include = FALSE}
+```{r setup, include = FALSE}
+auth_success <- tryCatch(
+  khisr:::khis_cred_docs(),
+  khis_cred_internal_error = function(e) NULL
+)
+
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  error = TRUE,
+  purl = khisr::khis_has_cred(),
+  eval = khisr::khis_has_cred()
 )
 ```
 
+```{r, include = FALSE}
+library(cancerscreening)
+```
+
+# Overview
+
+Metadata in DHIS2 refers to predefined data dimensions that provide context to data values. This context is essential for classifying, organizing, and analyzing data, ultimately enabling a better understanding of the information. The main metadata dimensions in DHIS2 include:
+
+1. **Organisation Units:** Provide geographical context to data.
+2. **Data Elements:** Define what is being measured.
+3. **Periods:** Specify the temporal dimension of the data.
+
+## Organisation Units (annotated as *ou*)
+
+Organisation units in DHIS2 represent the location or larger geographical context of the data. They encompass:
+
+- Locations where services are provided (e.g., health facilities, schools, community units).
+- Administrative units representing geographical areas (e.g., district, county, sub-county).
+
+In Kenya, the hierarchy of organisation units starts at the country level, further subdivided into 47 counties, then into smaller sub-counties and wards. At the lowest level, there are individual health facilities and community units, forming a hierarchical tree.
+
+DHIS2 allows the classification of organisation units using criteria other than administrative hierarchy. This can be achieved through the use of organisation unit groups and organisation unit group sets.
+
+- **Organisation Unit Groups:** Allow for additional sub-classification of organisation units (e.g., by ownership or facility level) other than then geographical classification.
+
+```{r}
+# Retrieves organisation unit groups which belong to the organisation 
+# unit group set with the name 'Facility Ownership'
+orgs_groups <- get_organisation_unit_groups(
+    groupSets.name %.eq% 'Facility Ownership'
+)
+orgs_groups
+```
+
+- **Organisation Unit Group Sets:** Serve as umbrella classifications containing individual groups (e.g., *Facility Type Organisation Unit Group Set* contains Faith-based Organisation, Ministry of Health, and Private Facilities Organisation Unit Groups).
+
+```{r}
+# Retrieves all the organisation unit group sets
+orgs_group_set <- get_organisation_unit_groupsets()
+orgs_group_set
+```
+
+## Data Elements (annotated as *dx*)
+
+Data elements in DHIS2 define what is being represented by a particular data value. They act as labels or variables describing the nature of the data. Examples include counts of malaria cases or the number of women screened.
+
+Data elements can represent numerical values that can be aggregated (summed or averaged) from monthly to quarterly values. They can also be disaggregated (separated into components) or aggregated (summed) from facility to district to country.
+
+```{r}
+# Retrieves all the data elements in DHIS2
+data_elements <- get_data_elements()
+data_elements
+```
+
+Related data elements are grouped into a logical collection referred to as **data element groups**. The data element groups do not directly contain data but reference members data elements. Therefore data element groups provide a way manage and analyze related data elements.
+
+```{r}
+# Retrieves all the data element groups
+data_element_groups <- get_data_element_groups()
+data_element_groups
+```
+
+## Periods (annotated as *pe*)
+
+Periods are a crucial factor when collecting and analyzing data over time or creating periodic reports. DHIS2 supports two types of periods:
+
+- **Relative Periods:** Defined in relation to the date of analysis (e.g., last year, last month, this quarter).
+
+- **Fixed Periods:** Refer to specific periods (e.g., January 2024, 2020 to 2024).
+
+The choice of periods depends on the type of insight needed, whether it's a specific point in time, a trend over months, or an annual overview. For more details see [Date and Period Format](https://khisr.damurka.com/articles/date-format.html)
+
 DHIS2 utilizes a multi-dimensional data model, allowing you to analyze data across various aspects like data elements, periods, and organization units. This flexibility empowers you to gain deeper insights and answer complex questions.
 
-### Fixed and Dynamic Dimensions:
-
-DHIS2 offers three fixed dimensions:
-
-- **Data Elements (dx):** Represent specific data points like cases, deaths, or enrollments.
-- **Periods (pe):** Represent timeframes like months, quarters, or financial years.
-- **Organization Units (ou):** Represent geographical locations or organizational structures.
-
-Beyond these fixed dimensions, you can dynamically add additional dimensions through:
-
-- **Categories:** Group related data elements for thematic analysis (e.g., age groups for vaccination rates).
-- **Group Sets:** Predefined sets of data elements or organization units for efficient querying.
-
-### Understanding Dimension Items:
-
-Each dimension has its own set of dimension items, which are specific data points within that dimension. For example:
-
-- **Period dimension items:** Include ISO standard periods like 202401 for January 2024 and relative periods like LAST_WEEK.
-- **Organization unit dimension items:** Include specific health facilities, districts, or countries.
 
 ### Building Analytics Queries:
 
 The good news is, you don't necessarily need to know the intricate details of every dimension item when building analytics queries! `khisr` provides functions to handle these complexities for you.
-
-### Focus on Dates and Periods:
-
-For queries involving dates and periods, the relevant dimensions are:
-
-- **Period dimension (pe):** Use its identifier and various period formats (e.g., `2024Q1` for first quarter 2024 or `LAST_6_MONTHS`) to filter data by specific timeframes.
-- **Organization unit dimension (ou):** Utilize keywords like `USER_ORGUNIT` or `USER_ORGUNIT_CHILDREN` to filter data based on your current location or its sub-units within the organizational hierarchy.
 
 ### Further Resources:
 

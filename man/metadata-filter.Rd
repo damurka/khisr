@@ -106,7 +106,7 @@ property \%.~in\% values
 A spliced list with filter in the format property:operator:value
 }
 \description{
-Formats a metadata filter to DHIS 2 equivalent.
+Formats a metadata filter to DHIS 2 comparison operators.
 }
 \details{
 To filter the metadata there are several filter operations that can be applied

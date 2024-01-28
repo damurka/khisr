@@ -7,7 +7,6 @@
 #' @param values A vector of values or semi-colon separated string items.
 #'
 #' @details
-#'
 #' DHIS2 organizes data using multiple dimensions, each with a unique identifier
 #' and a set of items that represent specific data points within that dimension.
 #' - Data elements (dx): Indicators, data set reporting rate metrics, data element operands, program indicators, program data elements, program attributes, validation rules.

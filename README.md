@@ -1,6 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+    Code chunks will not be evaluated, because:
+    Set credential unsuccessful.
+
 # khisr <a href="https://khisr.damurka.com"><img src="man/figures/logo.png" align="right" height="139" alt="khisr website" /></a>
 
 <!-- badges: start -->
@@ -51,6 +54,35 @@ data from the API.
 
 For this overview, we’ve logged into KHIS as a specific user in a hidden
 chunk.
+
+## Basic Overview
+
+This is a basic example which shows you how to solve a common problem:
+
+``` r
+# Retrieve the organisation units by county (level 2)
+counties <- get_organisation_units(level %.eq% '2')
+counties
+
+# Retrieve organisation units by name (level included to ensure it refers to county)
+kiambu_county <- get_organisation_units(level %.eq% '2', name %.like% 'Kiambu county')
+kiambu_county
+
+# Retrieve all data elements by data element group for outpatient (data element group name MOH 705)
+moh_705 <- get_data_elements(dataElementGroups.name %.like% 'moh 705')
+moh_705
+
+# Filter the data element to element that contain malaria
+malaria <- get_data_elements(dataElementGroups.name %.like% 'moh 705', name %.like% 'malaria')
+malaria
+
+# Retrieve data for malaria in Kiambu county in the outpatient data element groups
+data <- get_analytics(
+    dx %.d% unique(malaria$id),
+    pe %.d% 'LAST_YEAR',
+    ou %.f% kiambu_county$id
+)
+```
 
 ## Code of Conduct
 

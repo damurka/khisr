@@ -23,7 +23,7 @@ library(khisr)
 To filter the metadata there are several filter operations that can be applied to the returned list of metadata. The format of the filter itself is straight-forward and follows the pattern property:operator:value, where property is the property on the metadata you want to filter on, operator is the comparison operator you want to perform and value is the value to check against (not all operators require value).
 
 | DHIS2 Operator  | Infix Operator  | Description                                         |
-|-----------------|:---------------:|----------------------------------------------------:|
+|:----------------|:----------------|:----------------------------------------------------|
 | `eq`            | %.eq%           | Equality                                            |
 | `!eq`           | %.~eq%          | Inequality                                          |
 | `ieq`           | %.ieq%          | Case insensitive string, match exact                |
@@ -32,14 +32,14 @@ To filter the metadata there are several filter operations that can be applied t
 | `!like`         | %.~Like%        | Case sensitive string, not match anywhere           |
 | `$like`         | %.^Like%        | Case sensitive string, match start                  |
 | `!$like`        | %.~^Like%       | Case sensitive string, not match start              |
-| `like$`         | %.Like$%        | Case sensitive string, match end                    |
-| `!like$`        | %.~Like$%       | Case sensitive string, not match end                |
+| `like$`         | %.Like\$%       | Case sensitive string, match end                    |
+| `!like$`        | %.~Like\$%      | Case sensitive string, not match end                |
 | `ilike`         | %.like%         | Case insensitive string, match anywhere             |
 | `!ilike`        | %.~like%        | Case insensitive string, not match anywhere         |
 | `$ilike`        | %.^like%        | Case insensitive string, match start                |
 | `!$ilike`       | %.~^like%       | Case insensitive string, not match start            |
-| `ilike$`        | %.like$%        | Case insensitive string, match end                  |
-| `!ilike$`       | %.~like$%       | Case insensitive string, not match end              |
+| `ilike$`        | %.like\$%       | Case insensitive string, match end                  |
+| `!ilike$`       | %.~like\$%      | Case insensitive string, not match end              |
 | `gt`            | %.gt%           | Greater than                                        |
 | `ge`            | %.ge%           | Greater than or equal                               |
 | `lt`            | %.lt%           | Less than                                           |

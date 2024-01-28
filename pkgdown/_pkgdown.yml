@@ -15,8 +15,8 @@ articles:
     navbar: ~
     contents:
     - khisr
-    - articles/date-format
     - articles/data-dimensions
+    - articles/date-format
 
 reference:
   - title: "Authorization Credentials"

@@ -9,34 +9,40 @@ knitr::opts_chunk$set(
 )
 ```
 
-khisr leverages the powerful DHIS2 API, which utilizes specific formats for dates and periods. Understanding these formats is crucial for effectively interacting with khisr functions and retrieving the desired data.
+`khisr` leverages the powerful DHIS2 API, which utilizes specific formats for dates and periods. Understanding these formats is crucial for effectively interacting with khisr functions and retrieving the desired data.
 
 # Date and Period Format
 
-The date format use in KHIS/DHIS2 API is `yyyy-MM-dd`
+The date format use in DHIS2 API is `yyyy-MM-dd`. For example, to express March 20, 2014, you must use 2014-03-20.
 
-For example, to express March 20, 2014, you must use 2014-03-20.
+DHIS2 supports two types of periods:
+
+- **Relative Periods:** Defined in relation to the date of analysis (e.g., last year, last month, this quarter).
+
+- **Fixed Periods:** Refer to specific periods (e.g., January 2024, 2020 to 2024).
+
+## Fixed Periods
 
 The period format is described in the following table (also available on [get_period_types()]):
 
-| Interval           | Format       | Example     | Description                              |
-|--------------------|--------------|-------------|------------------------------------------|
-| Day                | yyyyMMdd     | 20040315    | March 15, 2004                           |
-| Week               | yyyyWn       | 2004W10     | Week 10, 2004                            |
-| Week Wednesday     | yyyyWedWn    | 2015WedW5   | Week 5 with start on Wednesday           |
-| Week Thursday      | yyyyThuWn    | 2015ThuW6   | Week 6 with start on Thursday            |
-| Week Saturday      | yyyySatWn    | 2015SatW7   | Week 7 with start on Saturday            |
-| Week Sunday        | yyyySunWn    | 2015SunW8   | Week 8 with start on Sunday              |
-| Bi-week            | yyyyBiWn     | 2015BiW1    | Weeks 1-2, 2015                          |
-| Month              | yyyyMM       | 200403      | March 2004                               |
-| Bi-month           | yyyyMMB      | 200401B     | January-February 2004                    |
-| Quarter            | yyyyQn       | 2004Q1      | January-March 2004                       |
-| Six-month          | yyyySn       | 2004S1      | January-June 2004                        |
-| Six-month April    | yyyyAprilSn  | 2004AprilS1 | April-September 2004                     |
-| Year               | yyyy         | 2004        | 2004                                     |
-| Financial Year April | yyyyApril  | 2004April   | April 2004 - March 2005                  |
-| Financial Year July  | yyyyJuly   | 2004July    | July 2004 - June 2005                    |
-| Financial Year Oct   | yyyyOct    | 2004Oct     | October 2004 - September 2005            |
+| Interval             | Format       | Example     | Description                            |
+|:---------------------|:-------------|:------------|:---------------------------------------|
+| Day                  | yyyyMMdd     | 20040315    | March 15, 2004                         |
+| Week                 | yyyyWn       | 2004W10     | Week 10, 2004                          |
+| Week Wednesday       | yyyyWedWn    | 2015WedW5   | Week 5 with start on Wednesday         |
+| Week Thursday        | yyyyThuWn    | 2015ThuW6   | Week 6 with start on Thursday          |
+| Week Saturday        | yyyySatWn    | 2015SatW7   | Week 7 with start on Saturday          |
+| Week Sunday          | yyyySunWn    | 2015SunW8   | Week 8 with start on Sunday            |
+| Bi-week              | yyyyBiWn     | 2015BiW1    | Weeks 1-2, 2015                        |
+| Month                | yyyyMM       | 200403      | March 2004                             |
+| Bi-month             | yyyyMMB      | 200401B     | January-February 2004                  |
+| Quarter              | yyyyQn       | 2004Q1      | January-March 2004                     |
+| Six-month            | yyyySn       | 2004S1      | January-June 2004                      |
+| Six-month April      | yyyyAprilSn  | 2004AprilS1 | April-September 2004                   |
+| Year                 | yyyy         | 2004        | 2004                                   |
+| Financial Year April | yyyyApril    | 2004April   | April 2004 - March 2005                |
+| Financial Year July  | yyyyJuly     | 2004July    | July 2004 - June 2005                  |
+| Financial Year Oct   | yyyyOct      | 2004Oct     | October 2004 - September 2005          |
 
 ## Relative Periods
 

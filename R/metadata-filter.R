@@ -1,6 +1,6 @@
 #' Metadata Filter
 #'
-#' Formats a metadata filter to DHIS 2 equivalent.
+#' Formats a metadata filter to DHIS 2 comparison operators.
 #'
 #' @details
 #' To filter the metadata there are several filter operations that can be applied
