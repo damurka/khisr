@@ -4,24 +4,27 @@ Description:
     Tool providing powerful interface for efficient data retrieval from the 
     Kenya Health Information System (KHIS) <https://hiskenya.org>. KHIS is a 
     cornerstone in health information management in Kenya.
-Version: 1.0.0.9000
+Version: 1.0.0
 Authors@R: 
     person("David", "Kariuki", , "hello@damurka.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0003-6159-1107"))
 License: MIT + file LICENSE
-URL: https://khisr.damurka.com, https://github.com/damurka/khisr, https://khisr.damurka.com/, https://damurka.github.io/khisr/
+URL: https://khisr.damurka.com, 
+    https://github.com/damurka/khisr
 BugReports: https://github.com/damurka/khisr/issues
-Imports: 
-    dplyr,
-    tidyr,
-    rlang,
-    httr2,
+Imports:
     cli,
     curl,
+    dplyr,
+    httr2,
     jsonlite,
-    stringr,
     magrittr,
-    purrr
+    purrr,
+    rlang,
+    stringr,
+    tidyr,
+    utils,
+    withr
 Suggests: 
     knitr,
     rmarkdown,
@@ -31,4 +34,4 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-GB
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.0
+RoxygenNote: 7.3.1

@@ -1,6 +1,6 @@
 #' Metadata Filter
 #'
-#' Formats a metadata filter to DHIS 2 equivalent.
+#' Formats a metadata filter to DHIS 2 comparison operators.
 #'
 #' @details
 #' To filter the metadata there are several filter operations that can be applied
@@ -39,9 +39,6 @@
 #' @param property The property on the metadata you want to filter on
 #' @param operator The comparison operator you want to perform
 #' @param values The value to check against
-#' @param property_arg description
-#' @param operator_arg description
-#' @param values_arg description
 #' @param call description
 #'
 #'
@@ -71,15 +68,12 @@
 metadata_filter <- function(property,
                             operator,
                             values,
-                            property_arg = caller_arg(property),
-                            operator_arg = caller_arg(operator),
-                            values_arg = caller_arg(values),
                             call = caller_env()) {
 
-    check_scalar_character(property, arg = property_arg, call = call)
-    check_scalar_character(operator, arg = operator_arg, call = call)
-    check_supported_operator(operator, arg = operator_arg, call = call)
-    check_required(values, arg = values_arg, call = call)
+    check_scalar_character(property, arg = caller_arg(property), call = call)
+    check_scalar_character(operator, arg = caller_arg(operator), call = call)
+    check_supported_operator(operator, arg = caller_arg(operator), call = call)
+    check_required(values, arg = caller_arg(values), call = call)
 
     if (length(values) > 1 &&
         !(operator %in% c('in', '!in'))) {
@@ -107,6 +101,8 @@ metadata_filter <- function(property,
             )
         )
     }
+
+    values = unique(values)
 
     if (operator %in% c('in', '!in')) {
         filters <- str_c(

@@ -24,6 +24,7 @@
 \alias{get_organisation_unit_groups}
 \alias{get_organisation_units}
 \alias{get_dimensions}
+\alias{get_period_types}
 \title{Metadata Wrapper Functions}
 \usage{
 get_categories(..., fields = c("id", "name"))
@@ -69,6 +70,9 @@ get_organisation_unit_groups(..., fields = c("id", "name"))
 get_organisation_units(..., fields = c("id", "name"))
 
 get_dimensions(..., fields = c("id", "name"))
+
+get_period_types(..., fields = c("id", "name"))
+
 }
 \arguments{
 \item{...}{

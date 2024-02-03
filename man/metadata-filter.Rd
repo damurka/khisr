@@ -29,15 +29,7 @@
 \alias{\%.~in\%}
 \title{Metadata Filter}
 \usage{
-metadata_filter(
-  property,
-  operator,
-  values,
-  property_arg = caller_arg(property),
-  operator_arg = caller_arg(operator),
-  values_arg = caller_arg(values),
-  call = caller_env()
-)
+metadata_filter(property, operator, values, call = caller_env())
 
 property \%.eq\% values
 
@@ -94,19 +86,13 @@ property \%.~in\% values
 
 \item{values}{The value to check against}
 
-\item{property_arg}{description}
-
-\item{operator_arg}{description}
-
-\item{values_arg}{description}
-
 \item{call}{description}
 }
 \value{
 A spliced list with filter in the format property:operator:value
 }
 \description{
-Formats a metadata filter to DHIS 2 equivalent.
+Formats a metadata filter to DHIS 2 comparison operators.
 }
 \details{
 To filter the metadata there are several filter operations that can be applied

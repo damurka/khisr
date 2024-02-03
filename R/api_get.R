@@ -12,7 +12,8 @@
 #'  - 1: Show headers
 #'  - 2: Show headers and bodies
 #'  - 3: Show headers, bodies, and curl status message
-#' @param timeout Maximum number of seconds to wait
+#' @param timeout Maximum number of seconds to wait.
+#' @param paging Set if responses should be paginated. Disables pagination when FALSE (default).
 #' @param call The execution environment of a currently running function, e.g.
 #'   [caller_env()]. The function will be mentioned in error messages as the
 #'   source of the error. See the call argument of [abort()] for more information.
@@ -33,13 +34,14 @@ api_get <- function(endpoint,
                     retry = 2,
                     verbosity = 0,
                     timeout = 60,
+                    paging = FALSE,
                     call = caller_env()) {
 
     check_required(endpoint, call = call)
 
     params <- list2(
         ...,
-        paging = 'false',
+        paging = paging,
         ignoreLimit = 'true'
     )
 
@@ -47,7 +49,7 @@ api_get <- function(endpoint,
         req_url_path_append(endpoint) %>%
         req_url_query(!!!params) %>%
         req_headers('Accept' = 'application/json') %>%
-        req_user_agent('khisr (https://khisr.damurka.com)') %>%
+        req_user_agent('khisr/1.0.0 (https://khisr.damurka.com)') %>%
         req_retry(max_tries = retry) %>%
         req_timeout(timeout) %>%
         req_auth_khis_basic() %>%

@@ -5,6 +5,8 @@ output: github_document
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r setup, include = FALSE}
+library(dplyr)
+
 auth_success <- tryCatch(
   khisr:::khis_cred_docs(),
   khis_cred_internal_error = function(e) e
@@ -38,12 +40,20 @@ The khisr package is designed to seamlessly integrate with the Kenya Health Info
 
 ## Installation
 
-You can install the development version of khisr like so:
+You can install the release version of khisr from [CRAN](https://cran.r-project.org/) with:
+
+``` r
+install.packages("khisr")
+```
+
+And the development version of khisr like so:
 
 ``` r
 #install.packages('pak')
 pak::pak('damurka/khisr')
 ```
+
+## Usage
 
 ### Load khisr package
 
@@ -56,7 +66,9 @@ library("khisr")
 khisr will, by default, help you interact with KHIS as an authenticated user. 
 Before calling any function that makes an API call you need credentials to 
 [KHIS](https://hiskenya.org). You will be expected to set this credential to 
-download data.
+download data. See the article
+[set you credentials](https://khisr.damurka.com/articles/set-your-credentials.html)
+for more
 
 ```{r eval = FALSE}
 # Set the credentials using username and password
@@ -69,6 +81,50 @@ khis_cred(config_path = 'path/to/secret.json')
 After setting the credential you can invoke any function to download data from the API.
 
 For this overview, we've logged into KHIS as a specific user in a hidden chunk.
+
+## Basic Overview
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r}
+# Retrieve the organisation units by county (level 2)
+counties <- get_organisation_units(level %.eq% '2')
+counties
+
+# Retrieve organisation units by name (level included to ensure it refers to county)
+kiambu_county <- get_organisation_units(level %.eq% '2', 
+                                        name %.like% 'Kiambu')
+kiambu_county
+
+# Retrieve all data elements by data element group for outpatient (data element group name MOH 705)
+moh_705 <- get_data_elements(dataElementGroups.name %.like% 'moh 705')
+moh_705
+
+# Filter the data element to element that contain malaria
+malaria <- get_data_elements(dataElementGroups.name %.like% 'moh 705', 
+                             name %.like% 'malaria')
+malaria
+
+# Retrieve data for malaria in Kiambu county in the outpatient data element groups
+data <- get_analytics(
+        dx %.d% malaria$id,
+        pe %.d% 'LAST_YEAR',
+        ou %.f% kiambu_county$id
+    ) %>%
+    left_join(malaria, by = c('dx'='id'))
+data
+```
+
+## Where to learn more
+
+[Get Started](https://khisr.damurka.com/articles/khisr.html)
+is a more extensive general introduction to khisr.
+
+Browse the [articles index](https://khisr.damurka.com/articles/index.html) to 
+find articles that cover various topics in more depth.
+
+See the [function index](https://khisr.damurka.com/reference/index.html) for an
+organized, exhaustive listing.
 
 ## Code of Conduct
 

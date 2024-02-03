@@ -1,13 +1,13 @@
 #' Analytics Data Dimensions
 #'
-#' Constructs a dimensions expression for analytics queries based on specified property, operator, and values.
+#' Constructs a dimensions expression for analytics queries based on specified
+#'   property, operator, and values.
 #'
 #' @param property A character string representing whether its dimension or filter. It only accepts `'dimension'`, `'filter'`.
 #' @param operator A character string representing the property to filter on (e.g., `'dx'`, `'pe'`, `'ou'`).
 #' @param values A vector of values or semi-colon separated string items.
 #'
 #' @details
-#'
 #' DHIS2 organizes data using multiple dimensions, each with a unique identifier
 #' and a set of items that represent specific data points within that dimension.
 #' - Data elements (dx): Indicators, data set reporting rate metrics, data element operands, program indicators, program data elements, program attributes, validation rules.
@@ -51,7 +51,7 @@ analytics_dimension <- function(property, operator, values) {
 
     property <- arg_match(property, c('filter', 'dimension'))
 
-    values <- str_c(values, collapse = ';')
+    values <- str_c(unique(values), collapse = ';')
     if (values == 'all') {
         values <- dots_list('{property}' := operator)
     } else {

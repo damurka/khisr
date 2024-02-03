@@ -63,6 +63,10 @@ khis_cred <- function(config_path = NULL,
         credentials <- .load_config_file(config_path)
         password <- credentials[["password"]]
         username <- credentials[["username"]]
+        #base_url <- credentials[["base_url"]]
+        #if (nchar(base_url) == 0) {
+        #    base_url = NULL
+        #}
 
         additional <- ' on the configuration file'
     }
@@ -84,7 +88,7 @@ khis_cred <- function(config_path = NULL,
         .auth$set_base_url(base_url)
     }
 
-    cli::cli_inform(c('i' = 'The credentials have been set.'))
+    khis_info(c('i' = 'The credentials have been set.'))
 
     invisible(TRUE)
 }
@@ -111,6 +115,7 @@ khis_cred <- function(config_path = NULL,
                 "x" = "Invalid {.field config_path} was provided.",
                 "!" = "Check the {.field config_path} and try again!"
             ),
+
             class = 'khis_invalid_config_path',
             config_path = config_path,
             call = call
@@ -283,7 +288,7 @@ khis_cred_internal <- function(account = c('docs', 'testing')) {
 
     filename <- str_glue("khis-{account}.json")
     khis_cred(
-        config_path = secret_decrypt_json(
+        secret_decrypt_json(
             system.file('secret', filename, package = 'khisr'),
             'KHIS_KEY'
         )

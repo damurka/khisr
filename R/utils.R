@@ -9,6 +9,20 @@ secret_decrypt_json <- function(path, key) {
     invisible(secret_decrypt(enc, key = key))
 }
 
+secret_encrypt_json <- function(json, path = NULL, key) {
+    if (!jsonlite::validate(json)) {
+        json <- readChar(json, file.info(json)$size - 1)
+    }
+    enc <- secret_encrypt(json, key = key)
+
+    if(!is.null(path)) {
+        is_string(path)
+        writeBin(enc, path)
+    }
+
+    invisible(enc)
+}
+
 check_scalar_character <- function(x, arg = caller_arg(x), call = caller_env()) {
 
     check_required(x, arg, call)

@@ -24,7 +24,8 @@ operator \%.f\% values
 A spliced list with filter in the format property=operator:value
 }
 \description{
-Constructs a dimensions expression for analytics queries based on specified property, operator, and values.
+Constructs a dimensions expression for analytics queries based on specified
+property, operator, and values.
 }
 \details{
 DHIS2 organizes data using multiple dimensions, each with a unique identifier

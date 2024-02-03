@@ -15,8 +15,6 @@ Useful links:
 \itemize{
   \item \url{https://khisr.damurka.com}
   \item \url{https://github.com/damurka/khisr}
-  \item \url{https://khisr.damurka.com/}
-  \item \url{https://damurka.github.io/khisr/}
   \item Report bugs at \url{https://github.com/damurka/khisr/issues}
 }
 

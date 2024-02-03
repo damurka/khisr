@@ -15,8 +15,9 @@ articles:
     navbar: ~
     contents:
     - khisr
-    - articles/date-format
     - articles/data-dimensions
+    - articles/date-format
+    - articles/set-your-credentials
 
 reference:
   - title: "Authorization Credentials"
@@ -28,6 +29,7 @@ reference:
       - khis_cred_clear
       - khis_username
       - khis_base_url
+      - khis-configuration
   - title: "KHIS Metadata"
     desc: >
       Download metadata information from KHIS

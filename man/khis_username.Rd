@@ -28,8 +28,8 @@ khis_username()
 }
 \seealso{
 Other credential functions: 
-\code{\link{khis_cred_clear}()},
 \code{\link{khis_cred}()},
+\code{\link{khis_cred_clear}()},
 \code{\link{khis_has_cred}()}
 }
 \concept{credential functions}
