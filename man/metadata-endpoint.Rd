@@ -72,6 +72,7 @@ get_organisation_units(..., fields = c("id", "name"))
 get_dimensions(..., fields = c("id", "name"))
 
 get_period_types(..., fields = c("id", "name"))
+
 }
 \arguments{
 \item{...}{
