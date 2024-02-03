@@ -35,7 +35,7 @@ reference:
       Download metadata information from KHIS
     contents:
       - get_metadata
-      - metadata-endpoint
+      - metadata-helpers
       - metadata-filter
   - title: "KHIS Analytics"
     desc: >

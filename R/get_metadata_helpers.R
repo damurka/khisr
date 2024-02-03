@@ -1,4 +1,4 @@
-#' Metadata Wrapper Functions
+#' Metadata Helper Functions
 #'
 #' Wrappers for [get_metadata()] that retrieves data from a specific KHIS API endpoint.
 #'
@@ -12,10 +12,19 @@
 #'
 #' @examplesIf khis_has_cred()
 #'
-#' # Get the data elements by id
-#' get_data_elements(values = c('VR7vdS7P0Gb', 'gQro1y7Rsbq'), by = 'id')
+#' # Get all organisation units
+#' get_organisation_units()
 #'
-#' @name metadata-endpoint
+#' # Get all data elements
+#' get_data_elements()
+#'
+#' # Get data elements by element ids
+#' get_data_elements(id %.in% c('VR7vdS7P0Gb', 'gQro1y7Rsbq'))
+#'
+#' # Get datasets by name with the word 'MOH 705'
+#' get_data_sets(name %.like% 'MOH 705')
+#'
+#' @name metadata-helpers
 
 get_categories <- function(...,
                            fields = c('id', 'name')) {
@@ -24,7 +33,7 @@ get_categories <- function(...,
                  fields = fields)
 }
 
-#' @rdname metadata-endpoint
+#' @rdname metadata-helpers
 #' @export
 
 get_category_combos <- function(...,
@@ -34,7 +43,7 @@ get_category_combos <- function(...,
                  fields = fields)
 }
 
-#' @rdname metadata-endpoint
+#' @rdname metadata-helpers
 #' @export
 
 get_category_option_combos <- function(...,
@@ -44,7 +53,7 @@ get_category_option_combos <- function(...,
                  fields = fields)
 }
 
-#' @rdname metadata-endpoint
+#' @rdname metadata-helpers
 #' @export
 
 get_category_option_group_sets <- function(...,
@@ -54,7 +63,7 @@ get_category_option_group_sets <- function(...,
                  fields = fields)
 }
 
-#' @rdname metadata-endpoint
+#' @rdname metadata-helpers
 #' @export
 
 get_category_option_groups <- function(...,
@@ -64,7 +73,7 @@ get_category_option_groups <- function(...,
                  fields = fields)
 }
 
-#' @rdname metadata-endpoint
+#' @rdname metadata-helpers
 #' @export
 
 get_category_options <- function(...,
@@ -74,7 +83,7 @@ get_category_options <- function(...,
                  fields = fields)
 }
 
-#' @rdname metadata-endpoint
+#' @rdname metadata-helpers
 #' @export
 
 get_data_element_group_sets <- function(...,
@@ -84,7 +93,7 @@ get_data_element_group_sets <- function(...,
                  fields = fields)
 }
 
-#' @rdname metadata-endpoint
+#' @rdname metadata-helpers
 #' @export
 
 get_data_element_groups <- function(...,
@@ -94,7 +103,7 @@ get_data_element_groups <- function(...,
                  fields = fields)
 }
 
-#' @rdname metadata-endpoint
+#' @rdname metadata-helpers
 #' @export
 
 get_data_elements <- function(...,
@@ -104,7 +113,7 @@ get_data_elements <- function(...,
                  fields = fields)
 }
 
-#' @rdname metadata-endpoint
+#' @rdname metadata-helpers
 #' @export
 
 get_data_sets <- function(...,
@@ -114,7 +123,7 @@ get_data_sets <- function(...,
                  fields = fields)
 }
 
-#' @rdname metadata-endpoint
+#' @rdname metadata-helpers
 #' @export
 
 get_user_groups <- function(...,
@@ -124,7 +133,7 @@ get_user_groups <- function(...,
                  fields = fields)
 }
 
-#' @rdname metadata-endpoint
+#' @rdname metadata-helpers
 #' @export
 
 get_indicator_group_sets <- function(...,
@@ -134,7 +143,7 @@ get_indicator_group_sets <- function(...,
                  fields = fields)
 }
 
-#' @rdname metadata-endpoint
+#' @rdname metadata-helpers
 #' @export
 
 get_indicator_groups <- function(...,
@@ -144,7 +153,7 @@ get_indicator_groups <- function(...,
                  fields = fields)
 }
 
-#' @rdname metadata-endpoint
+#' @rdname metadata-helpers
 #' @export
 
 get_indicators <- function(...,
@@ -154,7 +163,7 @@ get_indicators <- function(...,
                  fields = fields)
 }
 
-#' @rdname metadata-endpoint
+#' @rdname metadata-helpers
 #' @export
 
 get_option_group_sets <- function(...,
@@ -164,7 +173,7 @@ get_option_group_sets <- function(...,
                  fields = fields)
 }
 
-#' @rdname metadata-endpoint
+#' @rdname metadata-helpers
 #' @export
 
 get_option_groups <- function(...,
@@ -174,7 +183,7 @@ get_option_groups <- function(...,
                  fields = fields)
 }
 
-#' @rdname metadata-endpoint
+#' @rdname metadata-helpers
 #' @export
 
 get_option_sets <- function(...,
@@ -184,7 +193,7 @@ get_option_sets <- function(...,
                  fields = fields)
 }
 
-#' @rdname metadata-endpoint
+#' @rdname metadata-helpers
 #' @export
 
 get_options <- function(...,
@@ -194,7 +203,7 @@ get_options <- function(...,
                  fields = fields)
 }
 
-#' @rdname metadata-endpoint
+#' @rdname metadata-helpers
 #' @export
 
 get_organisation_unit_groupsets <- function(...,
@@ -204,7 +213,7 @@ get_organisation_unit_groupsets <- function(...,
                  fields = fields)
 }
 
-#' @rdname metadata-endpoint
+#' @rdname metadata-helpers
 #' @export
 
 get_organisation_unit_groups <- function(...,
@@ -214,7 +223,7 @@ get_organisation_unit_groups <- function(...,
                  fields = fields)
 }
 
-#' @rdname metadata-endpoint
+#' @rdname metadata-helpers
 #' @export
 
 get_organisation_units <- function(...,
@@ -224,7 +233,7 @@ get_organisation_units <- function(...,
                  fields = fields)
 }
 
-#' @rdname metadata-endpoint
+#' @rdname metadata-helpers
 #' @export
 
 get_dimensions <- function(...,
@@ -234,7 +243,7 @@ get_dimensions <- function(...,
                  fields = fields)
 }
 
-#' @rdname metadata-endpoint
+#' @rdname metadata-helpers
 #' @export
 
 get_period_types <- function(...,
