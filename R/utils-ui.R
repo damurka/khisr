@@ -15,6 +15,15 @@ khis_theme <- function() {
     )
 }
 
+khis_info <- function(message, ..., .envir = parent.frame(), call = caller_env()) {
+    quiet <- khis_quiet() %|% is_testing()
+    if (quiet) {
+        return(invisible())
+    }
+    cli::cli_div(theme = khis_theme())
+    cli::cli_inform(message = message, ..., .envir = .envir, call = call)
+}
+
 khis_abort <- function(message, ..., .envir = parent.frame(), call = caller_env()) {
     cli::cli_div(theme = khis_theme())
     cli::cli_abort(message = message, ..., .envir = .envir, call = call)
@@ -38,4 +47,57 @@ quote_if_no_color <- function(x, quote = "'") {
     } else {
         paste0(quote, x, quote)
     }
+}
+
+is_testing <- function() {
+    identical(Sys.getenv("TESTTHAT"), "true")
+}
+
+#' Making khisr quiet vs. loud ----
+#'
+#' @noRd
+
+khis_quiet <- function() {
+    getOption("khis_quiet", default = NA)
+}
+
+#' @export
+#' @rdname khis-configuration
+#' @param code Code to execute quietly
+#' @return No return value, called for side effects
+#' @examples
+#' # message: "The credentials have been set."
+#' khis_cred(username = 'username', password = 'password')
+#'
+#' # suppress messages for a small amount of code
+#' with_khis_quiet(
+#'   khis_cred(username = 'username', password = 'password')
+#' )
+with_khis_quiet <- function(code) {
+    withr::with_options(list(khis_quiet = TRUE), code = code)
+}
+
+#' @export
+#' @rdname khis-configuration
+#' @param env The environment to use for scoping
+#' @return No return value, called for side effects
+#' @examples
+#' # message: "The credentials have been set."
+#' khis_cred(username = 'username', password = 'password')
+#'
+#' # suppress messages for a in a specific scope
+#' local_khis_quiet()
+#'
+#' # no message
+#' khis_cred(username = 'username', password = 'password')
+#'
+#' # clear credentials
+#' khis_cred_clear()
+
+local_khis_quiet <- function(env = parent.frame()) {
+    withr::local_options(list(khis_quiet = TRUE), .local_envir = env)
+}
+
+local_khis_loud <- function(env = parent.frame()) {
+    withr::local_options(list(khis_quiet = FALSE), .local_envir = env)
 }

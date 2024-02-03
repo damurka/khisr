@@ -233,3 +233,13 @@ get_dimensions <- function(...,
                  ...,
                  fields = fields)
 }
+
+#' @rdname metadata-endpoint
+#' @export
+
+get_period_types <- function(...,
+                           fields = c('id', 'name')) {
+    get_metadata('periodTypes',
+                 ...,
+                 fields = fields)
+}

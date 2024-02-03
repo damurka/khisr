@@ -11,17 +11,19 @@ Authors@R:
 License: MIT + file LICENSE
 URL: https://khisr.damurka.com, https://github.com/damurka/khisr, https://khisr.damurka.com/, https://damurka.github.io/khisr/
 BugReports: https://github.com/damurka/khisr/issues
-Imports: 
-    dplyr,
-    tidyr,
-    rlang,
-    httr2,
+Imports:
     cli,
     curl,
+    dplyr,
+    httr2,
     jsonlite,
-    stringr,
     magrittr,
-    purrr
+    purrr,
+    rlang,
+    stringr,
+    tidyr,
+    utils,
+    withr
 Suggests: 
     knitr,
     rmarkdown,

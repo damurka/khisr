@@ -5,7 +5,7 @@ title: "Data Dimensions"
 ```{r setup, include = FALSE}
 auth_success <- tryCatch(
   khisr:::khis_cred_docs(),
-  khis_cred_internal_error = function(e) NULL
+  khis_cred_internal_error = function(e) e
 )
 
 knitr::opts_chunk$set(
@@ -15,10 +15,8 @@ knitr::opts_chunk$set(
   purl = khisr::khis_has_cred(),
   eval = khisr::khis_has_cred()
 )
-```
 
-```{r, include = FALSE}
-library(cancerscreening)
+library(khisr)
 ```
 
 # Overview

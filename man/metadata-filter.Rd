@@ -29,15 +29,7 @@
 \alias{\%.~in\%}
 \title{Metadata Filter}
 \usage{
-metadata_filter(
-  property,
-  operator,
-  values,
-  property_arg = caller_arg(property),
-  operator_arg = caller_arg(operator),
-  values_arg = caller_arg(values),
-  call = caller_env()
-)
+metadata_filter(property, operator, values, call = caller_env())
 
 property \%.eq\% values
 
@@ -93,12 +85,6 @@ property \%.~in\% values
 \item{operator}{The comparison operator you want to perform}
 
 \item{values}{The value to check against}
-
-\item{property_arg}{description}
-
-\item{operator_arg}{description}
-
-\item{values_arg}{description}
 
 \item{call}{description}
 }
