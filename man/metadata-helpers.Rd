@@ -25,11 +25,7 @@
 \alias{get_organisation_units}
 \alias{get_dimensions}
 \alias{get_period_types}
-<<<<<<< HEAD:man/metadata-helpers.Rd
 \title{Metadata Helper Functions}
-=======
-\title{Metadata Wrapper Functions}
->>>>>>> 6f352975671eecfafc2278029d5f2bfea2cd932d:man/metadata-endpoint.Rd
 \usage{
 get_categories(..., fields = c("id", "name"))
 
