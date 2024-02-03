@@ -1,3 +1,3 @@
-# khisr (development version)
+# khisr 1.0.0
 
 * Initial CRAN submission.

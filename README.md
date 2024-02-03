@@ -144,8 +144,8 @@ data
 
 ## Where to learn more
 
-[Get Started](https://khisr.damurka.com/articles/getting-started.html)
-is a more extensive general introduction to khisr.
+[Get Started](https://khisr.damurka.com/articles/khisr.html) is a more
+extensive general introduction to khisr.
 
 Browse the [articles
 index](https://khisr.damurka.com/articles/index.html) to find articles
