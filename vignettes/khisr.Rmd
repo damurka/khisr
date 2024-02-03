@@ -258,5 +258,3 @@ get_analytics(
     ou %.f% 'qKzosKQPl6G'
 )
 ```
-  
-
