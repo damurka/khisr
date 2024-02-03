@@ -137,7 +137,7 @@ level) other than then geographical classification.</li>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Retrieves organisation unit groups which belong to the organisation </span></span>
 <span><span class="co"># unit group set with the name 'Facility Ownership'</span></span>
-<span><span class="va">orgs_groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metadata-endpoint.html">get_organisation_unit_groups</a></span><span class="op">(</span></span>
+<span><span class="va">orgs_groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metadata-helpers.html">get_organisation_unit_groups</a></span><span class="op">(</span></span>
 <span>    <span class="va">groupSets.name</span> <span class="op"><a href="../reference/metadata-filter.html">%.eq%</a></span> <span class="st">'Facility Ownership'</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">orgs_groups</span></span>
@@ -157,7 +157,7 @@ Groups).</li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Retrieves all the organisation unit group sets</span></span>
-<span><span class="va">orgs_group_set</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metadata-endpoint.html">get_organisation_unit_groupsets</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">orgs_group_set</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metadata-helpers.html">get_organisation_unit_groupsets</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">orgs_group_set</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 15 × 2</span></span></span>
 <span><span class="co">#&gt;    name                                id         </span></span>
@@ -191,7 +191,7 @@ disaggregated (separated into components) or aggregated (summed) from
 facility to district to country.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Retrieves all the data elements in DHIS2</span></span>
-<span><span class="va">data_elements</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metadata-endpoint.html">get_data_elements</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">data_elements</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metadata-helpers.html">get_data_elements</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">data_elements</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 13,768 × 2</span></span></span>
 <span><span class="co">#&gt;    name                                                                    id   </span></span>
@@ -214,7 +214,7 @@ data element groups provide a way manage and analyze related data
 elements.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Retrieves all the data element groups</span></span>
-<span><span class="va">data_element_groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metadata-endpoint.html">get_data_element_groups</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">data_element_groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metadata-helpers.html">get_data_element_groups</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">data_element_groups</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 244 × 2</span></span></span>
 <span><span class="co">#&gt;    name                                           id         </span></span>

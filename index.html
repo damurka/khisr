@@ -133,7 +133,7 @@
 <p>This is a basic example which shows you how to solve a common problem:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Retrieve the organisation units by county (level 2)</span></span>
-<span><span class="va">counties</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metadata-endpoint.html">get_organisation_units</a></span><span class="op">(</span><span class="va">level</span> <span class="op"><a href="reference/metadata-filter.html">%.eq%</a></span> <span class="st">'2'</span><span class="op">)</span></span>
+<span><span class="va">counties</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metadata-helpers.html">get_organisation_units</a></span><span class="op">(</span><span class="va">level</span> <span class="op"><a href="reference/metadata-filter.html">%.eq%</a></span> <span class="st">'2'</span><span class="op">)</span></span>
 <span><span class="va">counties</span></span>
 <span><span class="co">#&gt; # A tibble: 47 × 2</span></span>
 <span><span class="co">#&gt;    name                   id         </span></span>
@@ -151,7 +151,7 @@
 <span><span class="co">#&gt; # ℹ 37 more rows</span></span>
 <span></span>
 <span><span class="co"># Retrieve organisation units by name (level included to ensure it refers to county)</span></span>
-<span><span class="va">kiambu_county</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metadata-endpoint.html">get_organisation_units</a></span><span class="op">(</span><span class="va">level</span> <span class="op"><a href="reference/metadata-filter.html">%.eq%</a></span> <span class="st">'2'</span>, </span>
+<span><span class="va">kiambu_county</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metadata-helpers.html">get_organisation_units</a></span><span class="op">(</span><span class="va">level</span> <span class="op"><a href="reference/metadata-filter.html">%.eq%</a></span> <span class="st">'2'</span>, </span>
 <span>                                        <span class="va">name</span> <span class="op"><a href="reference/metadata-filter.html">%.like%</a></span> <span class="st">'Kiambu'</span><span class="op">)</span></span>
 <span><span class="va">kiambu_county</span></span>
 <span><span class="co">#&gt; # A tibble: 1 × 2</span></span>
@@ -160,7 +160,7 @@
 <span><span class="co">#&gt; 1 Kiambu County qKzosKQPl6G</span></span>
 <span></span>
 <span><span class="co"># Retrieve all data elements by data element group for outpatient (data element group name MOH 705)</span></span>
-<span><span class="va">moh_705</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metadata-endpoint.html">get_data_elements</a></span><span class="op">(</span><span class="va">dataElementGroups.name</span> <span class="op"><a href="reference/metadata-filter.html">%.like%</a></span> <span class="st">'moh 705'</span><span class="op">)</span></span>
+<span><span class="va">moh_705</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metadata-helpers.html">get_data_elements</a></span><span class="op">(</span><span class="va">dataElementGroups.name</span> <span class="op"><a href="reference/metadata-filter.html">%.like%</a></span> <span class="st">'moh 705'</span><span class="op">)</span></span>
 <span><span class="va">moh_705</span></span>
 <span><span class="co">#&gt; # A tibble: 96 × 2</span></span>
 <span><span class="co">#&gt;    name                         id         </span></span>
@@ -178,7 +178,7 @@
 <span><span class="co">#&gt; # ℹ 86 more rows</span></span>
 <span></span>
 <span><span class="co"># Filter the data element to element that contain malaria</span></span>
-<span><span class="va">malaria</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metadata-endpoint.html">get_data_elements</a></span><span class="op">(</span><span class="va">dataElementGroups.name</span> <span class="op"><a href="reference/metadata-filter.html">%.like%</a></span> <span class="st">'moh 705'</span>, </span>
+<span><span class="va">malaria</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metadata-helpers.html">get_data_elements</a></span><span class="op">(</span><span class="va">dataElementGroups.name</span> <span class="op"><a href="reference/metadata-filter.html">%.like%</a></span> <span class="st">'moh 705'</span>, </span>
 <span>                             <span class="va">name</span> <span class="op"><a href="reference/metadata-filter.html">%.like%</a></span> <span class="st">'malaria'</span><span class="op">)</span></span>
 <span><span class="va">malaria</span></span>
 <span><span class="co">#&gt; # A tibble: 4 × 2</span></span>
