@@ -13,7 +13,7 @@ get_analytics(
 )
 }
 \arguments{
-\item{...}{One or more metadata filters in key-value pairs.}
+\item{...}{One or more \code{\link[=analytics_dimension]{analytics_dimension()}} in key-value pairs.}
 
 \item{return_type}{The type to be return names of uid.}
 
