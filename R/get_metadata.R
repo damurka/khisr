@@ -4,7 +4,7 @@
 #'
 #' @param endpoint The KHIS API endpoint for the metadata of interest
 #'   (e.g. dataElements, organisationUnits).
-#' @param ... One or more [metadata filters](metadata-filter) in key-value pairs.
+#' @param ... One or more [metadata_filter()] params in key-value pairs.
 #' @param fields The specific columns to be returned in the tibble.
 #' @param retry Number of times to retry the API call in case of failure
 #'   (defaults to 2).

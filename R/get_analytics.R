@@ -3,7 +3,7 @@
 #' `get_analytics()` fetches data from the KHIS analytics data tables for a
 #'   given period and data element(s), without performing any aggregation.
 #'
-#' @param ... One or more metadata filters in key-value pairs.
+#' @param ... One or more [analytics_dimension()] in key-value pairs.
 #' @param return_type The type to be return names of uid.
 #' @param retry Number of times to retry the API call in case of failure
 #'   (defaults to 2).

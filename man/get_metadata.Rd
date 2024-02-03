@@ -17,7 +17,7 @@ get_metadata(
 \item{endpoint}{The KHIS API endpoint for the metadata of interest
 (e.g. dataElements, organisationUnits).}
 
-\item{...}{One or more \href{metadata-filter}{metadata filters} in key-value pairs.}
+\item{...}{One or more \code{\link[=metadata_filter]{metadata_filter()}} params in key-value pairs.}
 
 \item{fields}{The specific columns to be returned in the tibble.}
 

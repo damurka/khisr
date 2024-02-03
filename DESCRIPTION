@@ -12,6 +12,8 @@ License: MIT + file LICENSE
 URL: https://khisr.damurka.com, 
     https://github.com/damurka/khisr
 BugReports: https://github.com/damurka/khisr/issues
+Depends: 
+    R (>= 3.3)
 Imports:
     cli,
     curl,
