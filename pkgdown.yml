@@ -2,8 +2,11 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
+  data-dimensions: data-dimensions.html
+  date-format: date-format.html
+  set-your-credentials: set-your-credentials.html
   khisr: khisr.html
-last_built: 2024-01-20T21:19Z
+last_built: 2024-02-03T14:05Z
 urls:
   reference: https://khisr.damurka.com/reference
   article: https://khisr.damurka.com/articles
