@@ -1,4 +1,4 @@
-# khisr (development version)
+# khisr 1.0.2
 
 * Updated the `khis_cred_clear()` to reset the base api url back to khis api
 
