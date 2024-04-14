@@ -63,7 +63,7 @@ khis_cred <- function(config_path = NULL,
         credentials <- .load_config_file(config_path)
         password <- credentials[["password"]]
         username <- credentials[["username"]]
-        #base_url <- credentials[["base_url"]]
+        base_url <- credentials[["base_url"]]
         #if (nchar(base_url) == 0) {
         #    base_url = NULL
         #}
