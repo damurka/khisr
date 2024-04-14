@@ -205,6 +205,7 @@ khis_has_cred <- function() {
 khis_cred_clear <- function() {
     .auth$set_username(NULL)
     .auth$clear_password()
+    .auth$reset_base_url()
     invisible(TRUE)
 }
 

@@ -96,6 +96,9 @@ AuthCred <- R6::R6Class('AuthCred', list(
         self$base_url <- value
         invisible(self)
     },
+    reset_base_url = function() {
+        self$set_base_url('https://hiskenya.org/api')
+    },
     #' @description Report if we have credentials
     has_cred = function() {
         !is.null(self$password) & !is.null(self$username)
