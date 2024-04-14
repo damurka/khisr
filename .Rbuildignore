@@ -9,5 +9,6 @@
 ^CODE_OF_CONDUCT\.md$
 ^\.github$
 ^vignettes/articles$
+^revdep$
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$

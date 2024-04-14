@@ -3,9 +3,9 @@ Title: Retrieve Data from Kenya Health Information System (KHIS)
 Description: 
     Simplify data retrieval from Kenya's health system with a powerful interface 
     for efficient data retrieval from the Kenya Health Information System 
-    (KHIS)<https://hiskenya.org>. Empower researchers, analysts, and healthcare 
+    (KHIS) <https://hiskenya.org>. Empower researchers, analysts, and healthcare 
     professionals to access critical health data efficiently.
-Version: 1.0.1
+Version: 1.0.2
 Authors@R: 
     person("David", "Kariuki", , "hello@damurka.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0003-6159-1107"))

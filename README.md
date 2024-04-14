@@ -138,10 +138,10 @@ data
 #> # A tibble: 4 × 4
 #>   dx          pe    value name                                   
 #>   <chr>       <chr> <dbl> <chr>                                  
-#> 1 Lt0FqtnHraW 2023  30917 Suspected  Malaria                     
-#> 2 OoakJhWiyZp 2023   5005 Confirmed Malaria (only Positive cases)
-#> 3 siOyOiOJpI8 2023  20443 MOH 705A Rev 2020_ Tested for Malaria  
-#> 4 gvZmXInRLuD 2023    396 Malaria in pregnancy
+#> 1 Lt0FqtnHraW 2023  31101 Suspected  Malaria                     
+#> 2 OoakJhWiyZp 2023   5092 Confirmed Malaria (only Positive cases)
+#> 3 siOyOiOJpI8 2023  20554 MOH 705A Rev 2020_ Tested for Malaria  
+#> 4 gvZmXInRLuD 2023    397 Malaria in pregnancy
 ```
 
 ## Where to learn more

@@ -63,7 +63,7 @@ khis_cred <- function(config_path = NULL,
         credentials <- .load_config_file(config_path)
         password <- credentials[["password"]]
         username <- credentials[["username"]]
-        #base_url <- credentials[["base_url"]]
+        base_url <- credentials[["base_url"]]
         #if (nchar(base_url) == 0) {
         #    base_url = NULL
         #}
@@ -205,6 +205,7 @@ khis_has_cred <- function() {
 khis_cred_clear <- function() {
     .auth$set_username(NULL)
     .auth$clear_password()
+    .auth$reset_base_url()
     invisible(TRUE)
 }
 
