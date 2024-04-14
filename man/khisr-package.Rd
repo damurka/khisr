@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Tool providing powerful interface for efficient data retrieval from the Kenya Health Information System (KHIS) \url{https://hiskenya.org}. KHIS is a cornerstone in health information management in Kenya.
+Simplify data retrieval from Kenya's health system with a powerful interface for efficient data retrieval from the Kenya Health Information System (KHIS) \url{https://hiskenya.org}. Empower researchers, analysts, and healthcare professionals to access critical health data efficiently.
 }
 \seealso{
 Useful links:
