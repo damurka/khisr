@@ -173,6 +173,13 @@ get_organisation_units <- function(...) {
 #' @rdname metadata-helpers
 #' @export
 
+get_organisation_unit_levels <- function(...) {
+    get_metadata('organisationUnitLevels', ...)
+}
+
+#' @rdname metadata-helpers
+#' @export
+
 get_dimensions <- function(...) {
     get_metadata('dimensions', ...)
 }

@@ -23,6 +23,7 @@
 \alias{get_organisation_unit_groupsets}
 \alias{get_organisation_unit_groups}
 \alias{get_organisation_units}
+\alias{get_organisation_unit_levels}
 \alias{get_dimensions}
 \alias{get_period_types}
 \title{DHIS2 Metadata Helper Functions}
@@ -68,6 +69,8 @@ get_organisation_unit_groupsets(...)
 get_organisation_unit_groups(...)
 
 get_organisation_units(...)
+
+get_organisation_unit_levels(...)
 
 get_dimensions(...)
 
