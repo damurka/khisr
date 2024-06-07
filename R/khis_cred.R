@@ -32,23 +32,21 @@
 #'
 #' @examples
 #'
-#' local({
+#' \dontrun{
 #'     # Option 1: Using a configuration file (recommended)
 #'     # Assuming a configuration file named "credentials.json":
-#'     # khis_cred(config_path = "path/to/credentials.json")
+#'     khis_cred(config_path = "path/to/credentials.json")
 #'
 #'     # Option 2: Providing credentials directly (less secure)
 #'     khis_cred(username = "your_username",
 #'               password = "your_password",
 #'               base_url='https://dhis2-instance/api')
-#' })
+#' }
 
 khis_cred <- function(config_path = NULL,
                       username = NULL,
                       password = NULL,
                       base_url = NULL) {
-
-    #khis_warn(config_path)
 
     if (is.null(config_path) && is.null(username)) {
         khis_abort(
@@ -191,19 +189,21 @@ req_auth_khis_basic <- function(req, arg = caller_arg(req), call = caller_env())
 #'
 #' @examples
 #'
-#' # Set the credentials
-#' #khis_cred(username = 'DHIS2 username',
-#' #          password = 'DHIS2 password',
-#' #          base_url='https://dhis2-instance/api')
+#' \dontrun{
+#'     # Set the credentials
+#'     khis_cred(username = 'DHIS2 username',
+#'               password = 'DHIS2 password',
+#'               base_url='https://dhis2-instance/api')
 #'
-#' # Check if credentials available. Expect TRUE
-#' #khis_has_cred()
+#'     # Check if credentials available. Expect TRUE
+#'     khis_has_cred()
 #'
-#' # Clear credentials
-#' #khis_cred_clear()
+#'     # Clear credentials
+#'     khis_cred_clear()
 #'
-#' # Check if credentials available. Expect FALSE
-#' #khis_has_cred()
+#'     # Check if credentials available. Expect FALSE
+#'     khis_has_cred()
+#' }
 
 khis_has_cred <- function() {
     .auth$has_cred()
@@ -236,19 +236,21 @@ khis_cred_clear <- function() {
 #'
 #' @examples
 #'
-#' # Set the credentials
-#' #khis_cred(username = 'DHIS2 username',
-#' #          password = 'DHIS2 password',
-#' #          base_url ='https://dhis2-instance/api')
+#' \dontrun{
+#'     # Set the credentials
+#'     khis_cred(username = 'DHIS2 username',
+#'               password = 'DHIS2 password',
+#'               base_url ='https://dhis2-instance/api')
 #'
-#' # View the username expect 'DHIS2 username'
-#' #khis_username()
+#'     # View the username expect 'DHIS2 username'
+#'     khis_username()
 #'
-#' # Clear credentials
-#' #khis_cred_clear()
+#'     # Clear credentials
+#'     khis_cred_clear()
 #'
-#' # View the username expect 'NULL'
-#' #khis_username()
+#'     # View the username expect 'NULL'
+#'     khis_username()
+#' }
 
 khis_username <- function() {
     .auth$get_username()
@@ -261,16 +263,18 @@ khis_username <- function() {
 #'
 #' @examples
 #'
-#' # Set the credentials
-#' #khis_cred(username = 'DHIS2 username',
-#' #          password = 'DHIS2 password',
-#' #          base_url = 'https://dhis2-instance/api')
+#' \dontrun{
+#'     # Set the credentials
+#'     khis_cred(username = 'DHIS2 username',
+#'               password = 'DHIS2 password',
+#'               base_url = 'https://dhis2-instance/api')
 #'
-#' # View the DHIS2 instance API expect 'https://dhis2-instance/api'
-#' #khis_base_url()
+#'     # View the DHIS2 instance API expect 'https://dhis2-instance/api'
+#'     khis_base_url()
 #'
-#' # Clear credentials
-#' #khis_cred_clear()
+#'     # Clear credentials
+#'     khis_cred_clear()
+#' }
 
 khis_base_url <- function() {
    .auth$get_base_url()

@@ -46,8 +46,7 @@ or  in your R script.
 
 \examples{
 
-local({
-
+\dontrun{
     # message: "The credentials have been set."
     khis_cred(username = 'username',
               password = 'password',
@@ -59,9 +58,9 @@ local({
                   password = 'password',
                   base_url = 'https://dhis2-instance/api')
     )
-})
+}
 
-local({
+\dontrun{
     # message: "The credentials have been set."
     khis_cred(username = 'username',
               password = 'password',
@@ -77,5 +76,5 @@ local({
 
     # clear credentials
     khis_cred_clear()
-})
+}
 }

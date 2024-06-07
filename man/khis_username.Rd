@@ -14,19 +14,21 @@ Produces the Configured Username
 }
 \examples{
 
-# Set the credentials
-#khis_cred(username = 'DHIS2 username',
-#          password = 'DHIS2 password',
-#          base_url ='https://dhis2-instance/api')
+\dontrun{
+    # Set the credentials
+    khis_cred(username = 'DHIS2 username',
+              password = 'DHIS2 password',
+              base_url ='https://dhis2-instance/api')
 
-# View the username expect 'DHIS2 username'
-#khis_username()
+    # View the username expect 'DHIS2 username'
+    khis_username()
 
-# Clear credentials
-#khis_cred_clear()
+    # Clear credentials
+    khis_cred_clear()
 
-# View the username expect 'NULL'
-#khis_username()
+    # View the username expect 'NULL'
+    khis_username()
+}
 }
 \seealso{
 Other credential functions: 

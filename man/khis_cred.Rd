@@ -40,16 +40,16 @@ credentials from being stored directly in your code.
 }
 \examples{
 
-local({
+\dontrun{
     # Option 1: Using a configuration file (recommended)
     # Assuming a configuration file named "credentials.json":
-    # khis_cred(config_path = "path/to/credentials.json")
+    khis_cred(config_path = "path/to/credentials.json")
 
     # Option 2: Providing credentials directly (less secure)
     khis_cred(username = "your_username",
               password = "your_password",
               base_url='https://dhis2-instance/api')
-})
+}
 }
 \seealso{
 Other credential functions: 

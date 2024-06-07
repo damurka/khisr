@@ -67,8 +67,7 @@ khis_quiet <- function() {
 #' @return No return value, called for side effects
 #' @examples
 #'
-#' local({
-#'
+#' \dontrun{
 #'     # message: "The credentials have been set."
 #'     khis_cred(username = 'username',
 #'               password = 'password',
@@ -80,7 +79,7 @@ khis_quiet <- function() {
 #'                   password = 'password',
 #'                   base_url = 'https://dhis2-instance/api')
 #'     )
-#' })
+#' }
 
 with_khis_quiet <- function(code) {
     withr::with_options(list(khis_quiet = TRUE), code = code)
@@ -92,7 +91,7 @@ with_khis_quiet <- function(code) {
 #' @return No return value, called for side effects
 #' @examples
 #'
-#' local({
+#' \dontrun{
 #'     # message: "The credentials have been set."
 #'     khis_cred(username = 'username',
 #'               password = 'password',
@@ -108,7 +107,7 @@ with_khis_quiet <- function(code) {
 #'
 #'     # clear credentials
 #'     khis_cred_clear()
-#' })
+#' }
 
 local_khis_quiet <- function(env = parent.frame()) {
     withr::local_options(list(khis_quiet = TRUE), .local_envir = env)

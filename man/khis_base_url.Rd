@@ -14,14 +14,16 @@ Produces the Configured DHIS2 API Base URI
 }
 \examples{
 
-# Set the credentials
-#khis_cred(username = 'DHIS2 username',
-#          password = 'DHIS2 password',
-#          base_url = 'https://dhis2-instance/api')
+\dontrun{
+    # Set the credentials
+    khis_cred(username = 'DHIS2 username',
+              password = 'DHIS2 password',
+              base_url = 'https://dhis2-instance/api')
 
-# View the DHIS2 instance API expect 'https://dhis2-instance/api'
-#khis_base_url()
+    # View the DHIS2 instance API expect 'https://dhis2-instance/api'
+    khis_base_url()
 
-# Clear credentials
-#khis_cred_clear()
+    # Clear credentials
+    khis_cred_clear()
+}
 }
