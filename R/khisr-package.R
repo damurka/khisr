@@ -12,6 +12,7 @@
 #' @importFrom stringr str_c
 #' @importFrom stringr str_glue
 #' @importFrom stringr str_to_upper
+#' @importFrom stringr str_extract
 ## usethis namespace: end
 NULL
 

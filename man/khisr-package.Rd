@@ -4,11 +4,11 @@
 \name{khisr-package}
 \alias{khisr}
 \alias{khisr-package}
-\title{khisr: Retrieve Data from Kenya Health Information System (KHIS)}
+\title{khisr: An R Client to Retrieve Data from DHIS2}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Simplify data retrieval from Kenya's health system with a powerful interface for efficient data retrieval from the Kenya Health Information System (KHIS) \url{https://hiskenya.org}. Empower researchers, analysts, and healthcare professionals to access critical health data efficiently.
+Provides a powerful and user-friendly interface for interacting with DHIS2 APIs. It streamlines data retrieval, empowering researchers, analysts and healthcare professionals to obtain and utilise data efficiently.
 }
 \seealso{
 Useful links:

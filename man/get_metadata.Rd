@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_metadata.R
 \name{get_metadata}
 \alias{get_metadata}
-\title{Get Metadata from a KHIS}
+\title{Get Metadata from a DHIS2 Instance}
 \usage{
 get_metadata(
   endpoint,
@@ -14,12 +14,12 @@ get_metadata(
 )
 }
 \arguments{
-\item{endpoint}{The KHIS API endpoint for the metadata of interest
-(e.g. dataElements, organisationUnits).}
+\item{endpoint}{The DHIS2 API endpoint for the metadata of interest
+(e.g., \code{dataElements}, \code{organisationUnits} endpoints).}
 
-\item{...}{One or more \code{\link[=metadata_filter]{metadata_filter()}} params in key-value pairs.}
+\item{...}{One or more \code{\link[=metadata_filter]{metadata_filter()}} parameters in key-value pairs.}
 
-\item{fields}{The specific columns to be returned in the tibble.}
+\item{fields}{The specific columns to be returned in the data frame.}
 
 \item{retry}{Number of times to retry the API call in case of failure
 (defaults to 2).}
@@ -32,13 +32,13 @@ get_metadata(
 \item 3: Show headers, bodies, and CURL status message.
 }}
 
-\item{timeout}{Maximum number of seconds to wait for the API response.}
+\item{timeout}{Maximum number of seconds to wait for the DHIS2 API response.}
 }
 \value{
-A tibble with the KHIS metadata response.
+A tibble containing the DHIS2 metadata response.
 }
 \description{
-\code{get_metadata} retrieves metadata for a specified endpoint of KHIS
+\code{get_metadata} retrieves metadata for a specified endpoint of a DHIS2 instance.
 }
 \examples{
 \dontshow{if (khis_has_cred()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
@@ -52,7 +52,7 @@ get_metadata('dataSets',
              fields = 'id,name,organisationUnits[id,name,path]',
              id \%.eq\% 'WWh5hbCmvND')
 
-# Get data elements filtered by dataElementgroups id
+# Get data elements filtered by dataElementGroups id
 get_metadata('dataElements',
              dataElementGroups.id \%.eq\% 'IXd7DXxZqzL',
              fields = ':all')

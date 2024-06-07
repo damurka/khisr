@@ -1,9 +1,9 @@
-#' Make an API Call to the Kenya Health Information System (KHIS) Server
+#' Make an Authenticated API Call to a DHIS2 Server
 #'
-#' `api_get()` function executes a GET request to the KHIS API server, handling
+#' `api_get()` function executes a request to the DHIS2 API server, handling
 #' authentication, query parameters, retries, and logging.
 #'
-#' @param endpoint The API endpoint path to call (e.g., "analytics", "dataElements").
+#' @param endpoint The DHIS2 API endpoint path to call (e.g., "analytics", "dataElements").
 #' @param ... Additional query parameters for the API call.
 #' @param retry Number of times to retry the API call in case of failure
 #'   (defaults to 2).
@@ -12,20 +12,19 @@
 #'  - 1: Show headers
 #'  - 2: Show headers and bodies
 #'  - 3: Show headers, bodies, and curl status message
-#' @param timeout Maximum number of seconds to wait.
-#' @param paging Set if responses should be paginated. Disables pagination when FALSE (default).
-#' @param call The execution environment of a currently running function, e.g.
-#'   [caller_env()]. The function will be mentioned in error messages as the
-#'   source of the error. See the call argument of [abort()] for more information.
+#' @param timeout Maximum number of seconds to wait for the response (default to 60).
+#' @param paging Set if responses should be paginated. (default is FALSE).
+#' @param call The execution environment of a currently running function, e.g.,
+#'   [caller_env()]. The function will be mentioned in error messages for debugging.
 #'
-#' @return A parsed JSON object containing the API response data.
+#' @return A parsed JSON object containing the DHIS2 API response data.
 #'
 #' @details Uses HTTP Basic Authentication with credentials provided using
-#'   [khis_cred]
+#'   [khis_cred()]
 #'
 #' @examplesIf khis_has_cred()
 #'
-#' analytics_data <- .api_get("analytics", startDate = "2023-01-01", endDate = "2023-02-28")
+#' analytics_data <- api_get("analytics", startDate = "2023-01-01", endDate = "2023-02-28")
 #'
 #' @noRd
 
@@ -38,6 +37,8 @@ api_get <- function(endpoint,
                     call = caller_env()) {
 
     check_required(endpoint, call = call)
+    check_scalar_character(endpoint, call = call)
+    check_has_credentials(call = call)
 
     params <- list2(
         ...,
@@ -49,7 +50,7 @@ api_get <- function(endpoint,
         req_url_path_append(endpoint) %>%
         req_url_query(!!!params) %>%
         req_headers('Accept' = 'application/json') %>%
-        req_user_agent('khisr/1.0.0 (https://khisr.damurka.com)') %>%
+        req_user_agent('khisr/1.0.3 (https://khisr.damurka.com)') %>%
         req_retry(max_tries = retry) %>%
         req_timeout(timeout) %>%
         req_auth_khis_basic() %>%

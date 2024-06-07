@@ -2,15 +2,15 @@
 #'
 #' Constructor function for objects of class [AuthCred].
 #'
-#' @param username The KHIS username to be used in API calls
-#' @param password The KHIS password to be used in API calls.
+#' @param username The DHIS2 username to be used in API calls
+#' @param password The DHIS2 password to be used in API calls.
 #'
 #' @return An object of class [AuthCred]
 #' @noRd
 
 init_AuthCred <- function(username = NA_character_,
-                          password = NULL,
-                          base_url = 'https://hiskenya.org/api') {
+                          password = NA_character_,
+                          base_url = NA_character_) {
     AuthCred$new(
         username = username,
         password = password,
@@ -21,22 +21,22 @@ init_AuthCred <- function(username = NA_character_,
 #' Authorization Credential
 #'
 #' An `AuthCred` object manages the authorization credentials that make request
-#' to the KHIS API server.
+#' to the DHIS2 API server.
 #'
 #' @details An `AuthCred` should be created through the constructor function
 #' [init_AuthCred()], which has more details on the arguments
 #'
 #' @param config_path Path to a JSON configuration file.
-#' @param username The KHIS username.
-#' @param password The KHIS password.
+#' @param username The DHIS2 username.
+#' @param password The DHIS2 password.
 #'
 #' @noRd
 AuthCred <- R6::R6Class('AuthCred', list(
     #' @field  config_path Path to a JSON configuration file.
     config_path = NULL,
-    #' @field  username The KHIS username.
+    #' @field  username The DHIS2 username.
     username = NULL,
-    #' @field password The KHIS password.
+    #' @field password The DHIS2 password.
     password = NULL,
     #' @field base_url The URL to the server
     base_url = NULL,
@@ -44,34 +44,39 @@ AuthCred <- R6::R6Class('AuthCred', list(
     #' @description Create a new AuthCred
     #' @details For more details on the parameters, see [init_AuthCred()]
     initialize = function(username = NA_character_,
-                          password = NULL,
-                          base_url = NULL) {
+                          password = NA_character_,
+                          base_url = NA_character_) {
 
-        if (!is_scalar_character(username) || !is.null(password)) {
-            khis_abort(c("x" = "username has to be a scalar character."))
-        }
-
-        if (!is_scalar_character(base_url) || is_empty(base_url)) {
-            khis_abort(c("x" = "base_url has to be a scalar character."))
-        }
+        stopifnot(
+            is.null(username) || is_scalar_character(username),
+            is.null(password) || is_scalar_character(password),
+            is.null(base_url) || is_scalar_character(base_url)
+        )
 
         self$username <- username
         self$password <- password
         self$base_url <- base_url
-    },
-    #' @description Set the KHIS username
-    #' @param value The KHIS username
-    set_username = function(value) {
-        self$username <- value
-        invisible(self)
+        self
     },
     #' @description Get username
     get_username = function() {
         self$username
     },
-    #' @description Set the KHIS password
-    #' @param value The KHIS password
+    #' @description Set the DHIS2 username
+    #' @param value The DHIS2 username
+    set_username = function(value) {
+        stopifnot(is.null(value) || is_scalar_character(value))
+        self$username <- value
+        invisible(self)
+    },
+    #' @description Get password
+    get_password = function() {
+        self$password
+    },
+    #' @description Set the DHIS2 password
+    #' @param value The DHIS2 password
     set_password = function(value) {
+        stopifnot(is.null(value) || is_scalar_character(value))
         self$password <- value
         invisible(self)
     },
@@ -79,28 +84,25 @@ AuthCred <- R6::R6Class('AuthCred', list(
     clear_password = function() {
         self$set_password(NULL)
     },
-    #' @description Get password
-    get_password = function() {
-        self$password
-    },
     #' @description Get the base URL API
     get_base_url = function() {
         self$base_url
     },
-    #' @description Set the KHIS username
-    #' @param value The KHIS username
+    #' @description Set the DHIS2 username
+    #' @param value The DHIS2 username
     set_base_url = function(value) {
-        if (!is_scalar_character(value) || is_empty(value)) {
-            khis_abort(c("x" = "base_url has not been provided"))
-        }
+        stopifnot(is.null(value) || is_scalar_character(value))
         self$base_url <- value
         invisible(self)
     },
+    #' @description Clear the base URL API
     reset_base_url = function() {
-        self$set_base_url('https://hiskenya.org/api')
+        self$set_base_url(NULL)
     },
     #' @description Report if we have credentials
     has_cred = function() {
-        !is.null(self$password) & !is.null(self$username)
+        !is.null(self$password) && !is_na(self$password) &&
+        !is.null(self$username) && !is_na(self$username) &&
+        !is.null(self$base_url) && !is_na(self$base_url)
     }
 ))

@@ -13,7 +13,8 @@ No return value
 Clear the Credentials from Memory
 }
 \examples{
-khis_cred_clear()
+
+#khis_cred_clear()
 }
 \seealso{
 Other credential functions: 

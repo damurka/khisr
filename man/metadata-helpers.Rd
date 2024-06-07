@@ -25,58 +25,59 @@
 \alias{get_organisation_units}
 \alias{get_dimensions}
 \alias{get_period_types}
-\title{Metadata Helper Functions}
+\title{DHIS2 Metadata Helper Functions}
 \usage{
-get_categories(..., fields = c("id", "name"))
+get_categories(...)
 
-get_category_combos(..., fields = c("id", "name"))
+get_category_combos(...)
 
-get_category_option_combos(..., fields = c("id", "name"))
+get_category_option_combos(...)
 
-get_category_option_group_sets(..., fields = c("id", "name"))
+get_category_option_group_sets(...)
 
-get_category_option_groups(..., fields = c("id", "name"))
+get_category_option_groups(...)
 
-get_category_options(..., fields = c("id", "name"))
+get_category_options(...)
 
-get_data_element_group_sets(..., fields = c("id", "name"))
+get_data_element_group_sets(...)
 
-get_data_element_groups(..., fields = c("id", "name"))
+get_data_element_groups(...)
 
-get_data_elements(..., fields = c("id", "name"))
+get_data_elements(...)
 
-get_data_sets(..., fields = c("id", "name"))
+get_data_sets(...)
 
-get_user_groups(..., fields = c("id", "name"))
+get_user_groups(...)
 
-get_indicator_group_sets(..., fields = c("id", "name"))
+get_indicator_group_sets(...)
 
-get_indicator_groups(..., fields = c("id", "name"))
+get_indicator_groups(...)
 
-get_indicators(..., fields = c("id", "name"))
+get_indicators(...)
 
-get_option_group_sets(..., fields = c("id", "name"))
+get_option_group_sets(...)
 
-get_option_groups(..., fields = c("id", "name"))
+get_option_groups(...)
 
-get_option_sets(..., fields = c("id", "name"))
+get_option_sets(...)
 
-get_options(..., fields = c("id", "name"))
+get_options(...)
 
-get_organisation_unit_groupsets(..., fields = c("id", "name"))
+get_organisation_unit_groupsets(...)
 
-get_organisation_unit_groups(..., fields = c("id", "name"))
+get_organisation_unit_groups(...)
 
-get_organisation_units(..., fields = c("id", "name"))
+get_organisation_units(...)
 
-get_dimensions(..., fields = c("id", "name"))
+get_dimensions(...)
 
-get_period_types(..., fields = c("id", "name"))
+get_period_types(...)
 }
 \arguments{
 \item{...}{
   Arguments passed on to \code{\link[=get_metadata]{get_metadata}}
   \describe{
+    \item{\code{fields}}{The specific columns to be returned in the data frame.}
     \item{\code{retry}}{Number of times to retry the API call in case of failure
 (defaults to 2).}
     \item{\code{verbosity}}{Level of HTTP information to print during the call:
@@ -86,16 +87,15 @@ get_period_types(..., fields = c("id", "name"))
 \item 2: Show headers and bodies
 \item 3: Show headers, bodies, and CURL status message.
 }}
-    \item{\code{timeout}}{Maximum number of seconds to wait for the API response.}
+    \item{\code{timeout}}{Maximum number of seconds to wait for the DHIS2 API response.}
   }}
-
-\item{fields}{The specific columns to be returned in the tibble.}
 }
 \value{
-A tibble with the KHIS metadata response.
+A tibble containing the DHIS2 metadata response.
 }
 \description{
-Wrappers for \code{\link[=get_metadata]{get_metadata()}} that retrieves data from a specific KHIS API endpoint.
+These functions simplify retrieving data from specific DHIS2 API endpoints
+using \code{\link[=get_metadata]{get_metadata()}}.
 }
 \examples{
 \dontshow{if (khis_has_cred()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

@@ -14,9 +14,11 @@ operator \%.d\% values
 operator \%.f\% values
 }
 \arguments{
-\item{property}{A character string representing whether its dimension or filter. It only accepts \code{'dimension'}, \code{'filter'}.}
+\item{property}{A character string representing whether its dimension or filter.
+It only accepts \code{'dimension'}, \code{'filter'}.}
 
-\item{operator}{A character string representing the property to filter on (e.g., \code{'dx'}, \code{'pe'}, \code{'ou'}).}
+\item{operator}{A character string representing the property to filter on (e.g.,
+\code{'dx'}, \code{'pe'}, \code{'ou'}).}
 
 \item{values}{A vector of values or semi-colon separated string items.}
 }
@@ -31,9 +33,12 @@ property, operator, and values.
 DHIS2 organizes data using multiple dimensions, each with a unique identifier
 and a set of items that represent specific data points within that dimension.
 \itemize{
-\item Data elements (dx): Indicators, data set reporting rate metrics, data element operands, program indicators, program data elements, program attributes, validation rules.
+\item Data elements (dx): Indicators, data set reporting rate metrics, data element
+operands, program indicators, program data elements, program attributes,
+validation rules.
 \item Periods (pe): ISO periods (e.g., 202401) and relative periods (e.g., LAST_WEEK).
-\item Organisation unit hierarchy (ou): Specific health facilities, districts, countries, and keywords for user location or its sub-units.
+\item Organisation unit hierarchy (ou): Specific health facilities, districts, countries,
+and keywords for user location or its sub-units.
 \item Category option combinations (co): Category option combo identifiers.
 \item Attribute option combinations (ao): Category option combo identifiers.
 \item Categories: Category option identifiers.
@@ -43,8 +48,10 @@ and a set of items that represent specific data points within that dimension.
 
 The infix operator used for filter and dimension includes:
 \itemize{
-\item \verb{\%.d\%}: Infix operator for constructing dimension filters. Equivalent to calling \code{analytics_dimension("dimension", ...)}.
-\item \verb{\%.f\%}: Infix operator for constructing filter filters. Equivalent to calling \code{analytics_dimension("filter", ...)}.
+\item \verb{\%.d\%}: Infix operator for constructing dimension filters. Equivalent to
+calling \code{analytics_dimension("dimension", ...)}.
+\item \verb{\%.f\%}: Infix operator for constructing filter filters. Equivalent to calling
+\code{analytics_dimension("filter", ...)}.
 }
 }
 \examples{

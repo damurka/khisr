@@ -1,11 +1,11 @@
-#' Get Metadata from a KHIS
+#' Get Metadata from a DHIS2 Instance
 #'
-#' `get_metadata` retrieves metadata for a specified endpoint of KHIS
+#' `get_metadata` retrieves metadata for a specified endpoint of a DHIS2 instance.
 #'
-#' @param endpoint The KHIS API endpoint for the metadata of interest
-#'   (e.g. dataElements, organisationUnits).
-#' @param ... One or more [metadata_filter()] params in key-value pairs.
-#' @param fields The specific columns to be returned in the tibble.
+#' @param endpoint The DHIS2 API endpoint for the metadata of interest
+#'   (e.g., `dataElements`, `organisationUnits` endpoints).
+#' @param ... One or more [metadata_filter()] parameters in key-value pairs.
+#' @param fields The specific columns to be returned in the data frame.
 #' @param retry Number of times to retry the API call in case of failure
 #'   (defaults to 2).
 #' @param verbosity Level of HTTP information to print during the call:
@@ -13,9 +13,9 @@
 #'   - 1: Show headers
 #'   - 2: Show headers and bodies
 #'   - 3: Show headers, bodies, and CURL status message.
-#' @param timeout Maximum number of seconds to wait for the API response.
+#' @param timeout Maximum number of seconds to wait for the DHIS2 API response.
 #'
-#' @return A tibble with the KHIS metadata response.
+#' @return A tibble containing the DHIS2 metadata response.
 #'
 #' @export
 #'
@@ -30,7 +30,7 @@
 #'              fields = 'id,name,organisationUnits[id,name,path]',
 #'              id %.eq% 'WWh5hbCmvND')
 #'
-#' # Get data elements filtered by dataElementgroups id
+#' # Get data elements filtered by dataElementGroups id
 #' get_metadata('dataElements',
 #'              dataElementGroups.id %.eq% 'IXd7DXxZqzL',
 #'              fields = ':all')

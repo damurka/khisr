@@ -6,4 +6,5 @@ test_that("Analytics dimensions helper works", {
     expect_identical(analytics_dimension('filter', 'dx', c('dim-1', 'dim-2')), splice(list2(filter = 'dx:dim-1;dim-2')))
     expect_identical('dx' %.f% c('dim-1', 'dim-2'), splice(list2(filter = 'dx:dim-1;dim-2')))
     expect_identical('dx' %.d% c('dim-1', 'dim-2'), splice(list2(dimension = 'dx:dim-1;dim-2')))
+    expect_identical('pe' %.d% 'all', splice(list2(dimension = 'pe')))
 })

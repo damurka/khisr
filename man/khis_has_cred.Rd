@@ -15,16 +15,18 @@ Are There Credentials on Hand?
 \examples{
 
 # Set the credentials
-khis_cred(username = 'KHIS username', password = 'KHIS password')
+#khis_cred(username = 'DHIS2 username',
+#          password = 'DHIS2 password',
+#          base_url='https://dhis2-instance/api')
 
 # Check if credentials available. Expect TRUE
-khis_has_cred()
+#khis_has_cred()
 
 # Clear credentials
-khis_cred_clear()
+#khis_cred_clear()
 
 # Check if credentials available. Expect FALSE
-khis_has_cred()
+#khis_has_cred()
 }
 \seealso{
 Other credential functions: 

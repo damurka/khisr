@@ -2,21 +2,26 @@
 % Please edit documentation in R/khis_cred.R
 \name{khis_base_url}
 \alias{khis_base_url}
-\title{Produces the Configured KHIS API Base URI}
+\title{Produces the Configured DHIS2 API Base URI}
 \usage{
 khis_base_url()
 }
 \value{
-the KHIS base URI
+the DHIS2 base URI
 }
 \description{
-Produces the Configured KHIS API Base URI
+Produces the Configured DHIS2 API Base URI
 }
 \examples{
 
 # Set the credentials
-khis_cred(username = 'KHIS username', password = 'KHIS password')
+#khis_cred(username = 'DHIS2 username',
+#          password = 'DHIS2 password',
+#          base_url = 'https://dhis2-instance/api')
 
-# View the username expect 'KHIS username'
-khis_base_url()
+# View the DHIS2 instance API expect 'https://dhis2-instance/api'
+#khis_base_url()
+
+# Clear credentials
+#khis_cred_clear()
 }

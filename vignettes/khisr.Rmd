@@ -24,48 +24,36 @@ knitr::opts_chunk$set(
 library(khisr)
 ```
 
-The `khisr` package seamlessly integrates with the Kenya Health Information System 
-(KHIS) API from R, empowering researchers and public health professionals to easily 
-access and analyze valuable health data. Built on the DHIS2 platform, khisr 
-automates data retrieval, saving you time and effort compared to manual methods.
+The `khisr` R package simplifies interaction with the District Health Information System 2 (DHIS2) platform. Designed for researchers and public health professionals, `khisr` streamlines data retrieval and analysis, saving you valuable time compared to manual methods.
 
 ## Authentication
 
-To ensure a secure and seamless experience, `khisr` operates by default in 
-authenticated mode, enabling you to interact with KHIS as a recognized user. 
-This means that before diving into KHIS data exploration, you'll need to establish 
-your credentials with the system.
+`khisr` prioritizes security by operating in authenticated mode by default. This ensures you interact with DHIS2 as a recognized user. To begin exploring DHIS2 data, you'll need to establish your credentials.
 
 ### Setting Your Credentials:
 
-1. Obtain your KHIS credentials: These typically consist of a username and 
-password, which you can acquire through appropriate channels within the KHIS organization.
+1. **Obtain Credentials**: Secure your DHIS2 username and password through appropriate channels within the DHIS2 organization.
 
-2. Store your credentials securely: khisr provides a convenient mechanism for 
-storing your credentials within your R environment. To learn how to set and 
-manage your credentials effectively, please refer to the comprehensive guide at 
-[Set Your Credentials](https://khisr.damurka.com/articles/set-your-credentials.html).
+2. **Store Credentials Securely**: `khisr` offers a convenient way to store your credentials within your R environment. Refer to the comprehensive guide, [Set Your Credentials](https://khisr.damurka.com/articles/set-your-credentials.html), for detailed instructions on setting and managing credentials effectively.
 
 ```{r, eval = FALSE}
 # Set the credentials using username and password
-khis_cred(username = 'KHIS username', password = 'KHIS password')
+khis_cred(username = 'your-dhis2-username', password = 'your-dhis2-password', base_url = 'https://<your dhis2 instance>')
 
 # Set credentials using configuration path
 khis_cred(config_path = 'path/to/secret.json')
 ```
+**Note**: Replace placeholders like '*your-dhis2-username*' and '*path/to/your/secret.json*' with your actual credentials and file path.
 
 ## Metadata
 
-KHIS uses metadata to define the structure and meaning of the data stored in the
-system. For more information see [data dimensions](https://khisr.damurka.com/articles/data-dimensions.html)
+DHIS2 utilizes metadata to define the structure and meaning of its data. Explore the [data dimensions](https://khisr.damurka.com/articles/data-dimensions.html) resource for a deeper understanding.
 
-### Metadata helpers
+### Metadata helpers in khisr
 
-`khisr` provides a number of high level metadata helpers for obtaining details 
-of the different types of metadata. There is a helper for each of the main
-metadata categories in DHIS2, in fact auto complete in the users R IDE will often 
-make typing these very fast. This is the list of the numerous high level metadata 
-helpers in `khisr`.
+`khisr` provides a set of high-level functions to retrieve details about various DHIS2 metadata categories.  These functions often leverage your R IDE's auto-complete feature for faster typing.  
+
+The following table summarizes these `khisr` metadata helper functions:
 
 | khisr function                       | KHIS API Endpoint          |
 |:-------------------------------------|:---------------------------|
@@ -95,14 +83,15 @@ helpers in `khisr`.
 
 ### Metadata object filter
 
-To filter the metadata there are several filter operations that can be applied 
-to the returned list of metadata. The format of the filter itself is 
-straight-forward and follows the pattern property:operator:value, where property 
-is the property on the metadata you want to filter on, operator is the comparison 
-operator you want to perform and value is the value to check against (not all 
-operators require value).
+`khisr` allows you to filter retrieved metadata using a straightforward approach. The filter format follows the pattern **property:operator:value**. Here's a breakdown of the components:
 
-| KHIS Operator   | Infix Operator  | Description                                         |
+- **property**: The property of the metadata you want to filter on.
+- **operator**: The comparison operator you want to perform (examples: `eq` for equality, `like` for case-sensitive string matching).
+- **value**: The value to use for comparison (not required for all operators).
+
+The following table provides a summary of the supported operators:
+
+| DHIS2 Operator  | Infix Operator  | Description                                         |
 |:----------------|:----------------|:----------------------------------------------------|
 |` eq`            | `%.eq%`         | Equality                                            |
 | `!eq`           | `%.~eq%`        | Inequality                                          |

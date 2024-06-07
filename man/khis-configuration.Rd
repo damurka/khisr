@@ -45,22 +45,37 @@ or  in your R script.
 }
 
 \examples{
-# message: "The credentials have been set."
-khis_cred(username = 'username', password = 'password')
 
-# suppress messages for a small amount of code
-with_khis_quiet(
-  khis_cred(username = 'username', password = 'password')
-)
-# message: "The credentials have been set."
-khis_cred(username = 'username', password = 'password')
+local({
 
-# suppress messages for a in a specific scope
-local_khis_quiet()
+    # message: "The credentials have been set."
+    khis_cred(username = 'username',
+              password = 'password',
+              base_url = 'https://dhis2-instance/api')
 
-# no message
-khis_cred(username = 'username', password = 'password')
+    # suppress messages for a small amount of code
+    with_khis_quiet(
+        khis_cred(username = 'username',
+                  password = 'password',
+                  base_url = 'https://dhis2-instance/api')
+    )
+})
 
-# clear credentials
-khis_cred_clear()
+local({
+    # message: "The credentials have been set."
+    khis_cred(username = 'username',
+              password = 'password',
+              base_url = 'https://dhis2-instance/api')
+
+    # suppress messages for a in a specific scope
+    local_khis_quiet()
+
+    # no message
+    khis_cred(username = 'username',
+              password = 'password',
+              base_url = 'https://dhis2-instance/api')
+
+    # clear credentials
+    khis_cred_clear()
+})
 }

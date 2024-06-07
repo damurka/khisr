@@ -9,25 +9,25 @@ secret_decrypt_json <- function(path, key) {
     invisible(secret_decrypt(enc, key = key))
 }
 
-secret_encrypt_json <- function(json, path = NULL, key) {
-    if (!jsonlite::validate(json)) {
-        json <- readChar(json, file.info(json)$size - 1)
-    }
-    enc <- secret_encrypt(json, key = key)
-
-    if(!is.null(path)) {
-        is_string(path)
-        writeBin(enc, path)
-    }
-
-    invisible(enc)
-}
+# secret_encrypt_json <- function(json, path = NULL, key) {
+#     if (!jsonlite::validate(json)) {
+#         json <- readChar(json, file.info(json)$size - 1)
+#     }
+#     enc <- secret_encrypt(json, key = key)
+#
+#     if(!is.null(path)) {
+#         is_string(path)
+#         writeBin(enc, path)
+#     }
+#
+#     invisible(enc)
+# }
 
 check_scalar_character <- function(x, arg = caller_arg(x), call = caller_env()) {
 
     check_required(x, arg, call)
 
-    if (!is_scalar_character(x) || nchar(x) == 0) {
+    if (!is_scalar_character(x) || is_empty(x)) {
         khis_abort(c('x' = '{.arg {arg}} should be scalar string'),
                    call = call)
     }
@@ -68,6 +68,19 @@ check_supported_operator <- function(x, arg = caller_arg(x), call = caller_env()
             message = c(
                 "x" = "{.arg {arg}} is not a supported operator"
             ),
+            call = call
+        )
+    }
+}
+
+check_has_credentials <- function(call = caller_env()) {
+    if (!khis_has_cred()) {
+        khis_abort(
+            message = c(
+                "x" = "Missing credentials",
+                "!" = "Please set the credentials by calling {.fun khis_cred}"
+            ),
+            class = 'khis_missing_credentials',
             call = call
         )
     }

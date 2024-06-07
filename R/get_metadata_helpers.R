@@ -1,12 +1,12 @@
-#' Metadata Helper Functions
+#' DHIS2 Metadata Helper Functions
 #'
-#' Wrappers for [get_metadata()] that retrieves data from a specific KHIS API endpoint.
+#' These functions simplify retrieving data from specific DHIS2 API endpoints
+#'   using [get_metadata()].
 #'
-#' @param ... One or more metadata filters in key-value pairs.
-#' @inheritParams get_metadata
+#' @param ... One or more metadata filters [metadata_filter()] in key-value pairs.
 #' @inheritDotParams get_metadata -endpoint
 #'
-#' @return A tibble with the KHIS metadata response.
+#' @return A tibble containing the DHIS2 metadata response.
 #'
 #' @export
 #'
@@ -26,229 +26,160 @@
 #'
 #' @name metadata-helpers
 
-get_categories <- function(...,
-                           fields = c('id', 'name')) {
-    get_metadata('categories',
-                 ...,
-                 fields = fields)
+get_categories <- function(...) {
+    get_metadata('categories', ...)
 }
 
 #' @rdname metadata-helpers
 #' @export
 
-get_category_combos <- function(...,
-                                fields = c('id', 'name')) {
-    get_metadata('categoryCombos',
-                 ...,
-                 fields = fields)
+get_category_combos <- function(...) {
+    get_metadata('categoryCombos', ...)
 }
 
 #' @rdname metadata-helpers
 #' @export
 
-get_category_option_combos <- function(...,
-                                       fields = c('id', 'name')) {
-    get_metadata('categoryOptionCombos',
-                 ...,
-                 fields = fields)
+get_category_option_combos <- function(...) {
+    get_metadata('categoryOptionCombos', ...)
 }
 
 #' @rdname metadata-helpers
 #' @export
 
-get_category_option_group_sets <- function(...,
-                                           fields = c('id', 'name')) {
-    get_metadata('categoryOptionGroupSets',
-                 ...,
-                 fields = fields)
+get_category_option_group_sets <- function(...) {
+    get_metadata('categoryOptionGroupSets', ...)
 }
 
 #' @rdname metadata-helpers
 #' @export
 
-get_category_option_groups <- function(...,
-                                       fields = c('id', 'name')) {
-    get_metadata('categoryOptionGroups',
-                 ...,
-                 fields = fields)
+get_category_option_groups <- function(...) {
+    get_metadata('categoryOptionGroups', ...)
 }
 
 #' @rdname metadata-helpers
 #' @export
 
-get_category_options <- function(...,
-                                 fields = c('id', 'name')) {
-    get_metadata('categoryOptions',
-                 ...,
-                 fields = fields)
+get_category_options <- function(...) {
+    get_metadata('categoryOptions', ...)
 }
 
 #' @rdname metadata-helpers
 #' @export
 
-get_data_element_group_sets <- function(...,
-                                        fields = c('id', 'name')) {
-    get_metadata('dataElementGroupSets',
-                 ...,
-                 fields = fields)
+get_data_element_group_sets <- function(...) {
+    get_metadata('dataElementGroupSets', ...)
 }
 
 #' @rdname metadata-helpers
 #' @export
 
-get_data_element_groups <- function(...,
-                                    fields = c('id', 'name')) {
-    get_metadata('dataElementGroups',
-                 ...,
-                 fields = fields)
+get_data_element_groups <- function(...) {
+    get_metadata('dataElementGroups', ...)
 }
 
 #' @rdname metadata-helpers
 #' @export
 
-get_data_elements <- function(...,
-                              fields = c('id', 'name')) {
-    get_metadata('dataElements',
-                 ...,
-                 fields = fields)
+get_data_elements <- function(...) {
+    get_metadata('dataElements', ...)
 }
 
 #' @rdname metadata-helpers
 #' @export
 
-get_data_sets <- function(...,
-                          fields = c('id', 'name')) {
-    get_metadata('dataSets',
-                 ...,
-                 fields = fields)
+get_data_sets <- function(...) {
+    get_metadata('dataSets', ...)
 }
 
 #' @rdname metadata-helpers
 #' @export
 
-get_user_groups <- function(...,
-                            fields = c('id', 'name')) {
-    get_metadata('userGroups',
-                 ...,
-                 fields = fields)
+get_user_groups <- function(...) {
+    get_metadata('userGroups', ...)
 }
 
 #' @rdname metadata-helpers
 #' @export
 
-get_indicator_group_sets <- function(...,
-                                     fields = c('id', 'name')) {
-    get_metadata('indicatorGroupSets',
-                 ...,
-                 fields = fields)
+get_indicator_group_sets <- function(...) {
+    get_metadata('indicatorGroupSets', ...)
 }
 
 #' @rdname metadata-helpers
 #' @export
 
-get_indicator_groups <- function(...,
-                                 fields = c('id', 'name')) {
-    get_metadata('indicatorGroups',
-                 ...,
-                 fields = fields)
+get_indicator_groups <- function(...) {
+    get_metadata('indicatorGroups', ...)
 }
 
 #' @rdname metadata-helpers
 #' @export
 
-get_indicators <- function(...,
-                           fields = c('id', 'name')) {
-    get_metadata('indicators',
-                 ...,
-                 fields = fields)
+get_indicators <- function(...) {
+    get_metadata('indicators', ...)
 }
 
 #' @rdname metadata-helpers
 #' @export
 
-get_option_group_sets <- function(...,
-                                  fields = c('id', 'name')) {
-    get_metadata('optionGroupSets',
-                 ...,
-                 fields = fields)
+get_option_group_sets <- function(...) {
+    get_metadata('optionGroupSets', ...)
 }
 
 #' @rdname metadata-helpers
 #' @export
 
-get_option_groups <- function(...,
-                              fields = c('id', 'name')) {
-    get_metadata('optionGroups',
-                 ...,
-                 fields = fields)
+get_option_groups <- function(...) {
+    get_metadata('optionGroups', ...)
 }
 
 #' @rdname metadata-helpers
 #' @export
 
-get_option_sets <- function(...,
-                            fields = c('id', 'name')) {
-    get_metadata('optionSets',
-                 ...,
-                 fields = fields)
+get_option_sets <- function(...) {
+    get_metadata('optionSets', ...)
 }
 
 #' @rdname metadata-helpers
 #' @export
 
-get_options <- function(...,
-                        fields = c('id', 'name')) {
-    get_metadata('options',
-                 ...,
-                 fields = fields)
+get_options <- function(...) {
+    get_metadata('options', ...)
 }
 
 #' @rdname metadata-helpers
 #' @export
 
-get_organisation_unit_groupsets <- function(...,
-                                            fields = c('id', 'name')) {
-    get_metadata('organisationUnitGroupSets',
-                 ...,
-                 fields = fields)
+get_organisation_unit_groupsets <- function(...) {
+    get_metadata('organisationUnitGroupSets', ...)
 }
 
 #' @rdname metadata-helpers
 #' @export
 
-get_organisation_unit_groups <- function(...,
-                                         fields = c('id', 'name')) {
-    get_metadata('organisationUnitGroups',
-                 ...,
-                 fields = fields)
+get_organisation_unit_groups <- function(...) {
+    get_metadata('organisationUnitGroups', ...)
 }
 
 #' @rdname metadata-helpers
 #' @export
 
-get_organisation_units <- function(...,
-                                   fields = c('id', 'name')) {
-    get_metadata('organisationUnits',
-                 ...,
-                 fields = fields)
+get_organisation_units <- function(...) {
+    get_metadata('organisationUnits', ...)
 }
 
 #' @rdname metadata-helpers
 #' @export
 
-get_dimensions <- function(...,
-                           fields = c('id', 'name')) {
-    get_metadata('dimensions',
-                 ...,
-                 fields = fields)
+get_dimensions <- function(...) {
+    get_metadata('dimensions', ...)
 }
 
 #' @rdname metadata-helpers
 #' @export
 
-get_period_types <- function(...,
-                           fields = c('id', 'name')) {
-    get_metadata('periodTypes',
-                 ...,
-                 fields = fields)
+get_period_types <- function(...) {
+    get_metadata('periodTypes', ...)
 }

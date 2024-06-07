@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_analytics.R
 \name{get_analytics}
 \alias{get_analytics}
-\title{Retrieves Analytics Table Data from KHIS}
+\title{Retrieves Disaggregated Analytics Data from a DHIS2 Server}
 \usage{
 get_analytics(
   ...,
@@ -13,12 +13,13 @@ get_analytics(
 )
 }
 \arguments{
-\item{...}{One or more \code{\link[=analytics_dimension]{analytics_dimension()}} in key-value pairs.}
+\item{...}{One or more \code{\link[=analytics_dimension]{analytics_dimension()}} parameters in key-value pairs.
+These define the analytics query, including data elements, periods, and organization units.}
 
-\item{return_type}{The type to be return names of uid.}
+\item{return_type}{Optional argument specifying the return format for identifiers.
+defaults to \code{'uid'}. Choose \code{'name'} for human readable labels.}
 
-\item{retry}{Number of times to retry the API call in case of failure
-(defaults to 2).}
+\item{retry}{Number of times to retry the API call in case of failure (defaults to 2).}
 
 \item{verbosity}{Level of HTTP information to print during the call:
 \itemize{
@@ -34,21 +35,23 @@ get_analytics(
 A tibble with detailed information
 }
 \description{
-\code{get_analytics()} fetches data from the KHIS analytics data tables for a
-given period and data element(s), without performing any aggregation.
+\code{get_analytics()} retrieves disaggregated data from DHIS2 analytics tables for a
+specified period and data element(s), without performing any aggregation.
 }
 \details{
 \itemize{
-\item Retrieves data directly from KHIS analytics tables.
-\item Allows specifying KHIS session objects, retry attempts, and logging verbosity.
+\item Retrieves data directly from DHIS2 analytics tables.
+\item Allows specifying analytics dimensions, return format for identifiers, retry
+attempts, and logging verbosity.
 }
 }
 \examples{
 \dontshow{if (khis_has_cred()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+
 # Clinical Breast Examination data elements
 # XEX93uLsAm2 = CBE Abnormal
 # cXe64Yk0QMY = CBE Normal
-element_id = c('cXe64Yk0QMY', 'XEX93uLsAm2')
+element_id <- c('cXe64Yk0QMY', 'XEX93uLsAm2')
 
 # Download data from February 2023 to current date
 data <- get_analytics(dx \%.d\% element_id, pe \%.d\% 'LAST_MONTH')
