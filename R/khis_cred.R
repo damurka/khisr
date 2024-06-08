@@ -46,7 +46,7 @@
 khis_cred <- function(config_path = NULL,
                       username = NULL,
                       password = NULL,
-                      base_url = NULL) {
+                      base_url = deprecated()) {
 
     if (is.null(config_path) && is.null(username)) {
         khis_abort(
@@ -89,6 +89,16 @@ khis_cred <- function(config_path = NULL,
             ),
             class = 'khis_missing_credentials'
         )
+    }
+
+    if (is_missing(base_url)) {
+        deprecate_warn(
+            when = '1.0.3',
+            what = 'khis_cred(base_url = )',
+            details = "The default value for `base_url` will be deprecated in future versions. Please provide a value explicitly."
+        )
+
+        base_url <- 'https://hiskenya.org/api'
     }
 
     if (!is_scalar_character(base_url) || nchar(base_url) == 0) {

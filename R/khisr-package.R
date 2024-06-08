@@ -7,6 +7,7 @@
 
 ## usethis namespace: start
 #' @importFrom janitor clean_names
+#' @importFrom lifecycle deprecate_warn
 #' @importFrom lifecycle deprecated
 #' @importFrom lubridate month
 #' @importFrom lubridate today
