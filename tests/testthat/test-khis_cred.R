@@ -27,8 +27,15 @@ test_that("khis_cred works correctly using configuration file", {
         class = 'khis_missing_credentials'
     )
 
+    expect_error(
+        khis_cred(
+            config_path =  system.file("extdata", "no_url_cred_conf.json", package = "khisr")),
+        class = 'khis_missing_base_url'
+    )
+
     expect_no_error(
-        khis_cred(config_path = system.file("extdata", "valid_cred_conf.json", package = "khisr"))
+        khis_cred(
+            config_path = system.file("extdata", "valid_cred_conf.json", package = "khisr"))
     )
 
     expect_true(khis_has_cred())
@@ -39,7 +46,18 @@ test_that("khis_cred works correctly using configuration file", {
 
     expect_false(khis_has_cred())
 
-    expect_no_error(khis_cred(username = 'username2', password = 'password2'))
+    expect_warning(
+        khis_cred(username = 'username2',
+                  password = 'password2'
+        )
+    )
+
+    expect_no_error(
+        khis_cred(username = 'username2',
+                  password = 'password2',
+                  base_url="https//play.dhis2.org/demo/api"
+        )
+    )
 
     expect_true(khis_has_cred())
 
@@ -60,7 +78,8 @@ test_that("req_auth_khis_basic works correctly", {
         class = 'khis_missing_credentials'
     )
 
-    khis_cred(config_path = system.file("extdata", "valid_cred_conf.json", package = "khisr"))
+    khis_cred(
+        config_path = system.file("extdata", "valid_cred_conf.json", package = "khisr"))
 
     expect_no_error(httr2::request('https://example.com') %>% req_auth_khis_basic())
 

@@ -1,6 +1,7 @@
 {
 	"credentials": {
 		"username": "username",
-		"password": "password"
+		"password": "password",
+		"base_url": "https://hiskenya.org/api"
 	}
 }

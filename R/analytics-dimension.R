@@ -3,16 +3,21 @@
 #' Constructs a dimensions expression for analytics queries based on specified
 #'   property, operator, and values.
 #'
-#' @param property A character string representing whether its dimension or filter. It only accepts `'dimension'`, `'filter'`.
-#' @param operator A character string representing the property to filter on (e.g., `'dx'`, `'pe'`, `'ou'`).
+#' @param property A character string representing whether its dimension or filter.
+#'   It only accepts `'dimension'`, `'filter'`.
+#' @param operator A character string representing the property to filter on (e.g.,
+#'   `'dx'`, `'pe'`, `'ou'`).
 #' @param values A vector of values or semi-colon separated string items.
 #'
 #' @details
 #' DHIS2 organizes data using multiple dimensions, each with a unique identifier
 #' and a set of items that represent specific data points within that dimension.
-#' - Data elements (dx): Indicators, data set reporting rate metrics, data element operands, program indicators, program data elements, program attributes, validation rules.
+#' - Data elements (dx): Indicators, data set reporting rate metrics, data element
+#'   operands, program indicators, program data elements, program attributes,
+#'   validation rules.
 #' - Periods (pe): ISO periods (e.g., 202401) and relative periods (e.g., LAST_WEEK).
-#' - Organisation unit hierarchy (ou): Specific health facilities, districts, countries, and keywords for user location or its sub-units.
+#' - Organisation unit hierarchy (ou): Specific health facilities, districts, countries,
+#'    and keywords for user location or its sub-units.
 #' - Category option combinations (co): Category option combo identifiers.
 #' - Attribute option combinations (ao): Category option combo identifiers.
 #' - Categories: Category option identifiers.
@@ -21,8 +26,10 @@
 #'
 #' The infix operator used for filter and dimension includes:
 #'
-#' - `%.d%`: Infix operator for constructing dimension filters. Equivalent to calling `analytics_dimension("dimension", ...)`.
-#' - `%.f%`: Infix operator for constructing filter filters. Equivalent to calling `analytics_dimension("filter", ...)`.
+#' - `%.d%`: Infix operator for constructing dimension filters. Equivalent to
+#'   calling `analytics_dimension("dimension", ...)`.
+#' - `%.f%`: Infix operator for constructing filter filters. Equivalent to calling
+#'    `analytics_dimension("filter", ...)`.
 #'
 #'
 #' @return A spliced list with filter in the format property=operator:value

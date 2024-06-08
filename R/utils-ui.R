@@ -62,37 +62,52 @@ khis_quiet <- function() {
 }
 
 #' @export
-#' @rdname khis-configuration
+#' @rdname khisr-configuration
 #' @param code Code to execute quietly
 #' @return No return value, called for side effects
 #' @examples
-#' # message: "The credentials have been set."
-#' khis_cred(username = 'username', password = 'password')
 #'
-#' # suppress messages for a small amount of code
-#' with_khis_quiet(
-#'   khis_cred(username = 'username', password = 'password')
-#' )
+#' \dontrun{
+#'     # message: "The credentials have been set."
+#'     khis_cred(username = 'username',
+#'               password = 'password',
+#'               base_url = 'https://dhis2-instance/api')
+#'
+#'     # suppress messages for a small amount of code
+#'     with_khis_quiet(
+#'         khis_cred(username = 'username',
+#'                   password = 'password',
+#'                   base_url = 'https://dhis2-instance/api')
+#'     )
+#' }
+
 with_khis_quiet <- function(code) {
     withr::with_options(list(khis_quiet = TRUE), code = code)
 }
 
 #' @export
-#' @rdname khis-configuration
+#' @rdname khisr-configuration
 #' @param env The environment to use for scoping
 #' @return No return value, called for side effects
 #' @examples
-#' # message: "The credentials have been set."
-#' khis_cred(username = 'username', password = 'password')
 #'
-#' # suppress messages for a in a specific scope
-#' local_khis_quiet()
+#' \dontrun{
+#'     # message: "The credentials have been set."
+#'     khis_cred(username = 'username',
+#'               password = 'password',
+#'               base_url = 'https://dhis2-instance/api')
 #'
-#' # no message
-#' khis_cred(username = 'username', password = 'password')
+#'     # suppress messages for a in a specific scope
+#'     local_khis_quiet()
 #'
-#' # clear credentials
-#' khis_cred_clear()
+#'     # no message
+#'     khis_cred(username = 'username',
+#'               password = 'password',
+#'               base_url = 'https://dhis2-instance/api')
+#'
+#'     # clear credentials
+#'     khis_cred_clear()
+#' }
 
 local_khis_quiet <- function(env = parent.frame()) {
     withr::local_options(list(khis_quiet = TRUE), .local_envir = env)

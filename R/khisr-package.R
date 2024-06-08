@@ -6,10 +6,21 @@
 "_PACKAGE"
 
 ## usethis namespace: start
+#' @importFrom janitor clean_names
+#' @importFrom lifecycle deprecate_warn
+#' @importFrom lifecycle deprecated
+#' @importFrom lubridate month
+#' @importFrom lubridate today
+#' @importFrom lubridate year
+#' @importFrom lubridate ym
+#' @importFrom lubridate ymd
 #' @importFrom purrr map
 #' @importFrom purrr map_vec
 #' @importFrom purrr pluck
+#' @importFrom purrr pmap_chr
 #' @importFrom stringr str_c
+#' @importFrom stringr str_dup
+#' @importFrom stringr str_extract
 #' @importFrom stringr str_glue
 #' @importFrom stringr str_to_upper
 ## usethis namespace: end
@@ -37,5 +48,5 @@ NULL
 #'
 #' @return No return value, called for side effects
 #'
-#' @name khis-configuration
+#' @name khisr-configuration
 NULL

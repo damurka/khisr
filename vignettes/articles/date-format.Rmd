@@ -8,18 +8,17 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+This guide explains how to specify dates and periods when working with the `khisr` package, which interacts with the DHIS2 platform. Understanding these formats is essential for retrieving the desired data effectively.
 
-`khisr` leverages the powerful DHIS2 API, which utilizes specific formats for dates and periods. Understanding these formats is crucial for effectively interacting with khisr functions and retrieving the desired data.
+DHIS2 uses the `yyyy-MM-dd` format for dates. For instance, to represent March 20, 2024, you would use "2024-03-20".
 
-# Date and Period Format
+### Specifying Periods
 
-The date format use in DHIS2 API is `yyyy-MM-dd`. For example, to express March 20, 2014, you must use 2014-03-20.
+DHIS2 allows you to define periods in two ways:
+- **Fixed Periods:** Refer to specific calendar periods (e.g., January 2024, 2020 to 2024).
+- **Relative Periods:** Defined in relation to the current date (e.g., last year, last month, this quarter).
 
-DHIS2 supports two types of periods:
 
-- **Relative Periods:** Defined in relation to the date of analysis (e.g., last year, last month, this quarter).
-
-- **Fixed Periods:** Refer to specific periods (e.g., January 2024, 2020 to 2024).
 
 ## Fixed Periods
 

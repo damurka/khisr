@@ -9,25 +9,44 @@ secret_decrypt_json <- function(path, key) {
     invisible(secret_decrypt(enc, key = key))
 }
 
-secret_encrypt_json <- function(json, path = NULL, key) {
-    if (!jsonlite::validate(json)) {
-        json <- readChar(json, file.info(json)$size - 1)
-    }
-    enc <- secret_encrypt(json, key = key)
+# secret_encrypt_json <- function(json, path = NULL, key) {
+#     if (!jsonlite::validate(json)) {
+#         json <- readChar(json, file.info(json)$size - 1)
+#     }
+#     enc <- secret_encrypt(json, key = key)
+#
+#     if(!is.null(path)) {
+#         is_string(path)
+#         writeBin(enc, path)
+#     }
+#
+#     invisible(enc)
+# }
 
-    if(!is.null(path)) {
-        is_string(path)
-        writeBin(enc, path)
-    }
+check_date <- function(date, can_be_null = FALSE, arg = caller_arg(date), error_call = caller_env()) {
 
-    invisible(enc)
+    check_required(date, arg = arg, call = error_call)
+
+    parsed_date <- ymd(date, quiet = TRUE)
+    if (any(length(parsed_date) > 1,
+            is_na(parsed_date),
+            (length(parsed_date) == 0 && !can_be_null))) {
+        khis_abort(
+            message = c(
+                "x" = "{.arg {arg}} has incorrect format",
+                "!" = "Provide the date in the format {.code yyyy-mm-dd}"
+            ),
+            class = 'khis_invalid_date',
+            call = error_call
+        )
+    }
 }
 
 check_scalar_character <- function(x, arg = caller_arg(x), call = caller_env()) {
 
     check_required(x, arg, call)
 
-    if (!is_scalar_character(x) || nchar(x) == 0) {
+    if (!is_scalar_character(x) || is_empty(x)) {
         khis_abort(c('x' = '{.arg {arg}} should be scalar string'),
                    call = call)
     }
@@ -52,6 +71,37 @@ check_string_vector <- function(vec, arg = caller_arg(vec), call = caller_env())
     }
 }
 
+check_integerish <- function(vec, arg = caller_arg(vec), call = caller_env()) {
+    check_required(vec, arg = arg, call = call)
+
+    is_integer <- is_scalar_integerish(vec)
+    no_null_na <- !any(is_null(vec) | is.na(vec))
+
+    if (!all(is_integer, no_null_na)) {
+        khis_abort(
+            message = c(
+                "x" = "{.arg {arg}} is not an integer",
+                "!" = "Provide scalar integer value without {.code NA}, {.code NULL}"
+            ),
+            call = call
+        )
+    }
+}
+
+check_level_supported <- function(level, arg = caller_arg(level), call = caller_env()) {
+    org_levels <- get_organisation_unit_levels(fields = "name,level")
+    if (!level %in% org_levels$level) {
+        khis_abort(
+            c(
+                'x' = "Invalid level specified",
+                "The organisation level is invalid"
+            ),
+            call = call
+        )
+    }
+    return(org_levels)
+}
+
 check_supported_operator <- function(x, arg = caller_arg(x), call = caller_env()) {
     symbols <- c(
         'eq', '!eq', 'ieq', 'ne',
@@ -68,6 +118,19 @@ check_supported_operator <- function(x, arg = caller_arg(x), call = caller_env()
             message = c(
                 "x" = "{.arg {arg}} is not a supported operator"
             ),
+            call = call
+        )
+    }
+}
+
+check_has_credentials <- function(call = caller_env()) {
+    if (!khis_has_cred()) {
+        khis_abort(
+            message = c(
+                "x" = "Missing credentials",
+                "!" = "Please set the credentials by calling {.fun khis_cred}"
+            ),
+            class = 'khis_missing_credentials',
             call = call
         )
     }

@@ -2,43 +2,54 @@
 % Please edit documentation in R/khis_cred.R
 \name{khis_cred}
 \alias{khis_cred}
-\title{Sets the KHIS Credentials}
+\title{Sets DHIS2 Credentials}
 \usage{
 khis_cred(
   config_path = NULL,
   username = NULL,
   password = NULL,
-  base_url = NULL
+  base_url = deprecated()
 )
 }
 \arguments{
-\item{config_path}{An optional parameters that contains the path to
-configuration file with username and password.}
+\item{config_path}{An optional path to a configuration file containing username
+and password. This is considered more secure than providing credentials directly
+in code.}
 
-\item{username}{The KHIS username. Can be optional if \code{config_path} is
-already provided}
+\item{username}{The DHIS2 username. Only required if configuration file not
+provided.}
 
-\item{password}{The KHIS password. Can be optional if \code{config_path} is
-already provided.}
+\item{password}{The DHIS2 password. Only required if configuration file not
+provided.}
 
-\item{base_url}{The base url used for the KHIS instance. The default is NULL
-which is the \url{https://hiskenya.org/api}}
+\item{base_url}{The base URL of the DHIS2 instance. Only required if
+configuration file not provided.}
 }
 \value{
 No return value
 }
 \description{
-Sets the KHIS Credentials
+\code{khis_cred()} sets the credentials for accessing a DHIS2 instance.
 }
 \details{
-The credentials can be provided using a configuration file (more secure) or
-providing \code{username} and \code{password} arguments. The \code{config_path} is considered
-more secure since credentials will not appear in the code.
+This function allows you to set the credentials for interacting with a DHIS2
+server. You can either provide the username and password directly (less secure)
+or specify a path to a configuration file containing these credentials. Using
+a configuration file is recommended for improved security as it prevents
+credentials from being stored directly in your code.
 }
 \examples{
 
-# Load username and password
-khis_cred(username = 'khis_username', password = 'PASSWORD')
+\dontrun{
+    # Option 1: Using a configuration file (recommended)
+    # Assuming a configuration file named "credentials.json":
+    khis_cred(config_path = "path/to/credentials.json")
+
+    # Option 2: Providing credentials directly (less secure)
+    khis_cred(username = "your_username",
+              password = "your_password",
+              base_url='https://dhis2-instance/api')
+}
 }
 \seealso{
 Other credential functions: 

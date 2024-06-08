@@ -11,6 +11,8 @@ test_that("Metadata filter format helpers works", {
     expect_error(metadata_filter("P", "!null", "V"))
     expect_error(metadata_filter("P", "empty", "V"))
     expect_error(metadata_filter("P", "O", NULL))
+    expect_error(metadata_filter("P", "in", NULL))
+    expect_error(metadata_filter("P", "eq", c(1,2)))
 
     # values can have length > 1 only if operator is in or !in
     # and values for in and !in always enclosed in square brackets
@@ -48,6 +50,10 @@ test_that("Metadata filter format helpers works", {
     expect_identical(P %.^like% "V", splice(list2(filter = "P:$ilike:V")))
     expect_identical(P %.~^like% "V", splice(list2(filter = "P:!$ilike:V")))
 
+    # %.Like% and %.~Like%
+    expect_identical(P %.Like% "V", splice(list2(filter = "P:like:V")))
+    expect_identical(P %.~Like% "V", splice(list2(filter = "P:!like:V")))
+
     # %.Like$% and %.~Like$%
     expect_identical(P %.Like$% "V", splice(list2(filter = "P:like$:V")))
     expect_identical(P %.~Like$% "V", splice(list2(filter = "P:!like$:V")))
@@ -60,12 +66,10 @@ test_that("Metadata filter format helpers works", {
     expect_identical(P %.token% "V", splice(list2(filter = "P:token:V")))
     expect_identical(P %.~token% "V", splice(list2(filter = "P:!token:V")))
 
-    # %.le%, %.It% %.ge% %.gt% and %.~.Like%
+    # %.le%, %.It% %.ge% and %.gt%
     expect_identical(P %.le% "V", splice(list2(filter = "P:le:V")))
     expect_identical(P %.lt% "V", splice(list2(filter = "P:lt:V")))
     expect_identical(P %.ge% "V", splice(list2(filter = "P:ge:V")))
     expect_identical(P %.gt% "V", splice(list2(filter = "P:gt:V")))
-    expect_identical(P %.~Like$% "V", splice(list2(filter = "P:!like$:V")))
-    expect_identical(P %.~Like% "V", splice(list2(filter = "P:!like:V")))
 
 })

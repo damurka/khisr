@@ -1,18 +1,21 @@
-# This file is the interface between KHIS credential storage and khis package
+# This file is the interface between DHIS2 credential storage.
 
 # Initialization happens in .onLoad
 .auth <- NULL
 
-#' Sets the KHIS Credentials
+#' Sets DHIS2 Credentials
 #'
-#' @param config_path An optional parameters that contains the path to
-#'   configuration file with username and password.
-#' @param username The KHIS username. Can be optional if `config_path` is
-#'   already provided
-#' @param password The KHIS password. Can be optional if `config_path` is
-#'   already provided.
-#' @param base_url The base url used for the KHIS instance. The default is NULL
-#'   which is the <https://hiskenya.org/api>
+#' `khis_cred()` sets the credentials for accessing a DHIS2 instance.
+#'
+#' @param config_path An optional path to a configuration file containing username
+#'   and password. This is considered more secure than providing credentials directly
+#'   in code.
+#' @param username The DHIS2 username. Only required if configuration file not
+#'   provided.
+#' @param password The DHIS2 password. Only required if configuration file not
+#'   provided.
+#' @param base_url The base URL of the DHIS2 instance. Only required if
+#'   configuration file not provided.
 #'
 #' @family credential functions
 #'
@@ -21,19 +24,29 @@
 #' @export
 #'
 #' @details
-#' The credentials can be provided using a configuration file (more secure) or
-#' providing `username` and `password` arguments. The `config_path` is considered
-#' more secure since credentials will not appear in the code.
+#' This function allows you to set the credentials for interacting with a DHIS2
+#' server. You can either provide the username and password directly (less secure)
+#' or specify a path to a configuration file containing these credentials. Using
+#' a configuration file is recommended for improved security as it prevents
+#' credentials from being stored directly in your code.
 #'
 #' @examples
 #'
-#' # Load username and password
-#' khis_cred(username = 'khis_username', password = 'PASSWORD')
+#' \dontrun{
+#'     # Option 1: Using a configuration file (recommended)
+#'     # Assuming a configuration file named "credentials.json":
+#'     khis_cred(config_path = "path/to/credentials.json")
+#'
+#'     # Option 2: Providing credentials directly (less secure)
+#'     khis_cred(username = "your_username",
+#'               password = "your_password",
+#'               base_url='https://dhis2-instance/api')
+#' }
 
 khis_cred <- function(config_path = NULL,
                       username = NULL,
                       password = NULL,
-                      base_url = NULL) {
+                      base_url = deprecated()) {
 
     if (is.null(config_path) && is.null(username)) {
         khis_abort(
@@ -64,14 +77,11 @@ khis_cred <- function(config_path = NULL,
         password <- credentials[["password"]]
         username <- credentials[["username"]]
         base_url <- credentials[["base_url"]]
-        #if (nchar(base_url) == 0) {
-        #    base_url = NULL
-        #}
 
         additional <- ' on the configuration file'
     }
 
-    if (!rlang::is_scalar_character(password) || nchar(password) == 0 || !rlang::is_scalar_character(username) || nchar(username) == 0) {
+    if (!is_scalar_character(password) || nchar(password) == 0 || !is_scalar_character(username) || nchar(username) == 0) {
         khis_abort(
             message = c(
                 "x" = "Missing credentials",
@@ -81,24 +91,45 @@ khis_cred <- function(config_path = NULL,
         )
     }
 
+    if (is_missing(base_url)) {
+        deprecate_warn(
+            when = '1.0.3',
+            what = 'khis_cred(base_url = )',
+            details = "The default value for `base_url` will be deprecated in future versions. Please provide a value explicitly."
+        )
+
+        base_url <- 'https://hiskenya.org/api'
+    }
+
+    if (!is_scalar_character(base_url) || nchar(base_url) == 0) {
+        khis_abort(
+            message = c(
+                "x" = "Missing DHIS2 api instance",
+                "!" = "Please provide {.field base_url}."
+            ),
+            base_url = base_url,
+            class = 'khis_missing_base_url'
+        )
+    }
+
     .auth$set_username(username)
     .auth$set_password(password)
-
-    if (!is.null(base_url)) {
-        .auth$set_base_url(base_url)
-    }
+    .auth$set_base_url(base_url)
 
     khis_info(c('i' = 'The credentials have been set.'))
 
     invisible(TRUE)
 }
 
-#' @title Load Configuration File
+#' Load Configuration File
 #'
-#' @description Loads a JSON configuration file with KHIS credentials to access
-#'   a KHIS instance
-#' @param config_path Path to the KHIS credentials file
-#' @return A parsed list of the configuration file.
+#' Loads a JSON configuration file containing credentials for accessing DHIS2
+#'   instance.
+#'
+#' @param config_path Path to the DHIS2 credentials file.
+#'
+#' @return
+#' A parsed list of the configuration file.
 #'
 #'@noRd
 
@@ -135,7 +166,8 @@ khis_cred <- function(config_path = NULL,
 
 #' Authenticate Request with HTTP Basic Authentication
 #'
-#' This sets the Authorization header for basic authentication using the username and password provided.
+#' This sets the Authorization header for basic authentication using the username
+#'   and password provided.
 #'
 #' @param req A request
 #'
@@ -144,7 +176,7 @@ khis_cred <- function(config_path = NULL,
 #' @noRd
 #'
 #' @examples
-#' req <- request("http://example.com") %>%
+#' req <- request("http://dhis2.com/api") %>%
 #'   req_auth_khis_basic("damurka", "PASSWORD")
 #'
 #' @seealso [httr2]
@@ -152,17 +184,8 @@ khis_cred <- function(config_path = NULL,
 req_auth_khis_basic <- function(req, arg = caller_arg(req), call = caller_env()) {
 
     check_required(req, arg, call)
+    check_has_credentials(call)
 
-    if (!khis_has_cred()) {
-        khis_abort(
-            message = c(
-                "x" = "Missing credentials",
-                "!" = "Please set the credentials by calling {.fun khis_cred}"
-            ),
-            class = 'khis_missing_credentials',
-            call = call
-        )
-    }
     httr2::req_auth_basic(req, .auth$username, .auth$password)
 }
 
@@ -176,17 +199,21 @@ req_auth_khis_basic <- function(req, arg = caller_arg(req), call = caller_env())
 #'
 #' @examples
 #'
-#' # Set the credentials
-#' khis_cred(username = 'KHIS username', password = 'KHIS password')
+#' \dontrun{
+#'     # Set the credentials
+#'     khis_cred(username = 'DHIS2 username',
+#'               password = 'DHIS2 password',
+#'               base_url='https://dhis2-instance/api')
 #'
-#' # Check if credentials available. Expect TRUE
-#' khis_has_cred()
+#'     # Check if credentials available. Expect TRUE
+#'     khis_has_cred()
 #'
-#' # Clear credentials
-#' khis_cred_clear()
+#'     # Clear credentials
+#'     khis_cred_clear()
 #'
-#' # Check if credentials available. Expect FALSE
-#' khis_has_cred()
+#'     # Check if credentials available. Expect FALSE
+#'     khis_has_cred()
+#' }
 
 khis_has_cred <- function() {
     .auth$has_cred()
@@ -200,7 +227,8 @@ khis_has_cred <- function() {
 #' @export
 #'
 #' @examples
-#' khis_cred_clear()
+#'
+#' #khis_cred_clear()
 
 khis_cred_clear <- function() {
     .auth$set_username(NULL)
@@ -218,41 +246,48 @@ khis_cred_clear <- function() {
 #'
 #' @examples
 #'
-#' # Set the credentials
-#' khis_cred(username = 'KHIS username', password = 'KHIS password')
+#' \dontrun{
+#'     # Set the credentials
+#'     khis_cred(username = 'DHIS2 username',
+#'               password = 'DHIS2 password',
+#'               base_url ='https://dhis2-instance/api')
 #'
-#' # View the username expect 'KHIS username'
-#' khis_username()
+#'     # View the username expect 'DHIS2 username'
+#'     khis_username()
 #'
-#' # Clear credentials
-#' khis_cred_clear()
+#'     # Clear credentials
+#'     khis_cred_clear()
 #'
-#' # View the username expect 'NULL'
-#' khis_username()
+#'     # View the username expect 'NULL'
+#'     khis_username()
+#' }
 
 khis_username <- function() {
     .auth$get_username()
 }
 
-#' Produces the Configured KHIS API Base URI
+#' Produces the Configured DHIS2 API Base URI
 #'
-#' @return the KHIS base URI
+#' @return the DHIS2 base URI
 #' @export
 #'
 #' @examples
 #'
-#' # Set the credentials
-#' khis_cred(username = 'KHIS username', password = 'KHIS password')
+#' \dontrun{
+#'     # Set the credentials
+#'     khis_cred(username = 'DHIS2 username',
+#'               password = 'DHIS2 password',
+#'               base_url = 'https://dhis2-instance/api')
 #'
-#' # View the username expect 'KHIS username'
-#' khis_base_url()
+#'     # View the DHIS2 instance API expect 'https://dhis2-instance/api'
+#'     khis_base_url()
+#'
+#'     # Clear credentials
+#'     khis_cred_clear()
+#' }
 
 khis_base_url <- function() {
-    base_url <- .auth$get_base_url()
-    if (is_empty(base_url) || nchar(base_url) == 0) {
-        khis_abort(c('x' = 'The base url has not been set.'))
-    }
-    return(base_url)
+   .auth$get_base_url()
 }
 
 
@@ -269,7 +304,7 @@ khis_base_url <- function() {
 khis_cred_internal <- function(account = c('docs', 'testing')) {
     account <- arg_match(account)
     can_decrypt <- secret_has_key('KHIS_KEY')
-    online <- !is.null(curl::nslookup('hiskenya.org', error = FALSE))
+    online <- !is.null(curl::nslookup('google.com', error = FALSE))
     if (!can_decrypt || !online) {
         khis_abort(
             message = c(
@@ -278,7 +313,7 @@ khis_cred_internal <- function(account = c('docs', 'testing')) {
                     c("x" = "Can't decrypt the {.field {account}} credentials.")
                 },
                 if (!online) {
-                    c("x" = "We don't appear to be online. Or maybe the KHIS is down?")
+                    c("x" = "We don't appear to be online. Or maybe the DHIS2 is down?")
                 }
             ),
             class = 'khis_cred_internal_error',
@@ -287,9 +322,11 @@ khis_cred_internal <- function(account = c('docs', 'testing')) {
         )
     }
 
-    filename <- str_glue("khis-{account}.json")
+    if (!is_interactive()) local_khis_quiet()
+    filename <- str_glue("khisr-{account}.json")
+
     khis_cred(
-        secret_decrypt_json(
+        config_path = secret_decrypt_json(
             system.file('secret', filename, package = 'khisr'),
             'KHIS_KEY'
         )
