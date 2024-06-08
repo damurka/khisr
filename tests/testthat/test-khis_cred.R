@@ -46,6 +46,12 @@ test_that("khis_cred works correctly using configuration file", {
 
     expect_false(khis_has_cred())
 
+    expect_warning(
+        khis_cred(username = 'username2',
+                  password = 'password2'
+        )
+    )
+
     expect_no_error(
         khis_cred(username = 'username2',
                   password = 'password2',

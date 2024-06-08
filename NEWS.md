@@ -1,11 +1,5 @@
 # khisr (development version)
 
-## Breaking Changes
-
-* Made the package generic to support any DHIS2 instance and updated the documentation accordingly.
-
-* Modified  the `khis_cred()` to require the `base_url` argument and have no default value.
-
 ## New features
 
 * Introduced experimental functions for enhanced data retrieval:
@@ -17,6 +11,12 @@
 * Added the `khis_base_url()` to obtain the DHIS2 API URL.
 
 * Introduced `get_organisation_unit_levels()` to retrieve the available organisation levels in the DHIS2 instance.
+
+## Minor improvements and fixes
+
+* Made the package generic to support any DHIS2 instance and updated the documentation accordingly.
+
+* Modified  the `khis_cred()` to require the `base_url` argument and deprecated the default value.
 
 # khisr 1.0.2
 

@@ -1,18 +1,18 @@
 # Platform
 
-|field    |value                                    |
-|:--------|:----------------------------------------|
-|version  |R version 4.3.2 (2023-10-31 ucrt)        |
-|os       |Windows 11 x64 (build 22631)             |
-|system   |x86_64, mingw32                          |
-|ui       |RStudio                                  |
-|language |(EN)                                     |
-|collate  |English_Kenya.utf8                       |
-|ctype    |English_Kenya.utf8                       |
-|tz       |Africa/Nairobi                           |
-|date     |2024-06-08                               |
-|rstudio  |2024.04.1+748 Chocolate Cosmos (desktop) |
-|pandoc   |NA                                       |
+|field    |value                                                                                 |
+|:--------|:-------------------------------------------------------------------------------------|
+|version  |R version 4.3.2 (2023-10-31 ucrt)                                                     |
+|os       |Windows 11 x64 (build 22631)                                                          |
+|system   |x86_64, mingw32                                                                       |
+|ui       |RStudio                                                                               |
+|language |(EN)                                                                                  |
+|collate  |English_Kenya.utf8                                                                    |
+|ctype    |English_Kenya.utf8                                                                    |
+|tz       |Africa/Nairobi                                                                        |
+|date     |2024-06-08                                                                            |
+|rstudio  |2024.04.1+748 Chocolate Cosmos (desktop)                                              |
+|pandoc   |3.1.11 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown) |
 
 # Dependencies
 
@@ -54,10 +54,4 @@
 |withr      |3.0.0 |3.0.0      |   |
 
 # Revdeps
-
-## New problems (1)
-
-|package         |version |error    |warning |note |
-|:---------------|:-------|:--------|:-------|:----|
-|[cancerscreening](problems.md#cancerscreening)|1.1.0   |1 __+1__ |        |     |
 

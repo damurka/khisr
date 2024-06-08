@@ -62,6 +62,6 @@ get_metadata <- function(endpoint,
         return(NULL)
     }
 
-    data <- data %>% unnest_wider(endpoint)
-    return(data)
+    data %>%
+        unnest_wider(all_of(endpoint))
 }

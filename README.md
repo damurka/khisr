@@ -110,6 +110,9 @@ counties
 #>  9 Isiolo County          bzOfj0iwfDH
 #> 10 Kajiado County         Hsk1YV8kHkT
 #> # ℹ 37 more rows
+```
+
+``` r
 
 # Retrieve organisation units by name (level included to ensure it refers to county)
 kiambu_county <- get_organisation_units(level %.eq% '2', 
@@ -119,6 +122,9 @@ kiambu_county
 #>   name          id         
 #>   <chr>         <chr>      
 #> 1 Kiambu County qKzosKQPl6G
+```
+
+``` r
 
 # Retrieve all data elements by data element group for outpatient (data element group name MOH 705)
 moh_705 <- get_data_elements(dataElementGroups.name %.like% 'moh 705')
@@ -137,6 +143,9 @@ moh_705
 #>  9 Burns                        dkEYL9Sous9
 #> 10 Cardiovascular conditions    sZETzNe1To8
 #> # ℹ 86 more rows
+```
+
+``` r
 
 # Filter the data element to element that contain malaria
 malaria <- get_data_elements(dataElementGroups.name %.like% 'moh 705', 
@@ -149,6 +158,9 @@ malaria
 #> 2 Malaria in pregnancy                    gvZmXInRLuD
 #> 3 MOH 705A Rev 2020_ Tested for Malaria   siOyOiOJpI8
 #> 4 Suspected  Malaria                      Lt0FqtnHraW
+```
+
+``` r
 
 # Retrieve data for malaria in Kiambu county in the outpatient data element groups
 data <- get_analytics(

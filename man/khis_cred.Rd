@@ -8,7 +8,7 @@ khis_cred(
   config_path = NULL,
   username = NULL,
   password = NULL,
-  base_url = NULL
+  base_url = deprecated()
 )
 }
 \arguments{
