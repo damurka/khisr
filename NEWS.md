@@ -1,4 +1,4 @@
-# khisr (development version)
+# khisr 1.0.3
 
 ## New features
 

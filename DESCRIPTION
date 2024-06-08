@@ -4,7 +4,7 @@ Description:
     Provides a powerful and user-friendly interface for interacting with DHIS2
     APIs. It streamlines data retrieval, empowering researchers, analysts and
     healthcare professionals to obtain and utilise data efficiently.
-Version: 1.0.2.9000
+Version: 1.0.3
 Authors@R: 
     person("David", "Kariuki", , "hello@damurka.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0003-6159-1107"))
