@@ -43,13 +43,22 @@
     <loc>https://khisr.damurka.com/reference/get_analytics.html</loc>
   </url>
   <url>
+    <loc>https://khisr.damurka.com/reference/get_analytics_by_level.html</loc>
+  </url>
+  <url>
+    <loc>https://khisr.damurka.com/reference/get_data_elements_with_category_options.html</loc>
+  </url>
+  <url>
+    <loc>https://khisr.damurka.com/reference/get_data_sets_by_level.html</loc>
+  </url>
+  <url>
     <loc>https://khisr.damurka.com/reference/get_metadata.html</loc>
   </url>
   <url>
-    <loc>https://khisr.damurka.com/reference/index.html</loc>
+    <loc>https://khisr.damurka.com/reference/get_organisations_by_level.html</loc>
   </url>
   <url>
-    <loc>https://khisr.damurka.com/reference/khis-configuration.html</loc>
+    <loc>https://khisr.damurka.com/reference/index.html</loc>
   </url>
   <url>
     <loc>https://khisr.damurka.com/reference/khis_base_url.html</loc>
@@ -65,6 +74,9 @@
   </url>
   <url>
     <loc>https://khisr.damurka.com/reference/khis_username.html</loc>
+  </url>
+  <url>
+    <loc>https://khisr.damurka.com/reference/khisr-configuration.html</loc>
   </url>
   <url>
     <loc>https://khisr.damurka.com/reference/khisr-package.html</loc>
