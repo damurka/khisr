@@ -49,4 +49,5 @@ reference:
     contents:
         - get_analytics_by_level
         - get_data_elements_with_category_options
+        - get_data_sets_by_level
         - get_organisations_by_level

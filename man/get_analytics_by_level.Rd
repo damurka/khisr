@@ -29,7 +29,7 @@ get_analytics_by_level(
 \value{
 A tibble with detailed information, including:
 \itemize{
-\item Geographical identifiers (country, county, subcounty, ward, facility, depending on level)
+\item Geographical identifiers (country, subnational, district, facility, depending on level)
 \item Reporting period (month, year, fiscal year)
 \item Data element names
 \item Category options

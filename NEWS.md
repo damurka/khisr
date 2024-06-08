@@ -15,6 +15,7 @@
       with the associated category options values
     - `get_organisations_by_level()` - Gets organisations filtered by the level
     - `get_analytics_by_level()` - Gets Analytics Table Data
+    - `get_data_sets_by_level()` - Retrieves Data Set Reporting Rate Metrics
 
 # khisr 1.0.2
 

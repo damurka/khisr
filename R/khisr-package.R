@@ -16,6 +16,7 @@
 #' @importFrom purrr map
 #' @importFrom purrr map_vec
 #' @importFrom purrr pluck
+#' @importFrom purrr pmap_chr
 #' @importFrom stringr str_c
 #' @importFrom stringr str_dup
 #' @importFrom stringr str_extract

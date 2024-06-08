@@ -19,7 +19,7 @@
 #'
 #' @return A tibble with detailed information, including:
 #'
-#' * Geographical identifiers (country, county, subcounty, ward, facility, depending on level)
+#' * Geographical identifiers (country, subnational, district, facility, depending on level)
 #' * Reporting period (month, year, fiscal year)
 #' * Data element names
 #' * Category options
