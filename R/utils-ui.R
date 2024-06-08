@@ -62,7 +62,7 @@ khis_quiet <- function() {
 }
 
 #' @export
-#' @rdname khis-configuration
+#' @rdname khisr-configuration
 #' @param code Code to execute quietly
 #' @return No return value, called for side effects
 #' @examples
@@ -86,7 +86,7 @@ with_khis_quiet <- function(code) {
 }
 
 #' @export
-#' @rdname khis-configuration
+#' @rdname khisr-configuration
 #' @param env The environment to use for scoping
 #' @return No return value, called for side effects
 #' @examples

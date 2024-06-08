@@ -23,6 +23,25 @@ secret_decrypt_json <- function(path, key) {
 #     invisible(enc)
 # }
 
+check_date <- function(date, can_be_null = FALSE, arg = caller_arg(date), error_call = caller_env()) {
+
+    check_required(date, arg = arg, call = error_call)
+
+    parsed_date <- ymd(date, quiet = TRUE)
+    if (any(length(parsed_date) > 1,
+            is_na(parsed_date),
+            (length(parsed_date) == 0 && !can_be_null))) {
+        khis_abort(
+            message = c(
+                "x" = "{.arg {arg}} has incorrect format",
+                "!" = "Provide the date in the format {.code yyyy-mm-dd}"
+            ),
+            class = 'khis_invalid_date',
+            call = error_call
+        )
+    }
+}
+
 check_scalar_character <- function(x, arg = caller_arg(x), call = caller_env()) {
 
     check_required(x, arg, call)

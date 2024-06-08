@@ -11,5 +11,5 @@ if(!isTRUE(auth_sucess)) {
 }
 
 skip_if_no_cred <- function() {
-  testthat::skip_if_not(khis_has_cred(), "No KHIS credentials")
+  testthat::skip_if_not(khis_has_cred(), "No DHIS2 credentials")
 }

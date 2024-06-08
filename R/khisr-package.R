@@ -8,6 +8,11 @@
 ## usethis namespace: start
 #' @importFrom janitor clean_names
 #' @importFrom lifecycle deprecated
+#' @importFrom lubridate month
+#' @importFrom lubridate today
+#' @importFrom lubridate year
+#' @importFrom lubridate ym
+#' @importFrom lubridate ymd
 #' @importFrom purrr map
 #' @importFrom purrr map_vec
 #' @importFrom purrr pluck
@@ -41,5 +46,5 @@ NULL
 #'
 #' @return No return value, called for side effects
 #'
-#' @name khis-configuration
+#' @name khisr-configuration
 NULL

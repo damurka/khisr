@@ -22,24 +22,31 @@ articles:
 reference:
   - title: "Authorization Credentials"
     desc: >
-      Set and securely store the KHIS authorization credentials
+      Set and securely store the DHIS2 authorization credentials
     contents:
       - khis_cred
       - khis_has_cred
       - khis_cred_clear
       - khis_username
       - khis_base_url
-      - khis-configuration
-  - title: "KHIS Metadata"
+      - khisr-configuration
+  - title: "DHIS2 Metadata"
     desc: >
-      Download metadata information from KHIS
+      Download metadata information from DHIS2
     contents:
       - get_metadata
       - metadata-helpers
       - metadata-filter
-  - title: "KHIS Analytics"
+  - title: "DHIS2 Analytics"
     desc: >
-      To access analytical, aggregated data in KHIS
+      To access analytical, aggregated data in DHIS2
     contents:
       - get_analytics
       - analytics-dimension
+  - title: "Experimental Functions"
+    desc: >
+        Experimental functions that formats the data in logical manner
+    contents:
+        - get_analytics_by_level
+        - get_data_elements_with_category_options
+        - get_organisations_by_level

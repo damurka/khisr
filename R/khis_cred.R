@@ -303,7 +303,7 @@ khis_cred_internal <- function(account = c('docs', 'testing')) {
                     c("x" = "Can't decrypt the {.field {account}} credentials.")
                 },
                 if (!online) {
-                    c("x" = "We don't appear to be online. Or maybe the KHIS is down?")
+                    c("x" = "We don't appear to be online. Or maybe the DHIS2 is down?")
                 }
             ),
             class = 'khis_cred_internal_error',
@@ -313,7 +313,7 @@ khis_cred_internal <- function(account = c('docs', 'testing')) {
     }
 
     if (!is_interactive()) local_khis_quiet()
-    filename <- str_glue("khis-{account}.json")
+    filename <- str_glue("khisr-{account}.json")
 
     khis_cred(
         config_path = secret_decrypt_json(

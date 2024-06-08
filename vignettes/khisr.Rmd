@@ -55,7 +55,7 @@ DHIS2 utilizes metadata to define the structure and meaning of its data. Explore
 
 The following table summarizes these `khisr` metadata helper functions:
 
-| khisr function                       | KHIS API Endpoint          |
+| khisr function                       | DHIS2 API Endpoint          |
 |:-------------------------------------|:---------------------------|
 | `get_categories()`                   | categories                 |
 | `get_category_combos()`              | categoryCombos             |
