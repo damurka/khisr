@@ -1,8 +1,8 @@
-#' Get Data Elements Metadata
+#' Get Data Elements with Category Options
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
-#' `get_data_elements_with_category()` fetches data elements metadata with the
+#' `get_data_elements_with_category_options()` fetches data elements metadata with the
 #' category options from the DHIS2 API server.
 #'
 #' @param element_ids The data element identifiers whose details being retrieved
@@ -19,10 +19,10 @@
 #' @examplesIf khis_has_cred()
 #'
 #' # Fetch the data element metadata for particular element id
-#' elements <- get_data_elements_with_category('htFuvGJRW1X')
+#' elements <- get_data_elements_with_category_options('htFuvGJRW1X')
 #' elements
 
-get_data_elements_with_category <-function(element_ids) {
+get_data_elements_with_category_options <-function(element_ids) {
 
     name = categoryCombo = categoryOptionCombos = co = co_name = co_id = NULL # due to NSE notes in R CMD check
 
@@ -40,7 +40,7 @@ get_data_elements_with_category <-function(element_ids) {
         return(NULL)
     }
 
-    data <- data  %>%
+    data  %>%
         hoist(categoryCombo, 'categoryOptionCombos') %>%
         unnest_longer(categoryOptionCombos, values_to = 'co') %>%
         unnest_wider(co, names_sep = '_') %>%
@@ -50,6 +50,4 @@ get_data_elements_with_category <-function(element_ids) {
             category = co_name,
             category_id = co_id
         )
-
-    return(data)
 }

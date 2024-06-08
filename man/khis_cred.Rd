@@ -16,14 +16,14 @@ khis_cred(
 and password. This is considered more secure than providing credentials directly
 in code.}
 
-\item{username}{The DHIS2 username. Only required if not provided in the
-configuration file.}
+\item{username}{The DHIS2 username. Only required if configuration file not
+provided.}
 
-\item{password}{The DHIS2 password. Only required if not provided in the
-configuration file.}
+\item{password}{The DHIS2 password. Only required if configuration file not
+provided.}
 
-\item{base_url}{The base URL of the DHIS2 instance. Defaults to NULL, which is
-typically \url{https://hiskenya.org/api}.}
+\item{base_url}{The base URL of the DHIS2 instance. Only required if
+configuration file not provided.}
 }
 \value{
 No return value

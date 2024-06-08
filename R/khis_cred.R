@@ -10,12 +10,12 @@
 #' @param config_path An optional path to a configuration file containing username
 #'   and password. This is considered more secure than providing credentials directly
 #'   in code.
-#' @param username The DHIS2 username. Only required if not provided in the
-#'   configuration file.
-#' @param password The DHIS2 password. Only required if not provided in the
-#'   configuration file.
-#' @param base_url The base URL of the DHIS2 instance. Defaults to NULL, which is
-#'   typically <https://hiskenya.org/api>.
+#' @param username The DHIS2 username. Only required if configuration file not
+#'   provided.
+#' @param password The DHIS2 password. Only required if configuration file not
+#'   provided.
+#' @param base_url The base URL of the DHIS2 instance. Only required if
+#'   configuration file not provided.
 #'
 #' @family credential functions
 #'

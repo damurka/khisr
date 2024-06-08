@@ -24,6 +24,7 @@ test_that("get_metadata_helpers functions work", {
     expect_no_error(get_organisation_unit_groupsets())
     expect_no_error(get_organisation_unit_groups())
     expect_no_error(get_organisation_units())
+    expect_no_error(get_organisation_unit_levels())
     expect_no_error(get_dimensions())
     expect_no_error(get_period_types())
 })

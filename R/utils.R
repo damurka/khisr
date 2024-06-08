@@ -52,6 +52,37 @@ check_string_vector <- function(vec, arg = caller_arg(vec), call = caller_env())
     }
 }
 
+check_integerish <- function(vec, arg = caller_arg(vec), call = caller_env()) {
+    check_required(vec, arg = arg, call = call)
+
+    is_integer <- is_scalar_integerish(vec)
+    no_null_na <- !any(is_null(vec) | is.na(vec))
+
+    if (!all(is_integer, no_null_na)) {
+        khis_abort(
+            message = c(
+                "x" = "{.arg {arg}} is not an integer",
+                "!" = "Provide scalar integer value without {.code NA}, {.code NULL}"
+            ),
+            call = call
+        )
+    }
+}
+
+check_level_supported <- function(level, arg = caller_arg(level), call = caller_env()) {
+    org_levels <- get_organisation_unit_levels(fields = "name,level")
+    if (!level %in% org_levels$level) {
+        khis_abort(
+            c(
+                'x' = "Invalid level specified",
+                "The organisation level is invalid"
+            ),
+            call = call
+        )
+    }
+    return(org_levels)
+}
+
 check_supported_operator <- function(x, arg = caller_arg(x), call = caller_env()) {
     symbols <- c(
         'eq', '!eq', 'ieq', 'ne',

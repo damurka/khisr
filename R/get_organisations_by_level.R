@@ -1,48 +1,35 @@
-#' Get Formatted Organisations by Level
+#' Get Organisations by Level
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
-#' `get_organisations_formatted()` is an experimental function that retrieves
-#' the organisation units along with their parent units up to the specified
-#' level.
+#' `get_organisations_by_level()` is an experimental function that retrieves
+#' the organisation units along with their parent units.
 #'
+#' @param level An integer specifying the desired organisation level (default level 1).
 #' @param org_ids Optional. A vector of organisation identifiers whose details
 #'   are being retrieved.
-#' @param level An integer specifying the desired organisation level.
 #'
 #' @return A tibble containing the organisation units and their parent units up
 #'   to the specified level.
+#'
 #' @export
 #'
 #' @examplesIf khis_has_cred()
 #' # Fetch all the organisation units metadata
-#' organisations <- get_organisations_formatted(level = 2)
+#' organisations <- get_organisations_by_level(level = 2)
 #' organisations
 
-get_organisations_formatted <- function(org_ids = NULL, level = 1) {
+get_organisations_by_level <- function(level = 1, org_ids = NULL) {
 
     name = parent = NULL
 
-    if (!is_scalar_integerish(level)) {
-        khis_abort(
-            c(
-                "x" = "Invalid level"
-            )
-        )
-    }
-
-    org_levels <- get_organisation_unit_levels(fields = "name,level")
-
-    if (!level %in% org_levels$level) {
-        khis_abort(
-            c(
-                'x' = "Invalid level specified",
-                "The organisation level is invalid"
-            )
-        )
-    }
+    check_integerish(level)
+    org_levels <- check_level_supported(level)
 
     if (!is.null(org_ids)) {
+
+        check_string_vector(org_ids)
+
         filters <- split(unique(org_ids), ceiling(seq_along(unique(org_ids))/500))
         orgs <- map(filters,
                     ~ get_organisation_units(id %.in% .x,
@@ -72,11 +59,10 @@ get_organisations_formatted <- function(org_ids = NULL, level = 1) {
             select(-any_of('parent'))
     }
 
-    orgs <- orgs %>%
+    orgs %>%
         rename_with(~ level_name, starts_with('name')) %>%
-        clean_names()
-
-    return(orgs)
+        clean_names() %>%
+        relocate(id)
 }
 
 generate_fields_string <- function(level) {
