@@ -1,15 +1,16 @@
-## Resubmission
-This is a resubmission. In this version `1.0.1` I have:
-
-* Revised the DESCRIPTION Description and removed the phrase tool.
-
 ## R CMD check results
 
 0 errors | 0 warnings | 0 note
 
 ## revdepcheck results
 
-We checked 0 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 1 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 0 new problems
- * We failed to check 0 packages
+We saw 1 new problems
+    *cancerscreening
+    
+The maintainer was notified on June 6, 2024 (2 days ago) and supplied with patched
+
+We failed to check 0 packages
+ 
+ 

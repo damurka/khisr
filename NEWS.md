@@ -1,21 +1,22 @@
 # khisr (development version)
 
-* Updated the package to be generic and support any DHIS2 instance and improved 
-  the documentation to reflect DHIS2 support.
+## Breaking Changes
 
-* Updated the `khis_cred()` to require the `base_url` and have no default value.
+* Made the package generic to support any DHIS2 instance and updated the documentation accordingly.
 
-* Added the `khis_base_url()` to retrieve the DHIS2 API url.
+* Modified  the `khis_cred()` to require the `base_url` argument and have no default value.
 
-* Added the function `get_organisation_unit_levels()` to retrieve the levels
-  available in the DHIS2 instance
+## New features
 
-* Added experimental functions to allow retrieval of data in a well formatted
-    - `get_data_elements_with_category_options()` - Get data elements along with the 
-      with the associated category options values
-    - `get_organisations_by_level()` - Gets organisations filtered by the level
-    - `get_analytics_by_level()` - Gets Analytics Table Data
-    - `get_data_sets_by_level()` - Retrieves Data Set Reporting Rate Metrics
+* Introduced experimental functions for enhanced data retrieval:
+    - `get_data_elements_with_category_options()`: Fetch data elements along with their associated category option values.
+    - `get_organisations_by_level()`: Retrieve organizations filtered by level.
+    - `get_data_sets_by_level()`: Obtain analytics table data
+    - `get_data_sets_by_level()`: Retrieve data set reporting rate metrics.
+    
+* Added the `khis_base_url()` to obtain the DHIS2 API URL.
+
+* Introduced `get_organisation_unit_levels()` to retrieve the available organisation levels in the DHIS2 instance.
 
 # khisr 1.0.2
 
