@@ -112,9 +112,38 @@ khis_cred <- function(config_path = NULL,
         )
     }
 
+    profile <- init_Profile(username = username)
+
     .auth$set_username(username)
     .auth$set_password(password)
     .auth$set_base_url(base_url)
+
+    user_profile <- tryCatch(
+        get_user_profile(),
+        error = function(e) e
+    )
+
+    if (inherits(user_profile, 'error')) {
+        khis_cred_clear()
+        khis_warn( message = c(
+                '!' = user_profile$message,
+                'i' = 'Please check the credentials provided and try again'
+            )
+        )
+        return(invisible(FALSE))
+    }
+
+    profile <- init_Profile(
+        user_profile[['id']],
+        user_profile[['username']],
+        user_profile[['email']],
+        user_profile[['phoneNumber']],
+        user_profile[['displayName']],
+        user_profile[['firstName']],
+        user_profile[['lastName']]
+    )
+
+    .auth$set_profile(profile)
 
     khis_info(c('i' = 'The credentials have been set.'))
 
@@ -216,6 +245,10 @@ req_auth_khis_basic <- function(req, arg = caller_arg(req), call = caller_env())
 #' }
 
 khis_has_cred <- function() {
+    .auth$has_valid_cred() && .khis_has_cred()
+}
+
+.khis_has_cred <- function() {
     .auth$has_cred()
 }
 
@@ -233,8 +266,8 @@ khis_has_cred <- function() {
 khis_cred_clear <- function() {
     .auth$set_username(NULL)
     .auth$clear_password()
-    .auth$reset_base_url()
-    invisible(TRUE)
+    .auth$set_base_url(NULL)
+    .auth$set_profile(NULL)
 }
 
 #' Produces the Configured Username

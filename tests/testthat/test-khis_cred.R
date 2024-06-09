@@ -40,28 +40,29 @@ test_that("khis_cred works correctly using configuration file", {
 
     expect_true(khis_has_cred())
 
-    expect_equal(khis_username(), 'username')
+    expect_equal(khis_username(), 'admin')
 
     khis_cred_clear()
 
     expect_false(khis_has_cred())
 
-    expect_warning(
+    expect_error(
         khis_cred(username = 'username2',
-                  password = 'password2'
+                  password = 'password2',
+                  base_url = NULL
         )
     )
 
     expect_no_error(
-        khis_cred(username = 'username2',
-                  password = 'password2',
-                  base_url="https//play.dhis2.org/demo/api"
+        khis_cred(username = 'admin',
+                  password = 'district',
+                  base_url="https://play.im.dhis2.org/stable-2-41-0/api"
         )
     )
 
     expect_true(khis_has_cred())
 
-    expect_equal(khis_username(), 'username2')
+    expect_equal(khis_username(), 'admin')
 
     khis_cred_clear()
 

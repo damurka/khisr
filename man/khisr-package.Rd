@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Provides a powerful and user-friendly interface for interacting with DHIS2 APIs. It streamlines data retrieval, empowering researchers, analysts and healthcare professionals to obtain and utilise data efficiently.
+Provides a user-friendly interface for interacting with the District Health Information Software 2 (DHIS2) instance. It streamlines data retrieval, empowering researchers, analysts, and healthcare professionals to obtain and utilize data efficiently.
 }
 \seealso{
 Useful links:

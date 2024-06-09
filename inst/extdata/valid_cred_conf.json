@@ -1,7 +1,7 @@
 {
 	"credentials": {
-		"username": "username",
-		"password": "password",
-		"base_url": "https://hiskenya.org/api"
+		"username": "admin",
+		"password": "district",
+		"base_url": "https://play.im.dhis2.org/stable-2-41-0/api"
 	}
 }

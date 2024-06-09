@@ -4,17 +4,20 @@
 #'
 #' @param username The DHIS2 username to be used in API calls
 #' @param password The DHIS2 password to be used in API calls.
+#' @param base_url The DHIS2 base_url to be used in API calls.
 #'
 #' @return An object of class [AuthCred]
 #' @noRd
 
-init_AuthCred <- function(username = NA_character_,
-                          password = NA_character_,
-                          base_url = NA_character_) {
+init_AuthCred <- function(username = NULL,
+                          password = NULL,
+                          base_url = NULL,
+                          profile = NULL) {
     AuthCred$new(
         username = username,
         password = password,
-        base_url = base_url
+        base_url = base_url,
+        profile = profile
     )
 }
 
@@ -38,24 +41,30 @@ AuthCred <- R6::R6Class('AuthCred', list(
     username = NULL,
     #' @field password The DHIS2 password.
     password = NULL,
-    #' @field base_url The URL to the server
+    #' @field base_url The URL to the server.
     base_url = NULL,
+    #' @field profile Profile.
+    profile = NULL,
 
     #' @description Create a new AuthCred
     #' @details For more details on the parameters, see [init_AuthCred()]
-    initialize = function(username = NA_character_,
-                          password = NA_character_,
-                          base_url = NA_character_) {
+    initialize = function(username = NULL,
+                          password = NULL,
+                          base_url = NULL,
+                          profile = NULL) {
 
         stopifnot(
             is.null(username) || is_scalar_character(username),
             is.null(password) || is_scalar_character(password),
-            is.null(base_url) || is_scalar_character(base_url)
+            is.null(base_url) || is_scalar_character(base_url),
+            is.null(profile) || inherits(profile, "Profile")
         )
 
         self$username <- username
         self$password <- password
         self$base_url <- base_url
+        self$profile <- profile
+
         self
     },
     #' @description Get username
@@ -95,14 +104,25 @@ AuthCred <- R6::R6Class('AuthCred', list(
         self$base_url <- value
         invisible(self)
     },
-    #' @description Clear the base URL API
-    reset_base_url = function() {
-        self$set_base_url(NULL)
+    #' @description Get profiles
+    get_profile = function() {
+        self$profile
     },
-    #' @description Report if we have credentials
+    #' @description Set profiles
+    #' @param profile User profiles
+    set_profile = function(profile) {
+        is.null(profile) || inherits(profile, "Profile")
+        self$profile <- profile
+        invisible(self)
+    },
+    #' @description Report if we have valid credentials
     has_cred = function() {
-        !is.null(self$password) && !is_na(self$password) &&
-        !is.null(self$username) && !is_na(self$username) &&
-        !is.null(self$base_url) && !is_na(self$base_url)
+        !is.null(self$username) && is_scalar_character(self$username) &&
+        !is.null(self$password) && is_scalar_character(self$password) &&
+        !is.null(self$base_url) && is_scalar_character(self$base_url)
+    },
+    #' @description Report if we have valid credentials
+    has_valid_cred = function() {
+        !is.null(self$profile) && inherits(self$profile, "Profile")
     }
 ))

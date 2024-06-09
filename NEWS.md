@@ -1,5 +1,8 @@
 # khisr (development version)
 
+* Improved Credential Handling:
+    - `khis_has_cred()`: Now ensures credentials are valid before returning TRUE, preventing unauthorized access.
+    - `khis_cred()`: Includes validation to accept only valid credentials, reducing errors.
 
 # khisr 1.0.3
 
@@ -8,7 +11,7 @@
 * Introduced experimental functions for enhanced data retrieval:
     - `get_data_elements_with_category_options()`: Fetch data elements along with their associated category option values.
     - `get_organisations_by_level()`: Retrieve organizations filtered by level.
-    - `get_data_sets_by_level()`: Obtain analytics table data
+    - `get_analytics_by_level()`: Obtain analytics table data
     - `get_data_sets_by_level()`: Retrieve data set reporting rate metrics.
     
 * Added the `khis_base_url()` to obtain the DHIS2 API URL.

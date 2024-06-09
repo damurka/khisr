@@ -26,6 +26,7 @@
 \alias{get_organisation_unit_levels}
 \alias{get_dimensions}
 \alias{get_period_types}
+\alias{get_user_profile}
 \title{DHIS2 Metadata Helper Functions}
 \usage{
 get_categories(...)
@@ -75,6 +76,8 @@ get_organisation_unit_levels(...)
 get_dimensions(...)
 
 get_period_types(...)
+
+get_user_profile()
 }
 \arguments{
 \item{...}{

@@ -54,9 +54,24 @@ api_get <- function(endpoint,
         req_retry(max_tries = retry) %>%
         req_timeout(timeout) %>%
         req_auth_khis_basic() %>%
-        req_error(body = ~ khis_abort(c('x'='API Error','!' = '{resp_body_json(.x)}'), call = call)) %>%
-        req_perform(verbosity = verbosity) %>%
+        req_error(body = handle_error) %>%
+        #req_error(body = ~ khis_abort(c('x'='API Error','!' = '{resp_body_json(.x)}'), call = call)) %>%
+        req_perform(verbosity = verbosity, error_call = call) %>%
         resp_body_json()
 
     return(resp)
+}
+
+handle_error <- function(resp) {
+    content_type <- resp_content_type(resp)
+
+    if (grepl("application/json", content_type, ignore.case = TRUE)) {
+        tryCatch({
+            resp_body_json(resp)$message
+        }, error = function(e) {
+            'Failed to parse JSON response'
+        })
+    } else {
+        resp_body_string(resp)
+    }
 }

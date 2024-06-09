@@ -124,7 +124,7 @@ check_supported_operator <- function(x, arg = caller_arg(x), call = caller_env()
 }
 
 check_has_credentials <- function(call = caller_env()) {
-    if (!khis_has_cred()) {
+    if (!.khis_has_cred()) {
         khis_abort(
             message = c(
                 "x" = "Missing credentials",
