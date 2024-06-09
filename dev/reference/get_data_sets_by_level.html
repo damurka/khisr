@@ -126,9 +126,10 @@ can be REPORTING_RATE, REPORTING_RATE_ON_TIME, ACTUAL_REPORTS, ACTUAL_REPORTS_ON
 <span class="r-in"><span><span class="va">dataset_id</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'WWh5hbCmvND'</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Download data from February 2023 to current date</span></span></span>
-<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">get_data_sets_by_level</span><span class="op">(</span>element_ids <span class="op">=</span> <span class="va">element_id</span>,</span></span>
+<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">get_data_sets_by_level</span><span class="op">(</span>dataset_ids <span class="op">=</span> <span class="va">dataset_id</span>,</span></span>
 <span class="r-in"><span>                               start_date <span class="op">=</span> <span class="st">'2023-02-01'</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get_data_sets_by_level(element_ids = element_id, start_date = "2023-02-01"):</span> `dataset_ids` is absent but must be supplied.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get_analytics(dx %.d% dataset_ids_str, pe %.d% periods, ou %.d%     c(str_glue("LEVEL-{level}"), ou), ...):</span> HTTP 409 Conflict.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Query failed because a referenced table does not exist. Please ensure analytics job was run (SqlState: 42P01)</span>
 <span class="r-in"><span><span class="va">data</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (..., list = character(), package = NULL, lib.loc = NULL, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     verbose = getOption("verbose"), envir = .GlobalEnv, overwrite = TRUE) </span>
@@ -283,7 +284,7 @@ can be REPORTING_RATE, REPORTING_RATE_ON_TIME, ACTUAL_REPORTS, ACTUAL_REPORTS_ON
 <span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     invisible(names)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x557d49e20cd0&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x55f9e937c618&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: namespace:utils&gt;</span>
 </code></pre></div>
     </div>
