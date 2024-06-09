@@ -190,3 +190,9 @@ get_dimensions <- function(...) {
 get_period_types <- function(...) {
     get_metadata('periodTypes', ...)
 }
+
+#' @rdname metadata-helpers
+#' @export
+get_user_profile <- function() {
+    api_get('me')
+}

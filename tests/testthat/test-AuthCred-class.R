@@ -104,11 +104,11 @@ test_that("AuthCred base url can be modified and cleared", {
     a$set_base_url('CCC')
     expect_equal(a$get_base_url(), "CCC")
 
-    a$reset_base_url()
+    a$set_base_url(NULL)
     expect_null(a$get_base_url())
 })
 
-test_that("AuthCred hasCred can return Correctly", {
+test_that("AuthCred has_cred can return Correctly", {
     a <- init_AuthCred(
         username = 'username',
         password = 'password',
@@ -136,4 +136,18 @@ test_that("AuthCred hasCred can return Correctly", {
     a$set_base_url(NULL)
 
     expect_false(a$has_cred())
+})
+
+test_that("AuthCred has_valid_cred can return Correctly", {
+    a <- init_AuthCred()
+
+    expect_false(a$has_valid_cred())
+
+    expect_null(a$get_profile())
+
+    a$set_profile(init_Profile())
+
+    expect_true(a$has_valid_cred())
+
+    expect_s3_class(a$get_profile(), 'Profile')
 })
