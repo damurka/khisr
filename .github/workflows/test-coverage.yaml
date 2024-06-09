@@ -5,7 +5,11 @@ on:
     branches: [main, master]
   pull_request:
     branches: [main, master]
-  workflow_dispatch:
+  schedule:
+    # * is a special character in YAML so we have to quote this string
+    # 3pm EAT = 12pm UTC
+    # https://crontab.guru is your friend
+    - cron:  '0 12 * * *'
 
 name: test-coverage
 
@@ -14,6 +18,7 @@ permissions: read-all
 jobs:
   test-coverage:
     runs-on: ubuntu-latest
+    if: "github.event_name == 'schedule' || contains(github.event.head_commit.message, '[covr]')"
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       KHIS_KEY: ${{ secrets.KHIS_KEY }}
