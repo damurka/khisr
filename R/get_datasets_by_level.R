@@ -29,7 +29,7 @@
 #' dataset_id = c('WWh5hbCmvND')
 #'
 #' # Download data from February 2023 to current date
-#' data <- get_data_sets_by_level(element_ids = element_id,
+#' data <- get_data_sets_by_level(dataset_ids = dataset_id,
 #'                                start_date = '2023-02-01')
 #' data
 
