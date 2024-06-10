@@ -1,4 +1,4 @@
-# khisr (development version)
+# khisr 1.0.4
 
 * Improved Credential Handling:
     - `khis_has_cred()`: Now ensures credentials are valid before returning TRUE, preventing unauthorized access.
