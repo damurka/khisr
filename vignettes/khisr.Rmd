@@ -24,11 +24,11 @@ options(tibble.print_min = 5L, tibble.print_max = 5L)
 message("No token available. Code chunks will not be evaluated.")
 ```
 
-```{r index-auth, include=FALSE}
+```{r index-auth, eval = can_decrypt, include=FALSE}
 khisr:::khis_cred_docs()
 ```
 
-```{r}
+```{r, include=FALSE}
 library(khisr)
 ```
 
@@ -130,7 +130,7 @@ The following table provides a summary of the supported operators:
 
 Basic usage of the metadata filter
 
-```{r}
+```{r, eval = can_decrypt}
 # Retrieve organisation units by county (level 2)
 county <- get_organisation_units(level %.eq% '2')
 county
@@ -212,7 +212,7 @@ dimensions in the actual response.
   you want to include in the query response. Leverage the infix operators %.d% for 
   concise and readable code.
 
-```{r}
+```{r, eval = can_decrypt}
 # To include a list dimensions for data elements id, dataset ids
 dx %.d% c('dimension-id-1', 'dimension-id-2')
 
@@ -240,7 +240,7 @@ get_analytics(
 - **Apply Filters:** Use the filters parameter to specify dimensions for filtering
   data without including them in the response.
   
-```{r}
+```{r, eval = can_decrypt}
 # Filter by period
 pe %.f% 'LAST_YEAR'
 
