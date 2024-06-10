@@ -8,19 +8,27 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
-auth_success <- tryCatch(
-  khisr:::khis_cred_docs(),
-  khis_cred_internal_error = function(e) e
-)
+can_decrypt <- httr2::secret_has_key('KHIS_KEY')
 
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   error = TRUE,
-  purl = khisr::khis_has_cred(),
-  eval = khisr::khis_has_cred()
+  purl = can_decrypt,
+  eval = can_decrypt
 )
+options(tibble.print_min = 5L, tibble.print_max = 5L)
+```
 
+```{r eval = !can_decrypt, echo = FALSE, comment = NA}
+message("No token available. Code chunks will not be evaluated.")
+```
+
+```{r index-auth, include=FALSE}
+khisr:::khis_cred_docs()
+```
+
+```{r}
 library(khisr)
 ```
 
