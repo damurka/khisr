@@ -5,7 +5,7 @@ Description:
     Information Software 2 (DHIS2) instance. It streamlines data retrieval, 
     empowering researchers, analysts, and healthcare professionals to obtain and 
     utilize data efficiently.
-Version: 1.0.4
+Version: 1.0.4.9000
 Authors@R: 
     person("David", "Kariuki", , "hello@damurka.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0003-6159-1107"))
