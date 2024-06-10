@@ -28,7 +28,7 @@ message("No token available. Code chunks will not be evaluated.")
 khisr:::khis_cred_docs()
 ```
 
-```{r, eval = can_decrypt, include=FALSE}
+```{r, include=FALSE}
 library(khisr)
 ```
 
