@@ -28,7 +28,7 @@
 #' @export
 #'
 #' @seealso
-#' * [get_organisation_unit_levels()] for getting the organisations units
+#' * [get_organisations_by_level()] for getting the organisations units
 #' * [get_data_elements_with_category_options()] for retrieving the data elements
 #'
 #' @examplesIf khis_has_cred()

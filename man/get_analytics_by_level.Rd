@@ -63,7 +63,7 @@ data
 }
 \seealso{
 \itemize{
-\item \code{\link[=get_organisation_unit_levels]{get_organisation_unit_levels()}} for getting the organisations units
+\item \code{\link[=get_organisations_by_level]{get_organisations_by_level()}} for getting the organisations units
 \item \code{\link[=get_data_elements_with_category_options]{get_data_elements_with_category_options()}} for retrieving the data elements
 }
 }

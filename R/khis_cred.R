@@ -125,12 +125,12 @@ khis_cred <- function(config_path = NULL,
 
     if (inherits(user_profile, 'error')) {
         khis_cred_clear()
-        khis_warn( message = c(
+        khis_abort( message = c(
                 '!' = user_profile$message,
                 'i' = 'Please check the credentials provided and try again'
             )
         )
-        return(invisible(FALSE))
+        return(invisible(NULL))
     }
 
     profile <- init_Profile(
@@ -147,7 +147,7 @@ khis_cred <- function(config_path = NULL,
 
     khis_info(c('i' = 'The credentials have been set.'))
 
-    invisible(TRUE)
+    invisible(.auth)
 }
 
 #' Load Configuration File
@@ -199,6 +199,7 @@ khis_cred <- function(config_path = NULL,
 #'   and password provided.
 #'
 #' @param req A request
+#' @param auth The AuthCred credentials
 #'
 #' @return A modified HTTP request with authorization header
 #'
@@ -210,17 +211,27 @@ khis_cred <- function(config_path = NULL,
 #'
 #' @seealso [httr2]
 
-req_auth_khis_basic <- function(req, arg = caller_arg(req), call = caller_env()) {
+req_auth_khis_basic <- function(req, auth = NULL, arg = caller_arg(req), call = caller_env()) {
 
     check_required(req, arg, call)
     check_has_credentials(call)
 
-    httr2::req_auth_basic(req, .auth$username, .auth$password)
+    if (!is.null(auth) && inherits(auth, 'AuthCred')) {
+        username = auth$get_username()
+        password = auth$get_password()
+    } else {
+        username = .auth$get_username()
+        password = .auth$get_password()
+    }
+
+    httr2::req_auth_basic(req, username, password)
 }
 
 #' Are There Credentials on Hand?
 #'
 #' @family credential functions
+#'
+#' @param auth The AuthCred credentials
 #'
 #' @return a boolean value indicating if the credentials are available
 #'
@@ -244,11 +255,17 @@ req_auth_khis_basic <- function(req, arg = caller_arg(req), call = caller_env())
 #'     khis_has_cred()
 #' }
 
-khis_has_cred <- function() {
+khis_has_cred <- function(auth = NULL) {
+    if (!is.null(auth) && inherits(auth, 'AuthCred')) {
+        return(auth$has_valid_cred() && .khis_has_cred(auth))
+    }
     .auth$has_valid_cred() && .khis_has_cred()
 }
 
-.khis_has_cred <- function() {
+.khis_has_cred <- function(auth = NULL) {
+    if (!is.null(auth) && inherits(auth, 'AuthCred')) {
+        return(auth$has_cred())
+    }
     .auth$has_cred()
 }
 
@@ -274,6 +291,8 @@ khis_cred_clear <- function() {
 #'
 #' @family credential functions
 #'
+#' @param auth The AuthCred credentials
+#'
 #' @return the username of the user credentials
 #' @export
 #'
@@ -295,11 +314,16 @@ khis_cred_clear <- function() {
 #'     khis_username()
 #' }
 
-khis_username <- function() {
+khis_username <- function(auth = NULL) {
+    if (!is.null(auth) && inherits(auth, 'AuthCred')) {
+        return(auth$get_username())
+    }
     .auth$get_username()
 }
 
 #' Produces the Configured DHIS2 API Base URI
+#'
+#' @param auth The AuthCred credentials
 #'
 #' @return the DHIS2 base URI
 #' @export
@@ -319,7 +343,10 @@ khis_username <- function() {
 #'     khis_cred_clear()
 #' }
 
-khis_base_url <- function() {
+khis_base_url <- function(auth = NULL) {
+    if (!is.null(auth) && inherits(auth, 'AuthCred')) {
+        return(auth$get_base_url())
+    }
    .auth$get_base_url()
 }
 
