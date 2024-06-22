@@ -39,7 +39,7 @@ api_get <- function(endpoint,
 
     check_required(endpoint, call = call)
     check_scalar_character(endpoint, call = call)
-    check_has_credentials(call = call)
+    check_has_credentials(auth = auth, call = call)
 
     params <- list2(
         ...,

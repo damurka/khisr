@@ -19,12 +19,12 @@
 #' organisations <- get_organisations_by_level(level = 2)
 #' organisations
 
-get_organisations_by_level <- function(level = 1, org_ids = NULL) {
+get_organisations_by_level <- function(level = 1, org_ids = NULL, auth = NULL) {
 
     name = parent = NULL
 
     check_integerish(level)
-    org_levels <- check_level_supported(level)
+    org_levels <- check_level_supported(level, auth = auth)
 
     if (!is.null(org_ids)) {
 
@@ -34,12 +34,14 @@ get_organisations_by_level <- function(level = 1, org_ids = NULL) {
         orgs <- map(filters,
                     ~ get_organisation_units(id %.in% .x,
                                              level %.eq% level,
-                                             fields = generate_fields_string(level)))
+                                             fields = generate_fields_string(level),
+                                             auth = auth))
         orgs <- bind_rows(orgs)
 
     } else {
         orgs <- get_organisation_units(level %.eq% level,
-                                       fields = generate_fields_string(level))
+                                       fields = generate_fields_string(level),
+                                       auth = auth)
     }
 
     if (is_empty(orgs)) {

@@ -46,7 +46,7 @@ get_data_sets_by_level <- function(dataset_ids,
     check_date(start_date)
     check_date(end_date, can_be_null = TRUE)
     check_integerish(level)
-    org_levels <- check_level_supported(level)
+    org_levels <- check_level_supported(level, ...)
 
     values <- c('REPORTING_RATE',
                 'REPORTING_RATE_ON_TIME',
@@ -75,8 +75,8 @@ get_data_sets_by_level <- function(dataset_ids,
         ...
     )
 
-    organisations <- get_organisations_by_level(data$ou, level = level)
-    datasets <- get_data_sets(id %.in% dataset_ids, fields = 'id,name~rename(dataset)')
+    organisations <- get_organisations_by_level(data$ou, level = level, ...)
+    datasets <- get_data_sets(id %.in% dataset_ids, fields = 'id,name~rename(dataset)', ...)
 
     data %>%
         separate_wider_delim(dx, ".",  names = c('dx','element')) %>%
