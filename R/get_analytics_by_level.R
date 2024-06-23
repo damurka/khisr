@@ -11,6 +11,7 @@
 #' @param level The desired organisation level of data (default: level 1)
 #' @param org_ids Optional list of organization units IDs to be filtered.
 #' @param ... Other options that can be passed onto DHIS2 API.
+#' @param call The caller environment.
 #'
 #' @details
 #' * Retrieves data directly from DHIS2 analytics tables.
