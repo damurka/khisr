@@ -74,7 +74,8 @@ can be REPORTING_RATE, REPORTING_RATE_ON_TIME, ACTUAL_REPORTS, ACTUAL_REPORTS_ON
 <span>  end_date <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  level <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  org_ids <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu">caller_env</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -102,6 +103,10 @@ can be REPORTING_RATE, REPORTING_RATE_ON_TIME, ACTUAL_REPORTS, ACTUAL_REPORTS_ON
 
 <dt>...</dt>
 <dd><p>Other options that can be passed onto DHIS2 API.</p></dd>
+
+
+<dt>call</dt>
+<dd><p>The caller environment.</p></dd>
 
 </dl></div>
     <div class="section level2">
