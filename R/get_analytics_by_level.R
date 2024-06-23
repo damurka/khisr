@@ -47,15 +47,16 @@ get_analytics_by_level <- function(element_ids,
                                    end_date = NULL,
                                    level = 1,
                                    org_ids = NULL,
-                                   ...) {
+                                   ...,
+                                   call = caller_env()) {
 
     dx = co = ou = pe = value = period = NULL # due to NSE notes in R CMD check
 
-    check_string_vector(element_ids)
-    check_date(start_date)
-    check_date(end_date, can_be_null = TRUE)
-    check_integerish(level)
-    org_levels <- check_level_supported(level, ...)
+    check_string_vector(element_ids, call = call)
+    check_date(start_date, error_call = call)
+    check_date(end_date, can_be_null = TRUE, error_call = call)
+    check_integerish(level, call = call)
+    org_levels <- check_level_supported(level, ..., call = call)
 
     if (is.null(end_date)) {
         end_date = today()
@@ -65,7 +66,7 @@ get_analytics_by_level <- function(element_ids,
     #ou <- 'HfVjCurKxh2' # Kenya
     ou <- NULL
     if (!is.null(org_ids)) {
-        check_string_vector(org_ids)
+        check_string_vector(org_ids, call = call)
         ou <- org_ids
     }
 
@@ -76,15 +77,16 @@ get_analytics_by_level <- function(element_ids,
         co %.d% 'all',
         startDate = start_date,
         endDate = end_date,
-        ...
+        ...,
+        call = call
     )
 
     if (is_empty(data)) {
         return(NULL)
     }
 
-    organisations <- get_organisations_by_level(org_ids = data$ou, level = level, ...)
-    elements <- get_data_elements_with_category_options(element_ids, ...)
+    organisations <- get_organisations_by_level(org_ids = data$ou, level = level, ..., call = call)
+    elements <- get_data_elements_with_category_options(element_ids, ..., call = call)
 
     data %>%
         left_join(organisations, by=c('ou' = 'id')) %>%

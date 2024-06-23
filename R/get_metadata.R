@@ -14,6 +14,7 @@
 #'   - 2: Show headers and bodies
 #'   - 3: Show headers, bodies, and CURL status message.
 #' @param timeout Maximum number of seconds to wait for the DHIS2 API response.
+#' @param call The caller environment
 #'
 #' @return A tibble containing the DHIS2 metadata response.
 #'
@@ -40,10 +41,11 @@ get_metadata <- function(endpoint,
                          fields = c('id', 'name'),
                          retry = 2,
                          verbosity = 0,
-                         timeout = 60) {
+                         timeout = 60,
+                         call = caller_env()) {
 
-    check_scalar_character(endpoint)
-    check_string_vector(fields)
+    check_scalar_character(endpoint, call = call)
+    check_string_vector(fields, call = call)
 
     response <- api_get(
         endpoint = endpoint,
@@ -51,7 +53,8 @@ get_metadata <- function(endpoint,
         fields = str_c(fields, collapse=','),
         retry = retry,
         verbosity = verbosity,
-        timeout = timeout
+        timeout = timeout,
+        call = call
     )
 
     data <- as_tibble(response) %>%
