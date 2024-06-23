@@ -152,7 +152,7 @@ using <code><a href="get_metadata.html">get_metadata()</a></code>.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get all organisation units</span></span></span>
 <span class="r-in"><span><span class="fu">get_organisation_units</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 29,703 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 29,728 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name                           id         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 10 Engineer VCT                Vh676wb3d16</span>
@@ -165,11 +165,11 @@ using <code><a href="get_metadata.html">get_metadata()</a></code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 48 Taqwa Community Health Unit lhMzjmZKQgt</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 78 Tank Battalion Dispensary   MgMyK9aTJ2C</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 7KR Mrs Health Centre          kMvyfZaFoq8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 29,693 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 29,718 more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get all data elements</span></span></span>
 <span class="r-in"><span><span class="fu">get_data_elements</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 14,259 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 14,262 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name                                                                    id   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">""</span>                                                                      ioUh…</span>
@@ -182,7 +182,7 @@ using <code><a href="get_metadata.html">get_metadata()</a></code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>10.3 Availability of updated fee structure, strategically and promine… UXQg…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>10.3 Institutional<span style="color: #949494;">"</span>                                                    FGHs…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>10.4 Facility improvement/ Quality management funds are effciently us… y9ui…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 14,249 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 14,252 more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get data elements by element ids</span></span></span>
 <span class="r-in"><span><span class="fu">get_data_elements</span><span class="op">(</span><span class="va">id</span> <span class="op"><a href="metadata-filter.html">%.in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'VR7vdS7P0Gb'</span>, <span class="st">'gQro1y7Rsbq'</span><span class="op">)</span><span class="op">)</span></span></span>
