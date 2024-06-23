@@ -8,6 +8,7 @@
 #' @param level An integer specifying the desired organisation level (default level 1).
 #' @param org_ids Optional. A vector of organisation identifiers whose details
 #'   are being retrieved.
+#' @param auth Optional. The authentication object
 #'
 #' @return A tibble containing the organisation units and their parent units up
 #'   to the specified level.

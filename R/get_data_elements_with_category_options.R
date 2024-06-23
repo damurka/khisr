@@ -6,6 +6,7 @@
 #' category options from the DHIS2 API server.
 #'
 #' @param element_ids The data element identifiers whose details being retrieved
+#' @param auth The authentication object
 #'
 #' @return A tibble containing the following columns:
 #'
