@@ -4,7 +4,10 @@
 \alias{khis_has_cred}
 \title{Are There Credentials on Hand?}
 \usage{
-khis_has_cred()
+khis_has_cred(auth = NULL)
+}
+\arguments{
+\item{auth}{The AuthCred credentials}
 }
 \value{
 a boolean value indicating if the credentials are available

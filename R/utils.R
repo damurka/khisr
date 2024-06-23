@@ -88,8 +88,8 @@ check_integerish <- function(vec, arg = caller_arg(vec), call = caller_env()) {
     }
 }
 
-check_level_supported <- function(level, arg = caller_arg(level), call = caller_env()) {
-    org_levels <- get_organisation_unit_levels(fields = "name,level")
+check_level_supported <- function(level, auth = NULL, arg = caller_arg(level), call = caller_env()) {
+    org_levels <- get_organisation_unit_levels(fields = "name,level", auth = auth)
     if (!level %in% org_levels$level) {
         khis_abort(
             c(
@@ -123,8 +123,8 @@ check_supported_operator <- function(x, arg = caller_arg(x), call = caller_env()
     }
 }
 
-check_has_credentials <- function(call = caller_env()) {
-    if (!.khis_has_cred()) {
+check_has_credentials <- function(auth = NULL, call = caller_env()) {
+    if (!.khis_has_cred(auth)) {
         khis_abort(
             message = c(
                 "x" = "Missing credentials",

@@ -28,7 +28,7 @@
 #' @export
 #'
 #' @seealso
-#' * [get_organisation_unit_levels()] for getting the organisations units
+#' * [get_organisations_by_level()] for getting the organisations units
 #' * [get_data_elements_with_category_options()] for retrieving the data elements
 #'
 #' @examplesIf khis_has_cred()
@@ -55,7 +55,7 @@ get_analytics_by_level <- function(element_ids,
     check_date(start_date)
     check_date(end_date, can_be_null = TRUE)
     check_integerish(level)
-    org_levels <- check_level_supported(level)
+    org_levels <- check_level_supported(level, ...)
 
     if (is.null(end_date)) {
         end_date = today()
@@ -75,15 +75,16 @@ get_analytics_by_level <- function(element_ids,
         ou %.d% c(str_glue('LEVEL-{level}'), ou),
         co %.d% 'all',
         startDate = start_date,
-        endDate = end_date
+        endDate = end_date,
+        ...
     )
 
     if (is_empty(data)) {
         return(NULL)
     }
 
-    organisations <- get_organisations_by_level(org_ids = data$ou, level = level)
-    elements <- get_data_elements_with_category_options(element_ids)
+    organisations <- get_organisations_by_level(org_ids = data$ou, level = level, ...)
+    elements <- get_data_elements_with_category_options(element_ids, ...)
 
     data %>%
         left_join(organisations, by=c('ou' = 'id')) %>%

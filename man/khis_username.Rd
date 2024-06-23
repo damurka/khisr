@@ -4,7 +4,10 @@
 \alias{khis_username}
 \title{Produces the Configured Username}
 \usage{
-khis_username()
+khis_username(auth = NULL)
+}
+\arguments{
+\item{auth}{The AuthCred credentials}
 }
 \value{
 the username of the user credentials

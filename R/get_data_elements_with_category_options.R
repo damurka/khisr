@@ -6,6 +6,7 @@
 #' category options from the DHIS2 API server.
 #'
 #' @param element_ids The data element identifiers whose details being retrieved
+#' @param auth The authentication object
 #'
 #' @return A tibble containing the following columns:
 #'
@@ -22,7 +23,7 @@
 #' elements <- get_data_elements_with_category_options('htFuvGJRW1X')
 #' elements
 
-get_data_elements_with_category_options <-function(element_ids) {
+get_data_elements_with_category_options <-function(element_ids, auth = NULL) {
 
     name = categoryCombo = categoryOptionCombos = co = co_name = co_id = NULL # due to NSE notes in R CMD check
 
@@ -34,7 +35,8 @@ get_data_elements_with_category_options <-function(element_ids) {
     }
 
     data <- get_data_elements(filter,
-                              fields = c('id','name','categoryCombo[categoryOptionCombos[id,name]]'))
+                              fields = c('id','name','categoryCombo[categoryOptionCombos[id,name]]'),
+                              auth = auth)
 
     if (is_empty(data)) {
         return(NULL)

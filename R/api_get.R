@@ -34,11 +34,12 @@ api_get <- function(endpoint,
                     verbosity = 0,
                     timeout = 60,
                     paging = FALSE,
+                    auth = NULL,
                     call = caller_env()) {
 
     check_required(endpoint, call = call)
     check_scalar_character(endpoint, call = call)
-    check_has_credentials(call = call)
+    check_has_credentials(auth = auth, call = call)
 
     params <- list2(
         ...,
@@ -46,14 +47,14 @@ api_get <- function(endpoint,
         ignoreLimit = 'true'
     )
 
-    resp <- request(khis_base_url()) %>%
+    resp <- request(khis_base_url(auth)) %>%
         req_url_path_append(endpoint) %>%
         req_url_query(!!!params) %>%
         req_headers('Accept' = 'application/json') %>%
         req_user_agent('khisr/1.0.3 (https://khisr.damurka.com)') %>%
         req_retry(max_tries = retry) %>%
         req_timeout(timeout) %>%
-        req_auth_khis_basic() %>%
+        req_auth_khis_basic(auth = auth, call = call) %>%
         req_error(body = handle_error) %>%
         #req_error(body = ~ khis_abort(c('x'='API Error','!' = '{resp_body_json(.x)}'), call = call)) %>%
         req_perform(verbosity = verbosity, error_call = call) %>%

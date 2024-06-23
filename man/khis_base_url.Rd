@@ -4,7 +4,10 @@
 \alias{khis_base_url}
 \title{Produces the Configured DHIS2 API Base URI}
 \usage{
-khis_base_url()
+khis_base_url(auth = NULL)
+}
+\arguments{
+\item{auth}{The AuthCred credentials}
 }
 \value{
 the DHIS2 base URI
