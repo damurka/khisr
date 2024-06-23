@@ -213,7 +213,7 @@ khis_cred <- function(config_path = NULL,
 
 req_auth_khis_basic <- function(req, auth = NULL, arg = caller_arg(req), call = caller_env()) {
 
-    check_required(req, arg, call)
+    check_required(req, arg, call = call)
     check_has_credentials(auth = auth, call = call)
 
     if (!is.null(auth) && inherits(auth, 'AuthCred')) {

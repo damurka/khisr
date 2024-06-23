@@ -7,6 +7,7 @@
 #'
 #' @param element_ids The data element identifiers whose details being retrieved
 #' @param auth The authentication object
+#' @param call The caller environment
 #'
 #' @return A tibble containing the following columns:
 #'
@@ -23,11 +24,11 @@
 #' elements <- get_data_elements_with_category_options('htFuvGJRW1X')
 #' elements
 
-get_data_elements_with_category_options <-function(element_ids, auth = NULL) {
+get_data_elements_with_category_options <-function(element_ids, auth = NULL, call = caller_env()) {
 
     name = categoryCombo = categoryOptionCombos = co = co_name = co_id = NULL # due to NSE notes in R CMD check
 
-    check_string_vector(element_ids)
+    check_string_vector(element_ids, call = call)
 
     filter <- splice(list2(filter = NULL))
     if (!is.null(element_ids)) {
@@ -36,7 +37,8 @@ get_data_elements_with_category_options <-function(element_ids, auth = NULL) {
 
     data <- get_data_elements(filter,
                               fields = c('id','name','categoryCombo[categoryOptionCombos[id,name]]'),
-                              auth = auth)
+                              auth = auth,
+                              call = call)
 
     if (is_empty(data)) {
         return(NULL)

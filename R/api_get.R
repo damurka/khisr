@@ -56,7 +56,6 @@ api_get <- function(endpoint,
         req_timeout(timeout) %>%
         req_auth_khis_basic(auth = auth, call = call) %>%
         req_error(body = handle_error) %>%
-        #req_error(body = ~ khis_abort(c('x'='API Error','!' = '{resp_body_json(.x)}'), call = call)) %>%
         req_perform(verbosity = verbosity, error_call = call) %>%
         resp_body_json()
 
