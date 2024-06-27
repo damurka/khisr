@@ -14,7 +14,7 @@ can be REPORTING_RATE, REPORTING_RATE_ON_TIME, ACTUAL_REPORTS, ACTUAL_REPORTS_ON
     
     <a class="navbar-brand me-2" href="../index.html">khisr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,7 +74,8 @@ can be REPORTING_RATE, REPORTING_RATE_ON_TIME, ACTUAL_REPORTS, ACTUAL_REPORTS_ON
 <span>  end_date <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  level <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  org_ids <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu">caller_env</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -102,6 +103,10 @@ can be REPORTING_RATE, REPORTING_RATE_ON_TIME, ACTUAL_REPORTS, ACTUAL_REPORTS_ON
 
 <dt>...</dt>
 <dd><p>Other options that can be passed onto DHIS2 API.</p></dd>
+
+
+<dt>call</dt>
+<dd><p>The caller environment.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -132,23 +137,23 @@ can be REPORTING_RATE, REPORTING_RATE_ON_TIME, ACTUAL_REPORTS, ACTUAL_REPORTS_ON
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 17 × 10</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    kenya dataset    period     month  year reporting_rate reporting_rate_on_time</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Kenya MoH 745 C… 2023-06-01 June   <span style="text-decoration: underline;">2</span>023           61.9                   57.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Kenya MoH 745 C… 2023-05-01 May    <span style="text-decoration: underline;">2</span>023           59.9                   56.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Kenya MoH 745 C… 2023-03-01 March  <span style="text-decoration: underline;">2</span>023           61.3                   54.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Kenya MoH 745 C… 2024-05-01 May    <span style="text-decoration: underline;">2</span>024           26.5                   26.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Kenya MoH 745 C… 2023-06-01 June   <span style="text-decoration: underline;">2</span>023           62.3                   58.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Kenya MoH 745 C… 2023-05-01 May    <span style="text-decoration: underline;">2</span>023           60.3                   56.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Kenya MoH 745 C… 2023-03-01 March  <span style="text-decoration: underline;">2</span>023           61.7                   55.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Kenya MoH 745 C… 2024-05-01 May    <span style="text-decoration: underline;">2</span>024           58.9                   57.6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Kenya MoH 745 C… 2024-06-01 June   <span style="text-decoration: underline;">2</span>024            0                      0  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Kenya MoH 745 C… 2023-02-01 Febr…  <span style="text-decoration: underline;">2</span>023           61.9                   52.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Kenya MoH 745 C… 2023-04-01 April  <span style="text-decoration: underline;">2</span>023           57.8                   51.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Kenya MoH 745 C… 2024-03-01 March  <span style="text-decoration: underline;">2</span>024           59.8                   57.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Kenya MoH 745 C… 2024-04-01 April  <span style="text-decoration: underline;">2</span>024           57.9                   56.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Kenya MoH 745 C… 2023-07-01 July   <span style="text-decoration: underline;">2</span>023           62.6                   56.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> Kenya MoH 745 C… 2023-10-01 Octo…  <span style="text-decoration: underline;">2</span>023           61.1                   57.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> Kenya MoH 745 C… 2024-01-01 Janu…  <span style="text-decoration: underline;">2</span>024           58.7                   56  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> Kenya MoH 745 C… 2024-02-01 Febr…  <span style="text-decoration: underline;">2</span>024           60.5                   56.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> Kenya MoH 745 C… 2023-08-01 Augu…  <span style="text-decoration: underline;">2</span>023           62.1                   58.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> Kenya MoH 745 C… 2023-09-01 Sept…  <span style="text-decoration: underline;">2</span>023           62.2                   58  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> Kenya MoH 745 C… 2023-11-01 Nove…  <span style="text-decoration: underline;">2</span>023           59                     54.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> Kenya MoH 745 C… 2023-12-01 Dece…  <span style="text-decoration: underline;">2</span>023           57.9                   55.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Kenya MoH 745 C… 2023-02-01 Febr…  <span style="text-decoration: underline;">2</span>023           62.3                   52.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Kenya MoH 745 C… 2023-04-01 April  <span style="text-decoration: underline;">2</span>023           58.2                   52  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Kenya MoH 745 C… 2024-03-01 March  <span style="text-decoration: underline;">2</span>024           60.4                   58.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Kenya MoH 745 C… 2024-04-01 April  <span style="text-decoration: underline;">2</span>024           59                     56.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Kenya MoH 745 C… 2023-07-01 July   <span style="text-decoration: underline;">2</span>023           63.1                   56.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> Kenya MoH 745 C… 2023-10-01 Octo…  <span style="text-decoration: underline;">2</span>023           61.5                   58.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> Kenya MoH 745 C… 2024-01-01 Janu…  <span style="text-decoration: underline;">2</span>024           59.3                   56.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> Kenya MoH 745 C… 2024-02-01 Febr…  <span style="text-decoration: underline;">2</span>024           61                     56.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> Kenya MoH 745 C… 2023-08-01 Augu…  <span style="text-decoration: underline;">2</span>023           62.5                   59  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> Kenya MoH 745 C… 2023-09-01 Sept…  <span style="text-decoration: underline;">2</span>023           62.6                   58.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> Kenya MoH 745 C… 2023-11-01 Nove…  <span style="text-decoration: underline;">2</span>023           59.4                   55.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> Kenya MoH 745 C… 2023-12-01 Dece…  <span style="text-decoration: underline;">2</span>023           58.3                   55.6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 more variables: actual_reports &lt;dbl&gt;, actual_reports_on_time &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   expected_reports &lt;dbl&gt;</span></span>
 </code></pre></div>

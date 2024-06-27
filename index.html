@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="index.html">khisr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,7 +78,9 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9"><div class="section level1">
+  <main id="main" class="col-md-9"><div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>Code chunks will not be evaluated, because<span class="sc">:</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>Set credential unsuccessful.</span></code></pre></div>
+<div class="section level1">
 <div class="page-header">
 <img src="logo.png" class="logo" alt=""><h1 id="khisr-">khisr 
 <a class="anchor" aria-label="anchor" href="#khisr-"></a>
@@ -115,14 +117,14 @@
 <h3 id="stable-release">Stable Release<a class="anchor" aria-label="anchor" href="#stable-release"></a>
 </h3>
 <p>You can install the release version of khisr from <a href="https://cran.r-project.org/" class="external-link">CRAN</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"khisr"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="development-version">Development Version<a class="anchor" aria-label="anchor" href="#development-version"></a>
 </h3>
 <p>And the development version of khisr like so:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#install.packages('pak')</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">'damurka/khisr'</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -133,14 +135,14 @@
 <div class="section level3">
 <h3 id="load-khisr-package">Load khisr package<a class="anchor" aria-label="anchor" href="#load-khisr-package"></a>
 </h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://khisr.damurka.com">"khisr"</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="auth">Auth<a class="anchor" aria-label="anchor" href="#auth"></a>
 </h3>
 <p>The khisr package operates in authenticated mode by default. This means you’ll need to provide credentials before using any functions that interact with your DHIS2 instance to download data. To ensure secure access, khisr offers a convenient way to store your credentials within your R environment. Refer to the following resource for detailed instructions on setting your credentials: <a href="https://khisr.damurka.com/articles/set-your-credentials.html">set you credentials</a></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Option 1: Set credentials directly in R (less secure)</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/khis_cred.html">khis_cred</a></span><span class="op">(</span>username <span class="op">=</span> <span class="st">'DHIS2 username'</span>, </span>
@@ -158,68 +160,25 @@
 <h2 id="basic-overview">Basic Overview<a class="anchor" aria-label="anchor" href="#basic-overview"></a>
 </h2>
 <p>This is a basic example which shows you how to solve a common problem:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Retrieve the organisation units by county (level 2)</span></span>
 <span><span class="va">counties</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metadata-helpers.html">get_organisation_units</a></span><span class="op">(</span><span class="va">level</span> <span class="op"><a href="reference/metadata-filter.html">%.eq%</a></span> <span class="st">'2'</span><span class="op">)</span></span>
 <span><span class="va">counties</span></span>
-<span><span class="co">#&gt; # A tibble: 47 × 2</span></span>
-<span><span class="co">#&gt;    name                   id         </span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;                  &lt;chr&gt;      </span></span>
-<span><span class="co">#&gt;  1 Baringo County         vvOK1BxTbet</span></span>
-<span><span class="co">#&gt;  2 Bomet County           HMNARUV2CW4</span></span>
-<span><span class="co">#&gt;  3 Bungoma County         KGHhQ5GLd4k</span></span>
-<span><span class="co">#&gt;  4 Busia County           Tvf1zgVZ0K4</span></span>
-<span><span class="co">#&gt;  5 Elgeyo Marakwet County MqnLxQBigG0</span></span>
-<span><span class="co">#&gt;  6 Embu County            PFu8alU2KWG</span></span>
-<span><span class="co">#&gt;  7 Garissa County         uyOrcHZBpW0</span></span>
-<span><span class="co">#&gt;  8 Homa Bay County        nK0A12Q7MvS</span></span>
-<span><span class="co">#&gt;  9 Isiolo County          bzOfj0iwfDH</span></span>
-<span><span class="co">#&gt; 10 Kajiado County         Hsk1YV8kHkT</span></span>
-<span><span class="co">#&gt; # ℹ 37 more rows</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span></span>
 <span><span class="co"># Retrieve organisation units by name (level included to ensure it refers to county)</span></span>
 <span><span class="va">kiambu_county</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metadata-helpers.html">get_organisation_units</a></span><span class="op">(</span><span class="va">level</span> <span class="op"><a href="reference/metadata-filter.html">%.eq%</a></span> <span class="st">'2'</span>, </span>
 <span>                                        <span class="va">name</span> <span class="op"><a href="reference/metadata-filter.html">%.like%</a></span> <span class="st">'Kiambu'</span><span class="op">)</span></span>
 <span><span class="va">kiambu_county</span></span>
-<span><span class="co">#&gt; # A tibble: 1 × 2</span></span>
-<span><span class="co">#&gt;   name          id         </span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;      </span></span>
-<span><span class="co">#&gt; 1 Kiambu County qKzosKQPl6G</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span></span>
 <span><span class="co"># Retrieve all data elements by data element group for outpatient (data element group name MOH 705)</span></span>
 <span><span class="va">moh_705</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metadata-helpers.html">get_data_elements</a></span><span class="op">(</span><span class="va">dataElementGroups.name</span> <span class="op"><a href="reference/metadata-filter.html">%.like%</a></span> <span class="st">'moh 705'</span><span class="op">)</span></span>
 <span><span class="va">moh_705</span></span>
-<span><span class="co">#&gt; # A tibble: 96 × 2</span></span>
-<span><span class="co">#&gt;    name                         id         </span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;                        &lt;chr&gt;      </span></span>
-<span><span class="co">#&gt;  1 Abortion                     IrWSgk9GsUm</span></span>
-<span><span class="co">#&gt;  2 All other diseases           KxT47tbKHsd</span></span>
-<span><span class="co">#&gt;  3 Anaemia cases                kkUHOwGMawD</span></span>
-<span><span class="co">#&gt;  4 Arthritis, Joint pains etc.  waNhWrS3HL6</span></span>
-<span><span class="co">#&gt;  5 Asthma                       L82lvvxVaqt</span></span>
-<span><span class="co">#&gt;  6 Autism                       L529r3Wvtcf</span></span>
-<span><span class="co">#&gt;  7 Bilharzia  (Schistosomiasis) ojFSHMwbkHK</span></span>
-<span><span class="co">#&gt;  8 Brucellosis                  nb9cfWgxYFc</span></span>
-<span><span class="co">#&gt;  9 Burns                        dkEYL9Sous9</span></span>
-<span><span class="co">#&gt; 10 Cardiovascular conditions    sZETzNe1To8</span></span>
-<span><span class="co">#&gt; # ℹ 86 more rows</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span></span>
 <span><span class="co"># Filter the data element to element that contain malaria</span></span>
 <span><span class="va">malaria</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metadata-helpers.html">get_data_elements</a></span><span class="op">(</span><span class="va">dataElementGroups.name</span> <span class="op"><a href="reference/metadata-filter.html">%.like%</a></span> <span class="st">'moh 705'</span>, </span>
 <span>                             <span class="va">name</span> <span class="op"><a href="reference/metadata-filter.html">%.like%</a></span> <span class="st">'malaria'</span><span class="op">)</span></span>
 <span><span class="va">malaria</span></span>
-<span><span class="co">#&gt; # A tibble: 4 × 2</span></span>
-<span><span class="co">#&gt;   name                                    id         </span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;                                   &lt;chr&gt;      </span></span>
-<span><span class="co">#&gt; 1 Confirmed Malaria (only Positive cases) OoakJhWiyZp</span></span>
-<span><span class="co">#&gt; 2 Malaria in pregnancy                    gvZmXInRLuD</span></span>
-<span><span class="co">#&gt; 3 MOH 705A Rev 2020_ Tested for Malaria   siOyOiOJpI8</span></span>
-<span><span class="co">#&gt; 4 Suspected  Malaria                      Lt0FqtnHraW</span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span></span>
 <span><span class="co"># Retrieve data for malaria in Kiambu county in the outpatient data element groups</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_analytics.html">get_analytics</a></span><span class="op">(</span></span>
 <span>        <span class="va">dx</span> <span class="op"><a href="reference/analytics-dimension.html">%.d%</a></span> <span class="va">malaria</span><span class="op">$</span><span class="va">id</span>,</span>
@@ -227,14 +186,7 @@
 <span>        <span class="va">ou</span> <span class="op"><a href="reference/analytics-dimension.html">%.f%</a></span> <span class="va">kiambu_county</span><span class="op">$</span><span class="va">id</span></span>
 <span>    <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu">left_join</span><span class="op">(</span><span class="va">malaria</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'dx'</span><span class="op">=</span><span class="st">'id'</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">data</span></span>
-<span><span class="co">#&gt; # A tibble: 4 × 4</span></span>
-<span><span class="co">#&gt;   dx          pe    value name                                   </span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;                                  </span></span>
-<span><span class="co">#&gt; 1 Lt0FqtnHraW 2023  31101 Suspected  Malaria                     </span></span>
-<span><span class="co">#&gt; 2 OoakJhWiyZp 2023   5092 Confirmed Malaria (only Positive cases)</span></span>
-<span><span class="co">#&gt; 3 siOyOiOJpI8 2023  20554 MOH 705A Rev 2020_ Tested for Malaria  </span></span>
-<span><span class="co">#&gt; 4 gvZmXInRLuD 2023    397 Malaria in pregnancy</span></span></code></pre></div>
+<span><span class="va">data</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="where-to-learn-more">Where to learn more<a class="anchor" aria-label="anchor" href="#where-to-learn-more"></a>
@@ -249,6 +201,7 @@
 <p>Please note that the khisr project is released with a <a href="https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
+
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">

@@ -14,7 +14,7 @@ given period and data element(s), without performing any aggregation."><meta pro
     
     <a class="navbar-brand me-2" href="../index.html">khisr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,7 +74,8 @@ given period and data element(s), without performing any aggregation.</p>
 <span>  end_date <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  level <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  org_ids <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu">caller_env</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -103,6 +104,10 @@ given period and data element(s), without performing any aggregation.</p>
 <dt>...</dt>
 <dd><p>Other options that can be passed onto DHIS2 API.</p></dd>
 
+
+<dt>call</dt>
+<dd><p>The caller environment.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -124,7 +129,7 @@ given period and data element(s), without performing any aggregation.</p>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index">
-<ul><li><p><code><a href="metadata-helpers.html">get_organisation_unit_levels()</a></code> for getting the organisations units</p></li>
+<ul><li><p><code><a href="get_organisations_by_level.html">get_organisations_by_level()</a></code> for getting the organisations units</p></li>
 <li><p><code><a href="get_data_elements_with_category_options.html">get_data_elements_with_category_options()</a></code> for retrieving the data elements</p></li>
 </ul></div>
     </div>
@@ -146,13 +151,13 @@ given period and data element(s), without performing any aggregation.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>   137 Kenya CBE-Abnormal 35-39 yrs 2023-06-01 June      <span style="text-decoration: underline;">2</span>023</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>    18 Kenya CBE-Abnormal 56-74 yrs 2024-04-01 April     <span style="text-decoration: underline;">2</span>024</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>   156 Kenya CBE-Abnormal 35-39 yrs 2023-05-01 May       <span style="text-decoration: underline;">2</span>023</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>    22 Kenya CBE-Abnormal 56-74 yrs 2024-05-01 May       <span style="text-decoration: underline;">2</span>024</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>    35 Kenya CBE-Abnormal 56-74 yrs 2024-05-01 May       <span style="text-decoration: underline;">2</span>024</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>    24 Kenya CBE-Abnormal 56-74 yrs 2024-03-01 March     <span style="text-decoration: underline;">2</span>024</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>   150 Kenya CBE-Abnormal 35-39 yrs 2023-07-01 July      <span style="text-decoration: underline;">2</span>023</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>   100 Kenya CBE-Abnormal 35-39 yrs 2023-08-01 August    <span style="text-decoration: underline;">2</span>023</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>   119 Kenya CBE-Abnormal 35-39 yrs 2023-04-01 April     <span style="text-decoration: underline;">2</span>023</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>   116 Kenya CBE-Abnormal 35-39 yrs 2023-02-01 February  <span style="text-decoration: underline;">2</span>023</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="text-decoration: underline;">11</span>401 Kenya CBE-Normal   35-39 yrs 2023-12-01 December  <span style="text-decoration: underline;">2</span>023</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="text-decoration: underline;">11</span>406 Kenya CBE-Normal   35-39 yrs 2023-12-01 December  <span style="text-decoration: underline;">2</span>023</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 149 more rows</span></span>
 </code></pre></div>
     </div>
