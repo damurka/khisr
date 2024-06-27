@@ -10,17 +10,17 @@
 |collate  |English_Kenya.utf8                                                                    |
 |ctype    |English_Kenya.utf8                                                                    |
 |tz       |Africa/Nairobi                                                                        |
-|date     |2024-06-10                                                                            |
-|rstudio  |2024.04.1+748 Chocolate Cosmos (desktop)                                              |
+|date     |2024-06-27                                                                            |
+|rstudio  |2024.04.2+764 Chocolate Cosmos (desktop)                                              |
 |pandoc   |3.1.11 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown) |
 
 # Dependencies
 
 |package    |old    |new        |Δ  |
 |:----------|:------|:----------|:--|
-|khisr      |1.0.3  |1.0.3.9000 |*  |
+|khisr      |1.0.4  |1.0.4.9000 |*  |
 |askpass    |1.2.0  |1.2.0      |   |
-|cli        |3.6.2  |3.6.2      |   |
+|cli        |3.6.3  |3.6.3      |   |
 |cpp11      |0.4.7  |0.4.7      |   |
 |curl       |5.2.1  |5.2.1      |   |
 |dplyr      |1.1.4  |1.1.4      |   |

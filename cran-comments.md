@@ -1,6 +1,6 @@
 ## Patch Resubmission
 
-This patch release (v1.0.4) addresses issues identified in the **r-oldrel-macos-arm64**and **r-oldrel-macos-x86_64** flavours. In the previous version (v1.0.3), these flavours are evaluating code in `khisr.Rmd` vignette pages without a decryption key. To address this, an `eval` condition has been placed on each code block to explicitly enforce the requirement for a decryption key.
+This patch release (v1.0.5) addresses issues identified. The API url used in tests has changed causing the error during tests.
 
 ## R CMD check results
 
