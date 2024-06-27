@@ -1,5 +1,7 @@
 test_that("khis_cred works correctly using configuration file", {
 
+    skip_if_offline()
+
     expect_error(khis_cred(), class = 'khis_missing_credentials')
 
     expect_error(
@@ -40,7 +42,7 @@ test_that("khis_cred works correctly using configuration file", {
 
     expect_true(khis_has_cred())
 
-    expect_equal(khis_username(), 'admin')
+    expect_equal(khis_username(), 'dodoma')
 
     khis_cred_clear()
 
@@ -54,15 +56,15 @@ test_that("khis_cred works correctly using configuration file", {
     )
 
     expect_no_error(
-        khis_cred(username = 'admin',
-                  password = 'district',
-                  base_url="https://play.im.dhis2.org/stable-2-41-0/api"
+        khis_cred(username = 'dodoma',
+                  password = 'Ytrewq!23456',
+                  base_url="https://test.hiskenya.org/api"
         )
     )
 
     expect_true(khis_has_cred())
 
-    expect_equal(khis_username(), 'admin')
+    expect_equal(khis_username(), 'dodoma')
 
     khis_cred_clear()
 
