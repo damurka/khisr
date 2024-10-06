@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_analytics.R
 \name{get_analytics}
 \alias{get_analytics}
-\title{Retrieves Disaggregated Analytics Data from a DHIS2 Server}
+\title{Retrieves Disaggregated Analytics Data from DHIS2}
 \usage{
 get_analytics(
   ...,
@@ -32,7 +32,7 @@ defaults to \code{'uid'}. Choose \code{'name'} for human readable labels.}
 \item{timeout}{Maximum number of seconds to wait for the API response.}
 }
 \value{
-A tibble with detailed information
+A tibble containing the disaggregated analytics data, or \code{NULL} if no data is retrieved.
 }
 \description{
 \code{get_analytics()} retrieves disaggregated data from DHIS2 analytics tables for a

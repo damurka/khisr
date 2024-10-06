@@ -245,7 +245,7 @@ req_auth_khis_basic <- function(req, auth = NULL, arg = caller_arg(req), call = 
 #' Check if DHIS2 Credentials are Available
 #'
 #' This function checks whether valid credentials are available either in the provided
-#' quth object or in the global auth credentials object.
+#' auth object or in the global auth credentials object.
 #'
 #' @family credential functions
 #'

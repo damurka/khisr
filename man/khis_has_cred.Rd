@@ -15,7 +15,7 @@ A boolean value indicating whether valid credentials are available.
 }
 \description{
 This function checks whether valid credentials are available either in the provided
-quth object or in the global auth credentials object.
+auth object or in the global auth credentials object.
 }
 \examples{
 
