@@ -2,6 +2,6 @@
 	"credentials": {
 		"username": "dodoma",
 		"password": "Ytrewq!23456",
-		"base_url": "https://test.hiskenya.org/api"
+		"server": "https://test.hiskenya.org"
 	}
 }

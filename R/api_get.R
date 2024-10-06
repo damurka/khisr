@@ -48,10 +48,10 @@ api_get <- function(endpoint,
     )
 
     resp <- request(khis_base_url(auth)) %>%
-        req_url_path_append(endpoint) %>%
+        req_url_path_append('api', endpoint) %>%
         req_url_query(!!!params) %>%
         req_headers('Accept' = 'application/json') %>%
-        req_user_agent('khisr/1.0.3 (https://khisr.damurka.com)') %>%
+        req_user_agent('khisr/1.0.6 (https://khisr.damurka.com)') %>%
         req_retry(max_tries = retry) %>%
         req_timeout(timeout) %>%
         req_auth_khis_basic(auth = auth, call = call) %>%
@@ -64,14 +64,22 @@ api_get <- function(endpoint,
 
 handle_error <- function(resp) {
     content_type <- resp_content_type(resp)
+    url <- resp_url(resp)
 
+    # Handle JSON response
     if (grepl("application/json", content_type, ignore.case = TRUE)) {
         tryCatch({
-            resp_body_json(resp)$message
+            parsed_body <- resp_body_json(resp)
+            error_message <- parsed_body$message %||% "Unknown error in JSON response."
+            return(error_message)
         }, error = function(e) {
-            'Failed to parse JSON response'
+            return("Failed to parse JSON response: Invalid or malformed JSON.")
         })
     } else {
-        resp_body_string(resp)
+        # If not JSON, return a meaningful error message
+        return(paste0(
+            "Unsupported content type '", content_type, "' received from: ", url,
+            ". Only 'application/json' is supported."
+        ))
     }
 }

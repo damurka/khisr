@@ -13,3 +13,11 @@ if(!isTRUE(auth_sucess)) {
 skip_if_no_cred <- function() {
   testthat::skip_if_not(khis_has_cred(), "No DHIS2 credentials")
 }
+
+skip_if_server_error <- function() {
+    auth = tryCatch(
+        khis_cred(config_path = system.file("extdata", "valid_cred_conf.json", package = "khisr")),
+        error = function(e) NULL
+    )
+    testthat::skip_if_not(!is.null(auth), "Server Error")
+}

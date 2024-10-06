@@ -5,28 +5,34 @@
 \title{Sets DHIS2 Credentials}
 \usage{
 khis_cred(
-  config_path = NULL,
   username = NULL,
   password = NULL,
+  server = NULL,
+  api_version = NULL,
+  config_path = NULL,
   base_url = deprecated()
 )
 }
 \arguments{
-\item{config_path}{An optional path to a configuration file containing username
-and password. This is considered more secure than providing credentials directly
-in code.}
-
 \item{username}{The DHIS2 username. Only required if configuration file not
 provided.}
 
 \item{password}{The DHIS2 password. Only required if configuration file not
 provided.}
 
-\item{base_url}{The base URL of the DHIS2 instance. Only required if
-configuration file not provided.}
+\item{server}{The server URL of the DHIS2 instance. Only required if configuration
+file not provided.}
+
+\item{api_version}{The API version of the DHIS2 instance (optional).}
+
+\item{config_path}{An optional path to a configuration file containing username
+and password. This is considered more secure than providing credentials directly
+in code.}
+
+\item{base_url}{Deprecated. The base URL of the DHIS2 instance. Use \code{server} instead.}
 }
 \value{
-No return value
+Auth object
 }
 \description{
 \code{khis_cred()} sets the credentials for accessing a DHIS2 instance.
@@ -53,7 +59,9 @@ credentials from being stored directly in your code.
 }
 \seealso{
 Other credential functions: 
+\code{\link{khis_base_url}()},
 \code{\link{khis_cred_clear}()},
+\code{\link{khis_display_name}()},
 \code{\link{khis_has_cred}()},
 \code{\link{khis_username}()}
 }

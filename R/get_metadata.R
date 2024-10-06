@@ -47,21 +47,26 @@ get_metadata <- function(endpoint,
     check_scalar_character(endpoint, call = call)
     check_string_vector(fields, call = call)
 
-    response <- api_get(
-        endpoint = endpoint,
-        ...,
-        fields = str_c(fields, collapse=','),
-        retry = retry,
-        verbosity = verbosity,
-        timeout = timeout,
-        call = call
-    )
+    response <- tryCatch({
+        api_get(endpoint = endpoint,
+                ...,
+                fields = str_c(fields, collapse = ','),
+                retry = retry,
+                verbosity = verbosity,
+                timeout = timeout,
+                call = call)
+    }, error = function(e) {
+        khis_warn(c('x' = 'Error retrieving metadata:', message = e), call = call)
+        return(NULL)
+    })
+
+    if (is.null(response)) return(NULL)  # Handle potential errors in api_get
 
     data <- as_tibble(response) %>%
         hoist(endpoint)
 
     if (nrow(data) == 0) {
-        khis_warn(c('!' = 'The table is empty'))
+        khis_warn(c('!' = 'No data found for the specified endpoint.'), call = call)
         return(NULL)
     }
 

@@ -4,21 +4,30 @@
 \alias{khis_cred_clear}
 \title{Clear the Credentials from Memory}
 \usage{
-khis_cred_clear()
+khis_cred_clear(auth = NULL)
+}
+\arguments{
+\item{auth}{(Optional) An authentication object from which to clear credentials.
+If not provided, the credentials in the global auth object will be cleared.}
 }
 \value{
-No return value
+No return value, called for side effects.
 }
 \description{
-Clear the Credentials from Memory
+This function clears the DHIS2 credentials from memory. If an auth object is
+provided, it clears the credentials from that object. If no \code{auth} object is
+provided, it clears the global auth credentials.
 }
 \examples{
 
-#khis_cred_clear()
+# Clear credentials from the global .auth object
+khis_cred_clear()
 }
 \seealso{
 Other credential functions: 
+\code{\link{khis_base_url}()},
 \code{\link{khis_cred}()},
+\code{\link{khis_display_name}()},
 \code{\link{khis_has_cred}()},
 \code{\link{khis_username}()}
 }

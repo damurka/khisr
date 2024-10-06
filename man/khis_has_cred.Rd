@@ -2,41 +2,45 @@
 % Please edit documentation in R/khis_cred.R
 \name{khis_has_cred}
 \alias{khis_has_cred}
-\title{Are There Credentials on Hand?}
+\title{Check if DHIS2 Credentials are Available}
 \usage{
 khis_has_cred(auth = NULL)
 }
 \arguments{
-\item{auth}{The AuthCred credentials}
+\item{auth}{(Optional) An auth object containing DHIS2 credentials. If not provided,
+the function will check the global auth object for credentials.}
 }
 \value{
-a boolean value indicating if the credentials are available
+A boolean value indicating whether valid credentials are available.
 }
 \description{
-Are There Credentials on Hand?
+This function checks whether valid credentials are available either in the provided
+quth object or in the global auth credentials object.
 }
 \examples{
 
 \dontrun{
-    # Set the credentials
+    # Set the credentials using global .auth object
     khis_cred(username = 'DHIS2 username',
               password = 'DHIS2 password',
-              base_url='https://dhis2-instance/api')
+              server = 'https://dhis2-instance/api')
 
-    # Check if credentials available. Expect TRUE
+    # Check if credentials are available. Should return TRUE
     khis_has_cred()
 
-    # Clear credentials
+    # Clear global credentials
     khis_cred_clear()
 
-    # Check if credentials available. Expect FALSE
+    # Check if credentials are available. Should return FALSE
     khis_has_cred()
 }
 }
 \seealso{
 Other credential functions: 
+\code{\link{khis_base_url}()},
 \code{\link{khis_cred}()},
 \code{\link{khis_cred_clear}()},
+\code{\link{khis_display_name}()},
 \code{\link{khis_username}()}
 }
 \concept{credential functions}
