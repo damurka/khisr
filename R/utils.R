@@ -91,7 +91,6 @@ check_integerish <- function(vec, arg = caller_arg(vec), call = caller_env()) {
 check_level_supported <- function(level, auth = NULL, arg = caller_arg(level), call = caller_env()) {
 
     org_levels <- get_organisation_unit_levels(fields = "name,level", auth = auth, call = call)
-
     if (!level %in% org_levels$level) {
         khis_abort(
             c(

@@ -1,9 +1,12 @@
 # khisr (development version)
 
+<<<<<<< HEAD
 # khisr 1.0.6
 
 * Improved tests to skip tests when the server is down
 
+=======
+>>>>>>> f21da99dc0e49ff18843c9433d762bb88d99ec29
 # khisr 1.0.5
 
 * **Improved Authentication**: Now supports optional authentication for API calls using the `auth` argument. This strengthens security by allowing you to control access to your data.
