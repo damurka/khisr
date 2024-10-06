@@ -1,3 +1,5 @@
+# khisr (development version)
+
 # khisr 1.0.6
 
 * Improved tests to skip tests when the server is down
