@@ -86,7 +86,7 @@ The khisr package operates in authenticated mode by default. This means you'll n
 
 khis_cred(username = 'DHIS2 username', 
           password = 'DHIS2 password', 
-          base_url = 'https://<dhis2 server instance>/api')
+          server = 'https://<dhis2 server instance>')
 
 # Option 2: Set credentials from a secure configuration file (recommended)
 
