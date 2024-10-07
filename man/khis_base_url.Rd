@@ -2,31 +2,45 @@
 % Please edit documentation in R/khis_cred.R
 \name{khis_base_url}
 \alias{khis_base_url}
-\title{Produces the Configured DHIS2 API Base URI}
+\title{Retrieve the Configured DHIS2 API Base URL}
 \usage{
 khis_base_url(auth = NULL)
 }
 \arguments{
-\item{auth}{The AuthCred credentials}
+\item{auth}{(Optional) An auth object containing the DHIS2 credentials.
+If not provided, the function retrieves the base URL from the global auth object.}
 }
 \value{
-the DHIS2 base URI
+The DHIS2 base URL as a string, or \code{NULL} if no credentials are available.
 }
 \description{
-Produces the Configured DHIS2 API Base URI
+This function returns the base URL for the DHIS2 API from the provided auth
+object, or falls back to the global auth credentials if \code{auth} is not provided.
 }
 \examples{
 
 \dontrun{
-    # Set the credentials
+    # Set the credentials using the global .auth object
     khis_cred(username = 'DHIS2 username',
               password = 'DHIS2 password',
               base_url = 'https://dhis2-instance/api')
 
-    # View the DHIS2 instance API expect 'https://dhis2-instance/api'
+    # Retrieve the DHIS2 instance API base URL (expect 'https://dhis2-instance/api')
     khis_base_url()
 
     # Clear credentials
     khis_cred_clear()
+
+    # Retrieve the base URL again (expect 'NULL')
+    khis_base_url()
 }
 }
+\seealso{
+Other credential functions: 
+\code{\link{khis_cred}()},
+\code{\link{khis_cred_clear}()},
+\code{\link{khis_display_name}()},
+\code{\link{khis_has_cred}()},
+\code{\link{khis_username}()}
+}
+\concept{credential functions}

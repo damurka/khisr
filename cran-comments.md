@@ -1,6 +1,6 @@
 ## Patch Resubmission
 
-This patch release (v1.0.5) addresses issues identified. The API url used in tests has changed causing the error during tests.
+This patch release (v1.0.6) fixes issues in the CRAN checks. 
 
 ## R CMD check results
 

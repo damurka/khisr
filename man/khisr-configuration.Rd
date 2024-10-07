@@ -13,17 +13,21 @@ local_khis_quiet(env = parent.frame())
 \arguments{
 \item{code}{Code to execute quietly}
 
-\item{env}{The environment to use for scoping}
+\item{env}{The environment to use for scoping.}
 }
 \value{
 No return value, called for side effects
 
 No return value, called for side effects
 
-No return value, called for side effects
+No return value, called for side effects.
 }
 \description{
 Some aspects of khisr behaviour can be controlled via an option.
+
+Temporarily suppress messages by enabling quiet mode within the provided code block.
+
+Temporarily suppress messages within the specified environment.
 }
 \section{Messages}{
 
@@ -45,7 +49,6 @@ or  in your R script.
 }
 
 \examples{
-
 \dontrun{
     # message: "The credentials have been set."
     khis_cred(username = 'username',

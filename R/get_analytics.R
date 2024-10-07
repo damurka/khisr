@@ -1,4 +1,4 @@
-#' Retrieves Disaggregated Analytics Data from a DHIS2 Server
+#' Retrieves Disaggregated Analytics Data from DHIS2
 #'
 #' `get_analytics()` retrieves disaggregated data from DHIS2 analytics tables for a
 #'   specified period and data element(s), without performing any aggregation.
@@ -20,7 +20,7 @@
 #' * Allows specifying analytics dimensions, return format for identifiers, retry
 #'   attempts, and logging verbosity.
 #'
-#' @return A tibble with detailed information
+#' @return A tibble containing the disaggregated analytics data, or `NULL` if no data is retrieved.
 #'
 #' @export
 #'

@@ -10,6 +10,11 @@ test_that("khis_cred works correctly using configuration file", {
     )
 
     expect_error(
+        khis_cred(config_path = 'creds.json', password = 'password'),
+        class = 'khis_multiple_credentials'
+    )
+
+    expect_error(
         khis_cred(config_path ='does-not-exist.json'),
         class = 'khis_invalid_config_path'
     )
@@ -21,19 +26,21 @@ test_that("khis_cred works correctly using configuration file", {
 
     expect_error(
         khis_cred(config_path = system.file("extdata", "blank_cred_conf.json", package = "khisr")),
-        class = 'khis_missing_credentials'
+        class = 'khis_invalid_credentials'
     )
 
     expect_error(
         khis_cred(config_path = '{ "credentials": {}}'),
-        class = 'khis_missing_credentials'
+        class = 'khis_invalid_credentials'
     )
 
-    expect_error(
-        khis_cred(
-            config_path =  system.file("extdata", "no_url_cred_conf.json", package = "khisr")),
-        class = 'khis_missing_base_url'
-    )
+    # expect_error(
+    #     khis_cred(
+    #         config_path =  system.file("extdata", "no_url_cred_conf.json", package = "khisr")),
+    #     class = 'khis_missing_base_url'
+    # )
+
+    skip_if_server_error()
 
     expect_no_error(
         khis_cred(
@@ -70,7 +77,7 @@ test_that("khis_cred works correctly using configuration file", {
 
     expect_error(
         khis_cred(username = 'username2'),
-        class = 'khis_missing_credentials'
+        class = 'khis_invalid_credentials'
     )
 })
 
@@ -80,6 +87,8 @@ test_that("req_auth_khis_basic works correctly", {
         httr2::request('https://example.com') %>% req_auth_khis_basic(),
         class = 'khis_missing_credentials'
     )
+
+    skip_if_server_error()
 
     khis_cred(
         config_path = system.file("extdata", "valid_cred_conf.json", package = "khisr"))

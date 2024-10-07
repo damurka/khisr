@@ -91,7 +91,6 @@ check_integerish <- function(vec, arg = caller_arg(vec), call = caller_env()) {
 check_level_supported <- function(level, auth = NULL, arg = caller_arg(level), call = caller_env()) {
 
     org_levels <- get_organisation_unit_levels(fields = "name,level", auth = auth, call = call)
-  
     if (!level %in% org_levels$level) {
         khis_abort(
             c(
@@ -136,4 +135,46 @@ check_has_credentials <- function(auth = NULL, call = caller_env()) {
             call = call
         )
     }
+}
+
+#' Check if URL is valid
+#'
+#' This function checks whether the given URL is a valid scalar character and contains a valid scheme (http or https).
+#'
+#' @param url The URL to validate.
+#' @param arg The argument name to use in error messages. Defaults to the calling argument.
+#' @param call The calling environment for error reporting. Defaults to the calling environment.
+#'
+#' @return Returns `TRUE` if the URL is valid; otherwise, it raises an error.
+#'
+#' @noRd
+check_is_valid_url <- function(url, arg = caller_arg(url), call = caller_env()) {
+
+    # Check if the URL is missing or not a valid scalar character
+    if (is_missing(url) || !is_scalar_character(url) || nchar(url) == 0) {
+        khis_abort(
+            message = c(
+                'x' = 'Missing or invalid URL',
+                '!' = '{.arg {arg}} must be a non-empty string in the format of "https://dhis2-instance"'
+            ),
+            call = call
+        )
+    }
+
+    # Parse the URL
+    parsed_url <- url_parse(url)
+
+    # Check for valid scheme (http or https) and presence of host
+    if (is.null(parsed_url$scheme) || !parsed_url$scheme %in% c('http', 'https') || is.null(parsed_url$host)) {
+        khis_abort(
+            message = c(
+                'x' = 'Invalid URL scheme',
+                '!' = '{.arg {arg}} must start with "http" or "https" and contain a valid host, e.g., "https://dhis2-instance".'
+            ),
+            call = call
+        )
+    }
+
+    # If everything is valid, return TRUE
+    return(TRUE)
 }
