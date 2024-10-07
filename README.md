@@ -115,6 +115,7 @@ counties
 kiambu_county <- get_organisation_units(level %.eq% '2', 
                                         name %.like% 'Kiambu')
 kiambu_county
+
 #> # A tibble: 1 × 2
 #>   name          id         
 #>   <chr>         <chr>      
@@ -123,6 +124,7 @@ kiambu_county
 # Retrieve all data elements by data element group for outpatient (data element group name MOH 705)
 moh_705 <- get_data_elements(dataElementGroups.name %.like% 'moh 705')
 moh_705
+
 #> # A tibble: 96 × 2
 #>    name                         id         
 #>    <chr>                        <chr>      
@@ -142,6 +144,7 @@ moh_705
 malaria <- get_data_elements(dataElementGroups.name %.like% 'moh 705', 
                              name %.like% 'malaria')
 malaria
+
 #> # A tibble: 4 × 2
 #>   name                                    id         
 #>   <chr>                                   <chr>      
