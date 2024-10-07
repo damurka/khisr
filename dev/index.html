@@ -63,9 +63,7 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9"><div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>Code chunks will not be evaluated, because<span class="sc">:</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>Set credential unsuccessful.</span></code></pre></div>
-<div class="section level1">
+  <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header">
 <img src="logo.png" class="logo" alt=""><h1 id="khisr-">khisr 
 <a class="anchor" aria-label="anchor" href="#khisr-"></a>
@@ -102,14 +100,14 @@
 <h3 id="stable-release">Stable Release<a class="anchor" aria-label="anchor" href="#stable-release"></a>
 </h3>
 <p>You can install the release version of khisr from <a href="https://cran.r-project.org/" class="external-link">CRAN</a> with:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"khisr"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="development-version">Development Version<a class="anchor" aria-label="anchor" href="#development-version"></a>
 </h3>
 <p>And the development version of khisr like so:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#install.packages('pak')</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">'damurka/khisr'</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -120,19 +118,19 @@
 <div class="section level3">
 <h3 id="load-khisr-package">Load khisr package<a class="anchor" aria-label="anchor" href="#load-khisr-package"></a>
 </h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://khisr.damurka.com">"khisr"</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="auth">Auth<a class="anchor" aria-label="anchor" href="#auth"></a>
 </h3>
 <p>The khisr package operates in authenticated mode by default. This means you’ll need to provide credentials before using any functions that interact with your DHIS2 instance to download data. To ensure secure access, khisr offers a convenient way to store your credentials within your R environment. Refer to the following resource for detailed instructions on setting your credentials: <a href="https://khisr.damurka.com/articles/set-your-credentials.html">set you credentials</a></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Option 1: Set credentials directly in R (less secure)</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/khis_cred.html">khis_cred</a></span><span class="op">(</span>username <span class="op">=</span> <span class="st">'DHIS2 username'</span>, </span>
 <span>          password <span class="op">=</span> <span class="st">'DHIS2 password'</span>, </span>
-<span>          base_url <span class="op">=</span> <span class="st">'https://&lt;dhis2 server instance&gt;/api'</span><span class="op">)</span></span>
+<span>          server <span class="op">=</span> <span class="st">'https://&lt;dhis2 server instance&gt;'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Option 2: Set credentials from a secure configuration file (recommended)</span></span>
 <span></span>
@@ -145,83 +143,82 @@
 <h2 id="basic-overview">Basic Overview<a class="anchor" aria-label="anchor" href="#basic-overview"></a>
 </h2>
 <p>This is a basic example which shows you how to solve a common problem:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Retrieve the organisation units by county (level 2)</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>counties <span class="ot">&lt;-</span> <span class="fu">get_organisation_units</span>(level <span class="sc">%.eq%</span> <span class="st">'2'</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>counties</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="sc">&lt;</span><span class="er">&lt;&lt;&lt;&lt;&lt;&lt;</span> HEAD</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt; # A tibble: 47 × 2</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt;    name                   id         </span></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;                  &lt;chr&gt;      </span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt;  1 Baringo County         vvOK1BxTbet</span></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt;  2 Bomet County           HMNARUV2CW4</span></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt;  3 Bungoma County         KGHhQ5GLd4k</span></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt;  4 Busia County           Tvf1zgVZ0K4</span></span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#&gt;  5 Elgeyo Marakwet County MqnLxQBigG0</span></span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt;  6 Embu County            PFu8alU2KWG</span></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt;  7 Garissa County         uyOrcHZBpW0</span></span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">#&gt;  8 Homa Bay County        nK0A12Q7MvS</span></span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co">#&gt;  9 Isiolo County          bzOfj0iwfDH</span></span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co">#&gt; 10 Kajiado County         Hsk1YV8kHkT</span></span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="co">#&gt; # ℹ 37 more rows</span></span>
-<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="sc">==</span><span class="er">=====</span></span>
-<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="er">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> f21da99dc0e49ff18843c9433d762bb88d99ec29</span>
-<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a></span>
-<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="co"># Retrieve organisation units by name (level included to ensure it refers to county)</span></span>
-<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a>kiambu_county <span class="ot">&lt;-</span> <span class="fu">get_organisation_units</span>(level <span class="sc">%.eq%</span> <span class="st">'2'</span>, </span>
-<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a>                                        name <span class="sc">%.like%</span> <span class="st">'Kiambu'</span>)</span>
-<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a>kiambu_county</span>
-<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a><span class="sc">&lt;</span><span class="er">&lt;&lt;&lt;&lt;&lt;&lt;</span> HEAD</span>
-<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 2</span></span>
-<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a><span class="co">#&gt;   name          id         </span></span>
-<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;      </span></span>
-<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a><span class="co">#&gt; 1 Kiambu County qKzosKQPl6G</span></span>
-<span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a><span class="sc">==</span><span class="er">=====</span></span>
-<span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a><span class="er">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> f21da99dc0e49ff18843c9433d762bb88d99ec29</span>
-<span id="cb6-33"><a href="#cb6-33" tabindex="-1"></a></span>
-<span id="cb6-34"><a href="#cb6-34" tabindex="-1"></a><span class="co"># Retrieve all data elements by data element group for outpatient (data element group name MOH 705)</span></span>
-<span id="cb6-35"><a href="#cb6-35" tabindex="-1"></a>moh_705 <span class="ot">&lt;-</span> <span class="fu">get_data_elements</span>(dataElementGroups.name <span class="sc">%.like%</span> <span class="st">'moh 705'</span>)</span>
-<span id="cb6-36"><a href="#cb6-36" tabindex="-1"></a>moh_705</span>
-<span id="cb6-37"><a href="#cb6-37" tabindex="-1"></a><span class="sc">&lt;</span><span class="er">&lt;&lt;&lt;&lt;&lt;&lt;</span> HEAD</span>
-<span id="cb6-38"><a href="#cb6-38" tabindex="-1"></a><span class="co">#&gt; # A tibble: 96 × 2</span></span>
-<span id="cb6-39"><a href="#cb6-39" tabindex="-1"></a><span class="co">#&gt;    name                         id         </span></span>
-<span id="cb6-40"><a href="#cb6-40" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;                        &lt;chr&gt;      </span></span>
-<span id="cb6-41"><a href="#cb6-41" tabindex="-1"></a><span class="co">#&gt;  1 Abortion                     IrWSgk9GsUm</span></span>
-<span id="cb6-42"><a href="#cb6-42" tabindex="-1"></a><span class="co">#&gt;  2 All other diseases           KxT47tbKHsd</span></span>
-<span id="cb6-43"><a href="#cb6-43" tabindex="-1"></a><span class="co">#&gt;  3 Anaemia cases                kkUHOwGMawD</span></span>
-<span id="cb6-44"><a href="#cb6-44" tabindex="-1"></a><span class="co">#&gt;  4 Arthritis, Joint pains etc.  waNhWrS3HL6</span></span>
-<span id="cb6-45"><a href="#cb6-45" tabindex="-1"></a><span class="co">#&gt;  5 Asthma                       L82lvvxVaqt</span></span>
-<span id="cb6-46"><a href="#cb6-46" tabindex="-1"></a><span class="co">#&gt;  6 Autism                       L529r3Wvtcf</span></span>
-<span id="cb6-47"><a href="#cb6-47" tabindex="-1"></a><span class="co">#&gt;  7 Bilharzia  (Schistosomiasis) ojFSHMwbkHK</span></span>
-<span id="cb6-48"><a href="#cb6-48" tabindex="-1"></a><span class="co">#&gt;  8 Brucellosis                  nb9cfWgxYFc</span></span>
-<span id="cb6-49"><a href="#cb6-49" tabindex="-1"></a><span class="co">#&gt;  9 Burns                        dkEYL9Sous9</span></span>
-<span id="cb6-50"><a href="#cb6-50" tabindex="-1"></a><span class="co">#&gt; 10 Cardiovascular conditions    sZETzNe1To8</span></span>
-<span id="cb6-51"><a href="#cb6-51" tabindex="-1"></a><span class="co">#&gt; # ℹ 86 more rows</span></span>
-<span id="cb6-52"><a href="#cb6-52" tabindex="-1"></a><span class="sc">==</span><span class="er">=====</span></span>
-<span id="cb6-53"><a href="#cb6-53" tabindex="-1"></a><span class="er">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> f21da99dc0e49ff18843c9433d762bb88d99ec29</span>
-<span id="cb6-54"><a href="#cb6-54" tabindex="-1"></a></span>
-<span id="cb6-55"><a href="#cb6-55" tabindex="-1"></a><span class="co"># Filter the data element to element that contain malaria</span></span>
-<span id="cb6-56"><a href="#cb6-56" tabindex="-1"></a>malaria <span class="ot">&lt;-</span> <span class="fu">get_data_elements</span>(dataElementGroups.name <span class="sc">%.like%</span> <span class="st">'moh 705'</span>, </span>
-<span id="cb6-57"><a href="#cb6-57" tabindex="-1"></a>                             name <span class="sc">%.like%</span> <span class="st">'malaria'</span>)</span>
-<span id="cb6-58"><a href="#cb6-58" tabindex="-1"></a>malaria</span>
-<span id="cb6-59"><a href="#cb6-59" tabindex="-1"></a><span class="sc">&lt;</span><span class="er">&lt;&lt;&lt;&lt;&lt;&lt;</span> HEAD</span>
-<span id="cb6-60"><a href="#cb6-60" tabindex="-1"></a><span class="co">#&gt; # A tibble: 4 × 2</span></span>
-<span id="cb6-61"><a href="#cb6-61" tabindex="-1"></a><span class="co">#&gt;   name                                    id         </span></span>
-<span id="cb6-62"><a href="#cb6-62" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                   &lt;chr&gt;      </span></span>
-<span id="cb6-63"><a href="#cb6-63" tabindex="-1"></a><span class="co">#&gt; 1 Confirmed Malaria (only Positive cases) OoakJhWiyZp</span></span>
-<span id="cb6-64"><a href="#cb6-64" tabindex="-1"></a><span class="co">#&gt; 2 Malaria in pregnancy                    gvZmXInRLuD</span></span>
-<span id="cb6-65"><a href="#cb6-65" tabindex="-1"></a><span class="co">#&gt; 3 MOH 705A Rev 2020_ Tested for Malaria   siOyOiOJpI8</span></span>
-<span id="cb6-66"><a href="#cb6-66" tabindex="-1"></a><span class="co">#&gt; 4 Suspected  Malaria                      Lt0FqtnHraW</span></span>
-<span id="cb6-67"><a href="#cb6-67" tabindex="-1"></a><span class="sc">==</span><span class="er">=====</span></span>
-<span id="cb6-68"><a href="#cb6-68" tabindex="-1"></a><span class="er">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> f21da99dc0e49ff18843c9433d762bb88d99ec29</span>
-<span id="cb6-69"><a href="#cb6-69" tabindex="-1"></a></span>
-<span id="cb6-70"><a href="#cb6-70" tabindex="-1"></a><span class="co"># Retrieve data for malaria in Kiambu county in the outpatient data element groups</span></span>
-<span id="cb6-71"><a href="#cb6-71" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">get_analytics</span>(</span>
-<span id="cb6-72"><a href="#cb6-72" tabindex="-1"></a>        dx <span class="sc">%.d%</span> malaria<span class="sc">$</span>id,</span>
-<span id="cb6-73"><a href="#cb6-73" tabindex="-1"></a>        pe <span class="sc">%.d%</span> <span class="st">'LAST_YEAR'</span>,</span>
-<span id="cb6-74"><a href="#cb6-74" tabindex="-1"></a>        ou <span class="sc">%.f%</span> kiambu_county<span class="sc">$</span>id</span>
-<span id="cb6-75"><a href="#cb6-75" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb6-76"><a href="#cb6-76" tabindex="-1"></a>    <span class="fu">left_join</span>(malaria, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'dx'</span><span class="ot">=</span><span class="st">'id'</span>))</span>
-<span id="cb6-77"><a href="#cb6-77" tabindex="-1"></a>data</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Retrieve the organisation units by county (level 2)</span></span>
+<span><span class="va">counties</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metadata-helpers.html">get_organisation_units</a></span><span class="op">(</span><span class="va">level</span> <span class="op"><a href="reference/metadata-filter.html">%.eq%</a></span> <span class="st">'2'</span><span class="op">)</span></span>
+<span><span class="va">counties</span></span>
+<span><span class="co">#&gt; # A tibble: 47 × 2</span></span>
+<span><span class="co">#&gt;    name                   id         </span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;                  &lt;chr&gt;      </span></span>
+<span><span class="co">#&gt;  1 Baringo County         vvOK1BxTbet</span></span>
+<span><span class="co">#&gt;  2 Bomet County           HMNARUV2CW4</span></span>
+<span><span class="co">#&gt;  3 Bungoma County         KGHhQ5GLd4k</span></span>
+<span><span class="co">#&gt;  4 Busia County           Tvf1zgVZ0K4</span></span>
+<span><span class="co">#&gt;  5 Elgeyo Marakwet County MqnLxQBigG0</span></span>
+<span><span class="co">#&gt;  6 Embu County            PFu8alU2KWG</span></span>
+<span><span class="co">#&gt;  7 Garissa County         uyOrcHZBpW0</span></span>
+<span><span class="co">#&gt;  8 Homa Bay County        nK0A12Q7MvS</span></span>
+<span><span class="co">#&gt;  9 Isiolo County          bzOfj0iwfDH</span></span>
+<span><span class="co">#&gt; 10 Kajiado County         Hsk1YV8kHkT</span></span>
+<span><span class="co">#&gt; # ℹ 37 more rows</span></span>
+<span></span>
+<span><span class="co"># Retrieve organisation units by name (level included to ensure it refers to county)</span></span>
+<span><span class="va">kiambu_county</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metadata-helpers.html">get_organisation_units</a></span><span class="op">(</span><span class="va">level</span> <span class="op"><a href="reference/metadata-filter.html">%.eq%</a></span> <span class="st">'2'</span>, </span>
+<span>                                        <span class="va">name</span> <span class="op"><a href="reference/metadata-filter.html">%.like%</a></span> <span class="st">'Kiambu'</span><span class="op">)</span></span>
+<span><span class="va">kiambu_county</span></span>
+<span></span>
+<span><span class="co">#&gt; # A tibble: 1 × 2</span></span>
+<span><span class="co">#&gt;   name          id         </span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;      </span></span>
+<span><span class="co">#&gt; 1 Kiambu County qKzosKQPl6G</span></span>
+<span></span>
+<span><span class="co"># Retrieve all data elements by data element group for outpatient (data element group name MOH 705)</span></span>
+<span><span class="va">moh_705</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metadata-helpers.html">get_data_elements</a></span><span class="op">(</span><span class="va">dataElementGroups.name</span> <span class="op"><a href="reference/metadata-filter.html">%.like%</a></span> <span class="st">'moh 705'</span><span class="op">)</span></span>
+<span><span class="va">moh_705</span></span>
+<span></span>
+<span><span class="co">#&gt; # A tibble: 96 × 2</span></span>
+<span><span class="co">#&gt;    name                         id         </span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;                        &lt;chr&gt;      </span></span>
+<span><span class="co">#&gt;  1 Abortion                     IrWSgk9GsUm</span></span>
+<span><span class="co">#&gt;  2 All other diseases           KxT47tbKHsd</span></span>
+<span><span class="co">#&gt;  3 Anaemia cases                kkUHOwGMawD</span></span>
+<span><span class="co">#&gt;  4 Arthritis, Joint pains etc.  waNhWrS3HL6</span></span>
+<span><span class="co">#&gt;  5 Asthma                       L82lvvxVaqt</span></span>
+<span><span class="co">#&gt;  6 Autism                       L529r3Wvtcf</span></span>
+<span><span class="co">#&gt;  7 Bilharzia  (Schistosomiasis) ojFSHMwbkHK</span></span>
+<span><span class="co">#&gt;  8 Brucellosis                  nb9cfWgxYFc</span></span>
+<span><span class="co">#&gt;  9 Burns                        dkEYL9Sous9</span></span>
+<span><span class="co">#&gt; 10 Cardiovascular conditions    sZETzNe1To8</span></span>
+<span><span class="co">#&gt; # ℹ 86 more rows</span></span>
+<span></span>
+<span><span class="co"># Filter the data element to element that contain malaria</span></span>
+<span><span class="va">malaria</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metadata-helpers.html">get_data_elements</a></span><span class="op">(</span><span class="va">dataElementGroups.name</span> <span class="op"><a href="reference/metadata-filter.html">%.like%</a></span> <span class="st">'moh 705'</span>, </span>
+<span>                             <span class="va">name</span> <span class="op"><a href="reference/metadata-filter.html">%.like%</a></span> <span class="st">'malaria'</span><span class="op">)</span></span>
+<span><span class="va">malaria</span></span>
+<span></span>
+<span><span class="co">#&gt; # A tibble: 4 × 2</span></span>
+<span><span class="co">#&gt;   name                                    id         </span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;                                   &lt;chr&gt;      </span></span>
+<span><span class="co">#&gt; 1 Confirmed Malaria (only Positive cases) OoakJhWiyZp</span></span>
+<span><span class="co">#&gt; 2 Malaria in pregnancy                    gvZmXInRLuD</span></span>
+<span><span class="co">#&gt; 3 MOH 705A Rev 2020_ Tested for Malaria   siOyOiOJpI8</span></span>
+<span><span class="co">#&gt; 4 Suspected  Malaria                      Lt0FqtnHraW</span></span>
+<span></span>
+<span><span class="co"># Retrieve data for malaria in Kiambu county in the outpatient data element groups</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_analytics.html">get_analytics</a></span><span class="op">(</span></span>
+<span>        <span class="va">dx</span> <span class="op"><a href="reference/analytics-dimension.html">%.d%</a></span> <span class="va">malaria</span><span class="op">$</span><span class="va">id</span>,</span>
+<span>        <span class="va">pe</span> <span class="op"><a href="reference/analytics-dimension.html">%.d%</a></span> <span class="st">'LAST_YEAR'</span>,</span>
+<span>        <span class="va">ou</span> <span class="op"><a href="reference/analytics-dimension.html">%.f%</a></span> <span class="va">kiambu_county</span><span class="op">$</span><span class="va">id</span></span>
+<span>    <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu">left_join</span><span class="op">(</span><span class="va">malaria</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'dx'</span><span class="op">=</span><span class="st">'id'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">data</span></span>
+<span><span class="co">#&gt; # A tibble: 4 × 4</span></span>
+<span><span class="co">#&gt;   dx          pe    value name                                   </span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;                                  </span></span>
+<span><span class="co">#&gt; 1 Lt0FqtnHraW 2023  31101 Suspected  Malaria                     </span></span>
+<span><span class="co">#&gt; 2 OoakJhWiyZp 2023   5092 Confirmed Malaria (only Positive cases)</span></span>
+<span><span class="co">#&gt; 3 siOyOiOJpI8 2023  20554 MOH 705A Rev 2020_ Tested for Malaria  </span></span>
+<span><span class="co">#&gt; 4 gvZmXInRLuD 2023    397 Malaria in pregnancy</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="where-to-learn-more">Where to learn more<a class="anchor" aria-label="anchor" href="#where-to-learn-more"></a>
@@ -236,7 +233,6 @@
 <p>Please note that the khisr project is released with a <a href="https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
-
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
