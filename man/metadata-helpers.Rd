@@ -94,6 +94,7 @@ get_user_profile()
 \item 3: Show headers, bodies, and CURL status message.
 }}
     \item{\code{timeout}}{Maximum number of seconds to wait for the DHIS2 API response.}
+    \item{\code{call}}{The caller environment}
   }}
 }
 \value{

@@ -10,7 +10,8 @@ get_metadata(
   fields = c("id", "name"),
   retry = 2,
   verbosity = 0,
-  timeout = 60
+  timeout = 60,
+  call = caller_env()
 )
 }
 \arguments{
@@ -33,6 +34,8 @@ get_metadata(
 }}
 
 \item{timeout}{Maximum number of seconds to wait for the DHIS2 API response.}
+
+\item{call}{The caller environment}
 }
 \value{
 A tibble containing the DHIS2 metadata response.

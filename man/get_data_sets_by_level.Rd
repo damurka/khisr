@@ -10,7 +10,8 @@ get_data_sets_by_level(
   end_date = NULL,
   level = 1,
   org_ids = NULL,
-  ...
+  ...,
+  call = caller_env()
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ get_data_sets_by_level(
 \item{org_ids}{Optional list of organization units IDs to be filtered.}
 
 \item{...}{Other options that can be passed onto DHIS2 API.}
+
+\item{call}{The caller environment.}
 }
 \value{
 A tibble with detailed information, including:

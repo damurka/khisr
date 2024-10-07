@@ -8,6 +8,8 @@
 #' @param level An integer specifying the desired organisation level (default level 1).
 #' @param org_ids Optional. A vector of organisation identifiers whose details
 #'   are being retrieved.
+#' @param auth Optional. The authentication object
+#' @param call The call environment.
 #'
 #' @return A tibble containing the organisation units and their parent units up
 #'   to the specified level.
@@ -19,27 +21,34 @@
 #' organisations <- get_organisations_by_level(level = 2)
 #' organisations
 
-get_organisations_by_level <- function(level = 1, org_ids = NULL) {
+get_organisations_by_level <- function(level = 1,
+                                       org_ids = NULL,
+                                       auth = NULL,
+                                       call = caller_env()) {
 
     name = parent = NULL
 
-    check_integerish(level)
-    org_levels <- check_level_supported(level)
+    check_integerish(level, call = call)
+    org_levels <- check_level_supported(level, auth = auth, call = call)
 
     if (!is.null(org_ids)) {
 
-        check_string_vector(org_ids)
+        check_string_vector(org_ids, call = call)
 
         filters <- split(unique(org_ids), ceiling(seq_along(unique(org_ids))/500))
         orgs <- map(filters,
                     ~ get_organisation_units(id %.in% .x,
                                              level %.eq% level,
-                                             fields = generate_fields_string(level)))
+                                             fields = generate_fields_string(level),
+                                             auth = auth,
+                                             call = call))
         orgs <- bind_rows(orgs)
 
     } else {
         orgs <- get_organisation_units(level %.eq% level,
-                                       fields = generate_fields_string(level))
+                                       fields = generate_fields_string(level),
+                                       auth = auth,
+                                       call = call)
     }
 
     if (is_empty(orgs)) {

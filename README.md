@@ -1,6 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+    Code chunks will not be evaluated, because:
+    Set credential unsuccessful.
+
 # khisr <a href="https://khisr.damurka.com"><img src="man/figures/logo.png" align="right" height="139" alt="khisr website" /></a>
 
 <!-- badges: start -->
@@ -96,6 +99,7 @@ This is a basic example which shows you how to solve a common problem:
 # Retrieve the organisation units by county (level 2)
 counties <- get_organisation_units(level %.eq% '2')
 counties
+<<<<<<< HEAD
 #> # A tibble: 47 × 2
 #>    name                   id         
 #>    <chr>                  <chr>      
@@ -110,25 +114,25 @@ counties
 #>  9 Isiolo County          bzOfj0iwfDH
 #> 10 Kajiado County         Hsk1YV8kHkT
 #> # ℹ 37 more rows
-```
-
-``` r
+=======
+>>>>>>> f21da99dc0e49ff18843c9433d762bb88d99ec29
 
 # Retrieve organisation units by name (level included to ensure it refers to county)
 kiambu_county <- get_organisation_units(level %.eq% '2', 
                                         name %.like% 'Kiambu')
 kiambu_county
+<<<<<<< HEAD
 #> # A tibble: 1 × 2
 #>   name          id         
 #>   <chr>         <chr>      
 #> 1 Kiambu County qKzosKQPl6G
-```
-
-``` r
+=======
+>>>>>>> f21da99dc0e49ff18843c9433d762bb88d99ec29
 
 # Retrieve all data elements by data element group for outpatient (data element group name MOH 705)
 moh_705 <- get_data_elements(dataElementGroups.name %.like% 'moh 705')
 moh_705
+<<<<<<< HEAD
 #> # A tibble: 96 × 2
 #>    name                         id         
 #>    <chr>                        <chr>      
@@ -143,14 +147,14 @@ moh_705
 #>  9 Burns                        dkEYL9Sous9
 #> 10 Cardiovascular conditions    sZETzNe1To8
 #> # ℹ 86 more rows
-```
-
-``` r
+=======
+>>>>>>> f21da99dc0e49ff18843c9433d762bb88d99ec29
 
 # Filter the data element to element that contain malaria
 malaria <- get_data_elements(dataElementGroups.name %.like% 'moh 705', 
                              name %.like% 'malaria')
 malaria
+<<<<<<< HEAD
 #> # A tibble: 4 × 2
 #>   name                                    id         
 #>   <chr>                                   <chr>      
@@ -158,9 +162,8 @@ malaria
 #> 2 Malaria in pregnancy                    gvZmXInRLuD
 #> 3 MOH 705A Rev 2020_ Tested for Malaria   siOyOiOJpI8
 #> 4 Suspected  Malaria                      Lt0FqtnHraW
-```
-
-``` r
+=======
+>>>>>>> f21da99dc0e49ff18843c9433d762bb88d99ec29
 
 # Retrieve data for malaria in Kiambu county in the outpatient data element groups
 data <- get_analytics(
@@ -170,13 +173,6 @@ data <- get_analytics(
     ) %>%
     left_join(malaria, by = c('dx'='id'))
 data
-#> # A tibble: 4 × 4
-#>   dx          pe    value name                                   
-#>   <chr>       <chr> <dbl> <chr>                                  
-#> 1 Lt0FqtnHraW 2023  31101 Suspected  Malaria                     
-#> 2 OoakJhWiyZp 2023   5092 Confirmed Malaria (only Positive cases)
-#> 3 siOyOiOJpI8 2023  20554 MOH 705A Rev 2020_ Tested for Malaria  
-#> 4 gvZmXInRLuD 2023    397 Malaria in pregnancy
 ```
 
 ## Where to learn more

@@ -11,6 +11,7 @@
 #' @param level Required desired organisation level of data (default: level 1) .
 #' @param org_ids Optional list of organization units IDs to be filtered.
 #' @param ... Other options that can be passed onto DHIS2 API.
+#' @param call The caller environment.
 #'
 #' @return A tibble with detailed information, including:
 #'
@@ -38,15 +39,16 @@ get_data_sets_by_level <- function(dataset_ids,
                                   end_date = NULL,
                                   level = 1,
                                   org_ids = NULL,
-                                  ...) {
+                                  ...,
+                                  call = caller_env()) {
 
     dx = period = pe = ou = element = value = NULL # due to NSE notes in R CMD check
 
-    check_string_vector(dataset_ids)
-    check_date(start_date)
-    check_date(end_date, can_be_null = TRUE)
-    check_integerish(level)
-    org_levels <- check_level_supported(level)
+    check_string_vector(dataset_ids, call = call)
+    check_date(start_date, error_call = call)
+    check_date(end_date, can_be_null = TRUE, error_call = call)
+    check_integerish(level, call = call)
+    org_levels <- check_level_supported(level, ..., call = call)
 
     values <- c('REPORTING_RATE',
                 'REPORTING_RATE_ON_TIME',
@@ -64,7 +66,7 @@ get_data_sets_by_level <- function(dataset_ids,
     #ou <- 'HfVjCurKxh2' # Kenya
     ou <- NULL
     if (!is.null(org_ids)) {
-        check_string_vector(org_ids)
+        check_string_vector(org_ids, call = call)
         ou <- org_ids
     }
 
@@ -72,11 +74,12 @@ get_data_sets_by_level <- function(dataset_ids,
         dx %.d% dataset_ids_str,
         pe %.d% periods,
         ou %.d% c(str_glue('LEVEL-{level}'), ou),
-        ...
+        ...,
+        call = call
     )
 
-    organisations <- get_organisations_by_level(data$ou, level = level)
-    datasets <- get_data_sets(id %.in% dataset_ids, fields = 'id,name~rename(dataset)')
+    organisations <- get_organisations_by_level(data$ou, level = level, ..., call = call)
+    datasets <- get_data_sets(id %.in% dataset_ids, fields = 'id,name~rename(dataset)', ..., call = call)
 
     data %>%
         separate_wider_delim(dx, ".",  names = c('dx','element')) %>%

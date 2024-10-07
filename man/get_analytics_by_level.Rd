@@ -10,7 +10,8 @@ get_analytics_by_level(
   end_date = NULL,
   level = 1,
   org_ids = NULL,
-  ...
+  ...,
+  call = caller_env()
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ get_analytics_by_level(
 \item{org_ids}{Optional list of organization units IDs to be filtered.}
 
 \item{...}{Other options that can be passed onto DHIS2 API.}
+
+\item{call}{The caller environment.}
 }
 \value{
 A tibble with detailed information, including:
@@ -63,7 +66,7 @@ data
 }
 \seealso{
 \itemize{
-\item \code{\link[=get_organisation_unit_levels]{get_organisation_unit_levels()}} for getting the organisations units
+\item \code{\link[=get_organisations_by_level]{get_organisations_by_level()}} for getting the organisations units
 \item \code{\link[=get_data_elements_with_category_options]{get_data_elements_with_category_options()}} for retrieving the data elements
 }
 }

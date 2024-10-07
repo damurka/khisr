@@ -20,11 +20,11 @@ knitr::opts_chunk$set(
 options(tibble.print_min = 5L, tibble.print_max = 5L)
 ```
 
-```{r eval = !can_decrypt, echo = FALSE, comment = NA}
+```{r, eval = !can_decrypt, echo = FALSE, comment = NA}
 message("No token available. Code chunks will not be evaluated.")
 ```
 
-```{r index-auth, eval = can_decrypt, include=FALSE}
+```{r, eval = can_decrypt, include=FALSE}
 khisr:::khis_cred_docs()
 ```
 

@@ -1,5 +1,20 @@
 # khisr (development version)
 
+<<<<<<< HEAD
+# khisr 1.0.6
+
+* Improved tests to skip tests when the server is down
+
+=======
+>>>>>>> f21da99dc0e49ff18843c9433d762bb88d99ec29
+# khisr 1.0.5
+
+* **Improved Authentication**: Now supports optional authentication for API calls using the `auth` argument. This strengthens security by allowing you to control access to your data.
+
+* **Clearer Error Messages**: Provides more informative error messages to help you identify and troubleshoot issues more efficiently.
+
+# khisr 1.0.4
+
 * Improved Credential Handling:
     - `khis_has_cred()`: Now ensures credentials are valid before returning TRUE, preventing unauthorized access.
     - `khis_cred()`: Includes validation to accept only valid credentials, reducing errors.

@@ -4,13 +4,22 @@
 \alias{get_organisations_by_level}
 \title{Get Organisations by Level}
 \usage{
-get_organisations_by_level(level = 1, org_ids = NULL)
+get_organisations_by_level(
+  level = 1,
+  org_ids = NULL,
+  auth = NULL,
+  call = caller_env()
+)
 }
 \arguments{
 \item{level}{An integer specifying the desired organisation level (default level 1).}
 
 \item{org_ids}{Optional. A vector of organisation identifiers whose details
 are being retrieved.}
+
+\item{auth}{Optional. The authentication object}
+
+\item{call}{The call environment.}
 }
 \value{
 A tibble containing the organisation units and their parent units up

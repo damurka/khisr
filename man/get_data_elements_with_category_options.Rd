@@ -4,10 +4,18 @@
 \alias{get_data_elements_with_category_options}
 \title{Get Data Elements with Category Options}
 \usage{
-get_data_elements_with_category_options(element_ids)
+get_data_elements_with_category_options(
+  element_ids,
+  auth = NULL,
+  call = caller_env()
+)
 }
 \arguments{
 \item{element_ids}{The data element identifiers whose details being retrieved}
+
+\item{auth}{The authentication object}
+
+\item{call}{The caller environment}
 }
 \value{
 A tibble containing the following columns:

@@ -18,7 +18,7 @@ test_that("get_metadata_helpers functions work", {
     expect_no_error(get_indicators())
     expect_no_error(get_indicator_groups())
     expect_warning(get_option_group_sets())
-    expect_warning(get_option_groups())
+    expect_no_error(get_option_groups())
     expect_no_error(get_option_sets())
     expect_no_error(get_options())
     expect_no_error(get_organisation_unit_groupsets())

@@ -8,3 +8,5 @@ inst/doc
 secret.json
 docs
 CRAN-SUBMISSION
+/doc/
+/Meta/
