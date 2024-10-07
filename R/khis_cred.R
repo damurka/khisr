@@ -42,7 +42,7 @@
 #'     # Option 2: Providing credentials directly (less secure)
 #'     khis_cred(username = "your_username",
 #'               password = "your_password",
-#'               base_url='https://dhis2-instance/api')
+#'               server='https://<dhis2-instance>')
 #' }
 
 khis_cred <- function(username = NULL,
@@ -368,7 +368,7 @@ khis_cred_clear <- function(auth = NULL) {
 #'     # Set the credentials using global .auth object
 #'     khis_cred(username = 'DHIS2 username',
 #'               password = 'DHIS2 password',
-#'               base_url = 'https://dhis2-instance/api')
+#'               server = 'https://<dhis2-instance>')
 #'
 #'     # View the username (expect 'DHIS2 username')
 #'     khis_username()
@@ -410,9 +410,9 @@ khis_username <- function(auth = NULL) {
 #'     # Set the credentials using the global .auth object
 #'     khis_cred(username = 'DHIS2 username',
 #'               password = 'DHIS2 password',
-#'               base_url = 'https://dhis2-instance/api')
+#'               server = 'https://<dhis2-instance>')
 #'
-#'     # Retrieve the DHIS2 instance API base URL (expect 'https://dhis2-instance/api')
+#'     # Retrieve the DHIS2 instance API base URL (expect 'https://<dhis2-instance>')
 #'     khis_base_url()
 #'
 #'     # Clear credentials
@@ -452,7 +452,7 @@ khis_base_url <- function(auth = NULL) {
 #'     # Set the credentials using global .auth object
 #'     khis_cred(username = 'DHIS2 username',
 #'               password = 'DHIS2 password',
-#'               base_url = 'https://dhis2-instance/api')
+#'               server = 'https://<dhis2-instance>')
 #'
 #'     # Retrieve the display name from the global .auth profile
 #'     khis_display_name()

@@ -54,7 +54,7 @@ credentials from being stored directly in your code.
     # Option 2: Providing credentials directly (less secure)
     khis_cred(username = "your_username",
               password = "your_password",
-              base_url='https://dhis2-instance/api')
+              server='https://<dhis2-instance>')
 }
 }
 \seealso{

@@ -5,10 +5,18 @@ development:
 
 template:
   bootstrap: 5
+  light-switch: true
   bslib:
     primary: "#0054AD"
     border-radius: 0.5rem
     btn-border-radius: 0.25rem
+  includes:
+    in_header:
+      <script data-goatcounter="https://khisr.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+
+authors:
+  David Kariuki:
+    href: https://damurka.com
 
 articles:
   - title: Common Uses

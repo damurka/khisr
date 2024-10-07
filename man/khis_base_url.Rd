@@ -23,9 +23,9 @@ object, or falls back to the global auth credentials if \code{auth} is not provi
     # Set the credentials using the global .auth object
     khis_cred(username = 'DHIS2 username',
               password = 'DHIS2 password',
-              base_url = 'https://dhis2-instance/api')
+              server = 'https://<dhis2-instance>')
 
-    # Retrieve the DHIS2 instance API base URL (expect 'https://dhis2-instance/api')
+    # Retrieve the DHIS2 instance API base URL (expect 'https://<dhis2-instance>')
     khis_base_url()
 
     # Clear credentials
