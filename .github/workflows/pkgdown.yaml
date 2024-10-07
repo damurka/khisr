@@ -3,8 +3,11 @@
 on:
   push:
     branches: [main, master]
-  pull_request:
-    branches: [main, master]
+  schedule:
+    # * is a special character in YAML so we have to quote this string
+    # 3am Pacific = 11am UTC
+    # https://crontab.guru is your friend
+    - cron:  '0 11 * * *'
   release:
     types: [published]
   workflow_dispatch:
@@ -14,6 +17,11 @@ name: pkgdown
 jobs:
   pkgdown:
     runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'schedule' ||
+      github.event_name == 'workflow_dispatch' ||
+      github.event_name == 'release' ||
+      contains(github.event.head_commit.message, '[pkgdown]')
     # Only restrict concurrency for non-PR jobs
     concurrency:
       group: pkgdown-${{ github.event_name != 'pull_request' || github.run_id }}
