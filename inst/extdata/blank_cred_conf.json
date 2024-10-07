@@ -2,6 +2,6 @@
 	"credentials": {
 		"username": "",
 		"password": "",
-		"base_url": ""
+		"server": ""
 	}
 }

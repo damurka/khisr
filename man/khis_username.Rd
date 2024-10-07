@@ -24,7 +24,7 @@ Otherwise, it retrieves the username from the global auth object.
     # Set the credentials using global .auth object
     khis_cred(username = 'DHIS2 username',
               password = 'DHIS2 password',
-              base_url = 'https://dhis2-instance/api')
+              server = 'https://<dhis2-instance>')
 
     # View the username (expect 'DHIS2 username')
     khis_username()

@@ -2,7 +2,22 @@
 
 # khisr 1.0.6
 
-* Improved tests to skip tests when the server is down
+## New Features
+- **Introduced `server` argument**: The `server` argument now accepts the server 
+  URL without the `/api` suffix, simplifying the configuration of DHIS2 credentials 
+  and API calls.
+
+## Deprecations
+- **Deprecated `base_url` in `khis_cred()`**: The `base_url` argument is now 
+  deprecated in favour of the new `server` argument. 
+- **Deprecated default `base_url` value**: The default value previously used for 
+  the `base_url` argument is no longer supported. Users should provide an explicit
+  `server` URL moving forward.
+
+## Enhancements
+- **Improved testing**: Test coverage has been enhanced to automatically skip 
+  tests when the target server is unreachable or down, ensuring smoother testing
+  workflows in offline or server downtime conditions.
 
 # khisr 1.0.5
 

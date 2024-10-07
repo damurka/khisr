@@ -158,13 +158,13 @@ khis_quiet <- function() {
 #'     # message: "The credentials have been set."
 #'     khis_cred(username = 'username',
 #'               password = 'password',
-#'               base_url = 'https://dhis2-instance/api')
+#'               server = 'https://<dhis2-instance>')
 #'
 #'     # suppress messages for a small amount of code
 #'     with_khis_quiet(
 #'         khis_cred(username = 'username',
 #'                   password = 'password',
-#'                   base_url = 'https://dhis2-instance/api')
+#'                   server = 'https://<dhis2-instance>')
 #'     )
 #' }
 
@@ -188,7 +188,7 @@ with_khis_quiet <- function(code) {
 #'     # message: "The credentials have been set."
 #'     khis_cred(username = 'username',
 #'               password = 'password',
-#'               base_url = 'https://dhis2-instance/api')
+#'               server = 'https://<dhis2-instance>')
 #'
 #'     # suppress messages for a in a specific scope
 #'     local_khis_quiet()
@@ -196,7 +196,7 @@ with_khis_quiet <- function(code) {
 #'     # no message
 #'     khis_cred(username = 'username',
 #'               password = 'password',
-#'               base_url = 'https://dhis2-instance/api')
+#'               server = 'https://<dhis2-instance>')
 #'
 #'     # clear credentials
 #'     khis_cred_clear()

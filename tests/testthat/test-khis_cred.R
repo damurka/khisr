@@ -58,14 +58,14 @@ test_that("khis_cred works correctly using configuration file", {
     expect_error(
         khis_cred(username = 'username2',
                   password = 'password2',
-                  base_url = NULL
+                  server = NULL
         )
     )
 
     expect_no_error(
         khis_cred(username = 'dodoma',
                   password = 'Ytrewq!23456',
-                  base_url="https://test.hiskenya.org/api"
+                  server="https://test.hiskenya.org"
         )
     )
 

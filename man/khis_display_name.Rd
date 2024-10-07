@@ -23,7 +23,7 @@ auth object. If \code{auth} is not provided, it falls back to the global auth cr
     # Set the credentials using global .auth object
     khis_cred(username = 'DHIS2 username',
               password = 'DHIS2 password',
-              base_url = 'https://dhis2-instance/api')
+              server = 'https://<dhis2-instance>')
 
     # Retrieve the display name from the global .auth profile
     khis_display_name()
