@@ -46,7 +46,7 @@ The `khisr` R package simplifies interaction with the District Health Informatio
 
 ```{r, eval = FALSE}
 # Set the credentials using username and password
-khis_cred(username = 'your-dhis2-username', password = 'your-dhis2-password', base_url = 'https://<your dhis2 instance>')
+khis_cred(username = 'your-dhis2-username', password = 'your-dhis2-password', server = 'https://<your dhis2 instance>')
 
 # Set credentials using configuration path
 khis_cred(config_path = 'path/to/secret.json')
