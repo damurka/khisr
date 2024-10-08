@@ -602,9 +602,12 @@ Leverage the infix operators %.d% for concise and readable code.</li>
 <span>    <span class="va">pe</span> <span class="op"><a href="../reference/analytics-dimension.html">%.d%</a></span> <span class="st">'LAST_YEAR'</span>,</span>
 <span>    <span class="va">ou</span> <span class="op"><a href="../reference/analytics-dimension.html">%.d%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'qKzosKQPl6G'</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `get_analytics()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> HTTP 409 Conflict.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> Query failed because a referenced table does not exist. Please ensure analytics job was run (SqlState: 42P01)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 4</span></span></span>
+<span><span class="co">#&gt;   dx          pe    ou          value</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> OoakJhWiyZp 2023  qKzosKQPl6G  <span style="text-decoration: underline;">5</span>092</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Lt0FqtnHraW 2023  qKzosKQPl6G <span style="text-decoration: underline;">31</span>101</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> siOyOiOJpI8 2023  qKzosKQPl6G <span style="text-decoration: underline;">20</span>554</span></span>
 <span></span>
 <span><span class="co"># Using the startDate and endDate with organisation unit keyword 'USER_ORGUNIT'</span></span>
 <span><span class="fu"><a href="../reference/get_analytics.html">get_analytics</a></span><span class="op">(</span></span>
@@ -614,9 +617,15 @@ Leverage the infix operators %.d% for concise and readable code.</li>
 <span>    startDate <span class="op">=</span> <span class="st">'2023-07-01'</span>,</span>
 <span>    endDate <span class="op">=</span> <span class="st">'2023-12-31'</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `get_analytics()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> HTTP 409 Conflict.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> Query failed because a referenced table does not exist. Please ensure analytics job was run (SqlState: 42P01)</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 18 × 4</span></span></span>
+<span><span class="co">#&gt;   dx          ou          pe       value</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> siOyOiOJpI8 HfVjCurKxh2 202310  <span style="text-decoration: underline;">752</span>870</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> siOyOiOJpI8 HfVjCurKxh2 202312  <span style="text-decoration: underline;">651</span>287</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Lt0FqtnHraW HfVjCurKxh2 202307 1<span style="text-decoration: underline;">122</span>436</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> OoakJhWiyZp HfVjCurKxh2 202308  <span style="text-decoration: underline;">367</span>190</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> siOyOiOJpI8 HfVjCurKxh2 202311  <span style="text-decoration: underline;">671</span>394</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 13 more rows</span></span></span></code></pre></div>
 <ul>
 <li>
 <strong>Apply Filters:</strong> Use the filters parameter to specify
@@ -643,9 +652,12 @@ response.</li>
 <span>    <span class="va">pe</span> <span class="op"><a href="../reference/analytics-dimension.html">%.f%</a></span> <span class="st">'LAST_YEAR'</span>,</span>
 <span>    <span class="va">ou</span> <span class="op"><a href="../reference/analytics-dimension.html">%.f%</a></span> <span class="st">'qKzosKQPl6G'</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `get_analytics()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> HTTP 409 Conflict.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> Query failed because a referenced table does not exist. Please ensure analytics job was run (SqlState: 42P01)</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 2</span></span></span>
+<span><span class="co">#&gt;   dx          value</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> OoakJhWiyZp  <span style="text-decoration: underline;">5</span>092</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> siOyOiOJpI8 <span style="text-decoration: underline;">20</span>554</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Lt0FqtnHraW <span style="text-decoration: underline;">31</span>101</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
