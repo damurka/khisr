@@ -150,7 +150,7 @@ Groups).</li>
 <code class="sourceCode R"><span><span class="co"># Retrieves all the organisation unit group sets</span></span>
 <span><span class="va">orgs_group_set</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metadata-helpers.html">get_organisation_unit_groupsets</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">orgs_group_set</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 18 × 2</span></span></span>
 <span><span class="co">#&gt;    name                                           id         </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">"</span>ART Central Sites<span style="color: #949494;">"</span>                            tjVYz9cY7I3</span></span>
@@ -167,12 +167,10 @@ Groups).</li>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> <span style="color: #949494;">"</span>NASCOP Region<span style="color: #949494;">"</span>                                rbvYf4IjcGf</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> <span style="color: #949494;">"</span>Non-Refugee &amp; Refugee camp Health facilities<span style="color: #949494;">"</span> ltZ6C4ckNLl</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> <span style="color: #949494;">"</span>Programme Sponsor<span style="color: #949494;">"</span>                            OE9Qlwr8XFv</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> <span style="color: #949494;">"</span>Province Name<span style="color: #949494;">"</span>                                A2DKecGXz73</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> <span style="color: #949494;">"</span>Supply Chain<span style="color: #949494;">"</span>                                 Vww46znsPsj</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> <span style="color: #949494;">"</span>TB  Lab Subcounty Store Vers 2022<span style="color: #949494;">"</span>            gmsEbbTJReq</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> <span style="color: #949494;">"</span>TB SubCounty Stores<span style="color: #949494;">"</span>                          R0JQ0AqdsZf</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> <span style="color: #949494;">"</span>TB Zone<span style="color: #949494;">"</span>                                      jvksQn3RnbT</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> <span style="color: #949494;">"</span>Type details<span style="color: #949494;">"</span>                                 klLcxNWVo1q</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> <span style="color: #949494;">"</span>Supply Chain<span style="color: #949494;">"</span>                                 Vww46znsPsj</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> <span style="color: #949494;">"</span>TB  Lab Subcounty Store Vers 2022<span style="color: #949494;">"</span>            gmsEbbTJReq</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> <span style="color: #949494;">"</span>TB SubCounty Stores<span style="color: #949494;">"</span>                          R0JQ0AqdsZf</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> <span style="color: #949494;">"</span>TB Zone<span style="color: #949494;">"</span>                                      jvksQn3RnbT</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="data-elements-annotated-as-dx">Data Elements (annotated as <em>dx</em>)<a class="anchor" aria-label="anchor" href="#data-elements-annotated-as-dx"></a>
@@ -189,7 +187,7 @@ facility to district to country.</p>
 <code class="sourceCode R"><span><span class="co"># Retrieves all the data elements in DHIS2</span></span>
 <span><span class="va">data_elements</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metadata-helpers.html">get_data_elements</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">data_elements</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 15,379 × 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 15,376 × 2</span></span></span>
 <span><span class="co">#&gt;    name                                                                    id   </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">""</span>                                                                      ioUh…</span></span>
@@ -202,7 +200,7 @@ facility to district to country.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>10.3 Availability of updated fee structure, strategically and promine… UXQg…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>10.3 Institutional<span style="color: #949494;">"</span>                                                    FGHs…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>10.4 Facility improvement/ Quality management funds are effciently us… y9ui…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 15,369 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 15,366 more rows</span></span></span></code></pre></div>
 <p>Related data elements are grouped into a logical collection referred
 to as <strong>data element groups</strong>. The data element groups do
 not directly contain data but reference members data elements. Therefore
@@ -212,7 +210,7 @@ elements.</p>
 <code class="sourceCode R"><span><span class="co"># Retrieves all the data element groups</span></span>
 <span><span class="va">data_element_groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metadata-helpers.html">get_data_element_groups</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">data_element_groups</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 269 × 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 266 × 2</span></span></span>
 <span><span class="co">#&gt;    name                                           id         </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">"</span>706D Haemovigilance Tool<span style="color: #949494;">"</span>                     EvSFB0kFshj</span></span>
@@ -225,7 +223,7 @@ elements.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>AMR - Pseudomonas aeruginosa isolates<span style="color: #949494;">"</span>        NpOK7Em3QRk</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>AMR - Staphylococcus aureus Isolates<span style="color: #949494;">"</span>         B3VgKffq78S</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>Antenatal client first visits<span style="color: #949494;">"</span>                XTHYIz6qsdX</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 259 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 256 more rows</span></span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="periods-annotated-as-pe">Periods (annotated as <em>pe</em>)<a class="anchor" aria-label="anchor" href="#periods-annotated-as-pe"></a>
