@@ -85,14 +85,14 @@ data
 #>    <chr> <chr>      <date>     <ord> <dbl>          <dbl>                  <dbl>
 #>  1 Kenya MoH 745 C… 2024-10-01 Octo…  2024           69.0                   66.1
 #>  2 Kenya MoH 745 C… 2024-11-01 Nove…  2024           67.2                   61.7
-#>  3 Kenya MoH 745 C… 2023-06-01 June   2023           67.2                   62.8
-#>  4 Kenya MoH 745 C… 2023-05-01 May    2023           65.1                   61.3
+#>  3 Kenya MoH 745 C… 2023-06-01 June   2023           67.2                   62.9
+#>  4 Kenya MoH 745 C… 2023-05-01 May    2023           65.1                   61.4
 #>  5 Kenya MoH 745 C… 2024-05-01 May    2024           66.5                   61.9
-#>  6 Kenya MoH 745 C… 2025-08-01 Augu…  2025           64.6                   59.9
-#>  7 Kenya MoH 745 C… 2025-09-01 Sept…  2025           66.1                   63.6
+#>  6 Kenya MoH 745 C… 2025-08-01 Augu…  2025           64.6                   60.0
+#>  7 Kenya MoH 745 C… 2025-09-01 Sept…  2025           66.2                   63.7
 #>  8 Kenya MoH 745 C… 2024-03-01 March  2024           66.1                   62.5
 #>  9 Kenya MoH 745 C… 2024-04-01 April  2024           65.7                   61.2
-#> 10 Kenya MoH 745 C… 2023-07-01 July   2023           68.0                   60.9
+#> 10 Kenya MoH 745 C… 2023-07-01 July   2023           68.1                   60.9
 #> # ℹ 24 more rows
 #> # ℹ 3 more variables: actual_reports <dbl>, actual_reports_on_time <dbl>,
 #> #   expected_reports <dbl>
