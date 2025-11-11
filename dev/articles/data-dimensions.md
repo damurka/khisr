@@ -124,7 +124,7 @@ groups provide a way manage and analyze related data elements.
 # Retrieves all the data element groups
 data_element_groups <- get_data_element_groups()
 data_element_groups
-#> # A tibble: 269 × 2
+#> # A tibble: 270 × 2
 #>    name                                           id         
 #>    <chr>                                          <chr>      
 #>  1 "706D Haemovigilance Tool"                     EvSFB0kFshj
@@ -137,7 +137,7 @@ data_element_groups
 #>  8 "AMR - Pseudomonas aeruginosa isolates"        NpOK7Em3QRk
 #>  9 "AMR - Staphylococcus aureus Isolates"         B3VgKffq78S
 #> 10 "Antenatal client first visits"                XTHYIz6qsdX
-#> # ℹ 259 more rows
+#> # ℹ 260 more rows
 ```
 
 ### Periods (annotated as *pe*)
