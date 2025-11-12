@@ -68,7 +68,7 @@ A tibble containing the DHIS2 metadata response.
 ``` r
 # Get the categories metadata
 get_metadata('categories')
-#> # A tibble: 540 × 2
+#> # A tibble: 543 × 2
 #>    name                                     id         
 #>    <chr>                                    <chr>      
 #>  1 "0-3mths, 4-6mths, 7-18mths"             JI1bCqQ77r1
@@ -81,7 +81,7 @@ get_metadata('categories')
 #>  8 "749 Total Isolates"                     mXj1e4ycMBt
 #>  9 "751_Child exclusively  breastfed"       oNDNLvqbXtN
 #> 10 "751_Early  initiation to breastfeeding" hghdXcQVx7R
-#> # ℹ 530 more rows
+#> # ℹ 533 more rows
 
 # Get the datasets metadata with fields 'id,name,organisationUnits' and filter
 # only the datasets with id 'WWh5hbCmvND'
@@ -91,7 +91,7 @@ get_metadata('dataSets',
 #> # A tibble: 1 × 3
 #>   name                                                  id     organisationUnits
 #>   <chr>                                                 <chr>  <list>           
-#> 1 MoH 745 Cancer Screening Program Monthly Summary Form WWh5h… <list [7,026]>   
+#> 1 MoH 745 Cancer Screening Program Monthly Summary Form WWh5h… <list [7,020]>   
 
 # Get data elements filtered by dataElementGroups id
 get_metadata('dataElements',
