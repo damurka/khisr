@@ -77,6 +77,6 @@ data
 #> # A tibble: 2 × 3
 #>   dx          pe     value
 #>   <chr>       <chr>  <dbl>
-#> 1 XEX93uLsAm2 202510   738
-#> 2 cXe64Yk0QMY 202510 52140
+#> 1 XEX93uLsAm2 202510   800
+#> 2 cXe64Yk0QMY 202510 57891
 ```
