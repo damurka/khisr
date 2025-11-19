@@ -83,15 +83,15 @@ data
 #> # A tibble: 34 × 10
 #>    kenya dataset    period     month  year reporting_rate reporting_rate_on_time
 #>    <chr> <chr>      <date>     <ord> <dbl>          <dbl>                  <dbl>
-#>  1 Kenya MoH 745 C… 2024-10-01 Octo…  2024           69.1                   66.2
-#>  2 Kenya MoH 745 C… 2024-11-01 Nove…  2024           67.3                   61.8
+#>  1 Kenya MoH 745 C… 2024-10-01 Octo…  2024           69.1                   66.1
+#>  2 Kenya MoH 745 C… 2024-11-01 Nove…  2024           67.3                   61.7
 #>  3 Kenya MoH 745 C… 2023-06-01 June   2023           67.3                   62.9
 #>  4 Kenya MoH 745 C… 2023-05-01 May    2023           65.2                   61.4
 #>  5 Kenya MoH 745 C… 2024-05-01 May    2024           66.6                   62.0
 #>  6 Kenya MoH 745 C… 2025-08-01 Augu…  2025           64.7                   60.0
 #>  7 Kenya MoH 745 C… 2025-09-01 Sept…  2025           66.5                   63.7
 #>  8 Kenya MoH 745 C… 2024-03-01 March  2024           66.2                   62.6
-#>  9 Kenya MoH 745 C… 2024-04-01 April  2024           65.8                   61.3
+#>  9 Kenya MoH 745 C… 2024-04-01 April  2024           65.7                   61.3
 #> 10 Kenya MoH 745 C… 2023-07-01 July   2023           68.1                   61.0
 #> # ℹ 24 more rows
 #> # ℹ 3 more variables: actual_reports <dbl>, actual_reports_on_time <dbl>,
