@@ -80,7 +80,7 @@ dataset_id = c('WWh5hbCmvND')
 data <- get_data_sets_by_level(dataset_ids = dataset_id,
                                start_date = '2023-02-01')
 data
-#> # A tibble: 34 × 10
+#> # A tibble: 35 × 10
 #>    kenya dataset    period     month  year reporting_rate reporting_rate_on_time
 #>    <chr> <chr>      <date>     <ord> <dbl>          <dbl>                  <dbl>
 #>  1 Kenya MoH 745 C… 2024-10-01 Octo…  2024           69.1                   66.2
@@ -93,7 +93,7 @@ data
 #>  8 Kenya MoH 745 C… 2024-03-01 March  2024           66.2                   62.6
 #>  9 Kenya MoH 745 C… 2024-04-01 April  2024           65.8                   61.3
 #> 10 Kenya MoH 745 C… 2023-07-01 July   2023           68.1                   61.0
-#> # ℹ 24 more rows
+#> # ℹ 25 more rows
 #> # ℹ 3 more variables: actual_reports <dbl>, actual_reports_on_time <dbl>,
 #> #   expected_reports <dbl>
 ```
