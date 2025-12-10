@@ -99,7 +99,7 @@ facility to district to country.
 # Retrieves all the data elements in DHIS2
 data_elements <- get_data_elements()
 data_elements
-#> # A tibble: 16,182 × 2
+#> # A tibble: 16,185 × 2
 #>    name                                                                    id   
 #>    <chr>                                                                   <chr>
 #>  1 ""                                                                      ioUh…
@@ -112,7 +112,7 @@ data_elements
 #>  8 "10.3 Availability of updated fee structure, strategically and promine… UXQg…
 #>  9 "10.3 Institutional"                                                    FGHs…
 #> 10 "10.4 Facility improvement/ Quality management funds are effciently us… y9ui…
-#> # ℹ 16,172 more rows
+#> # ℹ 16,175 more rows
 ```
 
 Related data elements are grouped into a logical collection referred to
