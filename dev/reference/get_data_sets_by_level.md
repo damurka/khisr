@@ -80,20 +80,20 @@ dataset_id = c('WWh5hbCmvND')
 data <- get_data_sets_by_level(dataset_ids = dataset_id,
                                start_date = '2023-02-01')
 data
-#> # A tibble: 35 × 10
+#> # A tibble: 36 × 10
 #>    kenya dataset    period     month  year reporting_rate reporting_rate_on_time
 #>    <chr> <chr>      <date>     <ord> <dbl>          <dbl>                  <dbl>
-#>  1 Kenya MoH 745 C… 2024-10-01 Octo…  2024           69.1                   66.2
-#>  2 Kenya MoH 745 C… 2024-11-01 Nove…  2024           67.3                   61.8
-#>  3 Kenya MoH 745 C… 2023-06-01 June   2023           67.3                   63.0
-#>  4 Kenya MoH 745 C… 2023-05-01 May    2023           65.2                   61.4
-#>  5 Kenya MoH 745 C… 2024-05-01 May    2024           66.6                   62.0
-#>  6 Kenya MoH 745 C… 2025-08-01 Augu…  2025           64.8                   60.0
-#>  7 Kenya MoH 745 C… 2025-09-01 Sept…  2025           67.2                   63.7
-#>  8 Kenya MoH 745 C… 2024-03-01 March  2024           66.2                   62.6
-#>  9 Kenya MoH 745 C… 2024-04-01 April  2024           65.8                   61.3
-#> 10 Kenya MoH 745 C… 2023-07-01 July   2023           68.2                   61  
-#> # ℹ 25 more rows
+#>  1 Kenya MoH 745 C… 2026-01-01 Janu…  2026            0                      0  
+#>  2 Kenya MoH 745 C… 2024-10-01 Octo…  2024           69.1                   66.2
+#>  3 Kenya MoH 745 C… 2024-11-01 Nove…  2024           67.3                   61.8
+#>  4 Kenya MoH 745 C… 2023-06-01 June   2023           67.3                   63.0
+#>  5 Kenya MoH 745 C… 2023-05-01 May    2023           65.2                   61.5
+#>  6 Kenya MoH 745 C… 2024-05-01 May    2024           66.6                   62  
+#>  7 Kenya MoH 745 C… 2025-08-01 Augu…  2025           64.8                   60.0
+#>  8 Kenya MoH 745 C… 2025-09-01 Sept…  2025           67.2                   63.7
+#>  9 Kenya MoH 745 C… 2024-03-01 March  2024           66.2                   62.6
+#> 10 Kenya MoH 745 C… 2024-04-01 April  2024           65.8                   61.3
+#> # ℹ 26 more rows
 #> # ℹ 3 more variables: actual_reports <dbl>, actual_reports_on_time <dbl>,
 #> #   expected_reports <dbl>
 ```
