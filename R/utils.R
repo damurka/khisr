@@ -1,3 +1,4 @@
+utils::globalVariables("id")
 
 is_testing <- function() {
     identical(Sys.getenv("TESTTHAT"), "true")
