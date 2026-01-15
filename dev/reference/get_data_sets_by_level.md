@@ -84,15 +84,15 @@ data
 #>    kenya dataset    period     month  year reporting_rate reporting_rate_on_time
 #>    <chr> <chr>      <date>     <ord> <dbl>          <dbl>                  <dbl>
 #>  1 Kenya MoH 745 C… 2026-01-01 Janu…  2026            0                      0  
-#>  2 Kenya MoH 745 C… 2024-10-01 Octo…  2024           69.2                   66.3
-#>  3 Kenya MoH 745 C… 2024-11-01 Nove…  2024           67.4                   61.9
+#>  2 Kenya MoH 745 C… 2024-10-01 Octo…  2024           69.3                   66.3
+#>  3 Kenya MoH 745 C… 2024-11-01 Nove…  2024           67.5                   61.9
 #>  4 Kenya MoH 745 C… 2023-06-01 June   2023           67.5                   63.1
 #>  5 Kenya MoH 745 C… 2023-05-01 May    2023           65.4                   61.6
-#>  6 Kenya MoH 745 C… 2024-05-01 May    2024           66.7                   62.1
-#>  7 Kenya MoH 745 C… 2025-08-01 Augu…  2025           64.9                   60.1
-#>  8 Kenya MoH 745 C… 2025-09-01 Sept…  2025           67.3                   63.8
-#>  9 Kenya MoH 745 C… 2024-03-01 March  2024           66.3                   62.7
-#> 10 Kenya MoH 745 C… 2024-04-01 April  2024           65.9                   61.4
+#>  6 Kenya MoH 745 C… 2024-05-01 May    2024           66.8                   62.1
+#>  7 Kenya MoH 745 C… 2025-08-01 Augu…  2025           65.0                   60.2
+#>  8 Kenya MoH 745 C… 2025-09-01 Sept…  2025           67.4                   63.8
+#>  9 Kenya MoH 745 C… 2024-03-01 March  2024           66.4                   62.8
+#> 10 Kenya MoH 745 C… 2024-04-01 April  2024           66.0                   61.5
 #> # ℹ 26 more rows
 #> # ℹ 3 more variables: actual_reports <dbl>, actual_reports_on_time <dbl>,
 #> #   expected_reports <dbl>

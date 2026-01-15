@@ -258,9 +258,9 @@ get_analytics(
 #> # A tibble: 3 × 4
 #>   dx          pe    ou          value
 #>   <chr>       <chr> <chr>       <dbl>
-#> 1 OoakJhWiyZp 2025  qKzosKQPl6G  3586
-#> 2 Lt0FqtnHraW 2025  qKzosKQPl6G 27173
-#> 3 siOyOiOJpI8 2025  qKzosKQPl6G 17537
+#> 1 OoakJhWiyZp 2025  qKzosKQPl6G  3591
+#> 2 Lt0FqtnHraW 2025  qKzosKQPl6G 27212
+#> 3 siOyOiOJpI8 2025  qKzosKQPl6G 17570
 
 # Using the startDate and endDate with organisation unit keyword 'USER_ORGUNIT'
 get_analytics(
@@ -307,7 +307,7 @@ get_analytics(
 #> # A tibble: 3 × 2
 #>   dx          value
 #>   <chr>       <dbl>
-#> 1 OoakJhWiyZp  3586
-#> 2 siOyOiOJpI8 17537
-#> 3 Lt0FqtnHraW 27173
+#> 1 OoakJhWiyZp  3591
+#> 2 siOyOiOJpI8 17570
+#> 3 Lt0FqtnHraW 27212
 ```
