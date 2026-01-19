@@ -78,5 +78,5 @@ data
 #>   dx          pe     value
 #>   <chr>       <chr>  <dbl>
 #> 1 XEX93uLsAm2 202512  1587
-#> 2 cXe64Yk0QMY 202512 38301
+#> 2 cXe64Yk0QMY 202512 38430
 ```
