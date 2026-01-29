@@ -85,7 +85,7 @@ data
 #>    <chr> <chr>      <date>     <ord> <dbl>          <dbl>                  <dbl>
 #>  1 Kenya MoH 745 C… 2026-01-01 Janu…  2026            0                      0  
 #>  2 Kenya MoH 745 C… 2024-10-01 Octo…  2024           69.3                   66.4
-#>  3 Kenya MoH 745 C… 2024-11-01 Nove…  2024           67.5                   62.0
+#>  3 Kenya MoH 745 C… 2024-11-01 Nove…  2024           67.5                   61.9
 #>  4 Kenya MoH 745 C… 2023-06-01 June   2023           67.5                   63.1
 #>  5 Kenya MoH 745 C… 2023-05-01 May    2023           65.4                   61.6
 #>  6 Kenya MoH 745 C… 2024-05-01 May    2024           66.8                   62.2
