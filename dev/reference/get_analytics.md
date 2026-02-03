@@ -74,5 +74,9 @@ element_id <- c('cXe64Yk0QMY', 'XEX93uLsAm2')
 # Download data from February 2023 to current date
 data <- get_analytics(dx %.d% element_id, pe %.d% 'LAST_MONTH')
 data
-#> NULL
+#> # A tibble: 2 × 3
+#>   dx          pe     value
+#>   <chr>       <chr>  <dbl>
+#> 1 cXe64Yk0QMY 202601   302
+#> 2 XEX93uLsAm2 202601     9
 ```
