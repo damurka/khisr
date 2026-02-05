@@ -94,7 +94,7 @@ element_id = c('cXe64Yk0QMY', 'XEX93uLsAm2')
 data <- get_analytics_by_level(element_ids = element_id,
                                start_date = '2023-02-01')
 data
-#> # A tibble: 357 × 7
+#> # A tibble: 358 × 7
 #>    value kenya element      category  period     month      year
 #>    <dbl> <chr> <chr>        <chr>     <date>     <ord>     <dbl>
 #>  1    18 Kenya CBE-Abnormal 56-74 yrs 2024-04-01 April      2024
@@ -107,5 +107,5 @@ data
 #>  8    24 Kenya CBE-Abnormal 56-74 yrs 2024-03-01 March      2024
 #>  9 15136 Kenya CBE-Normal   35-39 yrs 2025-09-01 September  2025
 #> 10   100 Kenya CBE-Abnormal 35-39 yrs 2023-08-01 August     2023
-#> # ℹ 347 more rows
+#> # ℹ 348 more rows
 ```
