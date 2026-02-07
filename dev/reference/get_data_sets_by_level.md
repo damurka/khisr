@@ -83,16 +83,16 @@ data
 #> # A tibble: 37 × 10
 #>    kenya dataset    period     month  year reporting_rate reporting_rate_on_time
 #>    <chr> <chr>      <date>     <ord> <dbl>          <dbl>                  <dbl>
-#>  1 Kenya MoH 745 C… 2026-02-01 Febr…  2026           0                      0   
-#>  2 Kenya MoH 745 C… 2026-01-01 Janu…  2026           7.28                   7.28
-#>  3 Kenya MoH 745 C… 2024-10-01 Octo…  2024          69.2                   66.3 
-#>  4 Kenya MoH 745 C… 2024-11-01 Nove…  2024          67.4                   61.9 
-#>  5 Kenya MoH 745 C… 2023-06-01 June   2023          67.5                   63.1 
-#>  6 Kenya MoH 745 C… 2023-05-01 May    2023          65.4                   61.6 
-#>  7 Kenya MoH 745 C… 2024-05-01 May    2024          66.8                   62.1 
-#>  8 Kenya MoH 745 C… 2025-08-01 Augu…  2025          65.2                   60.1 
-#>  9 Kenya MoH 745 C… 2025-09-01 Sept…  2025          67.7                   63.8 
-#> 10 Kenya MoH 745 C… 2024-03-01 March  2024          66.4                   62.7 
+#>  1 Kenya MoH 745 C… 2026-02-01 Febr…  2026            0                      0  
+#>  2 Kenya MoH 745 C… 2026-01-01 Janu…  2026           12.5                   12.5
+#>  3 Kenya MoH 745 C… 2024-10-01 Octo…  2024           69.2                   66.3
+#>  4 Kenya MoH 745 C… 2024-11-01 Nove…  2024           67.4                   61.9
+#>  5 Kenya MoH 745 C… 2023-06-01 June   2023           67.5                   63.1
+#>  6 Kenya MoH 745 C… 2023-05-01 May    2023           65.4                   61.6
+#>  7 Kenya MoH 745 C… 2024-05-01 May    2024           66.8                   62.1
+#>  8 Kenya MoH 745 C… 2025-08-01 Augu…  2025           65.2                   60.1
+#>  9 Kenya MoH 745 C… 2025-09-01 Sept…  2025           67.7                   63.8
+#> 10 Kenya MoH 745 C… 2024-03-01 March  2024           66.4                   62.7
 #> # ℹ 27 more rows
 #> # ℹ 3 more variables: actual_reports <dbl>, actual_reports_on_time <dbl>,
 #> #   expected_reports <dbl>
