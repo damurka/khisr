@@ -84,7 +84,7 @@ data
 #>    kenya dataset    period     month  year reporting_rate reporting_rate_on_time
 #>    <chr> <chr>      <date>     <ord> <dbl>          <dbl>                  <dbl>
 #>  1 Kenya MoH 745 C… 2026-02-01 Febr…  2026            0                      0  
-#>  2 Kenya MoH 745 C… 2026-01-01 Janu…  2026           15.8                   15.8
+#>  2 Kenya MoH 745 C… 2026-01-01 Janu…  2026           19.7                   19.7
 #>  3 Kenya MoH 745 C… 2024-10-01 Octo…  2024           69.2                   66.3
 #>  4 Kenya MoH 745 C… 2024-11-01 Nove…  2024           67.4                   61.9
 #>  5 Kenya MoH 745 C… 2023-06-01 June   2023           67.4                   63.1
