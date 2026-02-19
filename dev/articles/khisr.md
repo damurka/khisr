@@ -258,7 +258,7 @@ get_analytics(
 #> # A tibble: 3 × 4
 #>   dx          pe    ou          value
 #>   <chr>       <chr> <chr>       <dbl>
-#> 1 OoakJhWiyZp 2025  qKzosKQPl6G  3635
+#> 1 OoakJhWiyZp 2025  qKzosKQPl6G  3628
 #> 2 Lt0FqtnHraW 2025  qKzosKQPl6G 27571
 #> 3 siOyOiOJpI8 2025  qKzosKQPl6G 17938
 
@@ -307,7 +307,7 @@ get_analytics(
 #> # A tibble: 3 × 2
 #>   dx          value
 #>   <chr>       <dbl>
-#> 1 OoakJhWiyZp  3635
+#> 1 OoakJhWiyZp  3628
 #> 2 siOyOiOJpI8 17938
 #> 3 Lt0FqtnHraW 27571
 ```
