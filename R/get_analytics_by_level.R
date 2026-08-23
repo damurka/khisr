@@ -10,7 +10,11 @@
 #' @param end_date Optional ending date for data retrieval (default is the current date).
 #' @param level The desired organisation level of data (default: level 1)
 #' @param org_ids Optional list of organization units IDs to be filtered.
-#' @param ... Other options that can be passed onto DHIS2 API.
+#' @param ... Other analytics query options passed onto the DHIS2 `analytics`
+#'   endpoint (e.g. additional dimension/filter arguments). Not forwarded to
+#'   the organisation unit or data element metadata lookups this function also
+#'   performs.
+#' @param auth Optional. The authentication object.
 #' @param call The caller environment.
 #'
 #' @details
@@ -49,6 +53,7 @@ get_analytics_by_level <- function(element_ids,
                                    level = 1,
                                    org_ids = NULL,
                                    ...,
+                                   auth = NULL,
                                    call = caller_env()) {
 
     dx = co = ou = pe = value = period = NULL # due to NSE notes in R CMD check
@@ -57,7 +62,7 @@ get_analytics_by_level <- function(element_ids,
     check_date(start_date, error_call = call)
     check_date(end_date, can_be_null = TRUE, error_call = call)
     check_integerish(level, call = call)
-    org_levels <- check_level_supported(level, ..., call = call)
+    org_levels <- check_level_supported(level, auth = auth, call = call)
 
     if (is.null(end_date)) {
         end_date = today()
@@ -79,6 +84,7 @@ get_analytics_by_level <- function(element_ids,
         startDate = start_date,
         endDate = end_date,
         ...,
+        auth = auth,
         call = call
     )
 
@@ -86,8 +92,8 @@ get_analytics_by_level <- function(element_ids,
         return(NULL)
     }
 
-    organisations <- get_organisations_by_level(org_ids = data$ou, level = level, ..., call = call)
-    elements <- get_data_elements_with_category_options(element_ids, ..., call = call)
+    organisations <- get_organisations_by_level(org_ids = data$ou, level = level, auth = auth, call = call)
+    elements <- get_data_elements_with_category_options(element_ids, auth = auth, call = call)
 
     data %>%
         left_join(organisations, by=c('ou' = 'id')) %>%

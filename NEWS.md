@@ -1,5 +1,52 @@
 # khisr (development version)
 
+## New features
+
+* **Added Tracker API support**: `get_tracked_entities()`, `get_events()`,
+  and `get_enrollments()` retrieve tracked entity instances, program-stage
+  events, and program enrollments from DHIS2's Tracker API
+  (`/api/tracker/...`), with automatic pagination. Added
+  `tracked_entity_filter()` for filtering tracked entities by attribute
+  value (`trackedEntities` is the only tracker endpoint DHIS2 documents
+  filter support for — `get_events()` deliberately has no `filter` argument
+  since there is no documented way to filter events by data element value).
+
+## Bug fixes
+
+* **Fixed a crash when passing extra arguments to `get_analytics_by_level()`
+  or `get_data_sets_by_level()`**: `...` was being blindly forwarded into
+  internal metadata lookups that don't accept it, causing an "unused
+  argument" error any time a caller supplied additional query options (the
+  exact usage the docs invited). `...` is now only forwarded to the
+  underlying `analytics` query; `auth` is now an explicit, documented
+  argument on both functions.
+* **Fixed `relocate(id)` and `id %.in% ...` NSE usages** that relied on
+  `dplyr::id()` (removed in dplyr 1.2.0) to satisfy `R CMD check`'s global
+  variable check — the reason khisr was archived from CRAN.
+* **Fixed a bug where a failed metadata request produced a garbled,
+  recursive error** instead of the actual failure reason, making
+  instance-specific failures (auth errors, timeouts, etc.) very hard to
+  diagnose.
+
+## Robustness for large / restrictive DHIS2 instances
+
+* **Large metadata and organisation-unit lists are now fetched with real
+  pagination** instead of relying solely on `ignoreLimit=true`, which some
+  instances cap or ignore via `keyMaxRestApiCollectionSize` — previously
+  this could silently truncate results.
+* **ID filters (`element_ids`, `dataset_ids`, `org_ids`) are now chunked
+  consistently** across `get_organisations_by_level()`,
+  `get_data_elements_with_category_options()`, and `get_data_sets_by_level()`
+  to avoid hitting URL/header length limits on instances behind stricter
+  proxies or WAFs.
+* **Retries now cover 502/504 Gateway Timeout**, in addition to the
+  previous 429/503, since large unpaginated responses commonly time out at
+  a reverse proxy in front of the DHIS2 instance.
+* **`khis_cred()`'s `api_version` argument is now functional**: requests
+  can be pinned to a specific DHIS2 API version (e.g. `api_version = "40"`)
+  to guard against behavioural differences between DHIS2 core versions.
+  Added `khis_api_version()` to read back the pinned version.
+
 # khisr 1.0.6
 
 ## New Features

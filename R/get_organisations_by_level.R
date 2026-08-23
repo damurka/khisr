@@ -26,7 +26,7 @@ get_organisations_by_level <- function(level = 1,
                                        auth = NULL,
                                        call = caller_env()) {
 
-    name = parent = NULL
+    name = parent = id = NULL
 
     check_integerish(level, call = call)
     org_levels <- check_level_supported(level, auth = auth, call = call)
@@ -35,7 +35,7 @@ get_organisations_by_level <- function(level = 1,
 
         check_string_vector(org_ids, call = call)
 
-        filters <- split(unique(org_ids), ceiling(seq_along(unique(org_ids))/500))
+        filters <- chunk_ids(org_ids)
         orgs <- map(filters,
                     ~ get_organisation_units(id %.in% .x,
                                              level %.eq% level,

@@ -3,6 +3,28 @@ is_testing <- function() {
     identical(Sys.getenv("TESTTHAT"), "true")
 }
 
+#' Split a Vector of IDs into Chunks for Batched API Calls
+#'
+#' DHIS2 servers (and the proxies/WAFs many instances sit behind) commonly cap
+#' request URL/header length. Filtering on a large `id:in:[...]` list in a
+#' single GET request can silently fail on such instances even though it works
+#' fine on more permissive ones. This helper splits a vector of ids into
+#' batches so callers can fetch them a chunk at a time.
+#'
+#' @param ids A character vector of ids.
+#' @param chunk_size Maximum number of ids per batch (default 500).
+#'
+#' @return A list of character vectors, each of length at most `chunk_size`.
+#'
+#' @noRd
+chunk_ids <- function(ids, chunk_size = getOption('khis_chunk_size', 500)) {
+    ids <- unique(ids)
+    if (is_empty(ids)) {
+        return(list())
+    }
+    split(ids, ceiling(seq_along(ids) / chunk_size))
+}
+
 secret_decrypt_json <- function(path, key) {
     raw <- readBin(path, "raw", file.size(path))
     enc <- rawToChar(raw)

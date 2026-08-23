@@ -48,15 +48,15 @@ get_metadata <- function(endpoint,
     check_string_vector(fields, call = call)
 
     response <- tryCatch({
-        api_get(endpoint = endpoint,
-                ...,
-                fields = str_c(fields, collapse = ','),
-                retry = retry,
-                verbosity = verbosity,
-                timeout = timeout,
-                call = call)
+        api_get_paged(endpoint = endpoint,
+                      ...,
+                      fields = str_c(fields, collapse = ','),
+                      retry = retry,
+                      verbosity = verbosity,
+                      timeout = timeout,
+                      call = call)
     }, error = function(e) {
-        khis_warn(c('x' = 'Error retrieving metadata:', message = e), call = call)
+        khis_warn(c('x' = 'Error retrieving metadata:', 'i' = conditionMessage(e)), call = call)
         return(NULL)
     })
 

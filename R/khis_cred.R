@@ -13,7 +13,11 @@
 #'   provided.
 #' @param server The server URL of the DHIS2 instance. Only required if configuration
 #'   file not provided.
-#' @param api_version The API version of the DHIS2 instance (optional).
+#' @param api_version Optional. Pins requests to a specific DHIS2 API version
+#'   (e.g. `"40"`), so calls hit `<server>/api/40/<endpoint>` instead of
+#'   `<server>/api/<endpoint>`. Useful for guarding against behavioural
+#'   differences between DHIS2 core versions across instances. Defaults to the
+#'   server's own default API version when not set.
 #' @param config_path An optional path to a configuration file containing username
 #'   and password. This is considered more secure than providing credentials directly
 #'   in code.
@@ -86,6 +90,7 @@ khis_cred <- function(username = NULL,
         password <- credentials[["password"]]
         username <- credentials[["username"]]
         server <- credentials[["server"]]
+        api_version <- credentials[["api_version"]] %||% api_version
     }
 
     # validate username and password
@@ -112,10 +117,23 @@ khis_cred <- function(username = NULL,
     # Validate the server URL
     check_is_valid_url(server)
 
+    # Validate the API version, if provided
+    if (!is.null(api_version) &&
+        !(is_scalar_character(api_version) || is_scalar_integerish(api_version))) {
+        khis_abort(
+            message = c(
+                'x' = 'Invalid {.arg api_version}',
+                '!' = 'Provide a scalar value, e.g. {.code api_version = "40"}, or leave it {.code NULL} to use the server default.'
+            ),
+            class = 'khis_invalid_api_version'
+        )
+    }
+
     # Set the credentials in the .auth object
     .auth$set_username(username)
     .auth$set_password(password)
     .auth$set_base_url(server)
+    .auth$set_api_version(api_version)
 
     # Attempt to fetch user profile
     user_profile <- tryCatch(
@@ -334,6 +352,7 @@ khis_cred_clear <- function(auth = NULL) {
         auth$set_username(NULL)
         auth$clear_password()
         auth$set_base_url(NULL)
+        auth$set_api_version(NULL)
         auth$set_profile(NULL)
         return(invisible(NULL))
     }
@@ -342,6 +361,7 @@ khis_cred_clear <- function(auth = NULL) {
     .auth$set_username(NULL)
     .auth$clear_password()
     .auth$set_base_url(NULL)
+    .auth$set_api_version(NULL)
     .auth$set_profile(NULL)
 
     invisible(NULL)
@@ -430,6 +450,44 @@ khis_base_url <- function(auth = NULL) {
 
     # Fallback to the global .auth object
     return(.auth$get_base_url())
+}
+
+#' Retrieve the Configured DHIS2 API Version
+#'
+#' This function returns the API version requests are pinned to, as set via
+#' the `api_version` argument of [khis_cred()]. Returns `NULL` when no
+#' version is pinned, meaning requests use the server's own default version.
+#'
+#' @param auth (Optional) An auth object containing the DHIS2 credentials.
+#' If not provided, the function retrieves the API version from the global
+#' auth object.
+#'
+#' @return The pinned DHIS2 API version as a string, or `NULL` if not set.
+#'
+#' @family credential functions
+#'
+#' @export
+#'
+#' @examples
+#'
+#' \dontrun{
+#'     khis_cred(username = 'DHIS2 username',
+#'               password = 'DHIS2 password',
+#'               server = 'https://<dhis2-instance>',
+#'               api_version = '40')
+#'
+#'     # Retrieve the pinned API version (expect '40')
+#'     khis_api_version()
+#' }
+
+khis_api_version <- function(auth = NULL) {
+    # If an AuthCred object is provided, return the API version from it
+    if (!is.null(auth) && inherits(auth, 'AuthCred')) {
+        return(auth$get_api_version())
+    }
+
+    # Fallback to the global .auth object
+    return(.auth$get_api_version())
 }
 
 #' Retrieve the Configured Display Name

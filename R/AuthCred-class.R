@@ -12,11 +12,13 @@
 init_AuthCred <- function(username = NULL,
                           password = NULL,
                           base_url = NULL,
+                          api_version = NULL,
                           profile = NULL) {
     AuthCred$new(
         username = username,
         password = password,
         base_url = base_url,
+        api_version = api_version,
         profile = profile
     )
 }
@@ -43,6 +45,8 @@ AuthCred <- R6::R6Class('AuthCred', list(
     password = NULL,
     #' @field base_url The URL to the server.
     base_url = NULL,
+    #' @field api_version The DHIS2 API version to pin requests to (optional).
+    api_version = NULL,
     #' @field profile Profile.
     profile = NULL,
 
@@ -51,18 +55,21 @@ AuthCred <- R6::R6Class('AuthCred', list(
     initialize = function(username = NULL,
                           password = NULL,
                           base_url = NULL,
+                          api_version = NULL,
                           profile = NULL) {
 
         stopifnot(
             is.null(username) || is_scalar_character(username),
             is.null(password) || is_scalar_character(password),
             is.null(base_url) || is_scalar_character(base_url),
+            is.null(api_version) || is_scalar_character(api_version) || is_scalar_integerish(api_version),
             is.null(profile) || inherits(profile, "Profile")
         )
 
         self$username <- username
         self$password <- password
         self$base_url <- base_url
+        self$api_version <- if (is.null(api_version)) NULL else as.character(api_version)
         self$profile <- profile
 
         self
@@ -102,6 +109,17 @@ AuthCred <- R6::R6Class('AuthCred', list(
     set_base_url = function(value) {
         stopifnot(is.null(value) || is_scalar_character(value))
         self$base_url <- value
+        invisible(self)
+    },
+    #' @description Get the pinned API version
+    get_api_version = function() {
+        self$api_version
+    },
+    #' @description Set the DHIS2 API version to pin requests to
+    #' @param value The DHIS2 API version (e.g. `"40"`), or `NULL` to unpin
+    set_api_version = function(value) {
+        stopifnot(is.null(value) || is_scalar_character(value) || is_scalar_integerish(value))
+        self$api_version <- if (is.null(value)) NULL else as.character(value)
         invisible(self)
     },
     #' @description Get profiles

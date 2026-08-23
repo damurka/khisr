@@ -10,7 +10,11 @@
 #' @param end_date Optional ending date for data retrieval (default is the current date).
 #' @param level Required desired organisation level of data (default: level 1) .
 #' @param org_ids Optional list of organization units IDs to be filtered.
-#' @param ... Other options that can be passed onto DHIS2 API.
+#' @param ... Other analytics query options passed onto the DHIS2 `analytics`
+#'   endpoint (e.g. additional dimension/filter arguments). Not forwarded to
+#'   the organisation unit or data set metadata lookups this function also
+#'   performs.
+#' @param auth Optional. The authentication object.
 #' @param call The caller environment.
 #'
 #' @return A tibble with detailed information, including:
@@ -40,15 +44,16 @@ get_data_sets_by_level <- function(dataset_ids,
                                   level = 1,
                                   org_ids = NULL,
                                   ...,
+                                  auth = NULL,
                                   call = caller_env()) {
 
-    dx = period = pe = ou = element = value = NULL # due to NSE notes in R CMD check
+    dx = period = pe = ou = element = value = id = NULL # due to NSE notes in R CMD check
 
     check_string_vector(dataset_ids, call = call)
     check_date(start_date, error_call = call)
     check_date(end_date, can_be_null = TRUE, error_call = call)
     check_integerish(level, call = call)
-    org_levels <- check_level_supported(level, ..., call = call)
+    org_levels <- check_level_supported(level, auth = auth, call = call)
 
     values <- c('REPORTING_RATE',
                 'REPORTING_RATE_ON_TIME',
@@ -75,11 +80,18 @@ get_data_sets_by_level <- function(dataset_ids,
         pe %.d% periods,
         ou %.d% c(str_glue('LEVEL-{level}'), ou),
         ...,
+        auth = auth,
         call = call
     )
 
-    organisations <- get_organisations_by_level(data$ou, level = level, ..., call = call)
-    datasets <- get_data_sets(id %.in% dataset_ids, fields = 'id,name~rename(dataset)', ..., call = call)
+    organisations <- get_organisations_by_level(data$ou, level = level, auth = auth, call = call)
+    datasets <- map(chunk_ids(dataset_ids), ~ get_data_sets(
+        id %.in% .x,
+        fields = 'id,name~rename(dataset)',
+        auth = auth,
+        call = call
+    ))
+    datasets <- bind_rows(datasets)
 
     data %>%
         separate_wider_delim(dx, ".",  names = c('dx','element')) %>%

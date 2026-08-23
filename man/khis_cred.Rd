@@ -23,7 +23,11 @@ provided.}
 \item{server}{The server URL of the DHIS2 instance. Only required if configuration
 file not provided.}
 
-\item{api_version}{The API version of the DHIS2 instance (optional).}
+\item{api_version}{Optional. Pins requests to a specific DHIS2 API version
+(e.g. \code{"40"}), so calls hit \verb{<server>/api/40/<endpoint>} instead of
+\verb{<server>/api/<endpoint>}. Useful for guarding against behavioural
+differences between DHIS2 core versions across instances. Defaults to the
+server's own default API version when not set.}
 
 \item{config_path}{An optional path to a configuration file containing username
 and password. This is considered more secure than providing credentials directly
@@ -59,6 +63,7 @@ credentials from being stored directly in your code.
 }
 \seealso{
 Other credential functions: 
+\code{\link{khis_api_version}()},
 \code{\link{khis_base_url}()},
 \code{\link{khis_cred_clear}()},
 \code{\link{khis_display_name}()},

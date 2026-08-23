@@ -25,6 +25,7 @@ khis_cred_clear()
 }
 \seealso{
 Other credential functions: 
+\code{\link{khis_api_version}()},
 \code{\link{khis_base_url}()},
 \code{\link{khis_cred}()},
 \code{\link{khis_display_name}()},

@@ -8,6 +8,7 @@
 ^pkgdown$
 ^CODE_OF_CONDUCT\.md$
 ^\.github$
+^\.claude$
 ^vignettes/articles$
 ^revdep$
 ^cran-comments\.md$
