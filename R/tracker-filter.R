@@ -15,18 +15,23 @@ tracker_filter_operators <- c('eq', 'ge', 'gt', 'le', 'lt', 'ne', 'like', 'sw', 
 #' @details
 #' As documented for the DHIS2 Tracker API, the supported operators are:
 #'
-#' * `eq`    - Equality
-#' * `ge`    - Greater than or equal
-#' * `gt`    - Greater than
-#' * `le`    - Less than or equal
-#' * `lt`    - Less than
-#' * `ne`    - Inequality
-#' * `like`  - Match anywhere
-#' * `sw`    - Starts with
-#' * `ew`    - Ends with
-#' * `in`    - Match one or more values
-#' * `null`  - Attribute has no value
-#' * `!null` - Attribute has a value
+#' * `eq`    - `%.teq%`  - Equality
+#' * `ge`    - `%.tge%`  - Greater than or equal
+#' * `gt`    - `%.tgt%`  - Greater than
+#' * `le`    - `%.tle%`  - Less than or equal
+#' * `lt`    - `%.tlt%`  - Less than
+#' * `ne`    - `%.tne%`  - Inequality
+#' * `like`  - `%.tlike%` - Match anywhere
+#' * `sw`    - `%.tsw%`  - Starts with
+#' * `ew`    - `%.tew%`  - Ends with
+#' * `in`    - `%.tin%`  - Match one or more values
+#' * `null`  - (no infix form; call `tracked_entity_filter(attr, 'null', NULL)`) - Attribute has no value
+#' * `!null` - (no infix form; call `tracked_entity_filter(attr, '!null', NULL)`) - Attribute has a value
+#'
+#' The infix operators are shorthand for the equivalent `tracked_entity_filter()`
+#' call, e.g. `w75KJ2mc4zz %.teq% 'John'` is equivalent to
+#' `tracked_entity_filter('w75KJ2mc4zz', 'eq', 'John')`. `null`/`!null` have no
+#' infix form since an infix operator needs a right-hand value.
 #'
 #' This filter is only documented for the `trackedEntities` endpoint. DHIS2's
 #' published Tracker API docs do not describe an equivalent way to filter
@@ -57,6 +62,9 @@ tracker_filter_operators <- c('eq', 'ge', 'gt', 'le', 'lt', 'ne', 'like', 'sw', 
 #'
 #' # Tracked entities where attribute w75KJ2mc4zz is one of several values
 #' tracked_entity_filter('w75KJ2mc4zz', 'in', c('John', 'Jane'))
+#'
+#' # Equivalent, using the infix operator
+#' w75KJ2mc4zz %.teq% 'John'
 #'
 #' @family tracker functions
 #'
@@ -109,4 +117,94 @@ tracked_entity_filter <- function(attribute,
     value_str <- if (operator == 'in') str_c(values, collapse = ';') else values
 
     splice(list2(filter = str_c(attribute, ':', operator, ':', value_str)))
+}
+
+#' @rdname tracked_entity_filter
+#' @name %.teq%
+#' @export
+
+'%.teq%' <- function(attribute, values) {
+    attribute <- as.character(ensym(attribute))
+    tracked_entity_filter(attribute, 'eq', values)
+}
+
+#' @rdname tracked_entity_filter
+#' @name %.tne%
+#' @export
+
+'%.tne%' <- function(attribute, values) {
+    attribute <- as.character(ensym(attribute))
+    tracked_entity_filter(attribute, 'ne', values)
+}
+
+#' @rdname tracked_entity_filter
+#' @name %.tgt%
+#' @export
+
+'%.tgt%' <- function(attribute, values) {
+    attribute <- as.character(ensym(attribute))
+    tracked_entity_filter(attribute, 'gt', values)
+}
+
+#' @rdname tracked_entity_filter
+#' @name %.tge%
+#' @export
+
+'%.tge%' <- function(attribute, values) {
+    attribute <- as.character(ensym(attribute))
+    tracked_entity_filter(attribute, 'ge', values)
+}
+
+#' @rdname tracked_entity_filter
+#' @name %.tlt%
+#' @export
+
+'%.tlt%' <- function(attribute, values) {
+    attribute <- as.character(ensym(attribute))
+    tracked_entity_filter(attribute, 'lt', values)
+}
+
+#' @rdname tracked_entity_filter
+#' @name %.tle%
+#' @export
+
+'%.tle%' <- function(attribute, values) {
+    attribute <- as.character(ensym(attribute))
+    tracked_entity_filter(attribute, 'le', values)
+}
+
+#' @rdname tracked_entity_filter
+#' @name %.tlike%
+#' @export
+
+'%.tlike%' <- function(attribute, values) {
+    attribute <- as.character(ensym(attribute))
+    tracked_entity_filter(attribute, 'like', values)
+}
+
+#' @rdname tracked_entity_filter
+#' @name %.tsw%
+#' @export
+
+'%.tsw%' <- function(attribute, values) {
+    attribute <- as.character(ensym(attribute))
+    tracked_entity_filter(attribute, 'sw', values)
+}
+
+#' @rdname tracked_entity_filter
+#' @name %.tew%
+#' @export
+
+'%.tew%' <- function(attribute, values) {
+    attribute <- as.character(ensym(attribute))
+    tracked_entity_filter(attribute, 'ew', values)
+}
+
+#' @rdname tracked_entity_filter
+#' @name %.tin%
+#' @export
+
+'%.tin%' <- function(attribute, values) {
+    attribute <- as.character(ensym(attribute))
+    tracked_entity_filter(attribute, 'in', values)
 }

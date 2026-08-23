@@ -22,13 +22,15 @@
 #'   strings bounding the tracked entity's enrollment date.
 #' @param occurred_after,occurred_before Optional. ISO-8601 date or datetime
 #'   strings bounding the tracked entity's enrollment incident/occurred date.
-#' @param ... One or more [tracked_entity_filter()] attribute filters, and/or
-#'   other query parameters supported by your DHIS2 instance's Tracker API.
-#'   Build filters with [tracked_entity_filter()], not [metadata_filter()] or
-#'   its infix operators (`%.eq%`, `%.in%`, etc.) — those target the DHIS2
-#'   metadata API's larger operator set and, for `in`/`!in`, a different
-#'   value-joining convention; using them here raises an error rather than
-#'   silently sending malformed filter syntax.
+#' @param ... One or more [tracked_entity_filter()] attribute filters (or
+#'   its infix operators, e.g. `w75KJ2mc4zz %.teq% 'John'`), and/or other
+#'   query parameters supported by your DHIS2 instance's Tracker API.
+#'   Build filters with [tracked_entity_filter()] and its own infix
+#'   operators, not [metadata_filter()] or its infix operators (`%.eq%`,
+#'   `%.in%`, etc.) — those target the DHIS2 metadata API's larger operator
+#'   set and, for `in`/`!in`, a different value-joining convention; using
+#'   them here raises an error rather than silently sending malformed
+#'   filter syntax.
 #' @param fields The DHIS2 field-selector for the columns to return.
 #' @param page_size Number of records to request per page (default 500).
 #' @param retry Number of times to retry the API call in case of failure

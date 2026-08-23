@@ -95,25 +95,28 @@ entities
 ## Filtering by attribute value
 
 `get_tracked_entities()` also accepts one or more [tracked_entity_filter()]
-attribute filters. This is a separate, smaller operator set from
-[metadata_filter()] — it applies only to the `trackedEntities` endpoint, and the
-`in` operator joins values with semicolons rather than a comma-separated bracket
-list:
+attribute filters, or their infix-operator shorthand. This is a separate,
+smaller operator set from [metadata_filter()] — it applies only to the
+`trackedEntities` endpoint, and the `in` operator joins values with semicolons
+rather than a comma-separated bracket list. **`metadata_filter()`'s operators
+(`%.eq%`, `%.in%`, etc.) are not interchangeable with these** — passing one to
+`get_tracked_entities()` raises an error rather than sending malformed filter
+syntax to the server.
 
-| Operator | Meaning                     |
-|:----------|:------------------------------|
-| `eq`      | Equality                     |
-| `ne`      | Inequality                   |
-| `ge`      | Greater than or equal        |
-| `gt`      | Greater than                 |
-| `le`      | Less than or equal           |
-| `lt`      | Less than                    |
-| `like`    | Match anywhere               |
-| `sw`      | Starts with                  |
-| `ew`      | Ends with                    |
-| `in`      | Match one or more values     |
-| `null`    | Attribute has no value       |
-| `!null`   | Attribute has a value        |
+| Operator | Infix operator | Meaning                     |
+|:----------|:-----------------|:------------------------------|
+| `eq`      | `%.teq%`          | Equality                     |
+| `ne`      | `%.tne%`          | Inequality                   |
+| `ge`      | `%.tge%`          | Greater than or equal        |
+| `gt`      | `%.tgt%`          | Greater than                 |
+| `le`      | `%.tle%`          | Less than or equal           |
+| `lt`      | `%.tlt%`          | Less than                    |
+| `like`    | `%.tlike%`        | Match anywhere               |
+| `sw`      | `%.tsw%`          | Starts with                  |
+| `ew`      | `%.tew%`          | Ends with                    |
+| `in`      | `%.tin%`          | Match one or more values     |
+| `null`    | *(none — pass `NULL` to `tracked_entity_filter()`)* | Attribute has no value |
+| `!null`   | *(none — pass `NULL` to `tracked_entity_filter()`)* | Attribute has a value |
 
 ```{r}
 # Tracked entities whose attribute w75KJ2mc4zz starts with "Ann"
@@ -122,6 +125,14 @@ get_tracked_entities(
     org_units = 'DiszpKrYNg8',
     org_unit_mode = 'DESCENDANTS',
     tracked_entity_filter('w75KJ2mc4zz', 'sw', 'Ann')
+)
+
+# Equivalent, using the infix operator
+get_tracked_entities(
+    program = 'IpHINAT79UW',
+    org_units = 'DiszpKrYNg8',
+    org_unit_mode = 'DESCENDANTS',
+    w75KJ2mc4zz %.tsw% 'Ann'
 )
 ```
 

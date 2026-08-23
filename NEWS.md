@@ -6,7 +6,8 @@
   and `get_enrollments()` retrieve tracked entity instances, program-stage
   events, and program enrollments from DHIS2's Tracker API
   (`/api/tracker/...`), with automatic pagination. Added
-  `tracked_entity_filter()` for filtering tracked entities by attribute
+  `tracked_entity_filter()`, plus matching infix operators (`%.teq%`,
+  `%.tin%`, `%.tsw%`, etc.), for filtering tracked entities by attribute
   value (`trackedEntities` is the only tracker endpoint DHIS2 documents
   filter support for — `get_events()` deliberately has no `filter` argument
   since there is no documented way to filter events by data element value).

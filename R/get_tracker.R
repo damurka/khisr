@@ -96,7 +96,7 @@ check_tracker_filters <- function(dots, call = caller_env()) {
             khis_abort(
                 message = c(
                     'x' = '{.val {f}} is not valid tracked entity filter syntax',
-                    '!' = 'Build tracked entity filters with {.fun tracked_entity_filter}.',
+                    '!' = 'Build tracked entity filters with {.fun tracked_entity_filter} or its infix operators (e.g. {.code %.teq%}, {.code %.tin%}).',
                     'i' = '{.fun metadata_filter} and its infix operators (e.g. {.code %.eq%}, {.code %.in%}) target a different DHIS2 API and are not interchangeable with tracked entity filters.'
                 ),
                 call = call

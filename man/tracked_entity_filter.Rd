@@ -2,9 +2,39 @@
 % Please edit documentation in R/tracker-filter.R
 \name{tracked_entity_filter}
 \alias{tracked_entity_filter}
+\alias{\%.teq\%}
+\alias{\%.tne\%}
+\alias{\%.tgt\%}
+\alias{\%.tge\%}
+\alias{\%.tlt\%}
+\alias{\%.tle\%}
+\alias{\%.tlike\%}
+\alias{\%.tsw\%}
+\alias{\%.tew\%}
+\alias{\%.tin\%}
 \title{Tracked Entity Attribute Filter}
 \usage{
 tracked_entity_filter(attribute, operator, values, call = caller_env())
+
+attribute \%.teq\% values
+
+attribute \%.tne\% values
+
+attribute \%.tgt\% values
+
+attribute \%.tge\% values
+
+attribute \%.tlt\% values
+
+attribute \%.tle\% values
+
+attribute \%.tlike\% values
+
+attribute \%.tsw\% values
+
+attribute \%.tew\% values
+
+attribute \%.tin\% values
 }
 \arguments{
 \item{attribute}{The tracked entity attribute id to filter on.}
@@ -30,19 +60,24 @@ value-joining convention (semicolons, no brackets).
 \details{
 As documented for the DHIS2 Tracker API, the supported operators are:
 \itemize{
-\item \code{eq}    - Equality
-\item \code{ge}    - Greater than or equal
-\item \code{gt}    - Greater than
-\item \code{le}    - Less than or equal
-\item \code{lt}    - Less than
-\item \code{ne}    - Inequality
-\item \code{like}  - Match anywhere
-\item \code{sw}    - Starts with
-\item \code{ew}    - Ends with
-\item \verb{in}    - Match one or more values
-\item \code{null}  - Attribute has no value
-\item \code{!null} - Attribute has a value
+\item \code{eq}    - \verb{\%.teq\%}  - Equality
+\item \code{ge}    - \verb{\%.tge\%}  - Greater than or equal
+\item \code{gt}    - \verb{\%.tgt\%}  - Greater than
+\item \code{le}    - \verb{\%.tle\%}  - Less than or equal
+\item \code{lt}    - \verb{\%.tlt\%}  - Less than
+\item \code{ne}    - \verb{\%.tne\%}  - Inequality
+\item \code{like}  - \verb{\%.tlike\%} - Match anywhere
+\item \code{sw}    - \verb{\%.tsw\%}  - Starts with
+\item \code{ew}    - \verb{\%.tew\%}  - Ends with
+\item \verb{in}    - \verb{\%.tin\%}  - Match one or more values
+\item \code{null}  - (no infix form; call \code{tracked_entity_filter(attr, 'null', NULL)}) - Attribute has no value
+\item \code{!null} - (no infix form; call \code{tracked_entity_filter(attr, '!null', NULL)}) - Attribute has a value
 }
+
+The infix operators are shorthand for the equivalent \code{tracked_entity_filter()}
+call, e.g. \code{w75KJ2mc4zz \%.teq\% 'John'} is equivalent to
+\code{tracked_entity_filter('w75KJ2mc4zz', 'eq', 'John')}. \code{null}/\code{!null} have no
+infix form since an infix operator needs a right-hand value.
 
 This filter is only documented for the \code{trackedEntities} endpoint. DHIS2's
 published Tracker API docs do not describe an equivalent way to filter
@@ -64,6 +99,9 @@ tracked_entity_filter('w75KJ2mc4zz', 'eq', 'John')
 
 # Tracked entities where attribute w75KJ2mc4zz is one of several values
 tracked_entity_filter('w75KJ2mc4zz', 'in', c('John', 'Jane'))
+
+# Equivalent, using the infix operator
+w75KJ2mc4zz \%.teq\% 'John'
 
 }
 \seealso{
