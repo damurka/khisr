@@ -108,6 +108,7 @@ w75KJ2mc4zz \%.teq\% 'John'
 Other tracker functions: 
 \code{\link{get_enrollments}()},
 \code{\link{get_events}()},
+\code{\link{get_relationships}()},
 \code{\link{get_tracked_entities}()}
 }
 \concept{tracker functions}

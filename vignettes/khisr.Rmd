@@ -171,6 +171,8 @@ key functions and parameters involved:
 
 - `get_analytics()`: Retrieves aggregated data based on specified dimensions and
   filters.
+- `get_data_value_sets()`: Retrieves the individually entered raw data values
+  behind the aggregates — useful for data-quality auditing.
 - `analytics_dimension()`: Constructs dimensions for queries, ensuring accurate
   data retrieval.
 - `%.d%` (infix operator): Convenient shorthand for creating dimension filters.

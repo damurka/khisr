@@ -32,15 +32,18 @@ library(khisr)
 Alongside the [aggregate data](https://khisr.damurka.com/articles/data-dimensions.html)
 covered by `get_analytics()`, DHIS2's **Tracker** stores case-based, person-level
 data — the kind of record you'd use for individual patients or clients rather than
-facility-level totals. `khisr` provides three functions for reading it:
+facility-level totals. `khisr` provides functions for reading it:
 
-| khisr function            | DHIS2 API Endpoint         | Retrieves                          |
+| khisr function            | DHIS2 API Endpoint          | Retrieves                          |
 |:---------------------------|:----------------------------|:------------------------------------|
 | `get_tracked_entities()`   | `tracker/trackedEntities`   | The people/subjects being tracked  |
 | `get_enrollments()`        | `tracker/enrollments`       | Their enrollment in a program      |
 | `get_events()`             | `tracker/events`            | What happened at each program stage visit |
+| `get_relationships()`      | `tracker/relationships`     | Links between two tracker objects (e.g. an index case and a contact) |
+| `get_event_analytics()`    | `analytics/events/query`    | Aggregated/dimensional analytics over events |
+| `get_enrollment_analytics()` | `analytics/enrollments/query` | Aggregated/dimensional analytics over enrollments |
 
-These map onto four core Tracker concepts:
+These map onto five core Tracker concepts:
 
 | Concept            | Description                                                                                     |
 |:--------------------|:--------------------------------------------------------------------------------------------------|
@@ -48,9 +51,11 @@ These map onto four core Tracker concepts:
 | **Program**         | The case-based program a tracked entity is enrolled in (e.g. a child health programme).          |
 | **Enrollment**      | A tracked entity's participation in a specific program, with its own enrollment and incident dates. |
 | **Event**           | A single visit/data-collection point within an enrollment, tied to one `programStage` (e.g. a birth visit) and carrying `dataValues`. |
+| **Relationship**    | A typed link between two tracker objects, e.g. a TB index case and a household contact.          |
 
-All three functions are `r lifecycle::badge("experimental")` and share the same
-scoping, pagination, and error-handling behaviour.
+All of these functions are `r lifecycle::badge("experimental")` and, except for
+the two analytics-query functions, share the same scoping, pagination, and
+error-handling behaviour.
 
 Every query below needs real program, program stage, and org unit ids, which
 are metadata rather than data — look them up with the matching
@@ -182,6 +187,41 @@ get_enrollments(
     org_unit_mode = 'DESCENDANTS'
 )
 ```
+
+# Retrieving relationships
+
+`get_relationships()` returns links between two tracker objects — for
+example a TB index case and a household contact. It's scoped differently
+from the other three functions: provide exactly one of `tracked_entity`,
+`enrollment`, or `event` to retrieve that object's relationships.
+
+```{r}
+get_relationships(tracked_entity = 'IOR1AXXl24H')
+```
+
+# Aggregated Tracker analytics
+
+For counts and dimensional breakdowns over Tracker data (e.g. events by org
+unit and period) rather than the underlying individual records,
+`get_event_analytics()` and `get_enrollment_analytics()` query DHIS2's
+Tracker analytics engine — the same `%.d%`/`%.f%` dimension operators used
+by [get_analytics()] apply here too, and `program` is required as the first
+argument (used as a URL path segment, not a dimension):
+
+```{r}
+get_event_analytics(
+    program = 'IpHINAT79UW',
+    ou %.d% 'USER_ORGUNIT',
+    pe %.d% 'LAST_YEAR'
+)
+```
+
+Unlike every other paginated function in this package, this endpoint's
+pager lives in a nested `metaData.pager` field, and — confirmed live against
+a public DHIS2 demo instance — silently returns only the first 50 rows with
+no error or warning if you query the underlying DHIS2 endpoint directly
+without paging through it. `get_event_analytics()`/`get_enrollment_analytics()`
+handle this automatically.
 
 # Date filters and pagination
 

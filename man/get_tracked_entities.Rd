@@ -114,6 +114,7 @@ get_tracked_entities(program = 'IpHINAT79UW',
 Other tracker functions: 
 \code{\link{get_enrollments}()},
 \code{\link{get_events}()},
+\code{\link{get_relationships}()},
 \code{\link{tracked_entity_filter}()}
 }
 \concept{tracker functions}

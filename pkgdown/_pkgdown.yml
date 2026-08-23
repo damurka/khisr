@@ -50,17 +50,23 @@ reference:
       - metadata-filter
   - title: "DHIS2 Analytics"
     desc: >
-      To access analytical, aggregated data in DHIS2
+      To access analytical, aggregated data in DHIS2, and the raw data values
+      behind it
     contents:
       - get_analytics
       - analytics-dimension
+      - get_data_value_sets
+      - get_event_analytics
+      - get_enrollment_analytics
   - title: "DHIS2 Tracker"
     desc: >
-      Retrieve tracked entities, events, and enrollments from DHIS2's Tracker API
+      Retrieve tracked entities, events, enrollments, and relationships from
+      DHIS2's Tracker API
     contents:
       - get_tracked_entities
       - get_events
       - get_enrollments
+      - get_relationships
       - tracked_entity_filter
   - title: "Experimental Functions"
     desc: >

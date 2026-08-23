@@ -2,6 +2,38 @@
 
 ## New features
 
+* **Added `get_data_value_sets()`**: retrieves individually entered raw
+  aggregate data values (`/api/dataValueSets`), as opposed to
+  [get_analytics()]'s pre-aggregated view — useful for data-quality
+  auditing. Confirmed live against a public DHIS2 demo instance, including a
+  real gotcha: without `children = TRUE`, `org_units` matches only that
+  exact organisation unit, not its descendants, with no error either way.
+  `api_get()` now supports vector-valued query parameters generally
+  (exploded into repeated params, e.g. `orgUnit=A&orgUnit=B`), which this
+  endpoint's genuinely-repeated-param convention needed and no existing
+  caller used before.
+* **Added `get_relationships()`**: retrieves Tracker relationships
+  (`/api/tracker/relationships`) — completes the four-endpoint Tracker data
+  family alongside `get_tracked_entities()`/`get_events()`/
+  `get_enrollments()`. Confirmed live that the endpoint requires exactly one
+  of `tracked_entity`, `enrollment`, or `event`, and shares the same
+  pagination shape as the other three; the demo instance tested had no
+  relationship data configured on any program, so the shape of a populated
+  relationship's `from`/`to` fields is not independently verified.
+* **Added `get_event_analytics()`/`get_enrollment_analytics()`**:
+  aggregated, dimensional analytics over Tracker data
+  (`/api/analytics/events/query/{program}` and `/enrollments/query/{program}`),
+  as opposed to `get_events()`/`get_enrollments()`'s raw individual records.
+  Confirmed live against a public DHIS2 demo instance: the response shares
+  `get_analytics()`'s `headers`/`rows` shape (extracted into a shared
+  `parse_analytics_rows()` helper both now use), but paginates via a nested
+  `metaData.pager` — a third, distinct pagination shape from both
+  `/api/analytics` (unpaginated) and the raw Tracker endpoints (top-level
+  `pager`). Confirmed a real, easy-to-miss gotcha: querying the underlying
+  DHIS2 endpoint directly without paging through it silently returns only
+  the first 50 rows, no error or warning — verified these two functions
+  retrieve the full result set (2,782 rows across 28 pages in testing, not
+  just the first page) by comparing against a forced small page size.
 * **Added Personal Access Token (PAT) support**: `khis_cred()` now accepts a
   `token` argument (or a `token` key in a `config_path` JSON file) as an
   alternative to `username`/`password`, sending

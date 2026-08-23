@@ -109,6 +109,7 @@ get_enrollments(program = 'IpHINAT79UW',
 
 Other tracker functions: 
 \code{\link{get_events}()},
+\code{\link{get_relationships}()},
 \code{\link{get_tracked_entities}()},
 \code{\link{tracked_entity_filter}()}
 }

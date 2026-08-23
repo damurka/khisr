@@ -40,7 +40,6 @@ get_analytics <- function(...,
                           retry = 2,
                           verbosity = 0,
                           timeout = 60) {
-    x = NULL # due to NSE notes in R CMD check
 
     return_type <- str_to_upper(arg_match(return_type))
 
@@ -53,17 +52,5 @@ get_analytics <- function(...,
                     verbosity = verbosity,
                     timeout = timeout)
 
-    if (NROW(response$rows) == 0) {
-        return(NULL)
-    }
-
-    headers <- map_vec(response$headers, ~ pluck(.x, 'name'))
-    value_types <- map_vec(response$headers, ~ pluck(.x, 'valueType'))
-    names(value_types) <- headers
-    data <- tibble(x = response$rows) %>%
-        unnest_wider(x, names_sep = '') %>%
-        rename_all(~ headers) %>%
-        mutate(across(everything(), ~ if(value_types[[cur_column()]] == 'NUMBER') { as.numeric(.x)  } else { .x }))
-
-    return(data)
+    parse_analytics_rows(response$headers, response$rows)
 }

@@ -110,6 +110,7 @@ get_events(program_stage = 'A03MvHHogjR',
 
 Other tracker functions: 
 \code{\link{get_enrollments}()},
+\code{\link{get_relationships}()},
 \code{\link{get_tracked_entities}()},
 \code{\link{tracked_entity_filter}()}
 }
