@@ -23,7 +23,11 @@ are being retrieved.}
 }
 \value{
 A tibble containing the organisation units and their parent units up
-to the specified level.
+to the specified level. For each ancestor level, both a name column
+(e.g. \code{county}) and an id column (e.g. \code{county_id}) are included, so
+results can be joined back to other org-unit-keyed data by id rather
+than name — two different org units at the same level can share a name,
+a real, known DHIS2 data-quality issue.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}

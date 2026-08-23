@@ -79,6 +79,18 @@
   `get_tracked_entity_attributes()`, and `get_relationship_types()`, matching
   the existing `get_metadata()`-based helper pattern.
 
+* **`get_organisations_by_level()` now derives ancestor columns from the
+  `ancestors[id,name,level]` field** instead of hand-built nested
+  `parent[name[...]]` field queries, and includes an id column for every
+  ancestor level (e.g. `country_id`, `province_id`), not just a name column.
+  Verified live against a public DHIS2 demo instance that `ancestors[]`
+  returns the full ancestor chain in one request regardless of depth (a
+  level-4 org unit's `ancestors` array had all 3 ancestor levels, not just
+  its immediate parent), and that the id columns let results be joined back
+  to other org-unit-keyed data reliably even when two org units at the same
+  level share a name — a real, known DHIS2 data-quality issue that name-only
+  joins were silently vulnerable to.
+
 ## Bug fixes
 
 * **Fixed a crash when passing extra arguments to `get_analytics_by_level()`

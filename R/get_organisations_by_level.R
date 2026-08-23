@@ -12,7 +12,11 @@
 #' @param call The call environment.
 #'
 #' @return A tibble containing the organisation units and their parent units up
-#'   to the specified level.
+#'   to the specified level. For each ancestor level, both a name column
+#'   (e.g. `county`) and an id column (e.g. `county_id`) are included, so
+#'   results can be joined back to other org-unit-keyed data by id rather
+#'   than name — two different org units at the same level can share a name,
+#'   a real, known DHIS2 data-quality issue.
 #'
 #' @export
 #'
@@ -26,10 +30,12 @@ get_organisations_by_level <- function(level = 1,
                                        auth = NULL,
                                        call = caller_env()) {
 
-    name = parent = id = NULL
+    name = ancestor_id = ancestor_name = ancestor_level = level_name = id = NULL
 
     check_integerish(level, call = call)
     org_levels <- check_level_supported(level, auth = auth, call = call)
+
+    fields <- 'id,name,level,ancestors[id,name,level]'
 
     if (!is.null(org_ids)) {
 
@@ -39,14 +45,14 @@ get_organisations_by_level <- function(level = 1,
         orgs <- map(filters,
                     ~ get_organisation_units(id %.in% .x,
                                              level %.eq% level,
-                                             fields = generate_fields_string(level),
+                                             fields = fields,
                                              auth = auth,
                                              call = call))
         orgs <- bind_rows(orgs)
 
     } else {
         orgs <- get_organisation_units(level %.eq% level,
-                                       fields = generate_fields_string(level),
+                                       fields = fields,
                                        auth = auth,
                                        call = call)
     }
@@ -55,63 +61,51 @@ get_organisations_by_level <- function(level = 1,
         return (NULL)
     }
 
-    level_name <- org_levels %>%
+    level_lookup <- org_levels %>%
+        mutate(level_name = tolower(name)) %>%
+        select(level, level_name)
+
+    own_level_name <- level_lookup %>%
         filter(level == !!level) %>%
-        pull(name) %>%
-        tolower()
+        pull(level_name)
 
-    hoist_columns <- generate_hoist_columns(level, org_levels)
+    orgs <- orgs %>%
+        rename(!!own_level_name := name) %>%
+        select(-level)
 
-    if (!is.null(hoist_columns)) {
-        orgs <- orgs %>%
-            hoist(parent, !!!hoist_columns) %>%
-            select(-any_of('parent'))
+    # When every row's ancestors[] is an empty JSON array (e.g. level = 1,
+    # which has no ancestors by definition), the DHIS2 metadata pipeline
+    # collapses the column to a plain NA vector rather than a list-column —
+    # lengths() on that returns 1, not 0, so check is.list() first.
+    has_ancestors <- is.list(orgs[["ancestors"]]) && any(lengths(orgs[["ancestors"]]) > 0)
+
+    if (!has_ancestors) {
+        return(orgs %>%
+            select(-"ancestors") %>%
+            clean_names() %>%
+            relocate(id))
     }
+
+    ancestors_long <- orgs %>%
+        select(id, "ancestors") %>%
+        unnest_longer("ancestors", keep_empty = TRUE) %>%
+        hoist("ancestors", ancestor_id = 'id', ancestor_name = 'name', ancestor_level = 'level') %>%
+        filter(!is.na(ancestor_level)) %>%
+        left_join(level_lookup, by = c('ancestor_level' = 'level'))
+
+    ancestor_names <- ancestors_long %>%
+        select(id, level_name, ancestor_name) %>%
+        pivot_wider(names_from = level_name, values_from = ancestor_name)
+
+    ancestor_ids <- ancestors_long %>%
+        select(id, level_name, ancestor_id) %>%
+        mutate(level_name = str_c(level_name, '_id')) %>%
+        pivot_wider(names_from = level_name, values_from = ancestor_id)
 
     orgs %>%
-        rename_with(~ level_name, starts_with('name')) %>%
+        select(-"ancestors") %>%
+        left_join(ancestor_names, by = 'id') %>%
+        left_join(ancestor_ids, by = 'id') %>%
         clean_names() %>%
         relocate(id)
-}
-
-generate_fields_string <- function(level) {
-    if (level <= 1) {
-        return('id,name')
-    }
-
-    parent_str <- str_dup(',parent[name', level - 1)
-    parent_str <- str_c(parent_str, str_dup(']', level - 1))
-
-    return(paste0('id,name', parent_str))
-}
-
-generate_hoist_columns <- function(level, org_levels) {
-
-    name = NULL
-
-    # Determine the hierarchy of the levels
-    levels_hierarchy <- org_levels %>%
-        arrange(level) %>%
-        filter(level < !!level) %>%
-        pull(name) %>%
-        tolower()
-
-    # Generate the hoist column list dynamically
-    if (length(levels_hierarchy) == 0) {
-        return(NULL)
-    }
-
-    columns <- list2()
-    current_level <- NULL
-    for (lev in rev(levels_hierarchy)) {
-        if (is.null(current_level)) {
-            columns[[lev]] <- 'name'
-            current_level <- 'parent'
-        } else {
-            columns[[lev]] <- list2(!!!current_level, 'name')
-            current_level <- list2(!!!current_level, 'parent')
-        }
-    }
-
-    return(columns)
 }
