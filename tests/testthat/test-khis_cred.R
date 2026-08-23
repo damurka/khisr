@@ -113,19 +113,26 @@ test_that("khis_cred works correctly with a Personal Access Token", {
 
 test_that("req_auth_khis works correctly", {
 
+    # Use an explicit, empty AuthCred rather than the ambient global one:
+    # other test files in this suite authenticate globally (via helper.R) and
+    # never clear it, so relying on no-global-credentials-set here would be
+    # order-dependent and, worse, calling khis_cred_clear() afterwards would
+    # wipe out the credentials those later files depend on.
+    empty_auth <- khisr:::init_AuthCred()
     expect_error(
-        httr2::request('https://example.com') %>% req_auth_khis(),
+        httr2::request('https://example.com') %>% req_auth_khis(auth = empty_auth),
         class = 'khis_missing_credentials'
     )
 
     skip_if_server_error()
 
-    khis_cred(
-        config_path = system.file("extdata", "valid_cred_conf.json", package = "khisr"))
+    configured_auth <- khisr:::init_AuthCred(
+        username = 'dodoma',
+        password = 'Ytrewq!23456',
+        base_url = 'https://test.hiskenya.org'
+    )
 
-    expect_no_error(httr2::request('https://example.com') %>% req_auth_khis())
-
-    khis_cred_clear()
+    expect_no_error(httr2::request('https://example.com') %>% req_auth_khis(auth = configured_auth))
 })
 
 test_that("req_auth_khis uses a Personal Access Token when configured", {
