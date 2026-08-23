@@ -48,6 +48,10 @@ The `khisr` R package simplifies interaction with the District Health Informatio
 # Set the credentials using username and password
 khis_cred(username = 'your-dhis2-username', password = 'your-dhis2-password', server = 'https://<your dhis2 instance>')
 
+# Set the credentials using a Personal Access Token (DHIS2's recommended
+# method for scripts and integrations) instead of username/password
+khis_cred(token = 'your-dhis2-token', server = 'https://<your dhis2 instance>')
+
 # Set credentials using configuration path
 khis_cred(config_path = 'path/to/secret.json')
 ```
@@ -85,9 +89,15 @@ The following table summarizes these `khisr` metadata helper functions:
 | `get_organisation_unit_groupsets()`  | organisationUnitGroupSets  |
 | `get_organisation_unit_groups()`     | organisationUnitGroups     |
 | `get_organisation_units()`           | organisationUnits          |
+| `get_organisation_unit_levels()`     | organisationUnitLevels     |
 | `get_dimensions()`                   | dimensions                 |
 | `get_user_groups()`                  | userGroups                 |
 | `get_period_types()`                 | periodTypes                |
+| `get_programs()`                     | programs                   |
+| `get_program_stages()`               | programStages               |
+| `get_tracked_entity_types()`         | trackedEntityTypes          |
+| `get_tracked_entity_attributes()`    | trackedEntityAttributes     |
+| `get_relationship_types()`           | relationshipTypes          |
 
 ### Metadata object filter
 

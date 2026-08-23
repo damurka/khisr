@@ -190,7 +190,7 @@ with_khis_quiet <- function(code) {
 #'               password = 'password',
 #'               server = 'https://<dhis2-instance>')
 #'
-#'     # suppress messages for a in a specific scope
+#'     # suppress messages in a specific scope
 #'     local_khis_quiet()
 #'
 #'     # no message

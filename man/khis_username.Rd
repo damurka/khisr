@@ -11,7 +11,9 @@ khis_username(auth = NULL)
 will retrieve the username from the global auth credentials.}
 }
 \value{
-The username as a string, or \code{NULL} if no credentials are available.
+The username as a string, or \code{NULL} if no credentials are
+available, or if the credentials were set with \code{token} rather than
+\code{username}/\code{password} (see \code{\link[=khis_cred]{khis_cred()}}).
 }
 \description{
 This function returns the username from the configured credentials. If an

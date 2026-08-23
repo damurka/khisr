@@ -23,8 +23,10 @@ working with DHIS2 data directly within the R environment.
 - ***Data Retrieval:*** Easily download and manage data from DHIS2.
 - ***Flexible Queries:*** Customize data queries to retrieve specific
   data elements, periods, and organizational units.
-- ***Secure Access:*** Manage credentials securely within your R
-  environment.
+- ***Tracker Data:*** Retrieve tracked entities, enrollments, and
+  events from DHIS2's Tracker API.
+- ***Secure Access:*** Manage credentials securely, using a
+  username/password or a Personal Access Token.
 
 ### Use Cases
 
@@ -73,13 +75,20 @@ credentials](https://khisr.damurka.com/articles/set-your-credentials.html)
 ``` r
 # Option 1: Set credentials directly in R (less secure)
 
-khis_cred(username = 'DHIS2 username', 
-          password = 'DHIS2 password', 
+khis_cred(username = 'DHIS2 username',
+          password = 'DHIS2 password',
           server = 'https://<dhis2 server instance>')
 
 # Option 2: Set credentials from a secure configuration file (recommended)
 
 khis_cred(config_path = 'path/to/secret.json')
+
+# Option 3: Set credentials using a Personal Access Token, DHIS2's
+# recommended method for scripts and integrations, in place of
+# username/password
+
+khis_cred(token = 'DHIS2 personal access token',
+          server = 'https://<dhis2 server instance>')
 ```
 
 Once you’ve established your credentials, you’re ready to leverage
@@ -174,6 +183,9 @@ data
 
 [Get Started](https://khisr.damurka.com/articles/khisr.html) is a more
 extensive general introduction to khisr.
+
+[Tracker Data](https://khisr.damurka.com/articles/tracker.html) covers
+retrieving tracked entities, enrollments, and events.
 
 Browse the [articles
 index](https://khisr.damurka.com/articles/index.html) to find articles

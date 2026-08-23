@@ -128,8 +128,8 @@ AuthCred <- R6::R6Class('AuthCred', list(
     get_base_url = function() {
         self$base_url
     },
-    #' @description Set the DHIS2 username
-    #' @param value The DHIS2 username
+    #' @description Set the base URL
+    #' @param value The base URL
     set_base_url = function(value) {
         stopifnot(is.null(value) || is_scalar_character(value))
         self$base_url <- value
@@ -153,7 +153,7 @@ AuthCred <- R6::R6Class('AuthCred', list(
     #' @description Set profiles
     #' @param profile User profiles
     set_profile = function(profile) {
-        is.null(profile) || inherits(profile, "Profile")
+        stopifnot(is.null(profile) || inherits(profile, "Profile"))
         self$profile <- profile
         invisible(self)
     },

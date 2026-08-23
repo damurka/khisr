@@ -344,7 +344,7 @@ req_auth_khis <- function(req, auth = NULL, arg = caller_arg(req), call = caller
 #'     # Set the credentials using global .auth object
 #'     khis_cred(username = 'DHIS2 username',
 #'               password = 'DHIS2 password',
-#'               server = 'https://dhis2-instance/api')
+#'               server = 'https://<dhis2-instance>')
 #'
 #'     # Check if credentials are available. Should return TRUE
 #'     khis_has_cred()
@@ -444,7 +444,9 @@ khis_cred_clear <- function(auth = NULL) {
 #' @param auth (Optional) An auth object. If not provided, the function
 #'   will retrieve the username from the global auth credentials.
 #'
-#' @return The username as a string, or `NULL` if no credentials are available.
+#' @return The username as a string, or `NULL` if no credentials are
+#'   available, or if the credentials were set with `token` rather than
+#'   `username`/`password` (see [khis_cred()]).
 #'
 #' @export
 #'

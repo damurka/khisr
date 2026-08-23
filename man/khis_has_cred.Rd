@@ -23,7 +23,7 @@ auth object or in the global auth credentials object.
     # Set the credentials using global .auth object
     khis_cred(username = 'DHIS2 username',
               password = 'DHIS2 password',
-              server = 'https://dhis2-instance/api')
+              server = 'https://<dhis2-instance>')
 
     # Check if credentials are available. Should return TRUE
     khis_has_cred()

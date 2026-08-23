@@ -97,3 +97,9 @@ The good news is, you don't necessarily need to know the intricate details of ev
 ### Further Resources:
 
 For deeper dives into specific dimensions and objects, refer to the comprehensive [DHIS2 API documentation](https://docs.dhis2.org/en/develop/using-the-api/dhis-core-version-240/analytics.html)
+
+These dimensions describe **aggregate** data — facility/period totals accessed
+through `get_analytics()`. DHIS2 also has a separate, individual-level data
+model — tracked entities, enrollments, and events — with its own dimensions
+and its own retrieval functions; see
+[Tracker Data](https://khisr.damurka.com/articles/tracker.html).
