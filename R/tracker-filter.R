@@ -1,3 +1,9 @@
+#' Operators the DHIS2 Tracker API documents for `trackedEntities` filters.
+#' Deliberately a different, smaller set than [metadata_filter()]'s — see
+#' [tracked_entity_filter()] for why the two are not interchangeable.
+#' @noRd
+tracker_filter_operators <- c('eq', 'ge', 'gt', 'le', 'lt', 'ne', 'like', 'sw', 'ew', 'in', 'null', '!null')
+
 #' Tracked Entity Attribute Filter
 #'
 #' Formats a filter on a tracked entity attribute for the DHIS2 Tracker API's
@@ -24,8 +30,16 @@
 #'
 #' This filter is only documented for the `trackedEntities` endpoint. DHIS2's
 #' published Tracker API docs do not describe an equivalent way to filter
-#' `events` by data element value, so [get_events()] has no `filter`
-#' argument; check your instance's own API documentation if you need that.
+#' `events` or `enrollments`, so [get_events()] and [get_enrollments()]
+#' reject a `filter` argument outright rather than silently sending it as
+#' unsupported query syntax.
+#'
+#' [metadata_filter()] and its infix operators (`%.eq%`, `%.in%`, etc.) are
+#' for a different DHIS2 API and are not interchangeable with this function
+#' — passing one to [get_tracked_entities()] raises an error, since several
+#' metadata operators (e.g. `ieq`, `token`, the anchored `like` variants) and
+#' the `in`/`!in` value-joining convention (comma-bracketed vs semicolon)
+#' don't match what the Tracker API expects.
 #'
 #' @param attribute The tracked entity attribute id to filter on.
 #' @param operator The comparison operator to apply.
@@ -53,12 +67,10 @@ tracked_entity_filter <- function(attribute,
                                   values,
                                   call = caller_env()) {
 
-    operators <- c('eq', 'ge', 'gt', 'le', 'lt', 'ne', 'like', 'sw', 'ew', 'in', 'null', '!null')
-
     check_scalar_character(attribute, arg = caller_arg(attribute), call = call)
     check_scalar_character(operator, arg = caller_arg(operator), call = call)
 
-    if (!(operator %in% operators)) {
+    if (!(operator %in% tracker_filter_operators)) {
         khis_abort(
             message = c('x' = '{.arg {caller_arg(operator)}} is not a supported tracked entity filter operator'),
             call = call

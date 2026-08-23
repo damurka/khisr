@@ -10,6 +10,13 @@
   value (`trackedEntities` is the only tracker endpoint DHIS2 documents
   filter support for — `get_events()` deliberately has no `filter` argument
   since there is no documented way to filter events by data element value).
+  `metadata_filter()` and its infix operators (`%.eq%`, `%.in%`, etc.) are
+  for a different DHIS2 API and are not interchangeable with tracked entity
+  filters — several operators aren't supported by the Tracker API, and `in`
+  uses a different value-joining convention. `get_tracked_entities()` now
+  errors on such a filter instead of silently sending malformed syntax to
+  the server, and `get_events()`/`get_enrollments()` reject any `filter`
+  argument outright, since DHIS2 doesn't document filter support there.
 
 ## Bug fixes
 

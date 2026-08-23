@@ -33,7 +33,11 @@
 #' @details
 #' DHIS2 requires an enrollments query to be scoped by at least one of
 #' `program` or `org_units`; an unscoped query will be rejected by the
-#' server.
+#' server. DHIS2's Tracker API does not document filter support for this
+#' endpoint, so a `filter` argument raises an error rather than being
+#' silently sent as an unsupported query parameter; use
+#' [get_tracked_entities()] with [tracked_entity_filter()] to filter by
+#' attribute value instead.
 #'
 #' @return A tibble of enrollments, or `NULL` if none were found.
 #'
@@ -81,6 +85,7 @@ get_enrollments <- function(program = NULL,
                           enrolled_before, occurred_after, occurred_before)) {
         if (!is.null(date_arg)) check_scalar_character(date_arg, call = call)
     }
+    reject_tracker_filter(list2(...), fn = 'get_enrollments', call = call)
 
     fetch_tracker_records(
         'enrollments',

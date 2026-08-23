@@ -77,11 +77,11 @@ server.
 
 DHIS2's published Tracker API documentation does not describe a supported
 way to filter events by data element value (unlike \code{\link[=get_tracked_entities]{get_tracked_entities()}},
-which supports attribute filtering via \code{\link[=tracked_entity_filter]{tracked_entity_filter()}}). If your
-instance supports this, pass it through \code{...}; otherwise retrieve the
-broader event set and filter client-side. \code{dataValues} is returned as a
-list-column — use \code{\link[tidyr:unnest_wider]{tidyr::unnest_wider()}}/\code{\link[tidyr:unnest_longer]{tidyr::unnest_longer()}} to
-flatten it further.
+which supports attribute filtering via \code{\link[=tracked_entity_filter]{tracked_entity_filter()}}), so a
+\code{filter} argument raises an error here rather than being silently sent as
+an unsupported query parameter. Retrieve the broader event set and filter
+client-side instead. \code{dataValues} is returned as a list-column — use
+\code{\link[tidyr:unnest_wider]{tidyr::unnest_wider()}}/\code{\link[tidyr:unnest_longer]{tidyr::unnest_longer()}} to flatten it further.
 }
 \examples{
 \dontshow{if (khis_has_cred()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

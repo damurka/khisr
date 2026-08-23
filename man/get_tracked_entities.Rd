@@ -54,7 +54,12 @@ strings bounding the tracked entity's enrollment date.}
 strings bounding the tracked entity's enrollment incident/occurred date.}
 
 \item{...}{One or more \code{\link[=tracked_entity_filter]{tracked_entity_filter()}} attribute filters, and/or
-other query parameters supported by your DHIS2 instance's Tracker API.}
+other query parameters supported by your DHIS2 instance's Tracker API.
+Build filters with \code{\link[=tracked_entity_filter]{tracked_entity_filter()}}, not \code{\link[=metadata_filter]{metadata_filter()}} or
+its infix operators (\verb{\%.eq\%}, \verb{\%.in\%}, etc.) — those target the DHIS2
+metadata API's larger operator set and, for \verb{in}/\verb{!in}, a different
+value-joining convention; using them here raises an error rather than
+silently sending malformed filter syntax.}
 
 \item{fields}{The DHIS2 field-selector for the columns to return.}
 

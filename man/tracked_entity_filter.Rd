@@ -46,8 +46,16 @@ As documented for the DHIS2 Tracker API, the supported operators are:
 
 This filter is only documented for the \code{trackedEntities} endpoint. DHIS2's
 published Tracker API docs do not describe an equivalent way to filter
-\code{events} by data element value, so \code{\link[=get_events]{get_events()}} has no \code{filter}
-argument; check your instance's own API documentation if you need that.
+\code{events} or \code{enrollments}, so \code{\link[=get_events]{get_events()}} and \code{\link[=get_enrollments]{get_enrollments()}}
+reject a \code{filter} argument outright rather than silently sending it as
+unsupported query syntax.
+
+\code{\link[=metadata_filter]{metadata_filter()}} and its infix operators (\verb{\%.eq\%}, \verb{\%.in\%}, etc.) are
+for a different DHIS2 API and are not interchangeable with this function
+— passing one to \code{\link[=get_tracked_entities]{get_tracked_entities()}} raises an error, since several
+metadata operators (e.g. \code{ieq}, \code{token}, the anchored \code{like} variants) and
+the \verb{in}/\verb{!in} value-joining convention (comma-bracketed vs semicolon)
+don't match what the Tracker API expects.
 }
 \examples{
 

@@ -24,6 +24,11 @@
 #'   strings bounding the tracked entity's enrollment incident/occurred date.
 #' @param ... One or more [tracked_entity_filter()] attribute filters, and/or
 #'   other query parameters supported by your DHIS2 instance's Tracker API.
+#'   Build filters with [tracked_entity_filter()], not [metadata_filter()] or
+#'   its infix operators (`%.eq%`, `%.in%`, etc.) — those target the DHIS2
+#'   metadata API's larger operator set and, for `in`/`!in`, a different
+#'   value-joining convention; using them here raises an error rather than
+#'   silently sending malformed filter syntax.
 #' @param fields The DHIS2 field-selector for the columns to return.
 #' @param page_size Number of records to request per page (default 500).
 #' @param retry Number of times to retry the API call in case of failure
@@ -96,6 +101,7 @@ get_tracked_entities <- function(program = NULL,
                           enrolled_before, occurred_after, occurred_before)) {
         if (!is.null(date_arg)) check_scalar_character(date_arg, call = call)
     }
+    check_tracker_filters(list2(...), call = call)
 
     fetch_tracker_records(
         'trackedEntities',

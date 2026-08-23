@@ -75,7 +75,11 @@ API.
 \details{
 DHIS2 requires an enrollments query to be scoped by at least one of
 \code{program} or \code{org_units}; an unscoped query will be rejected by the
-server.
+server. DHIS2's Tracker API does not document filter support for this
+endpoint, so a \code{filter} argument raises an error rather than being
+silently sent as an unsupported query parameter; use
+\code{\link[=get_tracked_entities]{get_tracked_entities()}} with \code{\link[=tracked_entity_filter]{tracked_entity_filter()}} to filter by
+attribute value instead.
 }
 \examples{
 \dontshow{if (khis_has_cred()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

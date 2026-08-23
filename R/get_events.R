@@ -36,11 +36,11 @@
 #'
 #' DHIS2's published Tracker API documentation does not describe a supported
 #' way to filter events by data element value (unlike [get_tracked_entities()],
-#' which supports attribute filtering via [tracked_entity_filter()]). If your
-#' instance supports this, pass it through `...`; otherwise retrieve the
-#' broader event set and filter client-side. `dataValues` is returned as a
-#' list-column — use [tidyr::unnest_wider()]/[tidyr::unnest_longer()] to
-#' flatten it further.
+#' which supports attribute filtering via [tracked_entity_filter()]), so a
+#' `filter` argument raises an error here rather than being silently sent as
+#' an unsupported query parameter. Retrieve the broader event set and filter
+#' client-side instead. `dataValues` is returned as a list-column — use
+#' [tidyr::unnest_wider()]/[tidyr::unnest_longer()] to flatten it further.
 #'
 #' @return A tibble of events, or `NULL` if none were found.
 #'
@@ -87,6 +87,7 @@ get_events <- function(program = NULL,
     for (date_arg in list(updated_after, updated_before, occurred_after, occurred_before)) {
         if (!is.null(date_arg)) check_scalar_character(date_arg, call = call)
     }
+    reject_tracker_filter(list2(...), fn = 'get_events', call = call)
 
     fetch_tracker_records(
         'events',
