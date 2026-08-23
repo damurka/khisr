@@ -90,10 +90,10 @@ attribute value instead.
 
 The \code{enrolledAfter}/\code{enrolledBefore}/\code{occurredAfter}/\code{occurredBefore}
 query parameter names used here (unprefixed, unlike the equivalent
-\code{\link[=get_tracked_entities]{get_tracked_entities()}} arguments) are based on the best available
-documentation and usage examples rather than a directly confirmed
-parameter table for this specific endpoint — verify against your own
-instance if these filters don't behave as expected.
+\code{\link[=get_tracked_entities]{get_tracked_entities()}} arguments) were confirmed by testing live
+against a public DHIS2 demo instance — \code{enrolledAfter} measurably
+narrowed the result set, and \code{orgUnits}/\code{orgUnit} both work for this
+endpoint (unlike \code{events}, which only accepts the singular form).
 }
 \examples{
 \dontshow{if (khis_has_cred()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

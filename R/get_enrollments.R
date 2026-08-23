@@ -48,10 +48,10 @@
 #'
 #' The `enrolledAfter`/`enrolledBefore`/`occurredAfter`/`occurredBefore`
 #' query parameter names used here (unprefixed, unlike the equivalent
-#' [get_tracked_entities()] arguments) are based on the best available
-#' documentation and usage examples rather than a directly confirmed
-#' parameter table for this specific endpoint — verify against your own
-#' instance if these filters don't behave as expected.
+#' [get_tracked_entities()] arguments) were confirmed by testing live
+#' against a public DHIS2 demo instance — `enrolledAfter` measurably
+#' narrowed the result set, and `orgUnits`/`orgUnit` both work for this
+#' endpoint (unlike `events`, which only accepts the singular form).
 #'
 #' @return A tibble of enrollments, or `NULL` if none were found.
 #'

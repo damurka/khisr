@@ -26,6 +26,11 @@
 \alias{get_organisation_unit_levels}
 \alias{get_dimensions}
 \alias{get_period_types}
+\alias{get_programs}
+\alias{get_program_stages}
+\alias{get_tracked_entity_types}
+\alias{get_tracked_entity_attributes}
+\alias{get_relationship_types}
 \alias{get_user_profile}
 \title{DHIS2 Metadata Helper Functions}
 \usage{
@@ -77,6 +82,16 @@ get_dimensions(...)
 
 get_period_types(...)
 
+get_programs(...)
+
+get_program_stages(...)
+
+get_tracked_entity_types(...)
+
+get_tracked_entity_attributes(...)
+
+get_relationship_types(...)
+
 get_user_profile()
 }
 \arguments{
@@ -118,5 +133,13 @@ get_data_elements(id \%.in\% c('VR7vdS7P0Gb', 'gQro1y7Rsbq'))
 
 # Get datasets by name with the word 'MOH 705'
 get_data_sets(name \%.like\% 'MOH 705')
+
+# Get all tracker programs
+get_programs()
 \dontshow{\}) # examplesIf}
+}
+\seealso{
+\code{\link[=get_tracked_entities]{get_tracked_entities()}}, \code{\link[=get_events]{get_events()}}, \code{\link[=get_enrollments]{get_enrollments()}} for
+retrieving tracker data (as opposed to the metadata describing programs,
+program stages, and tracked entity types/attributes retrieved here).
 }

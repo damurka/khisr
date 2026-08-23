@@ -7,7 +7,7 @@
 get_events(
   program = NULL,
   program_stage = NULL,
-  org_units = NULL,
+  org_unit = NULL,
   org_unit_mode = NULL,
   updated_after = NULL,
   updated_before = NULL,
@@ -29,13 +29,17 @@ get_events(
 
 \item{program_stage}{Optional. A program stage id to scope the query to.}
 
-\item{org_units}{Optional. A vector of organisation unit ids to scope the
-query to.}
+\item{org_unit}{Optional. A single organisation unit id to scope the
+query to. Unlike \code{\link[=get_tracked_entities]{get_tracked_entities()}}/\code{\link[=get_enrollments]{get_enrollments()}}, the
+\code{events} endpoint accepts exactly one org unit (sent as the singular
+\code{orgUnit} query param, confirmed live against a DHIS2 demo instance —
+passing more than one is rejected by the server with a "UID must be..."
+error, not silently truncated).}
 
 \item{org_unit_mode}{Optional. One of \code{"SELECTED"}, \code{"CHILDREN"},
 \code{"DESCENDANTS"}, \code{"ACCESSIBLE"}, \code{"CAPTURE"}, \code{"ALL"}, controlling how
-\code{org_units} is interpreted. DHIS2 defaults to \code{"ACCESSIBLE"} when
-\code{org_units} is not provided, and \code{"SELECTED"} when it is.}
+\code{org_unit} is interpreted. DHIS2 defaults to \code{"ACCESSIBLE"} when
+\code{org_unit} is not provided, and \code{"SELECTED"} when it is.}
 
 \item{updated_after, updated_before}{Optional. ISO-8601 date or datetime
 strings bounding the event's last-updated timestamp.}
@@ -76,15 +80,13 @@ Tracker API.
 }
 \details{
 DHIS2 requires an events query to be scoped by at least one of \code{program},
-\code{program_stage}, or \code{org_units}; an unscoped query will be rejected by the
+\code{program_stage}, or \code{org_unit}; an unscoped query will be rejected by the
 server.
 
 The \code{occurredAfter}/\code{occurredBefore} query parameter names used here
 (unprefixed, unlike the equivalent \code{\link[=get_tracked_entities]{get_tracked_entities()}} arguments)
-are based on the best available documentation and usage examples rather
-than a directly confirmed parameter table for this specific endpoint —
-verify against your own instance if these filters don't behave as
-expected.
+and the single-value \code{orgUnit} parameter were confirmed by testing
+live against a public DHIS2 demo instance.
 
 DHIS2's published Tracker API documentation does not describe a supported
 way to filter events by data element value (unlike \code{\link[=get_tracked_entities]{get_tracked_entities()}},
@@ -99,7 +101,7 @@ client-side instead. \code{dataValues} is returned as a list-column — use
 
 # All events for a program stage at a given org unit
 get_events(program_stage = 'A03MvHHogjR',
-           org_units = 'DiszpKrYNg8',
+           org_unit = 'DiszpKrYNg8',
            org_unit_mode = 'DESCENDANTS')
 \dontshow{\}) # examplesIf}
 }

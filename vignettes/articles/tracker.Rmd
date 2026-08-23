@@ -52,18 +52,33 @@ These map onto four core Tracker concepts:
 All three functions are `r lifecycle::badge("experimental")` and share the same
 scoping, pagination, and error-handling behaviour.
 
+Every query below needs real program, program stage, and org unit ids, which
+are metadata rather than data — look them up with the matching
+[metadata helpers][metadata-helpers]:
+
+```{r}
+get_programs()
+get_program_stages()
+get_tracked_entity_types()
+get_tracked_entity_attributes()
+```
+
 # Scoping a query
 
 Every Tracker query must be scoped — DHIS2 rejects an unscoped request. Scope by
-`program`, and/or by `org_units` together with `org_unit_mode`, which controls how
-`org_units` is interpreted:
+`program`, and/or by an org unit together with `org_unit_mode`, which controls
+how the org unit is interpreted. `get_tracked_entities()` and
+`get_enrollments()` take `org_units` — one or more org unit ids — while
+`get_events()` takes a single `org_unit` — confirmed live against a DHIS2
+instance that the Tracker API's `events` endpoint only accepts one org unit,
+unlike the other two:
 
 | `org_unit_mode` | Meaning                                                          |
 |:------------------|:--------------------------------------------------------------------|
-| `SELECTED`         | Only the given org units (DHIS2's default when `org_units` is set)  |
-| `CHILDREN`         | The given org units and their immediate children                    |
-| `DESCENDANTS`      | The given org units and all units below them in the hierarchy       |
-| `ACCESSIBLE`       | Everything the authenticated user has access to (default when `org_units` is omitted) |
+| `SELECTED`         | Only the given org unit(s) (DHIS2's default when one is set)        |
+| `CHILDREN`         | The given org unit(s) and their immediate children                  |
+| `DESCENDANTS`      | The given org unit(s) and all units below them in the hierarchy     |
+| `ACCESSIBLE`       | Everything the authenticated user has access to (default when no org unit is given) |
 | `CAPTURE`          | Everything the authenticated user can capture data into             |
 | `ALL`              | Every org unit in the instance (typically requires elevated authority) |
 
@@ -144,7 +159,7 @@ in a `dataValues` list-column.
 ```{r}
 get_events(
     program = 'IpHINAT79UW',
-    org_units = 'DiszpKrYNg8',
+    org_unit = 'DiszpKrYNg8',
     org_unit_mode = 'DESCENDANTS'
 )
 ```
@@ -174,12 +189,13 @@ All three functions accept `updated_after`/`updated_before`, and
 `get_tracked_entities()`/`get_enrollments()` additionally accept
 `enrolled_after`/`enrolled_before` and `occurred_after`/`occurred_before` to
 bound results by enrollment or incident date. `get_events()` accepts
-`occurred_after`/`occurred_before` for the event's own occurred date. On
-`get_events()` and `get_enrollments()`, the underlying DHIS2 query parameter
-names for these are based on the best available documentation rather than a
-directly confirmed parameter table for those specific endpoints — see their
-help pages (`?get_events`, `?get_enrollments`) for details, and verify
-against your own instance if a date filter doesn't behave as expected.
+`occurred_after`/`occurred_before` for the event's own occurred date. The
+underlying DHIS2 query parameter names on `get_events()`/`get_enrollments()`
+were confirmed by testing live against a public DHIS2 demo instance —
+`enrolled_after`/`occurred_after` measurably narrowed the result set on
+both endpoints, and `get_events()`'s single-value `org_unit` requirement
+(unlike the other two functions' `org_units`) was confirmed the same way:
+passing more than one org unit is rejected by the server outright.
 
 Results are paginated automatically — `page_size` (default 500) controls how many
 records are requested per page, not the total returned; all matching pages are

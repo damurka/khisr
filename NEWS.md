@@ -24,7 +24,17 @@
   `enrolledAfter`/`enrolledBefore` query parameters appropriate to those
   endpoints, rather than the `eventOccurredAfter`/`enrollmentEnrolledAfter`/
   `enrollmentOccurredAfter` forms that are specific to
-  `get_tracked_entities()`'s nested-date disambiguation.
+  `get_tracked_entities()`'s nested-date disambiguation. **`get_events()`'s
+  `org_units` argument is now `org_unit` (singular)**: tested live against a
+  public DHIS2 demo instance, the Tracker API's `events` endpoint only
+  accepts a single org unit via `orgUnit` — passing more than one via the
+  plural `orgUnits` (which `get_tracked_entities()`/`get_enrollments()` both
+  use correctly) was silently rejected by the server as if no org unit had
+  been given at all.
+* **Added metadata helpers for Tracker configuration**: `get_programs()`,
+  `get_program_stages()`, `get_tracked_entity_types()`,
+  `get_tracked_entity_attributes()`, and `get_relationship_types()`, matching
+  the existing `get_metadata()`-based helper pattern.
 
 ## Bug fixes
 

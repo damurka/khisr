@@ -7,12 +7,16 @@
 #'
 #' @param program Optional. A program id to scope the query to.
 #' @param program_stage Optional. A program stage id to scope the query to.
-#' @param org_units Optional. A vector of organisation unit ids to scope the
-#'   query to.
+#' @param org_unit Optional. A single organisation unit id to scope the
+#'   query to. Unlike [get_tracked_entities()]/[get_enrollments()], the
+#'   `events` endpoint accepts exactly one org unit (sent as the singular
+#'   `orgUnit` query param, confirmed live against a DHIS2 demo instance —
+#'   passing more than one is rejected by the server with a "UID must be..."
+#'   error, not silently truncated).
 #' @param org_unit_mode Optional. One of `"SELECTED"`, `"CHILDREN"`,
 #'   `"DESCENDANTS"`, `"ACCESSIBLE"`, `"CAPTURE"`, `"ALL"`, controlling how
-#'   `org_units` is interpreted. DHIS2 defaults to `"ACCESSIBLE"` when
-#'   `org_units` is not provided, and `"SELECTED"` when it is.
+#'   `org_unit` is interpreted. DHIS2 defaults to `"ACCESSIBLE"` when
+#'   `org_unit` is not provided, and `"SELECTED"` when it is.
 #' @param updated_after,updated_before Optional. ISO-8601 date or datetime
 #'   strings bounding the event's last-updated timestamp.
 #' @param occurred_after,occurred_before Optional. ISO-8601 date or datetime
@@ -35,15 +39,13 @@
 #'
 #' @details
 #' DHIS2 requires an events query to be scoped by at least one of `program`,
-#' `program_stage`, or `org_units`; an unscoped query will be rejected by the
+#' `program_stage`, or `org_unit`; an unscoped query will be rejected by the
 #' server.
 #'
 #' The `occurredAfter`/`occurredBefore` query parameter names used here
 #' (unprefixed, unlike the equivalent [get_tracked_entities()] arguments)
-#' are based on the best available documentation and usage examples rather
-#' than a directly confirmed parameter table for this specific endpoint —
-#' verify against your own instance if these filters don't behave as
-#' expected.
+#' and the single-value `orgUnit` parameter were confirmed by testing
+#' live against a public DHIS2 demo instance.
 #'
 #' DHIS2's published Tracker API documentation does not describe a supported
 #' way to filter events by data element value (unlike [get_tracked_entities()],
@@ -65,12 +67,12 @@
 #'
 #' # All events for a program stage at a given org unit
 #' get_events(program_stage = 'A03MvHHogjR',
-#'            org_units = 'DiszpKrYNg8',
+#'            org_unit = 'DiszpKrYNg8',
 #'            org_unit_mode = 'DESCENDANTS')
 
 get_events <- function(program = NULL,
                        program_stage = NULL,
-                       org_units = NULL,
+                       org_unit = NULL,
                        org_unit_mode = NULL,
                        updated_after = NULL,
                        updated_before = NULL,
@@ -88,7 +90,7 @@ get_events <- function(program = NULL,
 
     if (!is.null(program)) check_scalar_character(program, call = call)
     if (!is.null(program_stage)) check_scalar_character(program_stage, call = call)
-    if (!is.null(org_units)) check_string_vector(org_units, call = call)
+    if (!is.null(org_unit)) check_scalar_character(org_unit, call = call)
     if (!is.null(org_unit_mode)) {
         org_unit_mode <- arg_match(
             org_unit_mode,
@@ -104,7 +106,7 @@ get_events <- function(program = NULL,
         'events',
         program = program,
         programStage = program_stage,
-        orgUnits = if (!is.null(org_units)) str_c(org_units, collapse = ',') else NULL,
+        orgUnit = org_unit,
         orgUnitMode = org_unit_mode,
         updatedAfter = updated_after,
         updatedBefore = updated_before,
