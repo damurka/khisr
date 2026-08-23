@@ -1,8 +1,5 @@
 test_that("get_analytics_by_level function works", {
 
-    skip_if_no_cred()
-    skip_if_offline()
-
     expect_error(get_analytics_by_level())
     expect_error(get_analytics_by_level(element_ids = 12345))
     expect_error(
@@ -51,6 +48,9 @@ test_that("get_analytics_by_level function works", {
                                level = 1,
                                org_ids = 12)
     )
+
+    skip_if_no_cred()
+    skip_if_offline()
 
     expect_null(
         get_analytics_by_level(element_ids = 'cXe64Yk0QMY',

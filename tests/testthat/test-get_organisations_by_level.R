@@ -1,8 +1,5 @@
 test_that("get_organisations_by_level function works", {
 
-    skip_if_no_cred()
-    skip_if_offline()
-
     expect_error(get_organisations_by_level(level = 1.1))
     expect_error(get_organisations_by_level(level = NULL))
     expect_error(get_organisations_by_level(level = NA))
@@ -11,6 +8,9 @@ test_that("get_organisations_by_level function works", {
 
     expect_error(get_organisations_by_level(org_ids = 123))
     expect_error(get_organisations_by_level(org_ids = ''))
+
+    skip_if_no_cred()
+    skip_if_offline()
 
     expect_warning(get_organisations_by_level(org_ids = '1234'))
 

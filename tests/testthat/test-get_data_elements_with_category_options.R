@@ -1,10 +1,10 @@
 test_that("get_data_elements_with_category_options function works", {
 
-    skip_if_no_cred()
-    skip_if_offline()
-
     expect_error(get_data_elements_with_category_options())
     expect_error(get_data_elements_with_category_options(123))
+
+    skip_if_no_cred()
+    skip_if_offline()
 
     expect_warning(get_data_elements_with_category_options('123456'))
 

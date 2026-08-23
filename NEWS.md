@@ -101,6 +101,23 @@
   not the `pe` dimension's period codes) are easy to conflate with the
   aggregate/Analytics content those articles otherwise focus on.
 
+## Test coverage
+
+* Several `test-get_*_by_level.R`/`test-get_metadata*.R` files called
+  `skip_if_no_cred()`/`skip_if_offline()` *before* input-validation
+  assertions that never touch the network, so those assertions never ran in
+  any environment without live DHIS2 credentials — including CI runs where
+  the credential secret isn't available (e.g. pull requests from forks).
+  Reordered so offline-safe assertions always run; only the assertions that
+  need a real server response stay behind the skip guards.
+* Added `test-utils.R`, directly covering `check_date()`, `check_integerish()`,
+  `check_is_valid_url()`, `check_supported_operator()`,
+  `check_scalar_character()`, `check_string_vector()`, and `chunk_ids()`,
+  none of which had dedicated tests before (only incidental coverage via
+  higher-level functions, most of which need network). Found and documented
+  a real inconsistency along the way: `check_scalar_character()` accepts an
+  empty string, unlike `check_string_vector()`, which explicitly rejects one.
+
 # khisr 1.0.6
 
 ## New Features

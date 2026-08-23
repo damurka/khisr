@@ -1,8 +1,5 @@
 test_that("get_data_sets_by_level function works", {
 
-    skip_if_no_cred()
-    skip_if_offline()
-
     expect_error(get_data_sets_by_level())
     expect_error(get_data_sets_by_level(dataset_ids = 12345))
     expect_error(
@@ -51,6 +48,9 @@ test_that("get_data_sets_by_level function works", {
                                level = 1,
                                org_ids = 12)
     )
+
+    skip_if_no_cred()
+    skip_if_offline()
 
     # expect_null(
     #     get_data_sets_by_level(dataset_ids = 'WWh5hbCmvND',
