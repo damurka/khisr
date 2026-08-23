@@ -57,7 +57,7 @@ api_get <- function(endpoint,
         req_user_agent('khisr/1.0.6 (https://khisr.damurka.com)') %>%
         req_retry(max_tries = retry, is_transient = is_transient_khis) %>%
         req_timeout(timeout) %>%
-        req_auth_khis_basic(auth = auth, call = call) %>%
+        req_auth_khis(auth = auth, call = call) %>%
         req_error(body = handle_error) %>%
         req_perform(verbosity = verbosity, error_call = call) %>%
         resp_body_json()

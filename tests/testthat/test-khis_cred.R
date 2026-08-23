@@ -81,10 +81,40 @@ test_that("khis_cred works correctly using configuration file", {
     )
 })
 
-test_that("req_auth_khis_basic works correctly", {
+test_that("khis_cred works correctly with a Personal Access Token", {
+
+    skip_if_offline()
 
     expect_error(
-        httr2::request('https://example.com') %>% req_auth_khis_basic(),
+        khis_cred(token = 'sometoken', username = 'username'),
+        class = 'khis_multiple_credentials'
+    )
+
+    expect_error(
+        khis_cred(token = 'sometoken', password = 'password'),
+        class = 'khis_multiple_credentials'
+    )
+
+    expect_error(
+        khis_cred(config_path = 'creds.json', token = 'sometoken'),
+        class = 'khis_multiple_credentials'
+    )
+
+    expect_error(
+        khis_cred(token = '', server = 'https://test.hiskenya.org'),
+        class = 'khis_invalid_credentials'
+    )
+
+    expect_error(
+        khis_cred(token = 123, server = 'https://test.hiskenya.org'),
+        class = 'khis_invalid_credentials'
+    )
+})
+
+test_that("req_auth_khis works correctly", {
+
+    expect_error(
+        httr2::request('https://example.com') %>% req_auth_khis(),
         class = 'khis_missing_credentials'
     )
 
@@ -93,7 +123,22 @@ test_that("req_auth_khis_basic works correctly", {
     khis_cred(
         config_path = system.file("extdata", "valid_cred_conf.json", package = "khisr"))
 
-    expect_no_error(httr2::request('https://example.com') %>% req_auth_khis_basic())
+    expect_no_error(httr2::request('https://example.com') %>% req_auth_khis())
 
     khis_cred_clear()
+})
+
+test_that("req_auth_khis uses a Personal Access Token when configured", {
+
+    auth <- khisr:::init_AuthCred(token = "d2pat_test", base_url = "https://example.com")
+    req <- httr2::request('https://example.com') %>% req_auth_khis(auth = auth)
+
+    # req_headers_redacted() stores the value behind a weak reference rather
+    # than as a plain string, so it never appears in verbose/debug output or
+    # a printed request; this is httr2's supported way to check that
+    expect_false(is.character(req$headers$Authorization))
+    expect_identical(
+        capture.output(print(req))[grep("Authorization", capture.output(print(req)))],
+        "* Authorization: <REDACTED>"
+    )
 })

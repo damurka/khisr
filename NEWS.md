@@ -2,6 +2,14 @@
 
 ## New features
 
+* **Added Personal Access Token (PAT) support**: `khis_cred()` now accepts a
+  `token` argument (or a `token` key in a `config_path` JSON file) as an
+  alternative to `username`/`password`, sending
+  `Authorization: ApiToken <token>` — DHIS2's own recommended authentication
+  method for scripts and integrations. Verified by generating a real token
+  against a live public DHIS2 demo instance and using it to authenticate and
+  retrieve real data; the token is redacted from verbose/debug request
+  output the same way Basic Authentication's password already is.
 * **Added Tracker API support**: `get_tracked_entities()`, `get_events()`,
   and `get_enrollments()` retrieve tracked entity instances, program-stage
   events, and program enrollments from DHIS2's Tracker API

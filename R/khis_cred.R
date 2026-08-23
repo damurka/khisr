@@ -7,10 +7,15 @@
 #'
 #' `khis_cred()` sets the credentials for accessing a DHIS2 instance.
 #'
-#' @param username The DHIS2 username. Only required if configuration file not
-#'   provided.
-#' @param password The DHIS2 password. Only required if configuration file not
-#'   provided.
+#' @param username The DHIS2 username. Only required if neither `config_path`
+#'   nor `token` is provided.
+#' @param password The DHIS2 password. Only required if neither `config_path`
+#'   nor `token` is provided.
+#' @param token A DHIS2 [Personal Access
+#'   Token](https://docs.dhis2.org/en/use/user-guides/dhis-core-version-master/working-with-your-account/personal-access-tokens.html),
+#'   as an alternative to `username`/`password`. DHIS2 recommends tokens over
+#'   Basic Authentication for scripts and integrations. Cannot be combined
+#'   with `username`/`password` or `config_path`.
 #' @param server The server URL of the DHIS2 instance. Only required if configuration
 #'   file not provided.
 #' @param api_version Optional. Pins requests to a specific DHIS2 API version
@@ -18,9 +23,9 @@
 #'   `<server>/api/<endpoint>`. Useful for guarding against behavioural
 #'   differences between DHIS2 core versions across instances. Defaults to the
 #'   server's own default API version when not set.
-#' @param config_path An optional path to a configuration file containing username
-#'   and password. This is considered more secure than providing credentials directly
-#'   in code.
+#' @param config_path An optional path to a configuration file containing
+#'   either `username`/`password` or a `token`. This is considered more
+#'   secure than providing credentials directly in code.
 #' @param base_url Deprecated. The base URL of the DHIS2 instance. Use `server` instead.
 #'
 #' @family credential functions
@@ -31,10 +36,16 @@
 #'
 #' @details
 #' This function allows you to set the credentials for interacting with a DHIS2
-#' server. You can either provide the username and password directly (less secure)
-#' or specify a path to a configuration file containing these credentials. Using
+#' server. You can provide `username`/`password` directly, a `token` directly,
+#' or specify a path to a configuration file containing either. Using
 #' a configuration file is recommended for improved security as it prevents
 #' credentials from being stored directly in your code.
+#'
+#' Token authentication sends `Authorization: ApiToken <token>`, confirmed by
+#' generating a real token (`POST /api/apiToken`) against a live public DHIS2
+#' demo instance and using it to authenticate and retrieve real data; like
+#' Basic Authentication's username/password, the token is redacted and never
+#' printed in verbose/debug request output.
 #'
 #' @examples
 #'
@@ -43,36 +54,55 @@
 #'     # Assuming a configuration file named "credentials.json":
 #'     khis_cred(config_path = "path/to/credentials.json")
 #'
-#'     # Option 2: Providing credentials directly (less secure)
+#'     # Option 2: Providing username/password directly (less secure)
 #'     khis_cred(username = "your_username",
 #'               password = "your_password",
 #'               server='https://<dhis2-instance>')
+#'
+#'     # Option 3: Providing a Personal Access Token directly (less secure)
+#'     khis_cred(token = "d2pat_...",
+#'               server = 'https://<dhis2-instance>')
 #' }
 
 khis_cred <- function(username = NULL,
                       password = NULL,
+                      token = NULL,
                       server = NULL,
                       api_version = NULL,
                       config_path = NULL,
                       base_url = deprecated()) {
 
-    # Ensure either config_path or credentials are provided
-    if (is.null(config_path) && (is.null(username) || is.null(password))) {
+    has_basic <- !is.null(username) || !is.null(password)
+    has_token <- !is.null(token)
+
+    # Ensure some credentials are provided
+    if (is.null(config_path) && !has_basic && !has_token) {
         khis_abort(
             message = c(
                 'x' = 'Missing credentials',
-                '!' = 'Please provide either a valid {.arg config_path} or both {.arg username} and {.arg password}.'
+                '!' = 'Please provide either a valid {.arg config_path}, both {.arg username} and {.arg password}, or a {.arg token}.'
             ),
             class = 'khis_missing_credentials'
         )
     }
 
     # Prevent simultaneous use of config_path and direct credentials
-    if (!is.null(config_path) && (!is.null(username) || !is.null(password))) {
+    if (!is.null(config_path) && (has_basic || has_token)) {
         khis_abort(
             message = c(
                 "x" = "Conflicting credentials input.",
-                "!" = "You cannot provide both {.arg config_path} and {.arg username} or {.arg password}. Use only one method."
+                "!" = "You cannot provide {.arg config_path} together with {.arg username}/{.arg password} or {.arg token}. Use only one method."
+            ),
+            class = 'khis_multiple_credentials'
+        )
+    }
+
+    # Prevent simultaneous use of token and username/password
+    if (has_basic && has_token) {
+        khis_abort(
+            message = c(
+                "x" = "Conflicting credentials input.",
+                "!" = "You cannot provide both {.arg token} and {.arg username}/{.arg password}. Use only one method."
             ),
             class = 'khis_multiple_credentials'
         )
@@ -89,12 +119,34 @@ khis_cred <- function(username = NULL,
         credentials <- .load_config_file(config_path)
         password <- credentials[["password"]]
         username <- credentials[["username"]]
+        token <- credentials[["token"]]
         server <- credentials[["server"]]
         api_version <- credentials[["api_version"]] %||% api_version
     }
 
-    # validate username and password
-    if (!is_scalar_character(password) || nchar(password) == 0 ||
+    # A config file's own credentials can also conflict
+    if (!is.null(token) && (!is.null(username) || !is.null(password))) {
+        khis_abort(
+            message = c(
+                "x" = "Conflicting credentials input.",
+                "!" = "{.arg config_path} cannot contain both {.field token} and {.field username}/{.field password}. Use only one method."
+            ),
+            class = 'khis_multiple_credentials'
+        )
+    }
+
+    # validate credentials
+    if (!is.null(token)) {
+        if (!is_scalar_character(token) || nchar(token) == 0) {
+            khis_abort(
+                message = c(
+                    "x" = "Invalid credentials",
+                    "!" = "{.arg token} must be a valid non-empty string."
+                ),
+                class = 'khis_invalid_credentials'
+            )
+        }
+    } else if (!is_scalar_character(password) || nchar(password) == 0 ||
         !is_scalar_character(username) || nchar(username) == 0) {
         khis_abort(
             message = c(
@@ -129,9 +181,12 @@ khis_cred <- function(username = NULL,
         )
     }
 
-    # Set the credentials in the .auth object
+    # Set the credentials in the .auth object. Both paths are set explicitly
+    # (clearing whichever isn't in use) so a prior credential set can't leak
+    # into a new one, e.g. switching from token- to password-based auth.
     .auth$set_username(username)
     .auth$set_password(password)
+    .auth$set_token(token)
     .auth$set_base_url(server)
     .auth$set_api_version(api_version)
 
@@ -213,14 +268,15 @@ khis_cred <- function(username = NULL,
     })
 }
 
-#' Authenticate HTTP Request with Basic Authentication
+#' Authenticate an HTTP Request with DHIS2 Credentials
 #'
-#' This function sets the Authorization header for HTTP basic authentication using
-#' the provided credentials (username and password). If the credentials are not explicitly
-#' provided, it defaults to the global auth credentials.
+#' Sets the Authorization header for the request, using a Personal Access
+#' Token (`Authorization: ApiToken <token>`) when one is configured, or HTTP
+#' Basic Authentication (username/password) otherwise. If the credentials are
+#' not explicitly provided, it defaults to the global auth credentials.
 #'
 #' @param req An HTTP request object created by [httr2::request].
-#' @param auth (Optional) An auth object containing the username and password.
+#' @param auth (Optional) An auth object containing the credentials.
 #' If not provided, the function uses global auth credentials.
 #' @param arg The argument name used in error messages (defaults to the calling argument).
 #' @param call The calling environment for error reporting (defaults to the calling environment).
@@ -235,10 +291,10 @@ khis_cred <- function(username = NULL,
 #'
 #' # Example using global credentials
 #' req <- request("http://dhis2.com/api") %>%
-#'   req_auth_khis_basic()
+#'   req_auth_khis()
 #'
-#' @seealso [httr2::req_auth_basic], [httr2::request]
-req_auth_khis_basic <- function(req, auth = NULL, arg = caller_arg(req), call = caller_env()) {
+#' @seealso [httr2::req_auth_basic], [httr2::req_headers], [httr2::request]
+req_auth_khis <- function(req, auth = NULL, arg = caller_arg(req), call = caller_env()) {
 
     # Ensure the request object is provided
     check_required(req, arg, call = call)
@@ -250,10 +306,18 @@ req_auth_khis_basic <- function(req, auth = NULL, arg = caller_arg(req), call = 
     if (!is.null(auth) && inherits(auth, 'AuthCred')) {
         username <- auth$get_username()
         password <- auth$get_password()
+        token <- auth$get_token()
     } else {
         # Fallback to global .auth credentials
         username <- .auth$get_username()
         password <- .auth$get_password()
+        token <- .auth$get_token()
+    }
+
+    # Prefer a Personal Access Token when one is configured. Redacted so the
+    # token doesn't leak into verbose/debug request output.
+    if (!is.null(token)) {
+        return(req_headers_redacted(req, Authorization = str_c('ApiToken ', token)))
     }
 
     # Add basic authentication header to the request
@@ -351,6 +415,7 @@ khis_cred_clear <- function(auth = NULL) {
     if (!is.null(auth) && inherits(auth, 'AuthCred')) {
         auth$set_username(NULL)
         auth$clear_password()
+        auth$clear_token()
         auth$set_base_url(NULL)
         auth$set_api_version(NULL)
         auth$set_profile(NULL)
@@ -360,6 +425,7 @@ khis_cred_clear <- function(auth = NULL) {
     # Fallback to clearing the global .auth credentials
     .auth$set_username(NULL)
     .auth$clear_password()
+    .auth$clear_token()
     .auth$set_base_url(NULL)
     .auth$set_api_version(NULL)
     .auth$set_profile(NULL)

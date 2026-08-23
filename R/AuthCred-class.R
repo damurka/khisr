@@ -4,6 +4,8 @@
 #'
 #' @param username The DHIS2 username to be used in API calls
 #' @param password The DHIS2 password to be used in API calls.
+#' @param token A DHIS2 Personal Access Token, as an alternative to
+#'   `username`/`password`.
 #' @param base_url The DHIS2 base_url to be used in API calls.
 #'
 #' @return An object of class [AuthCred]
@@ -11,12 +13,14 @@
 
 init_AuthCred <- function(username = NULL,
                           password = NULL,
+                          token = NULL,
                           base_url = NULL,
                           api_version = NULL,
                           profile = NULL) {
     AuthCred$new(
         username = username,
         password = password,
+        token = token,
         base_url = base_url,
         api_version = api_version,
         profile = profile
@@ -43,6 +47,8 @@ AuthCred <- R6::R6Class('AuthCred', list(
     username = NULL,
     #' @field password The DHIS2 password.
     password = NULL,
+    #' @field token A DHIS2 Personal Access Token.
+    token = NULL,
     #' @field base_url The URL to the server.
     base_url = NULL,
     #' @field api_version The DHIS2 API version to pin requests to (optional).
@@ -54,6 +60,7 @@ AuthCred <- R6::R6Class('AuthCred', list(
     #' @details For more details on the parameters, see [init_AuthCred()]
     initialize = function(username = NULL,
                           password = NULL,
+                          token = NULL,
                           base_url = NULL,
                           api_version = NULL,
                           profile = NULL) {
@@ -61,6 +68,7 @@ AuthCred <- R6::R6Class('AuthCred', list(
         stopifnot(
             is.null(username) || is_scalar_character(username),
             is.null(password) || is_scalar_character(password),
+            is.null(token) || is_scalar_character(token),
             is.null(base_url) || is_scalar_character(base_url),
             is.null(api_version) || is_scalar_character(api_version) || is_scalar_integerish(api_version),
             is.null(profile) || inherits(profile, "Profile")
@@ -68,6 +76,7 @@ AuthCred <- R6::R6Class('AuthCred', list(
 
         self$username <- username
         self$password <- password
+        self$token <- token
         self$base_url <- base_url
         self$api_version <- if (is.null(api_version)) NULL else as.character(api_version)
         self$profile <- profile
@@ -99,6 +108,21 @@ AuthCred <- R6::R6Class('AuthCred', list(
     #' @description Clear password
     clear_password = function() {
         self$set_password(NULL)
+    },
+    #' @description Get the Personal Access Token
+    get_token = function() {
+        self$token
+    },
+    #' @description Set the DHIS2 Personal Access Token
+    #' @param value The DHIS2 Personal Access Token
+    set_token = function(value) {
+        stopifnot(is.null(value) || is_scalar_character(value))
+        self$token <- value
+        invisible(self)
+    },
+    #' @description Clear the Personal Access Token
+    clear_token = function() {
+        self$set_token(NULL)
     },
     #' @description Get the base URL API
     get_base_url = function() {
@@ -135,8 +159,11 @@ AuthCred <- R6::R6Class('AuthCred', list(
     },
     #' @description Report if we have valid credentials
     has_cred = function() {
-        !is.null(self$username) && is_scalar_character(self$username) &&
-        !is.null(self$password) && is_scalar_character(self$password) &&
+        has_basic <- !is.null(self$username) && is_scalar_character(self$username) &&
+            !is.null(self$password) && is_scalar_character(self$password)
+        has_token <- !is.null(self$token) && is_scalar_character(self$token)
+
+        (has_basic || has_token) &&
         !is.null(self$base_url) && is_scalar_character(self$base_url)
     },
     #' @description Report if we have valid credentials

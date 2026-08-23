@@ -46,3 +46,19 @@
       Error in `initialize()`:
       ! is.null(base_url) || is_scalar_character(base_url) is not TRUE
 
+---
+
+    Code
+      init_AuthCred(token = c("home", "weed"), base_url = NULL)
+    Condition
+      Error in `initialize()`:
+      ! is.null(token) || is_scalar_character(token) is not TRUE
+
+---
+
+    Code
+      init_AuthCred(token = 123, base_url = NULL)
+    Condition
+      Error in `initialize()`:
+      ! is.null(token) || is_scalar_character(token) is not TRUE
+
