@@ -7,6 +7,7 @@
 khis_cred(
   username = NULL,
   password = NULL,
+  token = NULL,
   server = NULL,
   api_version = NULL,
   config_path = NULL,
@@ -14,20 +15,29 @@ khis_cred(
 )
 }
 \arguments{
-\item{username}{The DHIS2 username. Only required if configuration file not
-provided.}
+\item{username}{The DHIS2 username. Only required if neither \code{config_path}
+nor \code{token} is provided.}
 
-\item{password}{The DHIS2 password. Only required if configuration file not
-provided.}
+\item{password}{The DHIS2 password. Only required if neither \code{config_path}
+nor \code{token} is provided.}
+
+\item{token}{A DHIS2 \href{https://docs.dhis2.org/en/use/user-guides/dhis-core-version-master/working-with-your-account/personal-access-tokens.html}{Personal Access Token},
+as an alternative to \code{username}/\code{password}. DHIS2 recommends tokens over
+Basic Authentication for scripts and integrations. Cannot be combined
+with \code{username}/\code{password} or \code{config_path}.}
 
 \item{server}{The server URL of the DHIS2 instance. Only required if configuration
 file not provided.}
 
-\item{api_version}{The API version of the DHIS2 instance (optional).}
+\item{api_version}{Optional. Pins requests to a specific DHIS2 API version
+(e.g. \code{"40"}), so calls hit \verb{<server>/api/40/<endpoint>} instead of
+\verb{<server>/api/<endpoint>}. Useful for guarding against behavioural
+differences between DHIS2 core versions across instances. Defaults to the
+server's own default API version when not set.}
 
-\item{config_path}{An optional path to a configuration file containing username
-and password. This is considered more secure than providing credentials directly
-in code.}
+\item{config_path}{An optional path to a configuration file containing
+either \code{username}/\code{password} or a \code{token}. This is considered more
+secure than providing credentials directly in code.}
 
 \item{base_url}{Deprecated. The base URL of the DHIS2 instance. Use \code{server} instead.}
 }
@@ -39,10 +49,16 @@ Auth object
 }
 \details{
 This function allows you to set the credentials for interacting with a DHIS2
-server. You can either provide the username and password directly (less secure)
-or specify a path to a configuration file containing these credentials. Using
+server. You can provide \code{username}/\code{password} directly, a \code{token} directly,
+or specify a path to a configuration file containing either. Using
 a configuration file is recommended for improved security as it prevents
 credentials from being stored directly in your code.
+
+Token authentication sends \verb{Authorization: ApiToken <token>}, confirmed by
+generating a real token (\code{POST /api/apiToken}) against a live public DHIS2
+demo instance and using it to authenticate and retrieve real data; like
+Basic Authentication's username/password, the token is redacted and never
+printed in verbose/debug request output.
 }
 \examples{
 
@@ -51,14 +67,19 @@ credentials from being stored directly in your code.
     # Assuming a configuration file named "credentials.json":
     khis_cred(config_path = "path/to/credentials.json")
 
-    # Option 2: Providing credentials directly (less secure)
+    # Option 2: Providing username/password directly (less secure)
     khis_cred(username = "your_username",
               password = "your_password",
               server='https://<dhis2-instance>')
+
+    # Option 3: Providing a Personal Access Token directly (less secure)
+    khis_cred(token = "d2pat_...",
+              server = 'https://<dhis2-instance>')
 }
 }
 \seealso{
 Other credential functions: 
+\code{\link{khis_api_version}()},
 \code{\link{khis_base_url}()},
 \code{\link{khis_cred_clear}()},
 \code{\link{khis_display_name}()},

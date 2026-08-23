@@ -48,6 +48,10 @@ The `khisr` R package simplifies interaction with the District Health Informatio
 # Set the credentials using username and password
 khis_cred(username = 'your-dhis2-username', password = 'your-dhis2-password', server = 'https://<your dhis2 instance>')
 
+# Set the credentials using a Personal Access Token (DHIS2's recommended
+# method for scripts and integrations) instead of username/password
+khis_cred(token = 'your-dhis2-token', server = 'https://<your dhis2 instance>')
+
 # Set credentials using configuration path
 khis_cred(config_path = 'path/to/secret.json')
 ```
@@ -85,9 +89,15 @@ The following table summarizes these `khisr` metadata helper functions:
 | `get_organisation_unit_groupsets()`  | organisationUnitGroupSets  |
 | `get_organisation_unit_groups()`     | organisationUnitGroups     |
 | `get_organisation_units()`           | organisationUnits          |
+| `get_organisation_unit_levels()`     | organisationUnitLevels     |
 | `get_dimensions()`                   | dimensions                 |
 | `get_user_groups()`                  | userGroups                 |
 | `get_period_types()`                 | periodTypes                |
+| `get_programs()`                     | programs                   |
+| `get_program_stages()`               | programStages               |
+| `get_tracked_entity_types()`         | trackedEntityTypes          |
+| `get_tracked_entity_attributes()`    | trackedEntityAttributes     |
+| `get_relationship_types()`           | relationshipTypes          |
 
 ### Metadata object filter
 
@@ -101,7 +111,7 @@ The following table provides a summary of the supported operators:
 
 | DHIS2 Operator  | Infix Operator  | Description                                         |
 |:----------------|:----------------|:----------------------------------------------------|
-|` eq`            | `%.eq%`         | Equality                                            |
+| `eq`            | `%.eq%`         | Equality                                            |
 | `!eq`           | `%.~eq%`        | Inequality                                          |
 | `ieq`           | `%.ieq%`        | Case insensitive string, match exact                |
 | `ne`            | `%.ne%`         | Inequality                                          |
@@ -131,23 +141,23 @@ The following table provides a summary of the supported operators:
 Basic usage of the metadata filter
 
 ```{r, eval = can_decrypt}
-# Retrieve organisation units by county (level 2)
-county <- get_organisation_units(level %.eq% '2')
-county
+# Retrieve organisation units by province (level 2)
+province <- get_organisation_units(level %.eq% '2')
+province
 
-# Retrieve county by name (Mombasa)
-county <- get_organisation_units(level %.eq% '2',
-                                 name %.like% 'mombasa')
-county
+# Retrieve province by name (Vientiane Capital)
+province <- get_organisation_units(level %.eq% '2',
+                                   name %.like% 'vientiane capital')
+province
 
-data_element_id <- c('cXe64Yk0QMY', 'XEX93uLsAm2')
+data_element_id <- c('lYsfXxCw6Qi', 'GxlrIgMyEf4')
 
 # Retrieve data elements by ID using operator in
 data_elements <- get_data_elements(id %.in% data_element_id)
 data_elements
 
 # Retrieve data elements by filtering using dataElementGroups
-data_elements <- get_data_elements(dataElementGroups.name %.like% 'moh 705')
+data_elements <- get_data_elements(dataElementGroups.name %.like% 'malaria')
 data_elements
 ```
 
@@ -161,6 +171,8 @@ key functions and parameters involved:
 
 - `get_analytics()`: Retrieves aggregated data based on specified dimensions and
   filters.
+- `get_data_value_sets()`: Retrieves the individually entered raw data values
+  behind the aggregates — useful for data-quality auditing.
 - `analytics_dimension()`: Constructs dimensions for queries, ensuring accurate
   data retrieval.
 - `%.d%` (infix operator): Convenient shorthand for creating dimension filters.
@@ -177,22 +189,13 @@ specified dimension items. The fixed dimensions are the **data element** _(dx)_
 dynamically add dimensions through categories, data element group sets and 
 organisation unit group sets.
 
-| Dimension ID | Dimensions                           |
-|:-------------|:-----------------------------------------------------------------|
-| dx           | Data elements, indicators, data set reporting rate metrics,      |
-|              | data element operands, program indicators, program data elements,|
-|              | program attributes, validation rules                             |
-|              |                                                                  |
-| pe           | ISO periods and relative periods (see "date and period format")  |
-|              |                                                                  |
-| ou           | Organisation unit hierarchy                                      |
-|              | Organisation unit identifiers, keywords USER_ORGUNIT,            |
-|              | USER_ORGUNIT_CHILDREN, USER_ORGUNIT_GRANDCHILDREN, LEVEL-<level>,|
-|              | and OU_GROUP-<group-id>                                          |
-|              |                                                                  |
-| co           | Category option combo identifiers (use `all` to get all items)   |
-|              |                                                                  |
-| ao           |Category option combo identifiers (use `all` to get all items)    |
+| Dimension ID | Dimensions                                                                                                                                     |
+|:-------------|:------------------------------------------------------------------------------------------------------------------------------------------------|
+| `dx`         | Data elements, indicators, data set reporting rate metrics, data element operands, program indicators, program data elements, program attributes, validation rules |
+| `pe`         | ISO periods and relative periods (see [Date and Period Format](https://khisr.damurka.com/articles/date-format.html))                            |
+| `ou`         | Organisation unit hierarchy: organisation unit identifiers, or keywords `USER_ORGUNIT`, `USER_ORGUNIT_CHILDREN`, `USER_ORGUNIT_GRANDCHILDREN`, `LEVEL-<level>`, and `OU_GROUP-<group-id>` |
+| `co`         | Category option combo identifiers (use `all` to get all items)                                                                                   |
+| `ao`         | Attribute option combo identifiers (use `all` to get all items)                                                                                   |
 
 
 ### Filter (filter)
@@ -222,14 +225,14 @@ ou %.d% 'USER_ORGUNIT'
 
 # showing in the analytics
 get_analytics(
-    dx %.d% c('siOyOiOJpI8', 'Lt0FqtnHraW', 'OoakJhWiyZp'),
+    dx %.d% c('lYsfXxCw6Qi', 'vTRrNdOOT9g', 'GxlrIgMyEf4'),
     pe %.d% 'LAST_YEAR',
-    ou %.d% c('qKzosKQPl6G')
+    ou %.d% c('W6sNfkJcXGC')
 )
 
 # Using the startDate and endDate with organisation unit keyword 'USER_ORGUNIT'
 get_analytics(
-    dx %.d% c('siOyOiOJpI8', 'Lt0FqtnHraW', 'OoakJhWiyZp'),
+    dx %.d% c('lYsfXxCw6Qi', 'vTRrNdOOT9g', 'GxlrIgMyEf4'),
     ou %.d% 'USER_ORGUNIT',
     pe %.d% 'all',
     startDate = '2023-07-01',
@@ -247,11 +250,28 @@ pe %.f% 'LAST_YEAR'
 # Filter by organisation unit
 ou %.f% 'USER_ORGUNIT'
 
-# showing in the analytics. filter by organisation unit with id 'qKzosKQPl6G'
+# showing in the analytics. filter by organisation unit with id 'W6sNfkJcXGC'
 # and period 'LAST_YEAR'
 get_analytics(
-    dx %.d% c('siOyOiOJpI8', 'Lt0FqtnHraW', 'OoakJhWiyZp'),
+    dx %.d% c('lYsfXxCw6Qi', 'vTRrNdOOT9g', 'GxlrIgMyEf4'),
     pe %.f% 'LAST_YEAR',
-    ou %.f% 'qKzosKQPl6G'
+    ou %.f% 'W6sNfkJcXGC'
+)
+```
+
+## Tracker data
+
+Alongside aggregate analytics, DHIS2 also stores case-based, person-level data
+through its Tracker API. `khisr` provides `get_tracked_entities()`,
+`get_enrollments()`, and `get_events()` for reading it, plus
+`tracked_entity_filter()` for filtering tracked entities by attribute value. See
+[Tracker Data](https://khisr.damurka.com/articles/tracker.html) for a full guide.
+
+```{r, eval = can_decrypt}
+# Tracked entities enrolled in a program, at an org unit and everything below it
+get_tracked_entities(
+    program = 'PREnRHSp3be',
+    org_units = 'IWp9dQGM0bS',
+    org_unit_mode = 'DESCENDANTS'
 )
 ```

@@ -24,6 +24,13 @@
 #' # Get datasets by name with the word 'MOH 705'
 #' get_data_sets(name %.like% 'MOH 705')
 #'
+#' # Get all tracker programs
+#' get_programs()
+#'
+#' @seealso [get_tracked_entities()], [get_events()], [get_enrollments()] for
+#'   retrieving tracker data (as opposed to the metadata describing programs,
+#'   program stages, and tracked entity types/attributes retrieved here).
+#'
 #' @name metadata-helpers
 
 get_categories <- function(...) {
@@ -189,6 +196,41 @@ get_dimensions <- function(...) {
 
 get_period_types <- function(...) {
     get_metadata('periodTypes', ...)
+}
+
+#' @rdname metadata-helpers
+#' @export
+
+get_programs <- function(...) {
+    get_metadata('programs', ...)
+}
+
+#' @rdname metadata-helpers
+#' @export
+
+get_program_stages <- function(...) {
+    get_metadata('programStages', ...)
+}
+
+#' @rdname metadata-helpers
+#' @export
+
+get_tracked_entity_types <- function(...) {
+    get_metadata('trackedEntityTypes', ...)
+}
+
+#' @rdname metadata-helpers
+#' @export
+
+get_tracked_entity_attributes <- function(...) {
+    get_metadata('trackedEntityAttributes', ...)
+}
+
+#' @rdname metadata-helpers
+#' @export
+
+get_relationship_types <- function(...) {
+    get_metadata('relationshipTypes', ...)
 }
 
 #' @rdname metadata-helpers

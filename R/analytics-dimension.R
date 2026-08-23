@@ -19,7 +19,7 @@
 #' - Organisation unit hierarchy (ou): Specific health facilities, districts, countries,
 #'    and keywords for user location or its sub-units.
 #' - Category option combinations (co): Category option combo identifiers.
-#' - Attribute option combinations (ao): Category option combo identifiers.
+#' - Attribute option combinations (ao): Attribute option combo identifiers.
 #' - Categories: Category option identifiers.
 #' - Data element group sets: Data element group identifiers.
 #' - Organisation unit group sets: Organisation unit group identifiers.

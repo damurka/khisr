@@ -86,7 +86,7 @@ property \%.~in\% values
 
 \item{values}{The value to check against}
 
-\item{call}{description}
+\item{call}{The caller environment.}
 }
 \value{
 A spliced list with filter in the format property:operator:value

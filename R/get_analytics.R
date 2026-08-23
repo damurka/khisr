@@ -26,13 +26,13 @@
 #'
 #' @examplesIf khis_has_cred()
 #'
-#' # Clinical Breast Examination data elements
-#' # XEX93uLsAm2 = CBE Abnormal
-#' # cXe64Yk0QMY = CBE Normal
-#' element_id <- c('cXe64Yk0QMY', 'XEX93uLsAm2')
+#' # Malaria data elements
+#' # lYsfXxCw6Qi = MAL - Malaria confirmed cases reported
+#' # GxlrIgMyEf4 = MAL - Malaria deaths
+#' element_id <- c('lYsfXxCw6Qi', 'GxlrIgMyEf4')
 #'
-#' # Download data from February 2023 to current date
-#' data <- get_analytics(dx %.d% element_id, pe %.d% 'LAST_MONTH')
+#' # Download data for the last year
+#' data <- get_analytics(dx %.d% element_id, pe %.d% 'LAST_YEAR')
 #' data
 
 get_analytics <- function(...,
@@ -40,7 +40,6 @@ get_analytics <- function(...,
                           retry = 2,
                           verbosity = 0,
                           timeout = 60) {
-    x = NULL # due to NSE notes in R CMD check
 
     return_type <- str_to_upper(arg_match(return_type))
 
@@ -53,17 +52,5 @@ get_analytics <- function(...,
                     verbosity = verbosity,
                     timeout = timeout)
 
-    if (NROW(response$rows) == 0) {
-        return(NULL)
-    }
-
-    headers <- map_vec(response$headers, ~ pluck(.x, 'name'))
-    value_types <- map_vec(response$headers, ~ pluck(.x, 'valueType'))
-    names(value_types) <- headers
-    data <- tibble(x = response$rows) %>%
-        unnest_wider(x, names_sep = '') %>%
-        rename_all(~ headers) %>%
-        mutate(across(everything(), ~ if(value_types[[cur_column()]] == 'NUMBER') { as.numeric(.x)  } else { .x }))
-
-    return(data)
+    parse_analytics_rows(response$headers, response$rows)
 }

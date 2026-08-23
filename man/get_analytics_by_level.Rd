@@ -11,6 +11,7 @@ get_analytics_by_level(
   level = 1,
   org_ids = NULL,
   ...,
+  auth = NULL,
   call = caller_env()
 )
 }
@@ -25,7 +26,12 @@ get_analytics_by_level(
 
 \item{org_ids}{Optional list of organization units IDs to be filtered.}
 
-\item{...}{Other options that can be passed onto DHIS2 API.}
+\item{...}{Other analytics query options passed onto the DHIS2 \code{analytics}
+endpoint (e.g. additional dimension/filter arguments). Not forwarded to
+the organisation unit or data element metadata lookups this function also
+performs.}
+
+\item{auth}{Optional. The authentication object.}
 
 \item{call}{The caller environment.}
 }
@@ -53,10 +59,10 @@ given period and data element(s), without performing any aggregation.
 }
 \examples{
 \dontshow{if (khis_has_cred()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-# Clinical Breast Examination data elements
-# XEX93uLsAm2 = CBE Abnormal
-# cXe64Yk0QMY = CBE Normal
-element_id = c('cXe64Yk0QMY', 'XEX93uLsAm2')
+# Malaria data elements
+# lYsfXxCw6Qi = MAL - Malaria confirmed cases reported
+# GxlrIgMyEf4 = MAL - Malaria deaths
+element_id = c('lYsfXxCw6Qi', 'GxlrIgMyEf4')
 
 # Download data from February 2023 to current date
 data <- get_analytics_by_level(element_ids = element_id,

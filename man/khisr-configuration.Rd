@@ -41,10 +41,10 @@ in order of decreasing scope:
 \item Put \code{options(khis_quiet = TRUE)} in the start-up file, such as \code{.Rprofile},
 or  in your R script.
 \item Use \code{local_khis_quiet()} to silence khisr in a specific scope.
-\item Use \code{with_khis_quite} to run small bit of code silently.
+\item Use \code{with_khis_quiet} to run small bit of code silently.
 }
 
-\code{local_khis_quiet} and \code{with_khis} follow the conventions of the
+\code{local_khis_quiet} and \code{with_khis_quiet} follow the conventions of the
 \href{https://withr.r-lib.org}{withr} package.
 }
 
@@ -69,7 +69,7 @@ or  in your R script.
               password = 'password',
               server = 'https://<dhis2-instance>')
 
-    # suppress messages for a in a specific scope
+    # suppress messages in a specific scope
     local_khis_quiet()
 
     # no message

@@ -11,6 +11,7 @@ get_data_sets_by_level(
   level = 1,
   org_ids = NULL,
   ...,
+  auth = NULL,
   call = caller_env()
 )
 }
@@ -25,7 +26,12 @@ get_data_sets_by_level(
 
 \item{org_ids}{Optional list of organization units IDs to be filtered.}
 
-\item{...}{Other options that can be passed onto DHIS2 API.}
+\item{...}{Other analytics query options passed onto the DHIS2 \code{analytics}
+endpoint (e.g. additional dimension/filter arguments). Not forwarded to
+the organisation unit or data set metadata lookups this function also
+performs.}
+
+\item{auth}{Optional. The authentication object.}
 
 \item{call}{The caller environment.}
 }

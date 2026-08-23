@@ -26,19 +26,18 @@
 
 get_data_elements_with_category_options <-function(element_ids, auth = NULL, call = caller_env()) {
 
-    name = categoryCombo = categoryOptionCombos = co = co_name = co_id = NULL # due to NSE notes in R CMD check
+    name = categoryCombo = categoryOptionCombos = co = co_name = co_id = id = NULL # due to NSE notes in R CMD check
 
     check_string_vector(element_ids, call = call)
 
-    filter <- splice(list2(filter = NULL))
-    if (!is.null(element_ids)) {
-        filter <- id %.in% element_ids
-    }
-
-    data <- get_data_elements(filter,
-                              fields = c('id','name','categoryCombo[categoryOptionCombos[id,name]]'),
-                              auth = auth,
-                              call = call)
+    chunks <- chunk_ids(element_ids)
+    data <- map(chunks, ~ get_data_elements(
+        id %.in% .x,
+        fields = c('id','name','categoryCombo[categoryOptionCombos[id,name]]'),
+        auth = auth,
+        call = call
+    ))
+    data <- bind_rows(data)
 
     if (is_empty(data)) {
         return(NULL)

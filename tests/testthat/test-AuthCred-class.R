@@ -54,6 +54,22 @@ test_that("inputs are checked when creating AuthCred", {
         error = TRUE
     )
 
+    expect_snapshot(
+        init_AuthCred(
+            token = c('home', 'weed'),
+            base_url = NULL
+        ),
+        error = TRUE
+    )
+
+    expect_snapshot(
+        init_AuthCred(
+            token = 123,
+            base_url = NULL
+        ),
+        error = TRUE
+    )
+
     a <- init_AuthCred(
         username = 'username',
         password = NULL,
@@ -89,6 +105,23 @@ test_that("AuthCred password can be modified and cleared", {
 
     a$clear_password()
     expect_null(a$get_password())
+})
+
+test_that("AuthCred token can be modified and cleared", {
+    a <- init_AuthCred(token = 'AAA')
+    expect_equal(a$get_token(), "AAA")
+
+    a$set_token('BBB')
+    expect_equal(a$get_token(), "BBB")
+
+    a$set_token(NULL)
+    expect_null(a$get_token())
+
+    a$set_token('CCC')
+    expect_equal(a$get_token(), "CCC")
+
+    a$clear_token()
+    expect_null(a$get_token())
 })
 
 test_that("AuthCred base url can be modified and cleared", {
@@ -134,6 +167,21 @@ test_that("AuthCred has_cred can return Correctly", {
     expect_true(a$has_cred())
 
     a$set_base_url(NULL)
+
+    expect_false(a$has_cred())
+})
+
+test_that("AuthCred has_cred works with a token in place of username/password", {
+    a <- init_AuthCred(token = 'sometoken', base_url = 'base_url')
+
+    expect_true(a$has_cred())
+
+    a$set_base_url(NULL)
+
+    expect_false(a$has_cred())
+
+    a$set_base_url('base_url')
+    a$clear_token()
 
     expect_false(a$has_cred())
 })

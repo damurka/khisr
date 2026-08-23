@@ -43,9 +43,9 @@ NULL
 #' * Put `options(khis_quiet = TRUE)` in the start-up file, such as `.Rprofile`,
 #'   or  in your R script.
 #' * Use `local_khis_quiet()` to silence khisr in a specific scope.
-#' * Use `with_khis_quite` to run small bit of code silently.
+#' * Use `with_khis_quiet` to run small bit of code silently.
 #'
-#' `local_khis_quiet` and `with_khis` follow the conventions of the
+#' `local_khis_quiet` and `with_khis_quiet` follow the conventions of the
 #'   [withr](https://withr.r-lib.org) package.
 #'
 #' @return No return value, called for side effects

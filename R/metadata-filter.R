@@ -39,8 +39,7 @@
 #' @param property The property on the metadata you want to filter on
 #' @param operator The comparison operator you want to perform
 #' @param values The value to check against
-#' @param call description
-#'
+#' @param call The caller environment.
 #'
 #' @return A spliced list with filter in the format property:operator:value
 #'

@@ -1,8 +1,5 @@
 test_that("get_data_sets_by_level function works", {
 
-    skip_if_no_cred()
-    skip_if_offline()
-
     expect_error(get_data_sets_by_level())
     expect_error(get_data_sets_by_level(dataset_ids = 12345))
     expect_error(
@@ -52,6 +49,9 @@ test_that("get_data_sets_by_level function works", {
                                org_ids = 12)
     )
 
+    skip_if_no_cred()
+    skip_if_offline()
+
     # expect_null(
     #     get_data_sets_by_level(dataset_ids = 'WWh5hbCmvND',
     #                            start_date = '2023-01-01',
@@ -59,10 +59,10 @@ test_that("get_data_sets_by_level function works", {
     # )
 
     expect_no_error(
-        get_data_sets_by_level(dataset_ids = c('XnTPEQAh3WC', 'vGhomzLDNq3'),
+        get_data_sets_by_level(dataset_ids = c('VEM58nY22sO', 'mck6wRvBafz'),
                                start_date = '2023-01-01',
                                end_date = '2023-02-01',
                                level = 2,
-                               org_ids = c('jkG3zaihdSs', 'qKzosKQPl6G'))
+                               org_ids = c('W6sNfkJcXGC', 'YvLOmtTQD6b'))
     )
 })

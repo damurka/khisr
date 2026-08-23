@@ -43,7 +43,8 @@ The khisr package is designed to seamlessly integrate with DHIS2, providing R us
 
 - ***Data Retrieval:*** Easily download and manage data from DHIS2.
 - ***Flexible Queries:*** Customize data queries to retrieve specific data elements,   periods, and organizational units.
-- ***Secure Access:*** Manage credentials securely within your R environment.
+- ***Tracker Data:*** Retrieve tracked entities, enrollments, and events from DHIS2's Tracker API.
+- ***Secure Access:*** Manage credentials securely, using a username/password or a Personal Access Token.
 
 ### Use Cases
 
@@ -84,13 +85,20 @@ The khisr package operates in authenticated mode by default. This means you'll n
 ```{r eval = FALSE}
 # Option 1: Set credentials directly in R (less secure)
 
-khis_cred(username = 'DHIS2 username', 
-          password = 'DHIS2 password', 
+khis_cred(username = 'DHIS2 username',
+          password = 'DHIS2 password',
           server = 'https://<dhis2 server instance>')
 
 # Option 2: Set credentials from a secure configuration file (recommended)
 
 khis_cred(config_path = 'path/to/secret.json')
+
+# Option 3: Set credentials using a Personal Access Token, DHIS2's
+# recommended method for scripts and integrations, in place of
+# username/password
+
+khis_cred(token = 'DHIS2 personal access token',
+          server = 'https://<dhis2 server instance>')
 ```
 
 Once you've established your credentials, you're ready to leverage khisr's functions to download data from your DHIS2 instance.
@@ -102,32 +110,58 @@ For this overview, we've logged into DHIS2 as a specific user in a hidden chunk.
 This is a basic example which shows you how to solve a common problem:
 
 ```{r}
-# Retrieve the organisation units by county (level 2)
-counties <- get_organisation_units(level %.eq% '2')
-counties
+# Retrieve the organisation units by province (level 2)
+provinces <- get_organisation_units(level %.eq% '2')
+provinces
 
-# Retrieve organisation units by name (level included to ensure it refers to county)
-kiambu_county <- get_organisation_units(level %.eq% '2', 
-                                        name %.like% 'Kiambu')
-kiambu_county
+# Retrieve an organisation unit by name (level included to ensure it refers to a province)
+vientiane_capital <- get_organisation_units(level %.eq% '2',
+                                            name %.like% 'Vientiane Capital')
+vientiane_capital
 
-# Retrieve all data elements by data element group for outpatient (data element group name MOH 705)
-moh_705 <- get_data_elements(dataElementGroups.name %.like% 'moh 705')
-moh_705
+# Retrieve all data elements by data element group for malaria
+malaria_group <- get_data_elements(dataElementGroups.name %.like% 'malaria')
+malaria_group
 
-# Filter the data element to element that contain malaria
-malaria <- get_data_elements(dataElementGroups.name %.like% 'moh 705', 
-                             name %.like% 'malaria')
+# Filter the data elements to those reporting on malaria cases and deaths
+malaria <- get_data_elements(dataElementGroups.name %.like% 'malaria',
+                             name %.like% 'MAL - ') %>%
+    filter(name %in% c('MAL - Malaria confirmed cases reported',
+                       'MAL - Malaria deaths',
+                       'MAL - RDT positive malaria cases',
+                       'MAL - Suspected malaria cases'))
 malaria
 
-# Retrieve data for malaria in Kiambu county in the outpatient data element groups
+# Retrieve data for malaria in Vientiane Capital province
 data <- get_analytics(
         dx %.d% malaria$id,
         pe %.d% 'LAST_YEAR',
-        ou %.f% kiambu_county$id
+        ou %.f% vientiane_capital$id
     ) %>%
     left_join(malaria, by = c('dx'='id'))
 data
+```
+
+## Tracker Data
+
+Alongside aggregate analytics, khisr also reads DHIS2's Tracker API — case-based,
+person-level data such as tracked entities, enrollments, and events. See
+[Tracker Data](https://khisr.damurka.com/articles/tracker.html) for a full guide.
+
+```{r}
+# Tracked entities enrolled in a program, at an org unit and everything below it
+get_tracked_entities(
+    program = 'PREnRHSp3be',
+    org_units = 'IWp9dQGM0bS',
+    org_unit_mode = 'DESCENDANTS'
+)
+
+# Events for a program stage at a given org unit
+get_events(
+    program_stage = 'mj1stImcUCi',
+    org_unit = 'NRcrkSgDX5G',
+    org_unit_mode = 'DESCENDANTS'
+)
 ```
 
 ## Where to learn more
@@ -135,7 +169,10 @@ data
 [Get Started](https://khisr.damurka.com/articles/khisr.html)
 is a more extensive general introduction to khisr.
 
-Browse the [articles index](https://khisr.damurka.com/articles/index.html) to 
+[Tracker Data](https://khisr.damurka.com/articles/tracker.html) covers
+retrieving tracked entities, enrollments, and events.
+
+Browse the [articles index](https://khisr.damurka.com/articles/index.html) to
 find articles that cover various topics in more depth.
 
 See the [function index](https://khisr.damurka.com/reference/index.html) for an

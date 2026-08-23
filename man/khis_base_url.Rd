@@ -37,6 +37,7 @@ object, or falls back to the global auth credentials if \code{auth} is not provi
 }
 \seealso{
 Other credential functions: 
+\code{\link{khis_api_version}()},
 \code{\link{khis_cred}()},
 \code{\link{khis_cred_clear}()},
 \code{\link{khis_display_name}()},
