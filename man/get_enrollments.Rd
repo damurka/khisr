@@ -99,8 +99,8 @@ endpoint (unlike \code{events}, which only accepts the singular form).
 \dontshow{if (khis_has_cred()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # All enrollments in a program at a given org unit
-get_enrollments(program = 'IpHINAT79UW',
-                org_units = 'DiszpKrYNg8',
+get_enrollments(program = 'PREnRHSp3be',
+                org_units = 'IWp9dQGM0bS',
                 org_unit_mode = 'DESCENDANTS')
 \dontshow{\}) # examplesIf}
 }

@@ -6,6 +6,7 @@
 \usage{
 get_tracked_entities(
   program = NULL,
+  ...,
   tracked_entity_type = NULL,
   tracked_entities = NULL,
   org_units = NULL,
@@ -16,7 +17,6 @@ get_tracked_entities(
   enrolled_before = NULL,
   occurred_after = NULL,
   occurred_before = NULL,
-  ...,
   fields = c("trackedEntity", "trackedEntityType", "orgUnit", "createdAt", "updatedAt",
     "inactive"),
   page_size = 500,
@@ -29,6 +29,16 @@ get_tracked_entities(
 }
 \arguments{
 \item{program}{Optional. A program id to scope the query to.}
+
+\item{...}{One or more \code{\link[=tracked_entity_filter]{tracked_entity_filter()}} attribute filters (or
+its infix operators, e.g. \code{w75KJ2mc4zz \%.teq\% 'John'}), and/or other
+query parameters supported by your DHIS2 instance's Tracker API.
+Build filters with \code{\link[=tracked_entity_filter]{tracked_entity_filter()}} and its own infix
+operators, not \code{\link[=metadata_filter]{metadata_filter()}} or its infix operators (\verb{\%.eq\%},
+\verb{\%.in\%}, etc.) — those target the DHIS2 metadata API's larger operator
+set and, for \verb{in}/\verb{!in}, a different value-joining convention; using
+them here raises an error rather than silently sending malformed
+filter syntax.}
 
 \item{tracked_entity_type}{Optional. A tracked entity type id to scope the
 query to.}
@@ -52,16 +62,6 @@ strings bounding the tracked entity's enrollment date.}
 
 \item{occurred_after, occurred_before}{Optional. ISO-8601 date or datetime
 strings bounding the tracked entity's enrollment incident/occurred date.}
-
-\item{...}{One or more \code{\link[=tracked_entity_filter]{tracked_entity_filter()}} attribute filters (or
-its infix operators, e.g. \code{w75KJ2mc4zz \%.teq\% 'John'}), and/or other
-query parameters supported by your DHIS2 instance's Tracker API.
-Build filters with \code{\link[=tracked_entity_filter]{tracked_entity_filter()}} and its own infix
-operators, not \code{\link[=metadata_filter]{metadata_filter()}} or its infix operators (\verb{\%.eq\%},
-\verb{\%.in\%}, etc.) — those target the DHIS2 metadata API's larger operator
-set and, for \verb{in}/\verb{!in}, a different value-joining convention; using
-them here raises an error rather than silently sending malformed
-filter syntax.}
 
 \item{fields}{The DHIS2 field-selector for the columns to return.}
 
@@ -98,14 +98,14 @@ an unscoped query will be rejected by the server. Nested repeating data
 \dontshow{if (khis_has_cred()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # All tracked entities enrolled in a program at a given org unit
-get_tracked_entities(program = 'IpHINAT79UW',
-                     org_units = 'DiszpKrYNg8',
+get_tracked_entities(program = 'PREnRHSp3be',
+                     org_units = 'IWp9dQGM0bS',
                      org_unit_mode = 'DESCENDANTS')
 
-# Tracked entities whose attribute w75KJ2mc4zz equals "John"
-get_tracked_entities(program = 'IpHINAT79UW',
-                     org_units = 'DiszpKrYNg8',
-                     tracked_entity_filter('w75KJ2mc4zz', 'eq', 'John'))
+# Tracked entities whose attribute mTYYajEhlPY contains "John"
+get_tracked_entities(program = 'PREnRHSp3be',
+                     org_units = 'IWp9dQGM0bS',
+                     tracked_entity_filter('mTYYajEhlPY', 'like', 'John'))
 \dontshow{\}) # examplesIf}
 }
 \seealso{

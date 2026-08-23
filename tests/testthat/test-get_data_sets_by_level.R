@@ -59,10 +59,10 @@ test_that("get_data_sets_by_level function works", {
     # )
 
     expect_no_error(
-        get_data_sets_by_level(dataset_ids = c('XnTPEQAh3WC', 'vGhomzLDNq3'),
+        get_data_sets_by_level(dataset_ids = c('VEM58nY22sO', 'mck6wRvBafz'),
                                start_date = '2023-01-01',
                                end_date = '2023-02-01',
                                level = 2,
-                               org_ids = c('jkG3zaihdSs', 'qKzosKQPl6G'))
+                               org_ids = c('W6sNfkJcXGC', 'YvLOmtTQD6b'))
     )
 })

@@ -7,8 +7,8 @@ test_that("get_event_analytics function works", {
     skip_if_offline()
 
     expect_no_error(
-        get_event_analytics(program = 'IpHINAT79UW',
+        get_event_analytics(program = 'PREnRHSp3be',
                             ou %.d% 'USER_ORGUNIT',
-                            pe %.d% 'LAST_YEAR')
+                            pe %.d% 'LAST_12_MONTHS')
     )
 })

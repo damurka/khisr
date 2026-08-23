@@ -59,16 +59,17 @@
 #' @examplesIf khis_has_cred()
 #'
 #' # All tracked entities enrolled in a program at a given org unit
-#' get_tracked_entities(program = 'IpHINAT79UW',
-#'                      org_units = 'DiszpKrYNg8',
+#' get_tracked_entities(program = 'PREnRHSp3be',
+#'                      org_units = 'IWp9dQGM0bS',
 #'                      org_unit_mode = 'DESCENDANTS')
 #'
-#' # Tracked entities whose attribute w75KJ2mc4zz equals "John"
-#' get_tracked_entities(program = 'IpHINAT79UW',
-#'                      org_units = 'DiszpKrYNg8',
-#'                      tracked_entity_filter('w75KJ2mc4zz', 'eq', 'John'))
+#' # Tracked entities whose attribute mTYYajEhlPY contains "John"
+#' get_tracked_entities(program = 'PREnRHSp3be',
+#'                      org_units = 'IWp9dQGM0bS',
+#'                      tracked_entity_filter('mTYYajEhlPY', 'like', 'John'))
 
 get_tracked_entities <- function(program = NULL,
+                                 ...,
                                  tracked_entity_type = NULL,
                                  tracked_entities = NULL,
                                  org_units = NULL,
@@ -79,7 +80,6 @@ get_tracked_entities <- function(program = NULL,
                                  enrolled_before = NULL,
                                  occurred_after = NULL,
                                  occurred_before = NULL,
-                                 ...,
                                  fields = c('trackedEntity', 'trackedEntityType', 'orgUnit',
                                            'createdAt', 'updatedAt', 'inactive'),
                                  page_size = 500,

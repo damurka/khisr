@@ -11,8 +11,8 @@ test_that("get_events function works", {
     skip_if_offline()
 
     expect_no_error(
-        get_events(program = 'IpHINAT79UW',
-                  org_unit = 'DiszpKrYNg8',
+        get_events(program = 'PREnRHSp3be',
+                  org_unit = 'NRcrkSgDX5G',
                   org_unit_mode = 'DESCENDANTS')
     )
 })

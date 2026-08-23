@@ -66,7 +66,7 @@ needed for your instance.
 \dontshow{if (khis_has_cred()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # Relationships for a specific tracked entity
-get_relationships(tracked_entity = 'IOR1AXXl24H')
+get_relationships(tracked_entity = 'qkU5JI6SQcd')
 \dontshow{\}) # examplesIf}
 }
 \seealso{

@@ -100,8 +100,8 @@ client-side instead. \code{dataValues} is returned as a list-column — use
 \dontshow{if (khis_has_cred()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # All events for a program stage at a given org unit
-get_events(program_stage = 'A03MvHHogjR',
-           org_unit = 'DiszpKrYNg8',
+get_events(program_stage = 'mj1stImcUCi',
+           org_unit = 'NRcrkSgDX5G',
            org_unit_mode = 'DESCENDANTS')
 \dontshow{\}) # examplesIf}
 }

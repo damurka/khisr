@@ -12,8 +12,8 @@ test_that("get_data_value_sets function works", {
     skip_if_offline()
 
     expect_no_error(
-        get_data_value_sets(data_sets = 'WWh5hbCmvND',
-                            org_units = 'DiszpKrYNg8',
+        get_data_value_sets(data_sets = 'VEM58nY22sO',
+                            org_units = 'W6sNfkJcXGC',
                             children = TRUE,
                             periods = '202301')
     )

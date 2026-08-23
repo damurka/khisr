@@ -44,7 +44,7 @@
 #' @examplesIf khis_has_cred()
 #'
 #' # Relationships for a specific tracked entity
-#' get_relationships(tracked_entity = 'IOR1AXXl24H')
+#' get_relationships(tracked_entity = 'qkU5JI6SQcd')
 
 get_relationships <- function(tracked_entity = NULL,
                               enrollment = NULL,

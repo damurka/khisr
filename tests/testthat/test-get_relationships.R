@@ -10,5 +10,5 @@ test_that("get_relationships function works", {
     skip_if_no_cred()
     skip_if_offline()
 
-    expect_no_error(get_relationships(tracked_entity = 'IOR1AXXl24H'))
+    expect_no_error(get_relationships(tracked_entity = 'qkU5JI6SQcd'))
 })

@@ -53,16 +53,16 @@ test_that("get_analytics_by_level function works", {
     skip_if_offline()
 
     expect_null(
-        get_analytics_by_level(element_ids = 'cXe64Yk0QMY',
+        get_analytics_by_level(element_ids = 'lYsfXxCw6Qi',
                                start_date = '2023-01-01',
                                end_date = '2023-01-01')
     )
 
     expect_no_error(
-        get_analytics_by_level(element_ids = 'cXe64Yk0QMY',
+        get_analytics_by_level(element_ids = 'lYsfXxCw6Qi',
                                start_date = '2023-01-01',
                                end_date = '2023-02-01',
                                level = 2,
-                               org_ids = c('jkG3zaihdSs', 'qKzosKQPl6G'))
+                               org_ids = c('W6sNfkJcXGC', 'YvLOmtTQD6b'))
     )
 })

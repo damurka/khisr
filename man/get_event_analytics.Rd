@@ -65,10 +65,10 @@ instead of through this function.
 \examples{
 \dontshow{if (khis_has_cred()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
-# Events for a program, by org unit, over the last year
-get_event_analytics(program = 'IpHINAT79UW',
+# Events for a program, by org unit, over the last 12 months
+get_event_analytics(program = 'PREnRHSp3be',
                     ou \%.d\% 'USER_ORGUNIT',
-                    pe \%.d\% 'LAST_YEAR')
+                    pe \%.d\% 'LAST_12_MONTHS')
 \dontshow{\}) # examplesIf}
 }
 \seealso{

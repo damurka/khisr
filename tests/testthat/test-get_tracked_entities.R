@@ -11,8 +11,8 @@ test_that("get_tracked_entities function works", {
     skip_if_offline()
 
     expect_no_error(
-        get_tracked_entities(program = 'IpHINAT79UW',
-                             org_units = 'DiszpKrYNg8',
+        get_tracked_entities(program = 'PREnRHSp3be',
+                             org_units = 'IWp9dQGM0bS',
                              org_unit_mode = 'DESCENDANTS')
     )
 })

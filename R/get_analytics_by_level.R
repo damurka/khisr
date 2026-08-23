@@ -37,10 +37,10 @@
 #' * [get_data_elements_with_category_options()] for retrieving the data elements
 #'
 #' @examplesIf khis_has_cred()
-#' # Clinical Breast Examination data elements
-#' # XEX93uLsAm2 = CBE Abnormal
-#' # cXe64Yk0QMY = CBE Normal
-#' element_id = c('cXe64Yk0QMY', 'XEX93uLsAm2')
+#' # Malaria data elements
+#' # lYsfXxCw6Qi = MAL - Malaria confirmed cases reported
+#' # GxlrIgMyEf4 = MAL - Malaria deaths
+#' element_id = c('lYsfXxCw6Qi', 'GxlrIgMyEf4')
 #'
 #' # Download data from February 2023 to current date
 #' data <- get_analytics_by_level(element_ids = element_id,

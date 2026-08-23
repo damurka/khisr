@@ -90,8 +90,8 @@ unlike the other two:
 ```{r}
 # All tracked entities enrolled in a program, at an org unit and everything below it
 get_tracked_entities(
-    program = 'IpHINAT79UW',
-    org_units = 'DiszpKrYNg8',
+    program = 'PREnRHSp3be',
+    org_units = 'IWp9dQGM0bS',
     org_unit_mode = 'DESCENDANTS'
 )
 ```
@@ -104,8 +104,8 @@ such as `attributes` and `enrollments` come back as list-columns — use
 
 ```{r}
 entities <- get_tracked_entities(
-    program = 'IpHINAT79UW',
-    org_units = 'DiszpKrYNg8',
+    program = 'PREnRHSp3be',
+    org_units = 'IWp9dQGM0bS',
     org_unit_mode = 'DESCENDANTS',
     fields = c('trackedEntity', 'orgUnit', 'attributes')
 )
@@ -139,20 +139,20 @@ syntax to the server.
 | `!null`   | *(none — pass `NULL` to `tracked_entity_filter()`)* | Attribute has a value |
 
 ```{r}
-# Tracked entities whose attribute w75KJ2mc4zz starts with "Ann"
+# Tracked entities whose attribute mTYYajEhlPY starts with "Ann"
 get_tracked_entities(
-    program = 'IpHINAT79UW',
-    org_units = 'DiszpKrYNg8',
+    program = 'PREnRHSp3be',
+    org_units = 'IWp9dQGM0bS',
     org_unit_mode = 'DESCENDANTS',
-    tracked_entity_filter('w75KJ2mc4zz', 'sw', 'Ann')
+    tracked_entity_filter('mTYYajEhlPY', 'sw', 'John')
 )
 
 # Equivalent, using the infix operator
 get_tracked_entities(
-    program = 'IpHINAT79UW',
-    org_units = 'DiszpKrYNg8',
+    program = 'PREnRHSp3be',
+    org_units = 'IWp9dQGM0bS',
     org_unit_mode = 'DESCENDANTS',
-    w75KJ2mc4zz %.tsw% 'Ann'
+    mTYYajEhlPY %.tsw% 'John'
 )
 ```
 
@@ -163,8 +163,8 @@ in a `dataValues` list-column.
 
 ```{r}
 get_events(
-    program = 'IpHINAT79UW',
-    org_unit = 'DiszpKrYNg8',
+    program = 'PREnRHSp3be',
+    org_unit = 'NRcrkSgDX5G',
     org_unit_mode = 'DESCENDANTS'
 )
 ```
@@ -182,8 +182,8 @@ who is enrolled and when, independent of any particular visit.
 
 ```{r}
 get_enrollments(
-    program = 'IpHINAT79UW',
-    org_units = 'DiszpKrYNg8',
+    program = 'PREnRHSp3be',
+    org_units = 'IWp9dQGM0bS',
     org_unit_mode = 'DESCENDANTS'
 )
 ```
@@ -196,7 +196,7 @@ from the other three functions: provide exactly one of `tracked_entity`,
 `enrollment`, or `event` to retrieve that object's relationships.
 
 ```{r}
-get_relationships(tracked_entity = 'IOR1AXXl24H')
+get_relationships(tracked_entity = 'qkU5JI6SQcd')
 ```
 
 # Aggregated Tracker analytics
@@ -210,9 +210,9 @@ argument (used as a URL path segment, not a dimension):
 
 ```{r}
 get_event_analytics(
-    program = 'IpHINAT79UW',
+    program = 'PREnRHSp3be',
     ou %.d% 'USER_ORGUNIT',
-    pe %.d% 'LAST_YEAR'
+    pe %.d% 'LAST_12_MONTHS'
 )
 ```
 

@@ -26,13 +26,13 @@
 #'
 #' @examplesIf khis_has_cred()
 #'
-#' # Clinical Breast Examination data elements
-#' # XEX93uLsAm2 = CBE Abnormal
-#' # cXe64Yk0QMY = CBE Normal
-#' element_id <- c('cXe64Yk0QMY', 'XEX93uLsAm2')
+#' # Malaria data elements
+#' # lYsfXxCw6Qi = MAL - Malaria confirmed cases reported
+#' # GxlrIgMyEf4 = MAL - Malaria deaths
+#' element_id <- c('lYsfXxCw6Qi', 'GxlrIgMyEf4')
 #'
-#' # Download data from February 2023 to current date
-#' data <- get_analytics(dx %.d% element_id, pe %.d% 'LAST_MONTH')
+#' # Download data for the last year
+#' data <- get_analytics(dx %.d% element_id, pe %.d% 'LAST_YEAR')
 #' data
 
 get_analytics <- function(...,

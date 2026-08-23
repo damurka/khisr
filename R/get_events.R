@@ -66,8 +66,8 @@
 #' @examplesIf khis_has_cred()
 #'
 #' # All events for a program stage at a given org unit
-#' get_events(program_stage = 'A03MvHHogjR',
-#'            org_unit = 'DiszpKrYNg8',
+#' get_events(program_stage = 'mj1stImcUCi',
+#'            org_unit = 'NRcrkSgDX5G',
 #'            org_unit_mode = 'DESCENDANTS')
 
 get_events <- function(program = NULL,

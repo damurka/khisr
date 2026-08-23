@@ -64,8 +64,8 @@
 #' @examplesIf khis_has_cred()
 #'
 #' # All enrollments in a program at a given org unit
-#' get_enrollments(program = 'IpHINAT79UW',
-#'                 org_units = 'DiszpKrYNg8',
+#' get_enrollments(program = 'PREnRHSp3be',
+#'                 org_units = 'IWp9dQGM0bS',
 #'                 org_unit_mode = 'DESCENDANTS')
 
 get_enrollments <- function(program = NULL,

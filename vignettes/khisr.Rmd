@@ -141,23 +141,23 @@ The following table provides a summary of the supported operators:
 Basic usage of the metadata filter
 
 ```{r, eval = can_decrypt}
-# Retrieve organisation units by county (level 2)
-county <- get_organisation_units(level %.eq% '2')
-county
+# Retrieve organisation units by province (level 2)
+province <- get_organisation_units(level %.eq% '2')
+province
 
-# Retrieve county by name (Mombasa)
-county <- get_organisation_units(level %.eq% '2',
-                                 name %.like% 'mombasa')
-county
+# Retrieve province by name (Vientiane Capital)
+province <- get_organisation_units(level %.eq% '2',
+                                   name %.like% 'vientiane capital')
+province
 
-data_element_id <- c('cXe64Yk0QMY', 'XEX93uLsAm2')
+data_element_id <- c('lYsfXxCw6Qi', 'GxlrIgMyEf4')
 
 # Retrieve data elements by ID using operator in
 data_elements <- get_data_elements(id %.in% data_element_id)
 data_elements
 
 # Retrieve data elements by filtering using dataElementGroups
-data_elements <- get_data_elements(dataElementGroups.name %.like% 'moh 705')
+data_elements <- get_data_elements(dataElementGroups.name %.like% 'malaria')
 data_elements
 ```
 
@@ -225,14 +225,14 @@ ou %.d% 'USER_ORGUNIT'
 
 # showing in the analytics
 get_analytics(
-    dx %.d% c('siOyOiOJpI8', 'Lt0FqtnHraW', 'OoakJhWiyZp'),
+    dx %.d% c('lYsfXxCw6Qi', 'vTRrNdOOT9g', 'GxlrIgMyEf4'),
     pe %.d% 'LAST_YEAR',
-    ou %.d% c('qKzosKQPl6G')
+    ou %.d% c('W6sNfkJcXGC')
 )
 
 # Using the startDate and endDate with organisation unit keyword 'USER_ORGUNIT'
 get_analytics(
-    dx %.d% c('siOyOiOJpI8', 'Lt0FqtnHraW', 'OoakJhWiyZp'),
+    dx %.d% c('lYsfXxCw6Qi', 'vTRrNdOOT9g', 'GxlrIgMyEf4'),
     ou %.d% 'USER_ORGUNIT',
     pe %.d% 'all',
     startDate = '2023-07-01',
@@ -250,12 +250,12 @@ pe %.f% 'LAST_YEAR'
 # Filter by organisation unit
 ou %.f% 'USER_ORGUNIT'
 
-# showing in the analytics. filter by organisation unit with id 'qKzosKQPl6G'
+# showing in the analytics. filter by organisation unit with id 'W6sNfkJcXGC'
 # and period 'LAST_YEAR'
 get_analytics(
-    dx %.d% c('siOyOiOJpI8', 'Lt0FqtnHraW', 'OoakJhWiyZp'),
+    dx %.d% c('lYsfXxCw6Qi', 'vTRrNdOOT9g', 'GxlrIgMyEf4'),
     pe %.f% 'LAST_YEAR',
-    ou %.f% 'qKzosKQPl6G'
+    ou %.f% 'W6sNfkJcXGC'
 )
 ```
 
@@ -270,8 +270,8 @@ through its Tracker API. `khisr` provides `get_tracked_entities()`,
 ```{r, eval = can_decrypt}
 # Tracked entities enrolled in a program, at an org unit and everything below it
 get_tracked_entities(
-    program = 'IpHINAT79UW',
-    org_units = 'DiszpKrYNg8',
+    program = 'PREnRHSp3be',
+    org_units = 'IWp9dQGM0bS',
     org_unit_mode = 'DESCENDANTS'
 )
 ```

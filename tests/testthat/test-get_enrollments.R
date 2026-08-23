@@ -9,8 +9,8 @@ test_that("get_enrollments function works", {
     skip_if_offline()
 
     expect_no_error(
-        get_enrollments(program = 'IpHINAT79UW',
-                        org_units = 'DiszpKrYNg8',
+        get_enrollments(program = 'PREnRHSp3be',
+                        org_units = 'IWp9dQGM0bS',
                         org_unit_mode = 'DESCENDANTS')
     )
 })
