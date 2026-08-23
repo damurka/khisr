@@ -54,7 +54,7 @@ api_get <- function(endpoint,
         req_url_path_append(api_path, endpoint) %>%
         req_url_query(!!!params, .multi = 'explode') %>%
         req_headers('Accept' = 'application/json') %>%
-        req_user_agent('khisr/1.0.6 (https://khisr.damurka.com)') %>%
+        req_user_agent(str_glue('khisr/{utils::packageVersion("khisr")} (https://khisr.damurka.com)')) %>%
         req_retry(max_tries = retry, is_transient = is_transient_khis) %>%
         req_timeout(timeout) %>%
         req_auth_khis(auth = auth, call = call) %>%
