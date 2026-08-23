@@ -101,7 +101,7 @@ The following table provides a summary of the supported operators:
 
 | DHIS2 Operator  | Infix Operator  | Description                                         |
 |:----------------|:----------------|:----------------------------------------------------|
-|` eq`            | `%.eq%`         | Equality                                            |
+| `eq`            | `%.eq%`         | Equality                                            |
 | `!eq`           | `%.~eq%`        | Inequality                                          |
 | `ieq`           | `%.ieq%`        | Case insensitive string, match exact                |
 | `ne`            | `%.ne%`         | Inequality                                          |
@@ -177,22 +177,13 @@ specified dimension items. The fixed dimensions are the **data element** _(dx)_
 dynamically add dimensions through categories, data element group sets and 
 organisation unit group sets.
 
-| Dimension ID | Dimensions                           |
-|:-------------|:-----------------------------------------------------------------|
-| dx           | Data elements, indicators, data set reporting rate metrics,      |
-|              | data element operands, program indicators, program data elements,|
-|              | program attributes, validation rules                             |
-|              |                                                                  |
-| pe           | ISO periods and relative periods (see "date and period format")  |
-|              |                                                                  |
-| ou           | Organisation unit hierarchy                                      |
-|              | Organisation unit identifiers, keywords USER_ORGUNIT,            |
-|              | USER_ORGUNIT_CHILDREN, USER_ORGUNIT_GRANDCHILDREN, LEVEL-<level>,|
-|              | and OU_GROUP-<group-id>                                          |
-|              |                                                                  |
-| co           | Category option combo identifiers (use `all` to get all items)   |
-|              |                                                                  |
-| ao           |Category option combo identifiers (use `all` to get all items)    |
+| Dimension ID | Dimensions                                                                                                                                     |
+|:-------------|:------------------------------------------------------------------------------------------------------------------------------------------------|
+| `dx`         | Data elements, indicators, data set reporting rate metrics, data element operands, program indicators, program data elements, program attributes, validation rules |
+| `pe`         | ISO periods and relative periods (see [Date and Period Format](https://khisr.damurka.com/articles/date-format.html))                            |
+| `ou`         | Organisation unit hierarchy: organisation unit identifiers, or keywords `USER_ORGUNIT`, `USER_ORGUNIT_CHILDREN`, `USER_ORGUNIT_GRANDCHILDREN`, `LEVEL-<level>`, and `OU_GROUP-<group-id>` |
+| `co`         | Category option combo identifiers (use `all` to get all items)                                                                                   |
+| `ao`         | Attribute option combo identifiers (use `all` to get all items)                                                                                   |
 
 
 ### Filter (filter)
@@ -253,5 +244,22 @@ get_analytics(
     dx %.d% c('siOyOiOJpI8', 'Lt0FqtnHraW', 'OoakJhWiyZp'),
     pe %.f% 'LAST_YEAR',
     ou %.f% 'qKzosKQPl6G'
+)
+```
+
+## Tracker data
+
+Alongside aggregate analytics, DHIS2 also stores case-based, person-level data
+through its Tracker API. `khisr` provides `get_tracked_entities()`,
+`get_enrollments()`, and `get_events()` for reading it, plus
+`tracked_entity_filter()` for filtering tracked entities by attribute value. See
+[Tracker Data](https://khisr.damurka.com/articles/tracker.html) for a full guide.
+
+```{r, eval = can_decrypt}
+# Tracked entities enrolled in a program, at an org unit and everything below it
+get_tracked_entities(
+    program = 'IpHINAT79UW',
+    org_units = 'DiszpKrYNg8',
+    org_unit_mode = 'DESCENDANTS'
 )
 ```

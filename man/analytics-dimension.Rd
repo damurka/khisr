@@ -40,7 +40,7 @@ validation rules.
 \item Organisation unit hierarchy (ou): Specific health facilities, districts, countries,
 and keywords for user location or its sub-units.
 \item Category option combinations (co): Category option combo identifiers.
-\item Attribute option combinations (ao): Category option combo identifiers.
+\item Attribute option combinations (ao): Attribute option combo identifiers.
 \item Categories: Category option identifiers.
 \item Data element group sets: Data element group identifiers.
 \item Organisation unit group sets: Organisation unit group identifiers.

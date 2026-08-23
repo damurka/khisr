@@ -25,6 +25,7 @@ articles:
     - khisr
     - articles/data-dimensions
     - articles/date-format
+    - articles/tracker
     - articles/set-your-credentials
 
 reference:
@@ -38,6 +39,7 @@ reference:
       - khis_username
       - khis_display_name
       - khis_base_url
+      - khis_api_version
       - khisr-configuration
   - title: "DHIS2 Metadata"
     desc: >
@@ -52,6 +54,14 @@ reference:
     contents:
       - get_analytics
       - analytics-dimension
+  - title: "DHIS2 Tracker"
+    desc: >
+      Retrieve tracked entities, events, and enrollments from DHIS2's Tracker API
+    contents:
+      - get_tracked_entities
+      - get_events
+      - get_enrollments
+      - tracked_entity_filter
   - title: "Experimental Functions"
     desc: >
         Experimental functions that formats the data in logical manner

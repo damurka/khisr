@@ -1,0 +1,175 @@
+---
+title: "Tracker Data"
+---
+
+```{r, include = FALSE}
+can_decrypt <- httr2::secret_has_key('KHIS_KEY')
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  error = TRUE,
+  purl = can_decrypt,
+  eval = can_decrypt
+)
+options(tibble.print_min = 5L, tibble.print_max = 5L)
+```
+
+```{r, eval = !can_decrypt, echo = FALSE, comment = NA}
+message("No token available. Code chunks will not be evaluated.")
+```
+
+```{r, eval = can_decrypt, include = FALSE}
+khisr:::khis_cred_docs()
+```
+
+```{r, include = FALSE}
+library(khisr)
+```
+
+# Overview
+
+Alongside the [aggregate data](https://khisr.damurka.com/articles/data-dimensions.html)
+covered by `get_analytics()`, DHIS2's **Tracker** stores case-based, person-level
+data — the kind of record you'd use for individual patients or clients rather than
+facility-level totals. `khisr` provides three functions for reading it:
+
+| khisr function            | DHIS2 API Endpoint         | Retrieves                          |
+|:---------------------------|:----------------------------|:------------------------------------|
+| `get_tracked_entities()`   | `tracker/trackedEntities`   | The people/subjects being tracked  |
+| `get_enrollments()`        | `tracker/enrollments`       | Their enrollment in a program      |
+| `get_events()`             | `tracker/events`            | What happened at each program stage visit |
+
+These map onto four core Tracker concepts:
+
+| Concept            | Description                                                                                     |
+|:--------------------|:--------------------------------------------------------------------------------------------------|
+| **Tracked Entity**  | The subject being followed over time (e.g. a patient or client). Identified by a `trackedEntityType` such as "Person". |
+| **Program**         | The case-based program a tracked entity is enrolled in (e.g. a child health programme).          |
+| **Enrollment**      | A tracked entity's participation in a specific program, with its own enrollment and incident dates. |
+| **Event**           | A single visit/data-collection point within an enrollment, tied to one `programStage` (e.g. a birth visit) and carrying `dataValues`. |
+
+All three functions are `r lifecycle::badge("experimental")` and share the same
+scoping, pagination, and error-handling behaviour.
+
+# Scoping a query
+
+Every Tracker query must be scoped — DHIS2 rejects an unscoped request. Scope by
+`program`, and/or by `org_units` together with `org_unit_mode`, which controls how
+`org_units` is interpreted:
+
+| `org_unit_mode` | Meaning                                                          |
+|:------------------|:--------------------------------------------------------------------|
+| `SELECTED`         | Only the given org units (DHIS2's default when `org_units` is set)  |
+| `CHILDREN`         | The given org units and their immediate children                    |
+| `DESCENDANTS`      | The given org units and all units below them in the hierarchy       |
+| `ACCESSIBLE`       | Everything the authenticated user has access to (default when `org_units` is omitted) |
+| `CAPTURE`          | Everything the authenticated user can capture data into             |
+| `ALL`              | Every org unit in the instance (typically requires elevated authority) |
+
+```{r}
+# All tracked entities enrolled in a program, at an org unit and everything below it
+get_tracked_entities(
+    program = 'IpHINAT79UW',
+    org_units = 'DiszpKrYNg8',
+    org_unit_mode = 'DESCENDANTS'
+)
+```
+
+# Retrieving tracked entities
+
+`get_tracked_entities()` returns one row per tracked entity. Repeating structures
+such as `attributes` and `enrollments` come back as list-columns — use
+[tidyr::unnest_wider()] or [tidyr::unnest_longer()] to flatten the parts you need.
+
+```{r}
+entities <- get_tracked_entities(
+    program = 'IpHINAT79UW',
+    org_units = 'DiszpKrYNg8',
+    org_unit_mode = 'DESCENDANTS',
+    fields = c('trackedEntity', 'orgUnit', 'attributes')
+)
+entities
+```
+
+## Filtering by attribute value
+
+`get_tracked_entities()` also accepts one or more [tracked_entity_filter()]
+attribute filters. This is a separate, smaller operator set from
+[metadata_filter()] — it applies only to the `trackedEntities` endpoint, and the
+`in` operator joins values with semicolons rather than a comma-separated bracket
+list:
+
+| Operator | Meaning                     |
+|:----------|:------------------------------|
+| `eq`      | Equality                     |
+| `ne`      | Inequality                   |
+| `ge`      | Greater than or equal        |
+| `gt`      | Greater than                 |
+| `le`      | Less than or equal           |
+| `lt`      | Less than                    |
+| `like`    | Match anywhere               |
+| `sw`      | Starts with                  |
+| `ew`      | Ends with                    |
+| `in`      | Match one or more values     |
+| `null`    | Attribute has no value       |
+| `!null`   | Attribute has a value        |
+
+```{r}
+# Tracked entities whose attribute w75KJ2mc4zz starts with "Ann"
+get_tracked_entities(
+    program = 'IpHINAT79UW',
+    org_units = 'DiszpKrYNg8',
+    org_unit_mode = 'DESCENDANTS',
+    tracked_entity_filter('w75KJ2mc4zz', 'sw', 'Ann')
+)
+```
+
+# Retrieving events
+
+`get_events()` returns one row per event, with the data collected at that visit
+in a `dataValues` list-column.
+
+```{r}
+get_events(
+    program = 'IpHINAT79UW',
+    org_units = 'DiszpKrYNg8',
+    org_unit_mode = 'DESCENDANTS'
+)
+```
+
+DHIS2's Tracker API does not currently document a way to filter events by data
+element value the way `trackedEntities` supports attribute filtering, so
+`get_events()` has no `filter` argument. If your instance supports this via an
+undocumented parameter, pass it through `...`; otherwise retrieve the broader
+event set and filter client-side after unnesting `dataValues`.
+
+# Retrieving enrollments
+
+`get_enrollments()` returns one row per enrollment, useful for questions about
+who is enrolled and when, independent of any particular visit.
+
+```{r}
+get_enrollments(
+    program = 'IpHINAT79UW',
+    org_units = 'DiszpKrYNg8',
+    org_unit_mode = 'DESCENDANTS'
+)
+```
+
+# Date filters and pagination
+
+All three functions accept `updated_after`/`updated_before`, and
+`get_tracked_entities()`/`get_enrollments()` additionally accept
+`enrolled_after`/`enrolled_before` and `occurred_after`/`occurred_before` to
+bound results by enrollment or incident date. `get_events()` accepts
+`occurred_after`/`occurred_before` for the event's own occurred date.
+
+Results are paginated automatically — `page_size` (default 500) controls how many
+records are requested per page, not the total returned; all matching pages are
+fetched and combined into a single tibble.
+
+# Further resources
+
+For the full set of query parameters your DHIS2 instance supports, see the
+[DHIS2 Tracker API documentation](https://docs.dhis2.org/en/develop/using-the-api/dhis-core-version-master/tracker.html).
