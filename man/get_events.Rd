@@ -41,7 +41,11 @@ query to.}
 strings bounding the event's last-updated timestamp.}
 
 \item{occurred_after, occurred_before}{Optional. ISO-8601 date or datetime
-strings bounding the event's occurred date.}
+strings bounding the event's occurred date (sent as the unprefixed
+\code{occurredAfter}/\code{occurredBefore} query params — the corresponding
+\code{\link[=get_tracked_entities]{get_tracked_entities()}} arguments use \code{eventOccurredAfter}/
+\code{eventOccurredBefore} instead, to disambiguate from a tracked entity's
+other nested dates).}
 
 \item{...}{Other query parameters supported by your DHIS2 instance's
 Tracker API (e.g. \code{status}, \code{assignedUserMode}).}
@@ -74,6 +78,13 @@ Tracker API.
 DHIS2 requires an events query to be scoped by at least one of \code{program},
 \code{program_stage}, or \code{org_units}; an unscoped query will be rejected by the
 server.
+
+The \code{occurredAfter}/\code{occurredBefore} query parameter names used here
+(unprefixed, unlike the equivalent \code{\link[=get_tracked_entities]{get_tracked_entities()}} arguments)
+are based on the best available documentation and usage examples rather
+than a directly confirmed parameter table for this specific endpoint —
+verify against your own instance if these filters don't behave as
+expected.
 
 DHIS2's published Tracker API documentation does not describe a supported
 way to filter events by data element value (unlike \code{\link[=get_tracked_entities]{get_tracked_entities()}},

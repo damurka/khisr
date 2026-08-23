@@ -15,9 +15,16 @@
 #' @param updated_after,updated_before Optional. ISO-8601 date or datetime
 #'   strings bounding the enrollment's last-updated timestamp.
 #' @param enrolled_after,enrolled_before Optional. ISO-8601 date or datetime
-#'   strings bounding the enrollment date.
+#'   strings bounding the enrollment date (sent as the unprefixed
+#'   `enrolledAfter`/`enrolledBefore` query params — the corresponding
+#'   [get_tracked_entities()] arguments use `enrollmentEnrolledAfter`/
+#'   `enrollmentEnrolledBefore` instead, to disambiguate from a tracked
+#'   entity's other nested dates).
 #' @param occurred_after,occurred_before Optional. ISO-8601 date or datetime
-#'   strings bounding the enrollment's incident/occurred date.
+#'   strings bounding the enrollment's incident/occurred date (sent as the
+#'   unprefixed `occurredAfter`/`occurredBefore` query params — the
+#'   corresponding [get_tracked_entities()] arguments use
+#'   `enrollmentOccurredAfter`/`enrollmentOccurredBefore` instead).
 #' @param ... Other query parameters supported by your DHIS2 instance's
 #'   Tracker API (e.g. `status`).
 #' @param fields The DHIS2 field-selector for the columns to return.
@@ -38,6 +45,13 @@
 #' silently sent as an unsupported query parameter; use
 #' [get_tracked_entities()] with [tracked_entity_filter()] to filter by
 #' attribute value instead.
+#'
+#' The `enrolledAfter`/`enrolledBefore`/`occurredAfter`/`occurredBefore`
+#' query parameter names used here (unprefixed, unlike the equivalent
+#' [get_tracked_entities()] arguments) are based on the best available
+#' documentation and usage examples rather than a directly confirmed
+#' parameter table for this specific endpoint — verify against your own
+#' instance if these filters don't behave as expected.
 #'
 #' @return A tibble of enrollments, or `NULL` if none were found.
 #'
@@ -94,10 +108,10 @@ get_enrollments <- function(program = NULL,
         orgUnitMode = org_unit_mode,
         updatedAfter = updated_after,
         updatedBefore = updated_before,
-        enrollmentEnrolledAfter = enrolled_after,
-        enrollmentEnrolledBefore = enrolled_before,
-        enrollmentOccurredAfter = occurred_after,
-        enrollmentOccurredBefore = occurred_before,
+        enrolledAfter = enrolled_after,
+        enrolledBefore = enrolled_before,
+        occurredAfter = occurred_after,
+        occurredBefore = occurred_before,
         ...,
         fields = fields,
         page_size = page_size,

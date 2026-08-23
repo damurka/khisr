@@ -174,7 +174,12 @@ All three functions accept `updated_after`/`updated_before`, and
 `get_tracked_entities()`/`get_enrollments()` additionally accept
 `enrolled_after`/`enrolled_before` and `occurred_after`/`occurred_before` to
 bound results by enrollment or incident date. `get_events()` accepts
-`occurred_after`/`occurred_before` for the event's own occurred date.
+`occurred_after`/`occurred_before` for the event's own occurred date. On
+`get_events()` and `get_enrollments()`, the underlying DHIS2 query parameter
+names for these are based on the best available documentation rather than a
+directly confirmed parameter table for those specific endpoints — see their
+help pages (`?get_events`, `?get_enrollments`) for details, and verify
+against your own instance if a date filter doesn't behave as expected.
 
 Results are paginated automatically — `page_size` (default 500) controls how many
 records are requested per page, not the total returned; all matching pages are

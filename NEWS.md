@@ -18,6 +18,13 @@
   errors on such a filter instead of silently sending malformed syntax to
   the server, and `get_events()`/`get_enrollments()` reject any `filter`
   argument outright, since DHIS2 doesn't document filter support there.
+  `get_events()`'s `occurred_after`/`occurred_before` and
+  `get_enrollments()`'s `enrolled_after`/`enrolled_before`/`occurred_after`/
+  `occurred_before` now send the unprefixed `occurredAfter`/`occurredBefore`/
+  `enrolledAfter`/`enrolledBefore` query parameters appropriate to those
+  endpoints, rather than the `eventOccurredAfter`/`enrollmentEnrolledAfter`/
+  `enrollmentOccurredAfter` forms that are specific to
+  `get_tracked_entities()`'s nested-date disambiguation.
 
 ## Bug fixes
 

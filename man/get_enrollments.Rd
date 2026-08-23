@@ -40,10 +40,17 @@ query to.}
 strings bounding the enrollment's last-updated timestamp.}
 
 \item{enrolled_after, enrolled_before}{Optional. ISO-8601 date or datetime
-strings bounding the enrollment date.}
+strings bounding the enrollment date (sent as the unprefixed
+\code{enrolledAfter}/\code{enrolledBefore} query params — the corresponding
+\code{\link[=get_tracked_entities]{get_tracked_entities()}} arguments use \code{enrollmentEnrolledAfter}/
+\code{enrollmentEnrolledBefore} instead, to disambiguate from a tracked
+entity's other nested dates).}
 
 \item{occurred_after, occurred_before}{Optional. ISO-8601 date or datetime
-strings bounding the enrollment's incident/occurred date.}
+strings bounding the enrollment's incident/occurred date (sent as the
+unprefixed \code{occurredAfter}/\code{occurredBefore} query params — the
+corresponding \code{\link[=get_tracked_entities]{get_tracked_entities()}} arguments use
+\code{enrollmentOccurredAfter}/\code{enrollmentOccurredBefore} instead).}
 
 \item{...}{Other query parameters supported by your DHIS2 instance's
 Tracker API (e.g. \code{status}).}
@@ -80,6 +87,13 @@ endpoint, so a \code{filter} argument raises an error rather than being
 silently sent as an unsupported query parameter; use
 \code{\link[=get_tracked_entities]{get_tracked_entities()}} with \code{\link[=tracked_entity_filter]{tracked_entity_filter()}} to filter by
 attribute value instead.
+
+The \code{enrolledAfter}/\code{enrolledBefore}/\code{occurredAfter}/\code{occurredBefore}
+query parameter names used here (unprefixed, unlike the equivalent
+\code{\link[=get_tracked_entities]{get_tracked_entities()}} arguments) are based on the best available
+documentation and usage examples rather than a directly confirmed
+parameter table for this specific endpoint — verify against your own
+instance if these filters don't behave as expected.
 }
 \examples{
 \dontshow{if (khis_has_cred()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

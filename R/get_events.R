@@ -16,7 +16,11 @@
 #' @param updated_after,updated_before Optional. ISO-8601 date or datetime
 #'   strings bounding the event's last-updated timestamp.
 #' @param occurred_after,occurred_before Optional. ISO-8601 date or datetime
-#'   strings bounding the event's occurred date.
+#'   strings bounding the event's occurred date (sent as the unprefixed
+#'   `occurredAfter`/`occurredBefore` query params — the corresponding
+#'   [get_tracked_entities()] arguments use `eventOccurredAfter`/
+#'   `eventOccurredBefore` instead, to disambiguate from a tracked entity's
+#'   other nested dates).
 #' @param ... Other query parameters supported by your DHIS2 instance's
 #'   Tracker API (e.g. `status`, `assignedUserMode`).
 #' @param fields The DHIS2 field-selector for the columns to return.
@@ -33,6 +37,13 @@
 #' DHIS2 requires an events query to be scoped by at least one of `program`,
 #' `program_stage`, or `org_units`; an unscoped query will be rejected by the
 #' server.
+#'
+#' The `occurredAfter`/`occurredBefore` query parameter names used here
+#' (unprefixed, unlike the equivalent [get_tracked_entities()] arguments)
+#' are based on the best available documentation and usage examples rather
+#' than a directly confirmed parameter table for this specific endpoint —
+#' verify against your own instance if these filters don't behave as
+#' expected.
 #'
 #' DHIS2's published Tracker API documentation does not describe a supported
 #' way to filter events by data element value (unlike [get_tracked_entities()],
@@ -97,8 +108,8 @@ get_events <- function(program = NULL,
         orgUnitMode = org_unit_mode,
         updatedAfter = updated_after,
         updatedBefore = updated_before,
-        eventOccurredAfter = occurred_after,
-        eventOccurredBefore = occurred_before,
+        occurredAfter = occurred_after,
+        occurredBefore = occurred_before,
         ...,
         fields = fields,
         page_size = page_size,
