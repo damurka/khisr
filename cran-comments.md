@@ -10,11 +10,12 @@ that removed it): `R CMD check` returns 0 errors, 0 warnings, 1 note.
 
 This release also adds several new features (Tracker API support,
 Personal Access Token authentication, and additional data/analytics
-endpoints) and a number of unrelated bug fixes found during review; see
-NEWS.md for details.
+endpoints) and a number of unrelated bug fixes found during review; see NEWS.md for details.
 
 ## R CMD check results
 
 0 errors | 0 warnings | 1 note
 
-* This is a new release.
+* New submission
+   
+* Package was archived on CRAN
