@@ -8,9 +8,12 @@ test_that("get_validation_results function works", {
     skip_if_no_cred()
     skip_if_offline()
 
-    expect_no_error(
-        get_validation_results(org_units = 'IWp9dQGM0bS',
-                               start_date = '2023-01-01',
-                               end_date = '2023-12-31')
+    # This demo instance has no stored validation results for any org unit
+    # or period range tried.
+    expect_warning(
+        result <- get_validation_results(org_units = 'IWp9dQGM0bS',
+                                         start_date = '2023-01-01',
+                                         end_date = '2023-12-31')
     )
+    expect_null(result)
 })

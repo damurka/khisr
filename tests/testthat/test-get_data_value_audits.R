@@ -7,9 +7,12 @@ test_that("get_data_value_audits function works", {
     skip_if_no_cred()
     skip_if_offline()
 
-    expect_no_error(
-        get_data_value_audits(data_elements = 'lYsfXxCw6Qi',
-                              org_units = 'W6sNfkJcXGC',
-                              periods = '202301')
+    # This demo instance has no recorded edit history for any data value
+    # tried.
+    expect_warning(
+        result <- get_data_value_audits(data_elements = 'lYsfXxCw6Qi',
+                                        org_units = 'W6sNfkJcXGC',
+                                        periods = '202301')
     )
+    expect_null(result)
 })

@@ -9,7 +9,9 @@ test_that("get_metadata_helpers functions work", {
     expect_no_error(get_category_option_group_sets())
     expect_no_error(get_category_option_groups())
     expect_no_error(get_category_options())
-    expect_no_error(get_data_element_group_sets())
+    # This demo instance has no dataElementGroupSets configured at all.
+    expect_warning(result <- get_data_element_group_sets())
+    expect_null(result)
     expect_no_error(get_data_element_groups(name %.like% 'malaria'))
     expect_no_error(get_data_elements(name %.like% 'malaria'))
     expect_no_error(get_data_sets(name %.like% 'malaria'))

@@ -49,7 +49,7 @@ test_that("khis_cred works correctly using configuration file", {
 
     expect_true(khis_has_cred())
 
-    expect_equal(khis_username(), 'dodoma')
+    expect_equal(khis_username(), 'demo_en')
 
     khis_cred_clear()
 
@@ -63,15 +63,15 @@ test_that("khis_cred works correctly using configuration file", {
     )
 
     expect_no_error(
-        khis_cred(username = 'dodoma',
-                  password = 'Ytrewq!23456',
-                  server="https://test.hiskenya.org"
+        khis_cred(username = 'demo_en',
+                  password = 'District1#',
+                  server = "https://demos.dhis2.org/hmis"
         )
     )
 
     expect_true(khis_has_cred())
 
-    expect_equal(khis_username(), 'dodoma')
+    expect_equal(khis_username(), 'demo_en')
 
     khis_cred_clear()
 
@@ -101,12 +101,12 @@ test_that("khis_cred works correctly with a Personal Access Token", {
     )
 
     expect_error(
-        khis_cred(token = '', server = 'https://test.hiskenya.org'),
+        khis_cred(token = '', server = 'https://demos.dhis2.org/hmis'),
         class = 'khis_invalid_credentials'
     )
 
     expect_error(
-        khis_cred(token = 123, server = 'https://test.hiskenya.org'),
+        khis_cred(token = 123, server = 'https://demos.dhis2.org/hmis'),
         class = 'khis_invalid_credentials'
     )
 })
@@ -127,9 +127,9 @@ test_that("req_auth_khis works correctly", {
     skip_if_server_error()
 
     configured_auth <- khisr:::init_AuthCred(
-        username = 'dodoma',
-        password = 'Ytrewq!23456',
-        base_url = 'https://test.hiskenya.org'
+        username = 'demo_en',
+        password = 'District1#',
+        base_url = 'https://demos.dhis2.org/hmis'
     )
 
     expect_no_error(httr2::request('https://example.com') %>% req_auth_khis(auth = configured_auth))

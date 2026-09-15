@@ -12,12 +12,15 @@ test_that("get_analytics_outliers function works", {
 
     # The public demo account used for live testing lacks outlier-detection
     # authority (403 Forbidden regardless of parameters); the function
-    # handles that as a warning + NULL rather than an error, so this only
-    # confirms it doesn't crash.
-    expect_no_error(
-        get_analytics_outliers(data_elements = 'lYsfXxCw6Qi',
-                               org_units = 'W6sNfkJcXGC',
-                               start_date = '2023-01-01',
-                               end_date = '2023-12-31')
+    # handles that gracefully with two warnings (the specific HTTP failure,
+    # then the generic "no data") and a NULL return, rather than an error.
+    expect_warning(
+        expect_warning(
+            result <- get_analytics_outliers(data_elements = 'lYsfXxCw6Qi',
+                                             org_units = 'W6sNfkJcXGC',
+                                             start_date = '2023-01-01',
+                                             end_date = '2023-12-31')
+        )
     )
+    expect_null(result)
 })

@@ -13,7 +13,9 @@ test_that("get_sql_views and get_sql_view_data functions work", {
 
     # The public demo account used for live testing isn't authorised to read
     # data from any SQL view on the instance (403/409 regardless of which
-    # view); the function handles that as a warning + NULL, so this only
-    # confirms it doesn't crash.
-    expect_no_error(get_sql_view_data(views$id[1]))
+    # view); the function handles that gracefully with two warnings (the
+    # specific HTTP failure, then the generic "no data") and a NULL return,
+    # rather than an error.
+    expect_warning(expect_warning(result <- get_sql_view_data(views$id[1])))
+    expect_null(result)
 })
