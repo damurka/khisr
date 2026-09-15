@@ -50,14 +50,19 @@ reference:
       - metadata-filter
   - title: "DHIS2 Analytics"
     desc: >
-      To access analytical, aggregated data in DHIS2, and the raw data values
-      behind it
+      To access analytical, aggregated data in DHIS2, the raw data values
+      behind it, and data-quality checks
     contents:
       - get_analytics
       - analytics-dimension
       - get_data_value_sets
       - get_event_analytics
       - get_enrollment_analytics
+      - get_event_analytics_aggregate
+      - get_enrollment_analytics_aggregate
+      - get_analytics_outliers
+      - get_validation_results
+      - get_complete_data_set_registrations
   - title: "DHIS2 Tracker"
     desc: >
       Retrieve tracked entities, events, enrollments, and relationships from
@@ -68,6 +73,20 @@ reference:
       - get_enrollments
       - get_relationships
       - tracked_entity_filter
+  - title: "DHIS2 System & Utilities"
+    desc: >
+      Instance information, mapping, SQL views, the key/value data store,
+      audit history, and file resources
+    contents:
+      - get_system_info
+      - get_geo_features
+      - get_sql_views
+      - get_sql_view_data
+      - get_data_store_namespaces
+      - get_data_store_keys
+      - get_data_store_value
+      - get_data_value_audits
+      - get_file_resources
   - title: "Experimental Functions"
     desc: >
         Experimental functions that formats the data in logical manner

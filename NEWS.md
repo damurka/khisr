@@ -1,3 +1,49 @@
+# khisr (development version)
+
+## New features
+
+* **Added 12 new read-only DHIS2 endpoints**, closing most of the remaining
+  gaps in API coverage:
+  - `get_complete_data_set_registrations()`: raw dataset-completeness
+    records (who reported, when) — the raw counterpart to
+    `get_data_sets_by_level()`'s aggregated reporting-rate view, the same
+    way `get_data_value_sets()` complements `get_analytics()`.
+  - `get_event_analytics_aggregate()`/`get_enrollment_analytics_aggregate()`:
+    pivot-table style totals from `analytics/events|enrollments/aggregate/
+    {program}` — a genuinely different endpoint from `get_event_analytics()`/
+    `get_enrollment_analytics()`'s line-list `query` variant. Confirmed live
+    that, unlike `query`, `aggregate` is unpaginated (no `metaData.pager`,
+    like `/api/analytics` itself).
+  - `get_system_info()`: DHIS2 instance version/build info.
+  - `get_geo_features()`: organisation unit coordinates/boundaries for
+    mapping. Confirmed live that the `ou` parameter must be sent
+    `ou:`-prefixed (e.g. `ou:LEVEL-2`) — a bare id list is rejected — and
+    that the response's `dimensions` field, empty in every case tested,
+    must be dropped before binding rows, since an empty list-column in
+    every row otherwise collapses the whole result to 0 rows.
+  - `get_sql_views()`/`get_sql_view_data()`: list and execute predefined
+    SQL views.
+  - `get_data_store_namespaces()`/`get_data_store_keys()`/
+    `get_data_store_value()`: read DHIS2's key/value data store (system or
+    user-scoped, via a `store` argument).
+  - `get_data_value_audits()`: change history for a data value.
+  - `get_analytics_outliers()`: statistically flagged outlier values.
+  - `get_validation_results()`: violated validation rules (confirmed live
+    that the correct path is `/api/validationResults`, not
+    `/api/analytics/validationResults`, which 404s).
+  - `get_file_resources()`: metadata (not contents) of files stored in a
+    DHIS2 instance.
+
+  The public demo instance used for live verification lacked the account
+  authority to read outlier-detection results or any SQL view's data (403/
+  409 regardless of parameters) — both are account/instance restrictions,
+  not request errors, so `get_analytics_outliers()` and
+  `get_sql_view_data()`'s response shapes follow DHIS2's documented
+  structure rather than independent live verification; the validation
+  results and data value audit endpoints returned valid but empty results,
+  so a populated response's exact shape is likewise not independently
+  confirmed.
+
 # khisr 1.0.7
 
 ## New features
