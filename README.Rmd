@@ -44,6 +44,7 @@ The khisr package is designed to seamlessly integrate with DHIS2, providing R us
 - ***Data Retrieval:*** Easily download and manage data from DHIS2.
 - ***Flexible Queries:*** Customize data queries to retrieve specific data elements,   periods, and organizational units.
 - ***Tracker Data:*** Retrieve tracked entities, enrollments, and events from DHIS2's Tracker API.
+- ***Data Quality:*** Check completeness registrations, outliers, and validation results.
 - ***Secure Access:*** Manage credentials securely, using a username/password or a Personal Access Token.
 
 ### Use Cases

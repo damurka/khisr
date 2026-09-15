@@ -177,6 +177,9 @@ key functions and parameters involved:
   data retrieval.
 - `%.d%` (infix operator): Convenient shorthand for creating dimension filters.
 - `%.f%` (infix operator): Convenient shorthand for creating filter dimensions.
+- `get_event_analytics_aggregate()`/`get_enrollment_analytics_aggregate()`:
+  pivot-table style totals over Tracker data — see [Tracker
+  Data](https://khisr.damurka.com/articles/tracker.html).
 
 ### Dimension (dx)
 
@@ -259,6 +262,34 @@ get_analytics(
 )
 ```
 
+### Data quality
+
+Alongside the aggregated values themselves, DHIS2 exposes a few endpoints for
+checking the *quality* of reported data:
+
+| khisr function                             | Retrieves                                              |
+|:--------------------------------------------|:--------------------------------------------------------|
+| `get_complete_data_set_registrations()`     | Raw completeness records — who marked a data set complete, and when. |
+| `get_analytics_outliers()`                  | Data values flagged as statistical outliers.           |
+| `get_validation_results()`                  | Violated validation rules for an org unit/period range. |
+| `get_data_value_audits()`                   | Change history for a data value.                       |
+
+```{r, eval = can_decrypt}
+# Completeness registrations for a data set at a province and everything
+# below it, for a single period
+get_complete_data_set_registrations(
+    data_sets = 'VEM58nY22sO',
+    org_units = 'W6sNfkJcXGC',
+    children = TRUE,
+    periods = '202301'
+)
+```
+
+`get_analytics_outliers()` and `get_validation_results()` require the
+authenticated user to have the corresponding DHIS2 authority (outlier
+detection or validation analysis); without it, DHIS2 returns an
+authorisation error rather than empty results.
+
 ## Tracker data
 
 Alongside aggregate analytics, DHIS2 also stores case-based, person-level data
@@ -275,3 +306,32 @@ get_tracked_entities(
     org_unit_mode = 'DESCENDANTS'
 )
 ```
+
+## System & utilities
+
+A handful of functions cover the DHIS2 instance itself, rather than its
+health data:
+
+| khisr function                  | Retrieves                                                        |
+|:----------------------------------|:-------------------------------------------------------------------|
+| `get_system_info()`               | DHIS2 version, build, and server info.                           |
+| `get_geo_features()`              | Organisation unit coordinates/boundaries, for mapping.           |
+| `get_sql_views()`/`get_sql_view_data()` | Predefined SQL views, and their data.                        |
+| `get_data_store_namespaces()`/`get_data_store_keys()`/`get_data_store_value()` | The system or user key/value data store. |
+| `get_file_resources()`            | Metadata (not contents) of files stored in the instance.          |
+
+```{r, eval = can_decrypt}
+get_system_info()$version
+
+# Coordinates/boundaries for every province (level 2)
+get_geo_features(org_units = 'LEVEL-2')
+
+# Reading the key/value data store
+namespaces <- get_data_store_namespaces()
+namespaces
+get_data_store_keys(namespaces[1])
+```
+
+`get_sql_view_data()` requires the authenticated user to be authorised to
+read the specific SQL view; DHIS2 returns an error rather than empty
+results if not.

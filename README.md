@@ -25,6 +25,8 @@ working with DHIS2 data directly within the R environment.
   data elements, periods, and organizational units.
 - ***Tracker Data:*** Retrieve tracked entities, enrollments, and events
   from DHIS2’s Tracker API.
+- ***Data Quality:*** Check completeness registrations, outliers, and
+  validation results.
 - ***Secure Access:*** Manage credentials securely, using a
   username/password or a Personal Access Token.
 
