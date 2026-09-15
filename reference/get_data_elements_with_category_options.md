@@ -45,8 +45,12 @@ A tibble containing the following columns:
 ``` r
 
 # Fetch the data element metadata for particular element id
-elements <- get_data_elements_with_category_options('htFuvGJRW1X')
-#> Warning: ! No data found for the specified endpoint.
+elements <- get_data_elements_with_category_options('lYsfXxCw6Qi')
 elements
-#> NULL
+#> # A tibble: 3 × 4
+#>   element                                element_id  category   category_id
+#>   <chr>                                  <chr>       <chr>      <chr>      
+#> 1 MAL - Malaria confirmed cases reported lYsfXxCw6Qi 15+ years  hF0pQZIn6Ch
+#> 2 MAL - Malaria confirmed cases reported lYsfXxCw6Qi 5-14 years rtfSaMjPyq6
+#> 3 MAL - Malaria confirmed cases reported lYsfXxCw6Qi 0-4 years  oPcWGgS2Liz
 ```

@@ -88,8 +88,8 @@ As documented for the DHIS2 Tracker API, the supported operators are:
   `tracked_entity_filter(attr, '!null', NULL)`) - Attribute has a value
 
 The infix operators are shorthand for the equivalent
-`tracked_entity_filter()` call, e.g. `w75KJ2mc4zz %.teq% 'John'` is
-equivalent to `tracked_entity_filter('w75KJ2mc4zz', 'eq', 'John')`.
+`tracked_entity_filter()` call, e.g. `mTYYajEhlPY %.teq% 'John'` is
+equivalent to `tracked_entity_filter('mTYYajEhlPY', 'eq', 'John')`.
 `null`/`!null` have no infix form since an infix operator needs a
 right-hand value.
 
@@ -123,24 +123,24 @@ Other tracker functions:
 
 ``` r
 
-# Tracked entities where attribute w75KJ2mc4zz equals "John"
-tracked_entity_filter('w75KJ2mc4zz', 'eq', 'John')
+# Tracked entities where attribute mTYYajEhlPY equals "John"
+tracked_entity_filter('mTYYajEhlPY', 'eq', 'John')
 #> <spliced>
 #> $filter
-#> [1] "w75KJ2mc4zz:eq:John"
+#> [1] "mTYYajEhlPY:eq:John"
 #> 
 
-# Tracked entities where attribute w75KJ2mc4zz is one of several values
-tracked_entity_filter('w75KJ2mc4zz', 'in', c('John', 'Jane'))
+# Tracked entities where attribute mTYYajEhlPY is one of several values
+tracked_entity_filter('mTYYajEhlPY', 'in', c('John', 'Jane'))
 #> <spliced>
 #> $filter
-#> [1] "w75KJ2mc4zz:in:John;Jane"
+#> [1] "mTYYajEhlPY:in:John;Jane"
 #> 
 
 # Equivalent, using the infix operator
-w75KJ2mc4zz %.teq% 'John'
+mTYYajEhlPY %.teq% 'John'
 #> <spliced>
 #> $filter
-#> [1] "w75KJ2mc4zz:eq:John"
+#> [1] "mTYYajEhlPY:eq:John"
 #> 
 ```

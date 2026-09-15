@@ -85,17 +85,37 @@ get_metadata('categories')
 #> # ℹ 151 more rows
 
 # Get the datasets metadata with fields 'id,name,organisationUnits' and filter
-# only the datasets with id 'WWh5hbCmvND'
+# only the datasets with id 'VEM58nY22sO'
 get_metadata('dataSets',
              fields = 'id,name,organisationUnits[id,name,path]',
-             id %.eq% 'WWh5hbCmvND')
-#> Warning: ! No data found for the specified endpoint.
-#> NULL
+             id %.eq% 'VEM58nY22sO')
+#> # A tibble: 1 × 3
+#>   name                id          organisationUnits
+#>   <chr>               <chr>       <list>           
+#> 1 Malaria elimination VEM58nY22sO <list [1,385]>   
 
 # Get data elements filtered by dataElementGroups id
 get_metadata('dataElements',
-             dataElementGroups.id %.eq% 'IXd7DXxZqzL',
+             dataElementGroups.id %.eq% 'WdtYaV7o8QV',
              fields = ':all')
-#> Warning: ! No data found for the specified endpoint.
-#> NULL
+#> # A tibble: 23 × 34
+#>    code   name           created lastUpdated translations createdBy    favorites
+#>    <chr>  <chr>          <chr>   <chr>       <lgl>        <list>       <lgl>    
+#>  1 CH113a CH113a - Chil… 2022-0… 2022-01-10… NA           <named list> NA       
+#>  2 CH114  CH114 - House… 2022-0… 2022-01-10… NA           <named list> NA       
+#>  3 CH115a CH115a - Hous… 2022-0… 2022-01-10… NA           <named list> NA       
+#>  4 CH115b CH115b - Tota… 2022-0… 2022-01-10… NA           <named list> NA       
+#>  5 CH116a CH116a - Peop… 2022-0… 2022-01-10… NA           <named list> NA       
+#>  6 CH116b CH116b - Indi… 2022-0… 2022-01-10… NA           <named list> NA       
+#>  7 CH117  CH117 - Peopl… 2022-0… 2022-01-10… NA           <named list> NA       
+#>  8 CH118  CH118 - ITNs … 2022-0… 2022-01-10… NA           <named list> NA       
+#>  9 CH119a CH119a - Febr… 2022-0… 2022-01-10… NA           <named list> NA       
+#> 10 CH119b CH119b - Febr… 2022-0… 2022-01-10… NA           <named list> NA       
+#> # ℹ 13 more rows
+#> # ℹ 27 more variables: lastUpdatedBy <list>, sharing <list>, shortName <chr>,
+#> #   description <chr>, formName <chr>, dimensionItemType <chr>,
+#> #   legendSets <lgl>, aggregationType <chr>, valueType <chr>, domainType <chr>,
+#> #   dataSetElements <list>, aggregationLevels <lgl>, zeroIsSignificant <lgl>,
+#> #   optionSetValue <lgl>, dimensionItem <chr>, displayShortName <chr>,
+#> #   displayDescription <chr>, access <list>, displayName <chr>, …
 ```

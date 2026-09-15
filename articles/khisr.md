@@ -48,84 +48,25 @@ resource for a deeper understanding.
 
 ### Metadata helpers in khisr
 
-`khisr` provides a set of high-level functions to retrieve details about
-various DHIS2 metadata categories. These functions often leverage your R
-IDE’s auto-complete feature for faster typing.
-
-The following table summarizes these `khisr` metadata helper functions:
-
-| khisr function | DHIS2 API Endpoint |
-|:---|:---|
-| [`get_categories()`](https://khisr.damurka.com/reference/metadata-helpers.md) | categories |
-| [`get_category_combos()`](https://khisr.damurka.com/reference/metadata-helpers.md) | categoryCombos |
-| [`get_category_option_combos()`](https://khisr.damurka.com/reference/metadata-helpers.md) | categoryOptionCombos |
-| [`get_category_option_group_sets()`](https://khisr.damurka.com/reference/metadata-helpers.md) | categoryOptionGroupSets |
-| [`get_category_option_groups()`](https://khisr.damurka.com/reference/metadata-helpers.md) | categoryOptionGroups |
-| [`get_category_options()`](https://khisr.damurka.com/reference/metadata-helpers.md) | categoryOptions |
-| [`get_data_element_group_sets()`](https://khisr.damurka.com/reference/metadata-helpers.md) | dataElementGroupSets |
-| [`get_data_element_groups()`](https://khisr.damurka.com/reference/metadata-helpers.md) | dataElementGroups |
-| [`get_data_elements()`](https://khisr.damurka.com/reference/metadata-helpers.md) | dataElements |
-| [`get_data_sets()`](https://khisr.damurka.com/reference/metadata-helpers.md) | dataSets |
-| [`get_indicator_group_sets()`](https://khisr.damurka.com/reference/metadata-helpers.md) | indicatorGroupSets |
-| [`get_indicator_groups()`](https://khisr.damurka.com/reference/metadata-helpers.md) | indicatorGroups |
-| [`get_indicators()`](https://khisr.damurka.com/reference/metadata-helpers.md) | indicators |
-| [`get_option_group_sets()`](https://khisr.damurka.com/reference/metadata-helpers.md) | optionGroupSets |
-| [`get_option_groups()`](https://khisr.damurka.com/reference/metadata-helpers.md) | optionGroups |
-| [`get_option_sets()`](https://khisr.damurka.com/reference/metadata-helpers.md) | optionSets |
-| [`get_options()`](https://khisr.damurka.com/reference/metadata-helpers.md) | options |
-| [`get_organisation_unit_groupsets()`](https://khisr.damurka.com/reference/metadata-helpers.md) | organisationUnitGroupSets |
-| [`get_organisation_unit_groups()`](https://khisr.damurka.com/reference/metadata-helpers.md) | organisationUnitGroups |
-| [`get_organisation_units()`](https://khisr.damurka.com/reference/metadata-helpers.md) | organisationUnits |
-| [`get_organisation_unit_levels()`](https://khisr.damurka.com/reference/metadata-helpers.md) | organisationUnitLevels |
-| [`get_dimensions()`](https://khisr.damurka.com/reference/metadata-helpers.md) | dimensions |
-| [`get_user_groups()`](https://khisr.damurka.com/reference/metadata-helpers.md) | userGroups |
-| [`get_period_types()`](https://khisr.damurka.com/reference/metadata-helpers.md) | periodTypes |
-| [`get_programs()`](https://khisr.damurka.com/reference/metadata-helpers.md) | programs |
-| [`get_program_stages()`](https://khisr.damurka.com/reference/metadata-helpers.md) | programStages |
-| [`get_tracked_entity_types()`](https://khisr.damurka.com/reference/metadata-helpers.md) | trackedEntityTypes |
-| [`get_tracked_entity_attributes()`](https://khisr.damurka.com/reference/metadata-helpers.md) | trackedEntityAttributes |
-| [`get_relationship_types()`](https://khisr.damurka.com/reference/metadata-helpers.md) | relationshipTypes |
+`khisr` provides a set of high-level functions — one per DHIS2 metadata
+type
+([`get_organisation_units()`](https://khisr.damurka.com/reference/metadata-helpers.md),
+[`get_data_elements()`](https://khisr.damurka.com/reference/metadata-helpers.md),
+[`get_programs()`](https://khisr.damurka.com/reference/metadata-helpers.md),
+and around 25 others) — that all share the same interface and can be
+filtered the same way. See
+[`?metadata-helpers`](https://khisr.damurka.com/reference/metadata-helpers.html)
+for the full list, and your R IDE’s auto-complete for faster typing.
 
 ### Metadata object filter
 
-`khisr` allows you to filter retrieved metadata using a straightforward
-approach. The filter format follows the pattern
-**property:operator:value**. Here’s a breakdown of the components:
-
-- **property**: The property of the metadata you want to filter on.
-- **operator**: The comparison operator you want to perform (examples:
-  `eq` for equality, `like` for case-sensitive string matching).
-- **value**: The value to use for comparison (not required for all
-  operators).
-
-The following table provides a summary of the supported operators:
-
-| DHIS2 Operator | Infix Operator | Description |
-|:---|:---|:---|
-| `eq` | `%.eq%` | Equality |
-| `!eq` | `%.~eq%` | Inequality |
-| `ieq` | `%.ieq%` | Case insensitive string, match exact |
-| `ne` | `%.ne%` | Inequality |
-| `like` | `%.Like%` | Case sensitive string, match anywhere |
-| `!like` | `%.~Like%` | Case sensitive string, not match anywhere |
-| `$like` | `%.^Like%` | Case sensitive string, match start |
-| `!$like` | `%.~^Like%` | Case sensitive string, not match start |
-| `like$` | `%.Like$%` | Case sensitive string, match end |
-| `!like$` | `%.~Like$%` | Case sensitive string, not match end |
-| `ilike` | `%.like%` | Case insensitive string, match anywhere |
-| `!ilike` | `%.~like%` | Case insensitive string, not match anywhere |
-| `$ilike` | `%.^like%` | Case insensitive string, match start |
-| `!$ilike` | `%.~^like%` | Case insensitive string, not match start |
-| `ilike$` | `%.like$%` | Case insensitive string, match end |
-| `!ilike$` | `%.~like$%` | Case insensitive string, not match end |
-| `gt` | `%.gt%` | Greater than |
-| `ge` | `%.ge%` | Greater than or equal |
-| `lt` | `%.lt%` | Less than |
-| `le` | `%.le%` | Less than or equal |
-| `token` | `%.token%` | Match on multiple tokens in search property |
-| `!token` | `%.~token%` | Not match on multiple tokens in search property |
-| `in` | `%.in%` | Find objects matching 1 or more values |
-| `!in` | `%.~in%` | Find objects not matching 1 or more values |
+`khisr` filters retrieved metadata using DHIS2’s
+**property:operator:value** pattern, exposed through
+[`metadata_filter()`](https://khisr.damurka.com/reference/metadata-filter.html)
+and a matching set of infix operators (`%.eq%`, `%.like%`, `%.in%`, and
+about 20 more — see
+[`?metadata_filter`](https://khisr.damurka.com/reference/metadata-filter.md)
+for the complete list with descriptions).
 
 ### Working with metadata filters
 
@@ -199,6 +140,9 @@ resource, let’s explore the key functions and parameters involved:
   filters.
 - `%.f%` (infix operator): Convenient shorthand for creating filter
   dimensions.
+- [`get_event_analytics_aggregate()`](https://khisr.damurka.com/reference/get_event_analytics_aggregate.md)/[`get_enrollment_analytics_aggregate()`](https://khisr.damurka.com/reference/get_enrollment_analytics_aggregate.md):
+  pivot-table style totals over Tracker data — see [Tracker
+  Data](https://khisr.damurka.com/articles/tracker.html).
 
 ### Dimension (dx)
 
@@ -320,6 +264,46 @@ get_analytics(
 #> 3 GxlrIgMyEf4   966
 ```
 
+### Data quality
+
+Alongside the aggregated values themselves, DHIS2 exposes a few
+endpoints for checking the *quality* of reported data:
+
+| khisr function | Retrieves |
+|:---|:---|
+| [`get_complete_data_set_registrations()`](https://khisr.damurka.com/reference/get_complete_data_set_registrations.md) | Raw completeness records — who marked a data set complete, and when. |
+| [`get_analytics_outliers()`](https://khisr.damurka.com/reference/get_analytics_outliers.md) | Data values flagged as statistical outliers. |
+| [`get_validation_results()`](https://khisr.damurka.com/reference/get_validation_results.md) | Violated validation rules for an org unit/period range. |
+| [`get_data_value_audits()`](https://khisr.damurka.com/reference/get_data_value_audits.md) | Change history for a data value. |
+
+``` r
+
+# Completeness registrations for a data set at a province and everything
+# below it, for a single period
+get_complete_data_set_registrations(
+    data_sets = 'VEM58nY22sO',
+    org_units = 'W6sNfkJcXGC',
+    children = TRUE,
+    periods = '202301'
+)
+#> # A tibble: 16 × 7
+#>   period dataSet  organisationUnit attributeOptionCombo date  storedBy completed
+#>   <chr>  <chr>    <chr>            <chr>                <chr> <chr>    <lgl>    
+#> 1 202301 VEM58nY… xxBxJFWXtrL      HllvX50cXC0          2023… automat… TRUE     
+#> 2 202301 VEM58nY… C9ncRif5rMV      HllvX50cXC0          2023… automat… TRUE     
+#> 3 202301 VEM58nY… v3HIu78Y4Wf      HllvX50cXC0          2023… automat… TRUE     
+#> 4 202301 VEM58nY… rmJxaV9ggj7      HllvX50cXC0          2022… automat… TRUE     
+#> 5 202301 VEM58nY… NMDH3yjPLSx      HllvX50cXC0          2022… automat… TRUE     
+#> # ℹ 11 more rows
+```
+
+[`get_analytics_outliers()`](https://khisr.damurka.com/reference/get_analytics_outliers.md)
+and
+[`get_validation_results()`](https://khisr.damurka.com/reference/get_validation_results.md)
+require the authenticated user to have the corresponding DHIS2 authority
+(outlier detection or validation analysis); without it, DHIS2 returns an
+authorisation error rather than empty results.
+
 ## Tracker data
 
 Alongside aggregate analytics, DHIS2 also stores case-based,
@@ -350,3 +334,50 @@ get_tracked_entities(
 #> 5 rlTI0qJF8fl   DnxQe1mgmlp       2024-06-06T10:40:2… 2024-06-… mNaSC8… FALSE   
 #> # ℹ 265 more rows
 ```
+
+## System & utilities
+
+A handful of functions cover the DHIS2 instance itself, rather than its
+health data:
+
+| khisr function | Retrieves |
+|:---|:---|
+| [`get_system_info()`](https://khisr.damurka.com/reference/get_system_info.md) | DHIS2 version, build, and server info. |
+| [`get_geo_features()`](https://khisr.damurka.com/reference/get_geo_features.md) | Organisation unit coordinates/boundaries, for mapping. |
+| [`get_sql_views()`](https://khisr.damurka.com/reference/get_sql_views.md)/[`get_sql_view_data()`](https://khisr.damurka.com/reference/get_sql_view_data.md) | Predefined SQL views, and their data. |
+| [`get_data_store_namespaces()`](https://khisr.damurka.com/reference/get_data_store_namespaces.md)/[`get_data_store_keys()`](https://khisr.damurka.com/reference/get_data_store_keys.md)/[`get_data_store_value()`](https://khisr.damurka.com/reference/get_data_store_value.md) | The system or user key/value data store. |
+| [`get_file_resources()`](https://khisr.damurka.com/reference/get_file_resources.md) | Metadata (not contents) of files stored in the instance. |
+
+``` r
+
+get_system_info()$version
+#> [1] "2.41.7"
+
+# Coordinates/boundaries for every province (level 2)
+get_geo_features(org_units = 'LEVEL-2')
+#> # A tibble: 18 × 11
+#>   id      name  code  has_coordinates_down has_coordinates_up level parent_graph
+#>   <chr>   <chr> <chr> <lgl>                <lgl>              <int> <chr>       
+#> 1 W6sNfk… 01 V… ASIL… TRUE                 FALSE                  2 IWp9dQGM0bS 
+#> 2 YvLOmt… 02 P… ASIL… TRUE                 FALSE                  2 IWp9dQGM0bS 
+#> 3 XKGgyn… 03 L… ASIL… TRUE                 FALSE                  2 IWp9dQGM0bS 
+#> 4 rO2RVJ… 04 O… ASIL… TRUE                 FALSE                  2 IWp9dQGM0bS 
+#> 5 FRmrFT… 05 B… ASIL… TRUE                 FALSE                  2 IWp9dQGM0bS 
+#> # ℹ 13 more rows
+#> # ℹ 4 more variables: parent_id <chr>, parent_name <chr>, type <int>,
+#> #   coordinates <chr>
+
+# Reading the key/value data store
+namespaces <- get_data_store_namespaces()
+namespaces
+#>  [1] "who-dqa"             "bridge"              "CLIMATE_DATA"       
+#>  [4] "bulk-load"           "WHO_ICD11_COD"       "dataQualityTool"    
+#>  [7] "DHIS2_MAPS_APP_CORE" "tracker-capture"     "analytics"          
+#> [10] "Dhis2Transfer"
+get_data_store_keys(namespaces[1])
+#> [1] "configurations"        "configurationsMaurice" "configurationsTOM"
+```
+
+[`get_sql_view_data()`](https://khisr.damurka.com/reference/get_sql_view_data.md)
+requires the authenticated user to be authorised to read the specific
+SQL view; DHIS2 returns an error rather than empty results if not.

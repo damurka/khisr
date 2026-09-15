@@ -131,291 +131,22 @@ dimensions</a> resource for a deeper understanding.</p>
 <div class="section level3">
 <h3 id="metadata-helpers-in-khisr">Metadata helpers in khisr<a class="anchor" aria-label="anchor" href="#metadata-helpers-in-khisr"></a>
 </h3>
-<p><code>khisr</code> provides a set of high-level functions to retrieve
-details about various DHIS2 metadata categories. These functions often
-leverage your R IDE’s auto-complete feature for faster typing.</p>
-<p>The following table summarizes these <code>khisr</code> metadata
-helper functions:</p>
-<table class="table">
-<thead><tr class="header">
-<th align="left">khisr function</th>
-<th align="left">DHIS2 API Endpoint</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_categories()</a></code></td>
-<td align="left">categories</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_category_combos()</a></code></td>
-<td align="left">categoryCombos</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_category_option_combos()</a></code></td>
-<td align="left">categoryOptionCombos</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_category_option_group_sets()</a></code></td>
-<td align="left">categoryOptionGroupSets</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_category_option_groups()</a></code></td>
-<td align="left">categoryOptionGroups</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_category_options()</a></code></td>
-<td align="left">categoryOptions</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_data_element_group_sets()</a></code></td>
-<td align="left">dataElementGroupSets</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_data_element_groups()</a></code></td>
-<td align="left">dataElementGroups</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_data_elements()</a></code></td>
-<td align="left">dataElements</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_data_sets()</a></code></td>
-<td align="left">dataSets</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_indicator_group_sets()</a></code></td>
-<td align="left">indicatorGroupSets</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_indicator_groups()</a></code></td>
-<td align="left">indicatorGroups</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_indicators()</a></code></td>
-<td align="left">indicators</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_option_group_sets()</a></code></td>
-<td align="left">optionGroupSets</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_option_groups()</a></code></td>
-<td align="left">optionGroups</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_option_sets()</a></code></td>
-<td align="left">optionSets</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_options()</a></code></td>
-<td align="left">options</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_organisation_unit_groupsets()</a></code></td>
-<td align="left">organisationUnitGroupSets</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_organisation_unit_groups()</a></code></td>
-<td align="left">organisationUnitGroups</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_organisation_units()</a></code></td>
-<td align="left">organisationUnits</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_organisation_unit_levels()</a></code></td>
-<td align="left">organisationUnitLevels</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_dimensions()</a></code></td>
-<td align="left">dimensions</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_user_groups()</a></code></td>
-<td align="left">userGroups</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_period_types()</a></code></td>
-<td align="left">periodTypes</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_programs()</a></code></td>
-<td align="left">programs</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_program_stages()</a></code></td>
-<td align="left">programStages</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_tracked_entity_types()</a></code></td>
-<td align="left">trackedEntityTypes</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_tracked_entity_attributes()</a></code></td>
-<td align="left">trackedEntityAttributes</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_relationship_types()</a></code></td>
-<td align="left">relationshipTypes</td>
-</tr>
-</tbody>
-</table>
+<p><code>khisr</code> provides a set of high-level functions — one per
+DHIS2 metadata type (<code><a href="../reference/metadata-helpers.html">get_organisation_units()</a></code>,
+<code><a href="../reference/metadata-helpers.html">get_data_elements()</a></code>, <code><a href="../reference/metadata-helpers.html">get_programs()</a></code>, and
+around 25 others) — that all share the same interface and can be
+filtered the same way. See <a href="https://khisr.damurka.com/reference/metadata-helpers.html"><code>?metadata-helpers</code></a>
+for the full list, and your R IDE’s auto-complete for faster typing.</p>
 </div>
 <div class="section level3">
 <h3 id="metadata-object-filter">Metadata object filter<a class="anchor" aria-label="anchor" href="#metadata-object-filter"></a>
 </h3>
-<p><code>khisr</code> allows you to filter retrieved metadata using a
-straightforward approach. The filter format follows the pattern
-<strong>property:operator:value</strong>. Here’s a breakdown of the
-components:</p>
-<ul>
-<li>
-<strong>property</strong>: The property of the metadata you want to
-filter on.</li>
-<li>
-<strong>operator</strong>: The comparison operator you want to
-perform (examples: <code>eq</code> for equality, <code>like</code> for
-case-sensitive string matching).</li>
-<li>
-<strong>value</strong>: The value to use for comparison (not
-required for all operators).</li>
-</ul>
-<p>The following table provides a summary of the supported
-operators:</p>
-<table class="table">
-<colgroup>
-<col width="19%">
-<col width="19%">
-<col width="60%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">DHIS2 Operator</th>
-<th align="left">Infix Operator</th>
-<th align="left">Description</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left"><code>eq</code></td>
-<td align="left"><code>%.eq%</code></td>
-<td align="left">Equality</td>
-</tr>
-<tr class="even">
-<td align="left"><code>!eq</code></td>
-<td align="left"><code>%.~eq%</code></td>
-<td align="left">Inequality</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>ieq</code></td>
-<td align="left"><code>%.ieq%</code></td>
-<td align="left">Case insensitive string, match exact</td>
-</tr>
-<tr class="even">
-<td align="left"><code>ne</code></td>
-<td align="left"><code>%.ne%</code></td>
-<td align="left">Inequality</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>like</code></td>
-<td align="left"><code>%.Like%</code></td>
-<td align="left">Case sensitive string, match anywhere</td>
-</tr>
-<tr class="even">
-<td align="left"><code>!like</code></td>
-<td align="left"><code>%.~Like%</code></td>
-<td align="left">Case sensitive string, not match anywhere</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>$like</code></td>
-<td align="left"><code>%.^Like%</code></td>
-<td align="left">Case sensitive string, match start</td>
-</tr>
-<tr class="even">
-<td align="left"><code>!$like</code></td>
-<td align="left"><code>%.~^Like%</code></td>
-<td align="left">Case sensitive string, not match start</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>like$</code></td>
-<td align="left"><code>%.Like$%</code></td>
-<td align="left">Case sensitive string, match end</td>
-</tr>
-<tr class="even">
-<td align="left"><code>!like$</code></td>
-<td align="left"><code>%.~Like$%</code></td>
-<td align="left">Case sensitive string, not match end</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>ilike</code></td>
-<td align="left"><code>%.like%</code></td>
-<td align="left">Case insensitive string, match anywhere</td>
-</tr>
-<tr class="even">
-<td align="left"><code>!ilike</code></td>
-<td align="left"><code>%.~like%</code></td>
-<td align="left">Case insensitive string, not match anywhere</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>$ilike</code></td>
-<td align="left"><code>%.^like%</code></td>
-<td align="left">Case insensitive string, match start</td>
-</tr>
-<tr class="even">
-<td align="left"><code>!$ilike</code></td>
-<td align="left"><code>%.~^like%</code></td>
-<td align="left">Case insensitive string, not match start</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>ilike$</code></td>
-<td align="left"><code>%.like$%</code></td>
-<td align="left">Case insensitive string, match end</td>
-</tr>
-<tr class="even">
-<td align="left"><code>!ilike$</code></td>
-<td align="left"><code>%.~like$%</code></td>
-<td align="left">Case insensitive string, not match end</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>gt</code></td>
-<td align="left"><code>%.gt%</code></td>
-<td align="left">Greater than</td>
-</tr>
-<tr class="even">
-<td align="left"><code>ge</code></td>
-<td align="left"><code>%.ge%</code></td>
-<td align="left">Greater than or equal</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>lt</code></td>
-<td align="left"><code>%.lt%</code></td>
-<td align="left">Less than</td>
-</tr>
-<tr class="even">
-<td align="left"><code>le</code></td>
-<td align="left"><code>%.le%</code></td>
-<td align="left">Less than or equal</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>token</code></td>
-<td align="left"><code>%.token%</code></td>
-<td align="left">Match on multiple tokens in search property</td>
-</tr>
-<tr class="even">
-<td align="left"><code>!token</code></td>
-<td align="left"><code>%.~token%</code></td>
-<td align="left">Not match on multiple tokens in search property</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>in</code></td>
-<td align="left"><code>%.in%</code></td>
-<td align="left">Find objects matching 1 or more values</td>
-</tr>
-<tr class="even">
-<td align="left"><code>!in</code></td>
-<td align="left"><code>%.~in%</code></td>
-<td align="left">Find objects not matching 1 or more values</td>
-</tr>
-</tbody>
-</table>
+<p><code>khisr</code> filters retrieved metadata using DHIS2’s
+<strong>property:operator:value</strong> pattern, exposed through <a href="https://khisr.damurka.com/reference/metadata-filter.html"><code>metadata_filter()</code></a>
+and a matching set of infix operators (<code>%.eq%</code>,
+<code>%.like%</code>, <code>%.in%</code>, and about 20 more — see
+<code><a href="../reference/metadata-filter.html">?metadata_filter</a></code> for the complete list with
+descriptions).</p>
 </div>
 <div class="section level3">
 <h3 id="working-with-metadata-filters">Working with metadata filters<a class="anchor" aria-label="anchor" href="#working-with-metadata-filters"></a>
@@ -495,6 +226,10 @@ creating dimension filters.</li>
 <li>
 <code>%.f%</code> (infix operator): Convenient shorthand for
 creating filter dimensions.</li>
+<li>
+<code><a href="../reference/get_event_analytics_aggregate.html">get_event_analytics_aggregate()</a></code>/<code><a href="../reference/get_enrollment_analytics_aggregate.html">get_enrollment_analytics_aggregate()</a></code>:
+pivot-table style totals over Tracker data — see <a href="https://khisr.damurka.com/articles/tracker.html">Tracker
+Data</a>.</li>
 </ul>
 </div>
 <div class="section level3">
@@ -656,6 +391,65 @@ response.</li>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> vTRrNdOOT9g   242</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> GxlrIgMyEf4   966</span></span></code></pre></div>
 </div>
+<div class="section level3">
+<h3 id="data-quality">Data quality<a class="anchor" aria-label="anchor" href="#data-quality"></a>
+</h3>
+<p>Alongside the aggregated values themselves, DHIS2 exposes a few
+endpoints for checking the <em>quality</em> of reported data:</p>
+<table class="table">
+<colgroup>
+<col width="44%">
+<col width="55%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">khisr function</th>
+<th align="left">Retrieves</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code><a href="../reference/get_complete_data_set_registrations.html">get_complete_data_set_registrations()</a></code></td>
+<td align="left">Raw completeness records — who marked a data set
+complete, and when.</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="../reference/get_analytics_outliers.html">get_analytics_outliers()</a></code></td>
+<td align="left">Data values flagged as statistical outliers.</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="../reference/get_validation_results.html">get_validation_results()</a></code></td>
+<td align="left">Violated validation rules for an org unit/period
+range.</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="../reference/get_data_value_audits.html">get_data_value_audits()</a></code></td>
+<td align="left">Change history for a data value.</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Completeness registrations for a data set at a province and everything</span></span>
+<span><span class="co"># below it, for a single period</span></span>
+<span><span class="fu"><a href="../reference/get_complete_data_set_registrations.html">get_complete_data_set_registrations</a></span><span class="op">(</span></span>
+<span>    data_sets <span class="op">=</span> <span class="st">'VEM58nY22sO'</span>,</span>
+<span>    org_units <span class="op">=</span> <span class="st">'W6sNfkJcXGC'</span>,</span>
+<span>    children <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    periods <span class="op">=</span> <span class="st">'202301'</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 16 × 7</span></span></span>
+<span><span class="co">#&gt;   period dataSet  organisationUnit attributeOptionCombo date  storedBy completed</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 202301 VEM58nY… xxBxJFWXtrL      HllvX50cXC0          2023… automat… TRUE     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 202301 VEM58nY… C9ncRif5rMV      HllvX50cXC0          2023… automat… TRUE     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 202301 VEM58nY… v3HIu78Y4Wf      HllvX50cXC0          2023… automat… TRUE     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 202301 VEM58nY… rmJxaV9ggj7      HllvX50cXC0          2022… automat… TRUE     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 202301 VEM58nY… NMDH3yjPLSx      HllvX50cXC0          2022… automat… TRUE     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 11 more rows</span></span></span></code></pre></div>
+<p><code><a href="../reference/get_analytics_outliers.html">get_analytics_outliers()</a></code> and
+<code><a href="../reference/get_validation_results.html">get_validation_results()</a></code> require the authenticated user to
+have the corresponding DHIS2 authority (outlier detection or validation
+analysis); without it, DHIS2 returns an authorisation error rather than
+empty results.</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="tracker-data">Tracker data<a class="anchor" aria-label="anchor" href="#tracker-data"></a>
@@ -667,7 +461,7 @@ person-level data through its Tracker API. <code>khisr</code> provides
 <code><a href="../reference/tracked_entity_filter.html">tracked_entity_filter()</a></code> for filtering tracked entities by
 attribute value. See <a href="https://khisr.damurka.com/articles/tracker.html">Tracker Data</a>
 for a full guide.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Tracked entities enrolled in a program, at an org unit and everything below it</span></span>
 <span><span class="fu"><a href="../reference/get_tracked_entities.html">get_tracked_entities</a></span><span class="op">(</span></span>
 <span>    program <span class="op">=</span> <span class="st">'PREnRHSp3be'</span>,</span>
@@ -683,6 +477,80 @@ for a full guide.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> MNUPROje7ZP   DnxQe1mgmlp       2024-06-06T10:40:2… 2024-06-… wQUe9H… FALSE   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> rlTI0qJF8fl   DnxQe1mgmlp       2024-06-06T10:40:2… 2024-06-… mNaSC8… FALSE   </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 265 more rows</span></span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="system-utilities">System &amp; utilities<a class="anchor" aria-label="anchor" href="#system-utilities"></a>
+</h2>
+<p>A handful of functions cover the DHIS2 instance itself, rather than
+its health data:</p>
+<table class="table">
+<colgroup>
+<col width="33%">
+<col width="66%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">khisr function</th>
+<th align="left">Retrieves</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code><a href="../reference/get_system_info.html">get_system_info()</a></code></td>
+<td align="left">DHIS2 version, build, and server info.</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="../reference/get_geo_features.html">get_geo_features()</a></code></td>
+<td align="left">Organisation unit coordinates/boundaries, for
+mapping.</td>
+</tr>
+<tr class="odd">
+<td align="left">
+<code><a href="../reference/get_sql_views.html">get_sql_views()</a></code>/<code><a href="../reference/get_sql_view_data.html">get_sql_view_data()</a></code>
+</td>
+<td align="left">Predefined SQL views, and their data.</td>
+</tr>
+<tr class="even">
+<td align="left">
+<code><a href="../reference/get_data_store_namespaces.html">get_data_store_namespaces()</a></code>/<code><a href="../reference/get_data_store_keys.html">get_data_store_keys()</a></code>/<code><a href="../reference/get_data_store_value.html">get_data_store_value()</a></code>
+</td>
+<td align="left">The system or user key/value data store.</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="../reference/get_file_resources.html">get_file_resources()</a></code></td>
+<td align="left">Metadata (not contents) of files stored in the
+instance.</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/get_system_info.html">get_system_info</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">version</span></span>
+<span><span class="co">#&gt; [1] "2.41.7"</span></span>
+<span></span>
+<span><span class="co"># Coordinates/boundaries for every province (level 2)</span></span>
+<span><span class="fu"><a href="../reference/get_geo_features.html">get_geo_features</a></span><span class="op">(</span>org_units <span class="op">=</span> <span class="st">'LEVEL-2'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 18 × 11</span></span></span>
+<span><span class="co">#&gt;   id      name  code  has_coordinates_down has_coordinates_up level parent_graph</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> W6sNfk… 01 V… ASIL… TRUE                 FALSE                  2 IWp9dQGM0bS </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> YvLOmt… 02 P… ASIL… TRUE                 FALSE                  2 IWp9dQGM0bS </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> XKGgyn… 03 L… ASIL… TRUE                 FALSE                  2 IWp9dQGM0bS </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> rO2RVJ… 04 O… ASIL… TRUE                 FALSE                  2 IWp9dQGM0bS </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> FRmrFT… 05 B… ASIL… TRUE                 FALSE                  2 IWp9dQGM0bS </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 13 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: parent_id &lt;chr&gt;, parent_name &lt;chr&gt;, type &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   coordinates &lt;chr&gt;</span></span></span>
+<span></span>
+<span><span class="co"># Reading the key/value data store</span></span>
+<span><span class="va">namespaces</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_store_namespaces.html">get_data_store_namespaces</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">namespaces</span></span>
+<span><span class="co">#&gt;  [1] "who-dqa"             "bridge"              "CLIMATE_DATA"       </span></span>
+<span><span class="co">#&gt;  [4] "bulk-load"           "WHO_ICD11_COD"       "dataQualityTool"    </span></span>
+<span><span class="co">#&gt;  [7] "DHIS2_MAPS_APP_CORE" "tracker-capture"     "analytics"          </span></span>
+<span><span class="co">#&gt; [10] "Dhis2Transfer"</span></span>
+<span><span class="fu"><a href="../reference/get_data_store_keys.html">get_data_store_keys</a></span><span class="op">(</span><span class="va">namespaces</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "configurations"        "configurationsMaurice" "configurationsTOM"</span></span></code></pre></div>
+<p><code><a href="../reference/get_sql_view_data.html">get_sql_view_data()</a></code> requires the authenticated user to
+be authorised to read the specific SQL view; DHIS2 returns an error
+rather than empty results if not.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

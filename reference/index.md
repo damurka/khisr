@@ -88,8 +88,8 @@ Download metadata information from DHIS2
 
 ## DHIS2 Analytics
 
-To access analytical, aggregated data in DHIS2, and the raw data values
-behind it
+To access analytical, aggregated data in DHIS2, the raw data values
+behind it, and data-quality checks
 
 - [`get_analytics()`](https://khisr.damurka.com/reference/get_analytics.md)
   : Retrieves Disaggregated Analytics Data from DHIS2
@@ -105,6 +105,19 @@ behind it
 - [`get_enrollment_analytics()`](https://khisr.damurka.com/reference/get_enrollment_analytics.md)
   **\[experimental\]** : Retrieves Aggregated Enrollment Analytics Data
   from DHIS2
+- [`get_event_analytics_aggregate()`](https://khisr.damurka.com/reference/get_event_analytics_aggregate.md)
+  **\[experimental\]** : Get Aggregated (Pivot-Style) Event Analytics
+  from DHIS2
+- [`get_enrollment_analytics_aggregate()`](https://khisr.damurka.com/reference/get_enrollment_analytics_aggregate.md)
+  **\[experimental\]** : Get Aggregated (Pivot-Style) Enrollment
+  Analytics from DHIS2
+- [`get_analytics_outliers()`](https://khisr.damurka.com/reference/get_analytics_outliers.md)
+  **\[experimental\]** : Get Statistical Outliers from DHIS2 Analytics
+- [`get_validation_results()`](https://khisr.damurka.com/reference/get_validation_results.md)
+  **\[experimental\]** : Get Validation Rule Results from DHIS2
+- [`get_complete_data_set_registrations()`](https://khisr.damurka.com/reference/get_complete_data_set_registrations.md)
+  **\[experimental\]** : Get Raw Data Set Completeness Registrations
+  from a DHIS2 Instance
 
 ## DHIS2 Tracker
 
@@ -131,6 +144,32 @@ DHIS2’s Tracker API
   [`` `%.tew%` ``](https://khisr.damurka.com/reference/tracked_entity_filter.md)
   [`` `%.tin%` ``](https://khisr.damurka.com/reference/tracked_entity_filter.md)
   : Tracked Entity Attribute Filter
+
+## DHIS2 System & Utilities
+
+Instance information, mapping, SQL views, the key/value data store,
+audit history, and file resources
+
+- [`get_system_info()`](https://khisr.damurka.com/reference/get_system_info.md)
+  **\[experimental\]** : Get DHIS2 Instance System Information
+- [`get_geo_features()`](https://khisr.damurka.com/reference/get_geo_features.md)
+  **\[experimental\]** : Get Organisation Unit Geographic Features
+- [`get_sql_views()`](https://khisr.damurka.com/reference/get_sql_views.md)
+  **\[experimental\]** : Get SQL Views Metadata from a DHIS2 Instance
+- [`get_sql_view_data()`](https://khisr.damurka.com/reference/get_sql_view_data.md)
+  **\[experimental\]** : Get Data from a DHIS2 SQL View
+- [`get_data_store_namespaces()`](https://khisr.damurka.com/reference/get_data_store_namespaces.md)
+  **\[experimental\]** : Get DHIS2 Data Store Namespaces
+- [`get_data_store_keys()`](https://khisr.damurka.com/reference/get_data_store_keys.md)
+  **\[experimental\]** : Get the Keys in a DHIS2 Data Store Namespace
+- [`get_data_store_value()`](https://khisr.damurka.com/reference/get_data_store_value.md)
+  **\[experimental\]** : Get a Value from a DHIS2 Data Store
+- [`get_data_value_audits()`](https://khisr.damurka.com/reference/get_data_value_audits.md)
+  **\[experimental\]** : Get Data Value Change History from a DHIS2
+  Instance
+- [`get_file_resources()`](https://khisr.damurka.com/reference/get_file_resources.md)
+  **\[experimental\]** : Get File Resources Metadata from a DHIS2
+  Instance
 
 ## Experimental Functions
 
