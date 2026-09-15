@@ -19,10 +19,10 @@
 #' get_data_elements()
 #'
 #' # Get data elements by element ids
-#' get_data_elements(id %.in% c('VR7vdS7P0Gb', 'gQro1y7Rsbq'))
+#' get_data_elements(id %.in% c('lYsfXxCw6Qi', 'GxlrIgMyEf4'))
 #'
-#' # Get datasets by name with the word 'MOH 705'
-#' get_data_sets(name %.like% 'MOH 705')
+#' # Get datasets by name with the word 'malaria'
+#' get_data_sets(name %.like% 'malaria')
 #'
 #' # Get all tracker programs
 #' get_programs()

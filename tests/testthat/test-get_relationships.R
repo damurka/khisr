@@ -10,5 +10,9 @@ test_that("get_relationships function works", {
     skip_if_no_cred()
     skip_if_offline()
 
-    expect_no_error(get_relationships(tracked_entity = 'qkU5JI6SQcd'))
+    # This demo instance has a relationship type configured (TB - Index case
+    # --> Household contact) but no actual relationship data on any tracker
+    # program tried.
+    expect_warning(result <- get_relationships(tracked_entity = 'qkU5JI6SQcd'))
+    expect_null(result)
 })

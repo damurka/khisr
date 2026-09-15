@@ -29,8 +29,8 @@ tracker_filter_operators <- c('eq', 'ge', 'gt', 'le', 'lt', 'ne', 'like', 'sw', 
 #' * `!null` - (no infix form; call `tracked_entity_filter(attr, '!null', NULL)`) - Attribute has a value
 #'
 #' The infix operators are shorthand for the equivalent `tracked_entity_filter()`
-#' call, e.g. `w75KJ2mc4zz %.teq% 'John'` is equivalent to
-#' `tracked_entity_filter('w75KJ2mc4zz', 'eq', 'John')`. `null`/`!null` have no
+#' call, e.g. `mTYYajEhlPY %.teq% 'John'` is equivalent to
+#' `tracked_entity_filter('mTYYajEhlPY', 'eq', 'John')`. `null`/`!null` have no
 #' infix form since an infix operator needs a right-hand value.
 #'
 #' This filter is only documented for the `trackedEntities` endpoint. DHIS2's
@@ -57,14 +57,14 @@ tracker_filter_operators <- c('eq', 'ge', 'gt', 'le', 'lt', 'ne', 'like', 'sw', 
 #'
 #' @examples
 #'
-#' # Tracked entities where attribute w75KJ2mc4zz equals "John"
-#' tracked_entity_filter('w75KJ2mc4zz', 'eq', 'John')
+#' # Tracked entities where attribute mTYYajEhlPY equals "John"
+#' tracked_entity_filter('mTYYajEhlPY', 'eq', 'John')
 #'
-#' # Tracked entities where attribute w75KJ2mc4zz is one of several values
-#' tracked_entity_filter('w75KJ2mc4zz', 'in', c('John', 'Jane'))
+#' # Tracked entities where attribute mTYYajEhlPY is one of several values
+#' tracked_entity_filter('mTYYajEhlPY', 'in', c('John', 'Jane'))
 #'
 #' # Equivalent, using the infix operator
-#' w75KJ2mc4zz %.teq% 'John'
+#' mTYYajEhlPY %.teq% 'John'
 #'
 #' @family tracker functions
 #'

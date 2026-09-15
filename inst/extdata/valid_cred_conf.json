@@ -1,7 +1,7 @@
 {
 	"credentials": {
-		"username": "dodoma",
-		"password": "Ytrewq!23456",
-		"server": "https://test.hiskenya.org"
+		"username": "demo_en",
+		"password": "District1#",
+		"server": "https://demos.dhis2.org/hmis"
 	}
 }

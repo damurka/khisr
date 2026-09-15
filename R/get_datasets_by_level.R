@@ -30,8 +30,8 @@
 #' * [get_data_sets()] for retrieving the data sets
 #'
 #' @examplesIf khis_has_cred()
-#' # The MoH 745 Cancer Screening Program Monthly Summary Form
-#' dataset_id = c('WWh5hbCmvND')
+#' # The Malaria elimination dataset
+#' dataset_id = c('VEM58nY22sO')
 #'
 #' # Download data from February 2023 to current date
 #' data <- get_data_sets_by_level(dataset_ids = dataset_id,

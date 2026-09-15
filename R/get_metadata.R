@@ -26,14 +26,14 @@
 #' get_metadata('categories')
 #'
 #' # Get the datasets metadata with fields 'id,name,organisationUnits' and filter
-#' # only the datasets with id 'WWh5hbCmvND'
+#' # only the datasets with id 'VEM58nY22sO'
 #' get_metadata('dataSets',
 #'              fields = 'id,name,organisationUnits[id,name,path]',
-#'              id %.eq% 'WWh5hbCmvND')
+#'              id %.eq% 'VEM58nY22sO')
 #'
 #' # Get data elements filtered by dataElementGroups id
 #' get_metadata('dataElements',
-#'              dataElementGroups.id %.eq% 'IXd7DXxZqzL',
+#'              dataElementGroups.id %.eq% 'WdtYaV7o8QV',
 #'              fields = ':all')
 
 get_metadata <- function(endpoint,
