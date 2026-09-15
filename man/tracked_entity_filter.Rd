@@ -75,8 +75,8 @@ As documented for the DHIS2 Tracker API, the supported operators are:
 }
 
 The infix operators are shorthand for the equivalent \code{tracked_entity_filter()}
-call, e.g. \code{w75KJ2mc4zz \%.teq\% 'John'} is equivalent to
-\code{tracked_entity_filter('w75KJ2mc4zz', 'eq', 'John')}. \code{null}/\code{!null} have no
+call, e.g. \code{mTYYajEhlPY \%.teq\% 'John'} is equivalent to
+\code{tracked_entity_filter('mTYYajEhlPY', 'eq', 'John')}. \code{null}/\code{!null} have no
 infix form since an infix operator needs a right-hand value.
 
 This filter is only documented for the \code{trackedEntities} endpoint. DHIS2's
@@ -94,14 +94,14 @@ don't match what the Tracker API expects.
 }
 \examples{
 
-# Tracked entities where attribute w75KJ2mc4zz equals "John"
-tracked_entity_filter('w75KJ2mc4zz', 'eq', 'John')
+# Tracked entities where attribute mTYYajEhlPY equals "John"
+tracked_entity_filter('mTYYajEhlPY', 'eq', 'John')
 
-# Tracked entities where attribute w75KJ2mc4zz is one of several values
-tracked_entity_filter('w75KJ2mc4zz', 'in', c('John', 'Jane'))
+# Tracked entities where attribute mTYYajEhlPY is one of several values
+tracked_entity_filter('mTYYajEhlPY', 'in', c('John', 'Jane'))
 
 # Equivalent, using the infix operator
-w75KJ2mc4zz \%.teq\% 'John'
+mTYYajEhlPY \%.teq\% 'John'
 
 }
 \seealso{

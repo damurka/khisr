@@ -50,8 +50,8 @@ can be REPORTING_RATE, REPORTING_RATE_ON_TIME, ACTUAL_REPORTS, ACTUAL_REPORTS_ON
 }
 \examples{
 \dontshow{if (khis_has_cred()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-# The MoH 745 Cancer Screening Program Monthly Summary Form
-dataset_id = c('WWh5hbCmvND')
+# The Malaria elimination dataset
+dataset_id = c('VEM58nY22sO')
 
 # Download data from February 2023 to current date
 data <- get_data_sets_by_level(dataset_ids = dataset_id,

@@ -21,7 +21,7 @@
 #' @examplesIf khis_has_cred()
 #'
 #' # Fetch the data element metadata for particular element id
-#' elements <- get_data_elements_with_category_options('htFuvGJRW1X')
+#' elements <- get_data_elements_with_category_options('lYsfXxCw6Qi')
 #' elements
 
 get_data_elements_with_category_options <-function(element_ids, auth = NULL, call = caller_env()) {

@@ -590,18 +590,17 @@ khis_api_version <- function(auth = NULL) {
 #'     khis_display_name()
 #' }
 khis_display_name <- function(auth = NULL) {
-    # If an AuthCred object is provided, return the display name from its profile
-    if (!is.null(auth) && inherits(auth, 'AuthCred')) {
-        return(auth$get_display_name())
+    # Fall back to the global .auth object unless an AuthCred was provided
+    if (is.null(auth) || !inherits(auth, 'AuthCred')) {
+        auth <- .auth
     }
 
-    # Fallback to the global .auth object
-    if (!is.null(.auth$get_profile())) {
-        return(.auth$get_profile()$get_display_name())
+    profile <- auth$get_profile()
+    if (is.null(profile)) {
+        return(NULL)
     }
 
-    # Return NULL if no profile or display name is available
-    return(NULL)
+    profile$get_display_name()
 }
 
 #' Internal Credentials for Documentation or Testing

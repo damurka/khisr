@@ -35,7 +35,7 @@ category options from the DHIS2 API server.
 \dontshow{if (khis_has_cred()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # Fetch the data element metadata for particular element id
-elements <- get_data_elements_with_category_options('htFuvGJRW1X')
+elements <- get_data_elements_with_category_options('lYsfXxCw6Qi')
 elements
 \dontshow{\}) # examplesIf}
 }
