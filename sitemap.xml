@@ -8,6 +8,7 @@
 <url><loc>https://khisr.damurka.com/articles/index.html</loc></url>
 <url><loc>https://khisr.damurka.com/articles/khisr.html</loc></url>
 <url><loc>https://khisr.damurka.com/articles/set-your-credentials.html</loc></url>
+<url><loc>https://khisr.damurka.com/articles/tracker.html</loc></url>
 <url><loc>https://khisr.damurka.com/authors.html</loc></url>
 <url><loc>https://khisr.damurka.com/index.html</loc></url>
 <url><loc>https://khisr.damurka.com/news/index.html</loc></url>
@@ -16,9 +17,17 @@
 <url><loc>https://khisr.damurka.com/reference/get_analytics_by_level.html</loc></url>
 <url><loc>https://khisr.damurka.com/reference/get_data_elements_with_category_options.html</loc></url>
 <url><loc>https://khisr.damurka.com/reference/get_data_sets_by_level.html</loc></url>
+<url><loc>https://khisr.damurka.com/reference/get_data_value_sets.html</loc></url>
+<url><loc>https://khisr.damurka.com/reference/get_enrollment_analytics.html</loc></url>
+<url><loc>https://khisr.damurka.com/reference/get_enrollments.html</loc></url>
+<url><loc>https://khisr.damurka.com/reference/get_event_analytics.html</loc></url>
+<url><loc>https://khisr.damurka.com/reference/get_events.html</loc></url>
 <url><loc>https://khisr.damurka.com/reference/get_metadata.html</loc></url>
 <url><loc>https://khisr.damurka.com/reference/get_organisations_by_level.html</loc></url>
+<url><loc>https://khisr.damurka.com/reference/get_relationships.html</loc></url>
+<url><loc>https://khisr.damurka.com/reference/get_tracked_entities.html</loc></url>
 <url><loc>https://khisr.damurka.com/reference/index.html</loc></url>
+<url><loc>https://khisr.damurka.com/reference/khis_api_version.html</loc></url>
 <url><loc>https://khisr.damurka.com/reference/khis_base_url.html</loc></url>
 <url><loc>https://khisr.damurka.com/reference/khis_cred.html</loc></url>
 <url><loc>https://khisr.damurka.com/reference/khis_cred_clear.html</loc></url>
@@ -30,5 +39,6 @@
 <url><loc>https://khisr.damurka.com/reference/metadata-filter.html</loc></url>
 <url><loc>https://khisr.damurka.com/reference/metadata-helpers.html</loc></url>
 <url><loc>https://khisr.damurka.com/reference/pipe.html</loc></url>
+<url><loc>https://khisr.damurka.com/reference/tracked_entity_filter.html</loc></url>
 </urlset>
 
