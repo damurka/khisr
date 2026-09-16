@@ -1,7 +1,6 @@
 # khisr 1.0.8
 
-* Added a link to DHIS2 (`<https://dhis2.org>`) in `Description:`,
-  requested by a CRAN reviewer during review of the 1.0.7 submission.
+* Added a link to DHIS2 (`<https://dhis2.org>`) in `Description:`.
 
 # khisr 1.0.7
 
