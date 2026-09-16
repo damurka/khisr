@@ -1,5 +1,9 @@
 # Changelog
 
+## khisr 1.0.8
+
+- Added a link to DHIS2 (`<https://dhis2.org>`) in `Description:`.
+
 ## khisr 1.0.7
 
 This release adds support for DHIS2’s Tracker API, Personal Access Token

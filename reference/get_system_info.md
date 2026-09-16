@@ -41,7 +41,7 @@ get_system_info()
 #> [1] "https://demos.dhis2.org/hmis"
 #> 
 #> $userAgent
-#> [1] "khisr/1.0.7 (https://khisr.damurka.com)"
+#> [1] "khisr/1.0.8 (https://khisr.damurka.com)"
 #> 
 #> $calendar
 #> [1] "iso8601"
@@ -50,7 +50,7 @@ get_system_info()
 #> [1] "yyyy-mm-dd"
 #> 
 #> $serverDate
-#> [1] "2026-09-15T20:07:40.866"
+#> [1] "2026-09-16T10:42:57.373"
 #> 
 #> $serverTimeZoneId
 #> [1] "Europe/Berlin"
@@ -59,20 +59,20 @@ get_system_info()
 #> [1] "Central European Standard Time"
 #> 
 #> $lastAnalyticsTableSuccess
-#> [1] "2026-09-15T02:00:00.119"
+#> [1] "2026-09-16T02:00:00.124"
 #> 
 #> $intervalSinceLastAnalyticsTableSuccess
-#> [1] "18 h, 7 m, 40 s"
+#> [1] "8 h, 42 m, 57 s"
 #> 
 #> $lastAnalyticsTableRuntime
-#> [1] "03:28:07.718"
+#> [1] "03:28:22.607"
 #> 
 #> $databaseInfo
 #> $databaseInfo$spatialSupport
 #> [1] TRUE
 #> 
 #> $databaseInfo$time
-#> [1] "2026-09-15T20:07:40.866"
+#> [1] "2026-09-16T10:42:57.373"
 #> 
 #> 
 #> $version

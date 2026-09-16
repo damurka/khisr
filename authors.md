@@ -8,15 +8,15 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/damurka/khisr/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/damurka/khisr/blob/v1.0.8/DESCRIPTION)
 
 Kariuki D (2026). *khisr: An R Client to Retrieve Data from DHIS2*. R
-package version 1.0.7, <https://khisr.damurka.com>.
+package version 1.0.8, <https://khisr.damurka.com>.
 
     @Manual{,
       title = {khisr: An R Client to Retrieve Data from DHIS2},
       author = {David Kariuki},
       year = {2026},
-      note = {R package version 1.0.7},
+      note = {R package version 1.0.8},
       url = {https://khisr.damurka.com},
     }
