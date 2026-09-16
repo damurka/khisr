@@ -12,6 +12,10 @@ This release also adds several new features (Tracker API support,
 Personal Access Token authentication, and additional data/analytics
 endpoints) and a number of unrelated bug fixes found during review; see NEWS.md for details.
 
+Per reviewer feedback, `Description:` now includes a link
+(`<https://dhis2.org>`) to DHIS2, the external service khisr interacts
+with.
+
 ## R CMD check results
 
 0 errors | 0 warnings | 1 note
