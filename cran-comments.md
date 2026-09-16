@@ -1,3 +1,10 @@
+## Resubmission
+
+This is a resubmission. The previous submission (1.0.7) was not accepted;
+per reviewer feedback, `Description:` now includes a link
+(`<https://dhis2.org>`) to DHIS2, the external service khisr interacts
+with.
+
 ## Resubmission after archival
 
 This package was archived from CRAN on 2026-03-25 because check problems
@@ -10,12 +17,18 @@ that removed it): `R CMD check` returns 0 errors, 0 warnings, 1 note.
 
 This release also adds several new features (Tracker API support,
 Personal Access Token authentication, and additional data/analytics
-endpoints) and a number of unrelated bug fixes found during review; see NEWS.md for details.
+endpoints) and a number of unrelated bug fixes found during review; see
+NEWS.md for details.
 
 ## R CMD check results
 
 0 errors | 0 warnings | 1 note
 
 * New submission
-   
 * Package was archived on CRAN
+
+## revdepcheck results
+
+There are no reverse dependencies (checked against the current CRAN
+package database: no package lists khisr in Depends, Imports, Suggests,
+LinkingTo, or Enhances).
