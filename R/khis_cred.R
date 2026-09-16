@@ -26,7 +26,6 @@
 #' @param config_path An optional path to a configuration file containing
 #'   either `username`/`password` or a `token`. This is considered more
 #'   secure than providing credentials directly in code.
-#' @param base_url Deprecated. The base URL of the DHIS2 instance. Use `server` instead.
 #'
 #' @family credential functions
 #'
@@ -67,10 +66,9 @@
 khis_cred <- function(username = NULL,
                       password = NULL,
                       token = NULL,
-                      server = NULL,
+                      server,
                       api_version = NULL,
-                      config_path = NULL,
-                      base_url = deprecated()) {
+                      config_path = NULL) {
 
     has_basic <- !is.null(username) || !is.null(password)
     has_token <- !is.null(token)
@@ -106,12 +104,6 @@ khis_cred <- function(username = NULL,
             ),
             class = 'khis_multiple_credentials'
         )
-    }
-
-    # Deprecation warning for base_url and extract server if necessary
-    if (is_present(base_url)) {
-        lifecycle::deprecate_warn('1.0.6', 'khis_cred(base_url)', 'khis_cred(server)')
-        server <- str_remove(base_url, 'api')
     }
 
     # Load credentials from config file if provided
@@ -155,15 +147,6 @@ khis_cred <- function(username = NULL,
             ),
             class = 'khis_invalid_credentials'
         )
-    }
-
-    if (is_null(server)) {
-        lifecycle::deprecate_warn(
-            when = "1.0.6",
-            what = "khis_cred(base_url)",
-            details = "The use of a default URL (`https://hiskenya.org/api`) when neither `server` nor `base_url` is provided is deprecated. Please provide an explicit `server` URL."
-        )
-        server <- 'https://hiskenya.org'
     }
 
     # Validate the server URL

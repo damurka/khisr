@@ -34,11 +34,14 @@ test_that("khis_cred works correctly using configuration file", {
         class = 'khis_invalid_credentials'
     )
 
-    # expect_error(
-    #     khis_cred(
-    #         config_path =  system.file("extdata", "no_url_cred_conf.json", package = "khisr")),
-    #     class = 'khis_missing_base_url'
-    # )
+    expect_error(
+        khis_cred(
+            config_path = system.file("extdata", "no_url_cred_conf.json", package = "khisr"))
+    )
+
+    expect_error(
+        khis_cred(username = 'username2', password = 'password2')
+    )
 
     skip_if_server_error()
 

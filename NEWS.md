@@ -1,5 +1,10 @@
 # khisr (development version)
 
+* **Breaking change**: `khis_cred()`'s `server` argument no longer has a
+  default (nor an implicit fallback to `https://hiskenya.org`), and its
+  deprecated `base_url` argument has been removed entirely. Provide
+  `server` explicitly, or via `config_path`.
+
 # khisr 1.0.8
 
 * Added a link to DHIS2 (`<https://dhis2.org>`) in `Description:`.
