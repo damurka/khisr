@@ -38,7 +38,11 @@ get_organisations_by_level(
 ## Value
 
 A tibble containing the organisation units and their parent units up to
-the specified level.
+the specified level. For each ancestor level, both a name column (e.g.
+`county`) and an id column (e.g. `county_id`) are included, so results
+can be joined back to other org-unit-keyed data by id rather than name —
+two different org units at the same level can share a name, a real,
+known DHIS2 data-quality issue.
 
 ## Examples
 
@@ -46,18 +50,25 @@ the specified level.
 # Fetch all the organisation units metadata
 organisations <- get_organisations_by_level(level = 2)
 organisations
-#> # A tibble: 47 × 3
-#>    id          county                 kenya
-#>    <chr>       <chr>                  <chr>
-#>  1 vvOK1BxTbet Baringo County         Kenya
-#>  2 HMNARUV2CW4 Bomet County           Kenya
-#>  3 KGHhQ5GLd4k Bungoma County         Kenya
-#>  4 Tvf1zgVZ0K4 Busia County           Kenya
-#>  5 MqnLxQBigG0 Elgeyo Marakwet County Kenya
-#>  6 PFu8alU2KWG Embu County            Kenya
-#>  7 uyOrcHZBpW0 Garissa County         Kenya
-#>  8 nK0A12Q7MvS Homa Bay County        Kenya
-#>  9 bzOfj0iwfDH Isiolo County          Kenya
-#> 10 Hsk1YV8kHkT Kajiado County         Kenya
-#> # ℹ 37 more rows
+#> # A tibble: 18 × 4
+#>    id          province             country country_id 
+#>    <chr>       <chr>                <chr>   <chr>      
+#>  1 W6sNfkJcXGC 01 Vientiane Capital Lao PDR IWp9dQGM0bS
+#>  2 YvLOmtTQD6b 02 Phongsali         Lao PDR IWp9dQGM0bS
+#>  3 XKGgynPS1WZ 03 Louangnamtha      Lao PDR IWp9dQGM0bS
+#>  4 rO2RVJWHpCe 04 Oudomxai          Lao PDR IWp9dQGM0bS
+#>  5 FRmrFTE63D0 05 Bokeo             Lao PDR IWp9dQGM0bS
+#>  6 MBZYTqkEgwf 06 Louangphabang     Lao PDR IWp9dQGM0bS
+#>  7 hdeC7uX9Cko 07 Houaphan          Lao PDR IWp9dQGM0bS
+#>  8 RdNV4tTRNEo 08 Xainyabouli       Lao PDR IWp9dQGM0bS
+#>  9 VWGSudnonm5 09 Xiangkhouang      Lao PDR IWp9dQGM0bS
+#> 10 quFXhkOJGB4 10 Vientiane         Lao PDR IWp9dQGM0bS
+#> 11 vBWtCmNNnCG 11 Bolikhamxai       Lao PDR IWp9dQGM0bS
+#> 12 c4HrGRJoarj 12 Khammouan         Lao PDR IWp9dQGM0bS
+#> 13 pFCZqWnXtoU 13 Savannakhet       Lao PDR IWp9dQGM0bS
+#> 14 TOgZ99Jv0bN 14 Salavan           Lao PDR IWp9dQGM0bS
+#> 15 dOhqCNenSjS 15 Xekong            Lao PDR IWp9dQGM0bS
+#> 16 sv6c7CpPcrc 16 Champasak         Lao PDR IWp9dQGM0bS
+#> 17 hRQsZhmvqgS 17 Attapu            Lao PDR IWp9dQGM0bS
+#> 18 K27JzTKmBKh 18 Xaisomboun        Lao PDR IWp9dQGM0bS
 ```

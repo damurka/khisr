@@ -46,9 +46,9 @@ in order of decreasing scope:
 
 - Use `local_khis_quiet()` to silence khisr in a specific scope.
 
-- Use `with_khis_quite` to run small bit of code silently.
+- Use `with_khis_quiet` to run small bit of code silently.
 
-`local_khis_quiet` and `with_khis` follow the conventions of the
+`local_khis_quiet` and `with_khis_quiet` follow the conventions of the
 [withr](https://withr.r-lib.org) package.
 
 ## Examples
@@ -74,7 +74,7 @@ if (FALSE) { # \dontrun{
               password = 'password',
               server = 'https://<dhis2-instance>')
 
-    # suppress messages for a in a specific scope
+    # suppress messages in a specific scope
     local_khis_quiet()
 
     # no message

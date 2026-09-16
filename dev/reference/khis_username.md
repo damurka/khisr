@@ -19,11 +19,15 @@ khis_username(auth = NULL)
 
 ## Value
 
-The username as a string, or `NULL` if no credentials are available.
+The username as a string, or `NULL` if no credentials are available, or
+if the credentials were set with `token` rather than
+`username`/`password` (see
+[`khis_cred()`](https://khisr.damurka.com/dev/reference/khis_cred.md)).
 
 ## See also
 
 Other credential functions:
+[`khis_api_version()`](https://khisr.damurka.com/dev/reference/khis_api_version.md),
 [`khis_base_url()`](https://khisr.damurka.com/dev/reference/khis_base_url.md),
 [`khis_cred()`](https://khisr.damurka.com/dev/reference/khis_cred.md),
 [`khis_cred_clear()`](https://khisr.damurka.com/dev/reference/khis_cred_clear.md),
@@ -33,6 +37,7 @@ Other credential functions:
 ## Examples
 
 ``` r
+
 if (FALSE) { # \dontrun{
     # Set the credentials using global .auth object
     khis_cred(username = 'DHIS2 username',

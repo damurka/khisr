@@ -24,8 +24,13 @@ begin exploring DHIS2 data, you’ll need to establish your credentials.
     effectively.
 
 ``` r
+
 # Set the credentials using username and password
 khis_cred(username = 'your-dhis2-username', password = 'your-dhis2-password', server = 'https://<your dhis2 instance>')
+
+# Set the credentials using a Personal Access Token (DHIS2's recommended
+# method for scripts and integrations) instead of username/password
+khis_cred(token = 'your-dhis2-token', server = 'https://<your dhis2 instance>')
 
 # Set credentials using configuration path
 khis_cred(config_path = 'path/to/secret.json')
@@ -43,129 +48,77 @@ resource for a deeper understanding.
 
 ### Metadata helpers in khisr
 
-`khisr` provides a set of high-level functions to retrieve details about
-various DHIS2 metadata categories. These functions often leverage your R
-IDE’s auto-complete feature for faster typing.
-
-The following table summarizes these `khisr` metadata helper functions:
-
-| khisr function                                                                                     | DHIS2 API Endpoint        |
-|:---------------------------------------------------------------------------------------------------|:--------------------------|
-| [`get_categories()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md)                  | categories                |
-| [`get_category_combos()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md)             | categoryCombos            |
-| [`get_category_option_combos()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md)      | categoryOptionCombos      |
-| [`get_category_option_group_sets()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md)  | categoryOptionGroupSets   |
-| [`get_category_option_groups()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md)      | categoryOptionGroups      |
-| [`get_category_options()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md)            | categoryOptions           |
-| [`get_data_element_group_sets()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md)     | dataElementGroupSets      |
-| [`get_data_element_groups()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md)         | dataElementGroups         |
-| [`get_data_elements()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md)               | dataElements              |
-| [`get_data_sets()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md)                   | dataSets                  |
-| [`get_indicator_group_sets()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md)        | indicatorGroupSets        |
-| [`get_indicator_groups()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md)            | indicatorGroups           |
-| [`get_indicators()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md)                  | indicators                |
-| [`get_option_group_sets()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md)           | optionGroupSets           |
-| [`get_option_groups()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md)               | optionGroups              |
-| [`get_option_sets()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md)                 | optionSets                |
-| [`get_options()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md)                     | options                   |
-| [`get_organisation_unit_groupsets()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md) | organisationUnitGroupSets |
-| [`get_organisation_unit_groups()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md)    | organisationUnitGroups    |
-| [`get_organisation_units()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md)          | organisationUnits         |
-| [`get_dimensions()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md)                  | dimensions                |
-| [`get_user_groups()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md)                 | userGroups                |
-| [`get_period_types()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md)                | periodTypes               |
+`khisr` provides a set of high-level functions — one per DHIS2 metadata
+type
+([`get_organisation_units()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md),
+[`get_data_elements()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md),
+[`get_programs()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md),
+and around 25 others) — that all share the same interface and can be
+filtered the same way. See
+[`?metadata-helpers`](https://khisr.damurka.com/reference/metadata-helpers.html)
+for the full list, and your R IDE’s auto-complete for faster typing.
 
 ### Metadata object filter
 
-`khisr` allows you to filter retrieved metadata using a straightforward
-approach. The filter format follows the pattern
-**property:operator:value**. Here’s a breakdown of the components:
-
-- **property**: The property of the metadata you want to filter on.
-- **operator**: The comparison operator you want to perform (examples:
-  `eq` for equality, `like` for case-sensitive string matching).
-- **value**: The value to use for comparison (not required for all
-  operators).
-
-The following table provides a summary of the supported operators:
-
-| DHIS2 Operator | Infix Operator | Description                                     |
-|:---------------|:---------------|:------------------------------------------------|
-| `eq`           | `%.eq%`        | Equality                                        |
-| `!eq`          | `%.~eq%`       | Inequality                                      |
-| `ieq`          | `%.ieq%`       | Case insensitive string, match exact            |
-| `ne`           | `%.ne%`        | Inequality                                      |
-| `like`         | `%.Like%`      | Case sensitive string, match anywhere           |
-| `!like`        | `%.~Like%`     | Case sensitive string, not match anywhere       |
-| `$like`        | `%.^Like%`     | Case sensitive string, match start              |
-| `!$like`       | `%.~^Like%`    | Case sensitive string, not match start          |
-| `like$`        | `%.Like$%`     | Case sensitive string, match end                |
-| `!like$`       | `%.~Like$%`    | Case sensitive string, not match end            |
-| `ilike`        | `%.like%`      | Case insensitive string, match anywhere         |
-| `!ilike`       | `%.~like%`     | Case insensitive string, not match anywhere     |
-| `$ilike`       | `%.^like%`     | Case insensitive string, match start            |
-| `!$ilike`      | `%.~^like%`    | Case insensitive string, not match start        |
-| `ilike$`       | `%.like$%`     | Case insensitive string, match end              |
-| `!ilike$`      | `%.~like$%`    | Case insensitive string, not match end          |
-| `gt`           | `%.gt%`        | Greater than                                    |
-| `ge`           | `%.ge%`        | Greater than or equal                           |
-| `lt`           | `%.lt%`        | Less than                                       |
-| `le`           | `%.le%`        | Less than or equal                              |
-| `token`        | `%.token%`     | Match on multiple tokens in search property     |
-| `!token`       | `%.~token%`    | Not match on multiple tokens in search property |
-| `in`           | `%.in%`        | Find objects matching 1 or more values          |
-| `!in`          | `%.~in%`       | Find objects not matching 1 or more values      |
+`khisr` filters retrieved metadata using DHIS2’s
+**property:operator:value** pattern, exposed through
+[`metadata_filter()`](https://khisr.damurka.com/reference/metadata-filter.html)
+and a matching set of infix operators (`%.eq%`, `%.like%`, `%.in%`, and
+about 20 more — see
+[`?metadata_filter`](https://khisr.damurka.com/dev/reference/metadata-filter.md)
+for the complete list with descriptions).
 
 ### Working with metadata filters
 
 Basic usage of the metadata filter
 
 ``` r
-# Retrieve organisation units by county (level 2)
-county <- get_organisation_units(level %.eq% '2')
-county
-#> # A tibble: 47 × 2
-#>   name                   id         
-#>   <chr>                  <chr>      
-#> 1 Baringo County         vvOK1BxTbet
-#> 2 Bomet County           HMNARUV2CW4
-#> 3 Bungoma County         KGHhQ5GLd4k
-#> 4 Busia County           Tvf1zgVZ0K4
-#> 5 Elgeyo Marakwet County MqnLxQBigG0
-#> # ℹ 42 more rows
 
-# Retrieve county by name (Mombasa)
-county <- get_organisation_units(level %.eq% '2',
-                                 name %.like% 'mombasa')
-county
+# Retrieve organisation units by province (level 2)
+province <- get_organisation_units(level %.eq% '2')
+province
+#> # A tibble: 18 × 2
+#>   name                 id         
+#>   <chr>                <chr>      
+#> 1 01 Vientiane Capital W6sNfkJcXGC
+#> 2 02 Phongsali         YvLOmtTQD6b
+#> 3 03 Louangnamtha      XKGgynPS1WZ
+#> 4 04 Oudomxai          rO2RVJWHpCe
+#> 5 05 Bokeo             FRmrFTE63D0
+#> # ℹ 13 more rows
+
+# Retrieve province by name (Vientiane Capital)
+province <- get_organisation_units(level %.eq% '2',
+                                   name %.like% 'vientiane capital')
+province
 #> # A tibble: 1 × 2
-#>   name           id         
-#>   <chr>          <chr>      
-#> 1 Mombasa County wsBsC6gjHvn
+#>   name                 id         
+#>   <chr>                <chr>      
+#> 1 01 Vientiane Capital W6sNfkJcXGC
 
-data_element_id <- c('cXe64Yk0QMY', 'XEX93uLsAm2')
+data_element_id <- c('lYsfXxCw6Qi', 'GxlrIgMyEf4')
 
 # Retrieve data elements by ID using operator in
 data_elements <- get_data_elements(id %.in% data_element_id)
 data_elements
 #> # A tibble: 2 × 2
-#>   name         id         
-#>   <chr>        <chr>      
-#> 1 CBE-Abnormal XEX93uLsAm2
-#> 2 CBE-Normal   cXe64Yk0QMY
+#>   name                                   id         
+#>   <chr>                                  <chr>      
+#> 1 MAL - Malaria confirmed cases reported lYsfXxCw6Qi
+#> 2 MAL - Malaria deaths                   GxlrIgMyEf4
 
 # Retrieve data elements by filtering using dataElementGroups
-data_elements <- get_data_elements(dataElementGroups.name %.like% 'moh 705')
+data_elements <- get_data_elements(dataElementGroups.name %.like% 'malaria')
 data_elements
-#> # A tibble: 96 × 2
-#>   name                        id         
-#>   <chr>                       <chr>      
-#> 1 Abortion                    IrWSgk9GsUm
-#> 2 All other diseases          KxT47tbKHsd
-#> 3 Anaemia cases               kkUHOwGMawD
-#> 4 Arthritis, Joint pains etc. waNhWrS3HL6
-#> 5 Asthma                      L82lvvxVaqt
-#> # ℹ 91 more rows
+#> # A tibble: 316 × 2
+#>   name                                                            id         
+#>   <chr>                                                           <chr>      
+#> 1 CH113a - Children (0-4 y) reporting fever in the last two weeks hzstN9blpky
+#> 2 CH114 - Households with at least one ITN                        gRT7NXBCkbB
+#> 3 CH115a - Households with at least one ITN for every two persons xjGwK4DRHxh
+#> 4 CH115b - Total individuals who live in the household            mn8VQbAjlFU
+#> 5 CH116a - People sleeping under an ITN the previous night        UXCgJMwfQiG
+#> # ℹ 311 more rows
 ```
 
 ## Data analytics
@@ -178,12 +131,18 @@ resource, let’s explore the key functions and parameters involved:
 
 - [`get_analytics()`](https://khisr.damurka.com/dev/reference/get_analytics.md):
   Retrieves aggregated data based on specified dimensions and filters.
+- [`get_data_value_sets()`](https://khisr.damurka.com/dev/reference/get_data_value_sets.md):
+  Retrieves the individually entered raw data values behind the
+  aggregates — useful for data-quality auditing.
 - [`analytics_dimension()`](https://khisr.damurka.com/dev/reference/analytics-dimension.md):
   Constructs dimensions for queries, ensuring accurate data retrieval.
 - `%.d%` (infix operator): Convenient shorthand for creating dimension
   filters.
 - `%.f%` (infix operator): Convenient shorthand for creating filter
   dimensions.
+- [`get_event_analytics_aggregate()`](https://khisr.damurka.com/dev/reference/get_event_analytics_aggregate.md)/[`get_enrollment_analytics_aggregate()`](https://khisr.damurka.com/dev/reference/get_enrollment_analytics_aggregate.md):
+  pivot-table style totals over Tracker data — see [Tracker
+  Data](https://khisr.damurka.com/articles/tracker.html).
 
 ### Dimension (dx)
 
@@ -197,22 +156,13 @@ dimension items. The fixed dimensions are the **data element** *(dx)*
 can dynamically add dimensions through categories, data element group
 sets and organisation unit group sets.
 
-| Dimension ID | Dimensions                                                        |
-|:-------------|:------------------------------------------------------------------|
-| dx           | Data elements, indicators, data set reporting rate metrics,       |
-|              | data element operands, program indicators, program data elements, |
-|              | program attributes, validation rules                              |
-|              |                                                                   |
-| pe           | ISO periods and relative periods (see “date and period format”)   |
-|              |                                                                   |
-| ou           | Organisation unit hierarchy                                       |
-|              | Organisation unit identifiers, keywords USER_ORGUNIT,             |
-|              | USER_ORGUNIT_CHILDREN, USER_ORGUNIT_GRANDCHILDREN, LEVEL-,        |
-|              | and OU_GROUP-                                                     |
-|              |                                                                   |
-| co           | Category option combo identifiers (use `all` to get all items)    |
-|              |                                                                   |
-| ao           | Category option combo identifiers (use `all` to get all items)    |
+| Dimension ID | Dimensions |
+|:---|:---|
+| `dx` | Data elements, indicators, data set reporting rate metrics, data element operands, program indicators, program data elements, program attributes, validation rules |
+| `pe` | ISO periods and relative periods (see [Date and Period Format](https://khisr.damurka.com/articles/date-format.html)) |
+| `ou` | Organisation unit hierarchy: organisation unit identifiers, or keywords `USER_ORGUNIT`, `USER_ORGUNIT_CHILDREN`, `USER_ORGUNIT_GRANDCHILDREN`, `LEVEL-<level>`, and `OU_GROUP-<group-id>` |
+| `co` | Category option combo identifiers (use `all` to get all items) |
+| `ao` | Attribute option combo identifiers (use `all` to get all items) |
 
 ### Filter (filter)
 
@@ -233,6 +183,7 @@ will not be included as dimensions in the actual response.
   infix operators %.d% for concise and readable code.
 
 ``` r
+
 # To include a list dimensions for data elements id, dataset ids
 dx %.d% c('dimension-id-1', 'dimension-id-2')
 #> <spliced>
@@ -251,33 +202,33 @@ ou %.d% 'USER_ORGUNIT'
 
 # showing in the analytics
 get_analytics(
-    dx %.d% c('siOyOiOJpI8', 'Lt0FqtnHraW', 'OoakJhWiyZp'),
+    dx %.d% c('lYsfXxCw6Qi', 'vTRrNdOOT9g', 'GxlrIgMyEf4'),
     pe %.d% 'LAST_YEAR',
-    ou %.d% c('qKzosKQPl6G')
+    ou %.d% c('W6sNfkJcXGC')
 )
 #> # A tibble: 3 × 4
 #>   dx          pe    ou          value
 #>   <chr>       <chr> <chr>       <dbl>
-#> 1 OoakJhWiyZp 2025  qKzosKQPl6G  3628
-#> 2 Lt0FqtnHraW 2025  qKzosKQPl6G 27571
-#> 3 siOyOiOJpI8 2025  qKzosKQPl6G 17938
+#> 1 lYsfXxCw6Qi 2025  W6sNfkJcXGC   120
+#> 2 GxlrIgMyEf4 2025  W6sNfkJcXGC   966
+#> 3 vTRrNdOOT9g 2025  W6sNfkJcXGC   242
 
 # Using the startDate and endDate with organisation unit keyword 'USER_ORGUNIT'
 get_analytics(
-    dx %.d% c('siOyOiOJpI8', 'Lt0FqtnHraW', 'OoakJhWiyZp'),
+    dx %.d% c('lYsfXxCw6Qi', 'vTRrNdOOT9g', 'GxlrIgMyEf4'),
     ou %.d% 'USER_ORGUNIT',
     pe %.d% 'all',
     startDate = '2023-07-01',
     endDate = '2023-12-31'
 )
 #> # A tibble: 18 × 4
-#>   dx          ou          pe       value
-#>   <chr>       <chr>       <chr>    <dbl>
-#> 1 siOyOiOJpI8 HfVjCurKxh2 202310  753853
-#> 2 siOyOiOJpI8 HfVjCurKxh2 202312  653757
-#> 3 Lt0FqtnHraW HfVjCurKxh2 202307 1122346
-#> 4 OoakJhWiyZp HfVjCurKxh2 202308  367189
-#> 5 siOyOiOJpI8 HfVjCurKxh2 202311  671809
+#>   dx          ou          pe     value
+#>   <chr>       <chr>       <chr>  <dbl>
+#> 1 lYsfXxCw6Qi IWp9dQGM0bS 202308  2685
+#> 2 lYsfXxCw6Qi IWp9dQGM0bS 202309  3069
+#> 3 GxlrIgMyEf4 IWp9dQGM0bS 202310   178
+#> 4 lYsfXxCw6Qi IWp9dQGM0bS 202310  2966
+#> 5 GxlrIgMyEf4 IWp9dQGM0bS 202307   206
 #> # ℹ 13 more rows
 ```
 
@@ -285,6 +236,7 @@ get_analytics(
   filtering data without including them in the response.
 
 ``` r
+
 # Filter by period
 pe %.f% 'LAST_YEAR'
 #> <spliced>
@@ -297,17 +249,136 @@ ou %.f% 'USER_ORGUNIT'
 #> $filter
 #> [1] "ou:USER_ORGUNIT"
 
-# showing in the analytics. filter by organisation unit with id 'qKzosKQPl6G'
+# showing in the analytics. filter by organisation unit with id 'W6sNfkJcXGC'
 # and period 'LAST_YEAR'
 get_analytics(
-    dx %.d% c('siOyOiOJpI8', 'Lt0FqtnHraW', 'OoakJhWiyZp'),
+    dx %.d% c('lYsfXxCw6Qi', 'vTRrNdOOT9g', 'GxlrIgMyEf4'),
     pe %.f% 'LAST_YEAR',
-    ou %.f% 'qKzosKQPl6G'
+    ou %.f% 'W6sNfkJcXGC'
 )
 #> # A tibble: 3 × 2
 #>   dx          value
 #>   <chr>       <dbl>
-#> 1 OoakJhWiyZp  3628
-#> 2 siOyOiOJpI8 17938
-#> 3 Lt0FqtnHraW 27571
+#> 1 lYsfXxCw6Qi   120
+#> 2 vTRrNdOOT9g   242
+#> 3 GxlrIgMyEf4   966
 ```
+
+### Data quality
+
+Alongside the aggregated values themselves, DHIS2 exposes a few
+endpoints for checking the *quality* of reported data:
+
+| khisr function | Retrieves |
+|:---|:---|
+| [`get_complete_data_set_registrations()`](https://khisr.damurka.com/dev/reference/get_complete_data_set_registrations.md) | Raw completeness records — who marked a data set complete, and when. |
+| [`get_analytics_outliers()`](https://khisr.damurka.com/dev/reference/get_analytics_outliers.md) | Data values flagged as statistical outliers. |
+| [`get_validation_results()`](https://khisr.damurka.com/dev/reference/get_validation_results.md) | Violated validation rules for an org unit/period range. |
+| [`get_data_value_audits()`](https://khisr.damurka.com/dev/reference/get_data_value_audits.md) | Change history for a data value. |
+
+``` r
+
+# Completeness registrations for a data set at a province and everything
+# below it, for a single period
+get_complete_data_set_registrations(
+    data_sets = 'VEM58nY22sO',
+    org_units = 'W6sNfkJcXGC',
+    children = TRUE,
+    periods = '202301'
+)
+#> # A tibble: 16 × 7
+#>   period dataSet  organisationUnit attributeOptionCombo date  storedBy completed
+#>   <chr>  <chr>    <chr>            <chr>                <chr> <chr>    <lgl>    
+#> 1 202301 VEM58nY… xxBxJFWXtrL      HllvX50cXC0          2023… automat… TRUE     
+#> 2 202301 VEM58nY… C9ncRif5rMV      HllvX50cXC0          2023… automat… TRUE     
+#> 3 202301 VEM58nY… v3HIu78Y4Wf      HllvX50cXC0          2023… automat… TRUE     
+#> 4 202301 VEM58nY… rmJxaV9ggj7      HllvX50cXC0          2022… automat… TRUE     
+#> 5 202301 VEM58nY… NMDH3yjPLSx      HllvX50cXC0          2022… automat… TRUE     
+#> # ℹ 11 more rows
+```
+
+[`get_analytics_outliers()`](https://khisr.damurka.com/dev/reference/get_analytics_outliers.md)
+and
+[`get_validation_results()`](https://khisr.damurka.com/dev/reference/get_validation_results.md)
+require the authenticated user to have the corresponding DHIS2 authority
+(outlier detection or validation analysis); without it, DHIS2 returns an
+authorisation error rather than empty results.
+
+## Tracker data
+
+Alongside aggregate analytics, DHIS2 also stores case-based,
+person-level data through its Tracker API. `khisr` provides
+[`get_tracked_entities()`](https://khisr.damurka.com/dev/reference/get_tracked_entities.md),
+[`get_enrollments()`](https://khisr.damurka.com/dev/reference/get_enrollments.md),
+and
+[`get_events()`](https://khisr.damurka.com/dev/reference/get_events.md)
+for reading it, plus
+[`tracked_entity_filter()`](https://khisr.damurka.com/dev/reference/tracked_entity_filter.md)
+for filtering tracked entities by attribute value. See [Tracker
+Data](https://khisr.damurka.com/articles/tracker.html) for a full guide.
+
+``` r
+
+# Tracked entities enrolled in a program, at an org unit and everything below it
+get_tracked_entities(
+    program = 'PREnRHSp3be',
+    org_units = 'IWp9dQGM0bS',
+    org_unit_mode = 'DESCENDANTS'
+)
+#> # A tibble: 270 × 6
+#>   trackedEntity trackedEntityType createdAt           updatedAt orgUnit inactive
+#>   <chr>         <chr>             <chr>               <chr>     <chr>   <lgl>   
+#> 1 qkU5JI6SQcd   DnxQe1mgmlp       2024-06-06T10:40:2… 2024-06-… NRcrkS… FALSE   
+#> 2 ytRUQrTYLFz   DnxQe1mgmlp       2024-06-06T10:40:2… 2024-06-… QoGegg… FALSE   
+#> 3 xIOlpNNRcNY   DnxQe1mgmlp       2024-06-06T10:40:2… 2024-06-… o0Q54F… FALSE   
+#> 4 MNUPROje7ZP   DnxQe1mgmlp       2024-06-06T10:40:2… 2024-06-… wQUe9H… FALSE   
+#> 5 rlTI0qJF8fl   DnxQe1mgmlp       2024-06-06T10:40:2… 2024-06-… mNaSC8… FALSE   
+#> # ℹ 265 more rows
+```
+
+## System & utilities
+
+A handful of functions cover the DHIS2 instance itself, rather than its
+health data:
+
+| khisr function | Retrieves |
+|:---|:---|
+| [`get_system_info()`](https://khisr.damurka.com/dev/reference/get_system_info.md) | DHIS2 version, build, and server info. |
+| [`get_geo_features()`](https://khisr.damurka.com/dev/reference/get_geo_features.md) | Organisation unit coordinates/boundaries, for mapping. |
+| [`get_sql_views()`](https://khisr.damurka.com/dev/reference/get_sql_views.md)/[`get_sql_view_data()`](https://khisr.damurka.com/dev/reference/get_sql_view_data.md) | Predefined SQL views, and their data. |
+| [`get_data_store_namespaces()`](https://khisr.damurka.com/dev/reference/get_data_store_namespaces.md)/[`get_data_store_keys()`](https://khisr.damurka.com/dev/reference/get_data_store_keys.md)/[`get_data_store_value()`](https://khisr.damurka.com/dev/reference/get_data_store_value.md) | The system or user key/value data store. |
+| [`get_file_resources()`](https://khisr.damurka.com/dev/reference/get_file_resources.md) | Metadata (not contents) of files stored in the instance. |
+
+``` r
+
+get_system_info()$version
+#> [1] "2.41.7"
+
+# Coordinates/boundaries for every province (level 2)
+get_geo_features(org_units = 'LEVEL-2')
+#> # A tibble: 18 × 11
+#>   id      name  code  has_coordinates_down has_coordinates_up level parent_graph
+#>   <chr>   <chr> <chr> <lgl>                <lgl>              <int> <chr>       
+#> 1 W6sNfk… 01 V… ASIL… TRUE                 FALSE                  2 IWp9dQGM0bS 
+#> 2 YvLOmt… 02 P… ASIL… TRUE                 FALSE                  2 IWp9dQGM0bS 
+#> 3 XKGgyn… 03 L… ASIL… TRUE                 FALSE                  2 IWp9dQGM0bS 
+#> 4 rO2RVJ… 04 O… ASIL… TRUE                 FALSE                  2 IWp9dQGM0bS 
+#> 5 FRmrFT… 05 B… ASIL… TRUE                 FALSE                  2 IWp9dQGM0bS 
+#> # ℹ 13 more rows
+#> # ℹ 4 more variables: parent_id <chr>, parent_name <chr>, type <int>,
+#> #   coordinates <chr>
+
+# Reading the key/value data store
+namespaces <- get_data_store_namespaces()
+namespaces
+#>  [1] "who-dqa"             "bridge"              "CLIMATE_DATA"       
+#>  [4] "bulk-load"           "WHO_ICD11_COD"       "dataQualityTool"    
+#>  [7] "DHIS2_MAPS_APP_CORE" "tracker-capture"     "analytics"          
+#> [10] "Dhis2Transfer"
+get_data_store_keys(namespaces[1])
+#> [1] "configurations"        "configurationsMaurice" "configurationsTOM"
+```
+
+[`get_sql_view_data()`](https://khisr.damurka.com/dev/reference/get_sql_view_data.md)
+requires the authenticated user to be authorised to read the specific
+SQL view; DHIS2 returns an error rather than empty results if not.

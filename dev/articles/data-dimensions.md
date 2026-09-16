@@ -36,19 +36,16 @@ use of organisation unit groups and organisation unit group sets.
   than then geographical classification.
 
 ``` r
+
 # Retrieves organisation unit groups which belong to the organisation 
 # unit group set with the name 'Facility Ownership'
 orgs_groups <- get_organisation_unit_groups(
     groupSets.name %.eq% 'Facility Ownership'
 )
+#> Warning in get_organisation_unit_groups(groupSets.name %.eq% "Facility
+#> Ownership"): ! No data found for the specified endpoint.
 orgs_groups
-#> # A tibble: 4 × 2
-#>   name                                    id         
-#>   <chr>                                   <chr>      
-#> 1 Revised Faith Based Organisation (2018) eT1vvFVhLHc
-#> 2 Revised Ministry of Health (2018)       AaAF5EmS1fk
-#> 3 Revised NGO (2018)                      g58rumvciv2
-#> 4 Revised Private(2018)                   aRxa6o8GqZN
+#> NULL
 ```
 
 - **Organisation Unit Group Sets:** Serve as umbrella classifications
@@ -57,30 +54,24 @@ orgs_groups
   Private Facilities Organisation Unit Groups).
 
 ``` r
+
 # Retrieves all the organisation unit group sets
 orgs_group_set <- get_organisation_unit_groupsets()
 orgs_group_set
-#> # A tibble: 18 × 2
-#>    name                                           id         
-#>    <chr>                                          <chr>      
-#>  1 "ART Central Sites"                            tjVYz9cY7I3
-#>  2 "ART Facility Type"                            IwvoiaXmT7G
-#>  3 "ASAL Counties"                                x8y86riED0O
-#>  4 "Beyond Zero Clinics"                          cUiz93K15ZU
-#>  5 "Facility Ownership"                           JlW9OiK1eR4
-#>  6 "Facility Type"                                FSoqQFDES0U
-#>  7 "Health Facilities -Refugee Camp "             f0JZ8v0Zxa3
-#>  8 "KEPH Level "                                  sytI3XYbxwE
-#>  9 "Malaria Endemic Zones"                        Qhu3PDob3X6
-#> 10 "Malaria Epidemiological Zones"                IgwwNhbzeK7
-#> 11 "Malaria Vaccine Lake Endemic"                 Vo3q0yjOYFv
-#> 12 "NASCOP Region"                                rbvYf4IjcGf
-#> 13 "Non-Refugee & Refugee camp Health facilities" ltZ6C4ckNLl
-#> 14 "Programme Sponsor"                            OE9Qlwr8XFv
-#> 15 "Supply Chain"                                 Vww46znsPsj
-#> 16 "TB  Lab Subcounty Store Vers 2022"            gmsEbbTJReq
-#> 17 "TB SubCounty Stores"                          R0JQ0AqdsZf
-#> 18 "TB Zone"                                      jvksQn3RnbT
+#> # A tibble: 32 × 2
+#>    name                          id         
+#>    <chr>                         <chr>      
+#>  1 50 Districts of EPI (P-DLI8)  jH727AfNETY
+#>  2 Administrative levels of care dSwpdHITQ85
+#>  3 DLI-F Facilities              nB8yUjIepnt
+#>  4 DLI-F Facilities (baseline)   aUgQuHtJEZT
+#>  5 DLIP6 Reporting Units         BjuC5jWB8Iu
+#>  6 Districts & Provinces         fx6DMnqg5Oo
+#>  7 EmONC                         V6zTLQBbhgI
+#>  8 Functionality                 NUCtvtcCUIZ
+#>  9 HIV - STI                     vtYucsXZsGJ
+#> 10 HIV - VCT                     r3107KMwLMd
+#> # ℹ 22 more rows
 ```
 
 ### Data Elements (annotated as *dx*)
@@ -96,23 +87,24 @@ disaggregated (separated into components) or aggregated (summed) from
 facility to district to country.
 
 ``` r
+
 # Retrieves all the data elements in DHIS2
 data_elements <- get_data_elements()
 data_elements
-#> # A tibble: 16,185 × 2
-#>    name                                                                    id   
-#>    <chr>                                                                   <chr>
-#>  1 ""                                                                      ioUh…
-#>  2 "0000000 INCOME & EXPENDITURE STATEMENT"                                RvNJ…
-#>  3 "1000000 Income/Revenue"                                                zo5v…
-#>  4 "10.1 Residential"                                                      tZ3q…
-#>  5 "10.1 The facility has a sound fnancial plan that is adequately funded" oYdx…
-#>  6 "10.2 Commercial"                                                       PQNa…
-#>  7 "10.2 Financial resources are provided and used towards Quality Manage… OnDA…
-#>  8 "10.3 Availability of updated fee structure, strategically and promine… UXQg…
-#>  9 "10.3 Institutional"                                                    FGHs…
-#> 10 "10.4 Facility improvement/ Quality management funds are effciently us… y9ui…
-#> # ℹ 16,175 more rows
+#> # A tibble: 6,166 × 2
+#>    name                                id         
+#>    <chr>                               <chr>      
+#>  1 AEFI - AEFI outcome                 yRrSDiR5v1M
+#>  2 AEFI - AEFI start date              vNGUuAZA2C2
+#>  3 AEFI - AEFI time                    NyCB1VAOfJd
+#>  4 AEFI - Abdominal pain               T6tsxbKzikz
+#>  5 AEFI - Abscess                      wce39JmsjIK
+#>  6 AEFI - Anaphylaxis                  MkIgCrCTFyE
+#>  7 AEFI - Batch/lot number (Vaccine 1) LNqkAlvGplL
+#>  8 AEFI - Batch/lot number (Vaccine 2) b1rSwGRcY5W
+#>  9 AEFI - Batch/lot number (Vaccine 3) YBnFoNouH6f
+#> 10 AEFI - Batch/lot number (Vaccine 4) BHAfwo6JPDa
+#> # ℹ 6,156 more rows
 ```
 
 Related data elements are grouped into a logical collection referred to
@@ -121,23 +113,24 @@ contain data but reference members data elements. Therefore data element
 groups provide a way manage and analyze related data elements.
 
 ``` r
+
 # Retrieves all the data element groups
 data_element_groups <- get_data_element_groups()
 data_element_groups
-#> # A tibble: 270 × 2
+#> # A tibble: 160 × 2
 #>    name                                           id         
 #>    <chr>                                          <chr>      
-#>  1 "706D Haemovigilance Tool"                     EvSFB0kFshj
-#>  2 "751_BFCI FORM "                               Q3ZqDNTgosn
-#>  3 "Adverse Events Following Immunization (AEFI)" zHoxBNmNfej
-#>  4 "AFP Smear"                                    jjm7ipMtusz
-#>  5 "AMR - Acinetobacter Isolates"                 uqIQDfIInK1
-#>  6 "AMR - Escherichia coli isolates"              VjgPbuOqvBq
-#>  7 "AMR - Klebsiella species isolates"            SMINXpqL0s5
-#>  8 "AMR - Pseudomonas aeruginosa isolates"        NpOK7Em3QRk
-#>  9 "AMR - Staphylococcus aureus Isolates"         B3VgKffq78S
-#> 10 "Antenatal client first visits"                XTHYIz6qsdX
-#> # ℹ 260 more rows
+#>  1 AEFI - Adverse Events                          yhXZIbQuxOt
+#>  2 Animal Surveillance                            iMNcm8NLZSJ
+#>  3 Anti-Tuberculosis Drug Resistance Survey (DRS) SfwwoCbB1m3
+#>  4 CBS                                            EEiZFeswMNd
+#>  5 CBS - Alert                                    qacwMhz9mxd
+#>  6 CCH - Climate/Weather                          U4ClQbCq7Fv
+#>  7 CCH - Environment (Weekly)                     VthVLJyDjsx
+#>  8 CH - Adolescent Health                         RwfCEp0aoP5
+#>  9 CH - Child Health                              byO8RqLkwT5
+#> 10 CH - Child protection & interpersonal violence alIVe2Y6WRQ
+#> # ℹ 150 more rows
 ```
 
 ### Periods (annotated as *pe*)
@@ -172,3 +165,11 @@ provides functions to handle these complexities for you.
 For deeper dives into specific dimensions and objects, refer to the
 comprehensive [DHIS2 API
 documentation](https://docs.dhis2.org/en/develop/using-the-api/dhis-core-version-240/analytics.html)
+
+These dimensions describe **aggregate** data — facility/period totals
+accessed through
+[`get_analytics()`](https://khisr.damurka.com/dev/reference/get_analytics.md).
+DHIS2 also has a separate, individual-level data model — tracked
+entities, enrollments, and events — with its own dimensions and its own
+retrieval functions; see [Tracker
+Data](https://khisr.damurka.com/articles/tracker.html).

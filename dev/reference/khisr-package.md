@@ -1,9 +1,9 @@
 # khisr: An R Client to Retrieve Data from DHIS2
 
 Provides a user-friendly interface for interacting with the District
-Health Information Software 2 (DHIS2) instance. It streamlines data
-retrieval, empowering researchers, analysts, and healthcare
-professionals to obtain and utilize data efficiently.
+Health Information Software 2 ('DHIS2', <https://dhis2.org>) instance.
+It streamlines data retrieval, empowering researchers, analysts, and
+healthcare professionals to obtain and utilize data efficiently.
 
 ## See also
 

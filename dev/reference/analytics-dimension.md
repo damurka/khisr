@@ -51,7 +51,8 @@ that dimension.
 
 - Category option combinations (co): Category option combo identifiers.
 
-- Attribute option combinations (ao): Category option combo identifiers.
+- Attribute option combinations (ao): Attribute option combo
+  identifiers.
 
 - Categories: Category option identifiers.
 
@@ -70,6 +71,7 @@ The infix operator used for filter and dimension includes:
 ## Examples
 
 ``` r
+
 # Create a dimension for data element "DE_1234"
 analytics_dimension('dimension', "dx", "DE_1234")
 #> <spliced>

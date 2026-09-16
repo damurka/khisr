@@ -43,19 +43,14 @@ A tibble containing the following columns:
 ## Examples
 
 ``` r
+
 # Fetch the data element metadata for particular element id
-elements <- get_data_elements_with_category_options('htFuvGJRW1X')
+elements <- get_data_elements_with_category_options('lYsfXxCw6Qi')
 elements
-#> # A tibble: 9 × 4
-#>   element                                 element_id  category       category_id
-#>   <chr>                                   <chr>       <chr>          <chr>      
-#> 1 Number of HIV positive clients screened htFuvGJRW1X "Post-treatme… SMt1XYz1xId
-#> 2 Number of HIV positive clients screened htFuvGJRW1X " Initial Scr… fxXNsn1ppIe
-#> 3 Number of HIV positive clients screened htFuvGJRW1X "Routine Scre… QgiVkhdlO2u
-#> 4 Number of HIV positive clients screened htFuvGJRW1X " Initial Scr… bSFRz4appAT
-#> 5 Number of HIV positive clients screened htFuvGJRW1X "Post-treatme… p830auWrSqe
-#> 6 Number of HIV positive clients screened htFuvGJRW1X "Post-treatme… HOZwYuTL1lz
-#> 7 Number of HIV positive clients screened htFuvGJRW1X " Initial Scr… r1itkRYXnZh
-#> 8 Number of HIV positive clients screened htFuvGJRW1X "Routine Scre… gLkLCkCx1Ad
-#> 9 Number of HIV positive clients screened htFuvGJRW1X "Routine Scre… Qw3yiIgRXob
+#> # A tibble: 3 × 4
+#>   element                                element_id  category   category_id
+#>   <chr>                                  <chr>       <chr>      <chr>      
+#> 1 MAL - Malaria confirmed cases reported lYsfXxCw6Qi 15+ years  hF0pQZIn6Ch
+#> 2 MAL - Malaria confirmed cases reported lYsfXxCw6Qi 5-14 years rtfSaMjPyq6
+#> 3 MAL - Malaria confirmed cases reported lYsfXxCw6Qi 0-4 years  oPcWGgS2Liz
 ```

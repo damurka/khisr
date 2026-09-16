@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Data Dimensions">
 <meta name="robots" content="noindex">
@@ -27,7 +27,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">khisr</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.6.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.8.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,6 +43,7 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/data-dimensions.html">Data Dimensions</a></li>
     <li><a class="dropdown-item" href="../articles/date-format.html">Date and Period Format</a></li>
+    <li><a class="dropdown-item" href="../articles/tracker.html">Tracker Data</a></li>
     <li><a class="dropdown-item" href="../articles/set-your-credentials.html">Set your credentials</a></li>
   </ul>
 </li>
@@ -130,14 +131,10 @@ level) other than then geographical classification.</li>
 <span><span class="va">orgs_groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metadata-helpers.html">get_organisation_unit_groups</a></span><span class="op">(</span></span>
 <span>    <span class="va">groupSets.name</span> <span class="op"><a href="../reference/metadata-filter.html">%.eq%</a></span> <span class="st">'Facility Ownership'</span></span>
 <span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in get_organisation_unit_groups(groupSets.name %.eq% "Facility</span></span>
+<span><span class="co">#&gt; Ownership"): <span style="color: #BBBB00;">!</span> No data found for the specified endpoint.</span></span>
 <span><span class="va">orgs_groups</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span></span>
-<span><span class="co">#&gt;   name                                    id         </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Revised Faith Based Organisation (2018) eT1vvFVhLHc</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Revised Ministry of Health (2018)       AaAF5EmS1fk</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Revised NGO (2018)                      g58rumvciv2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Revised Private(2018)                   aRxa6o8GqZN</span></span></code></pre></div>
+<span><span class="co">#&gt; NULL</span></span></code></pre></div>
 <ul>
 <li>
 <strong>Organisation Unit Group Sets:</strong> Serve as umbrella
@@ -150,27 +147,20 @@ Groups).</li>
 <code class="sourceCode R"><span><span class="co"># Retrieves all the organisation unit group sets</span></span>
 <span><span class="va">orgs_group_set</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metadata-helpers.html">get_organisation_unit_groupsets</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">orgs_group_set</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 18 × 2</span></span></span>
-<span><span class="co">#&gt;    name                                           id         </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">"</span>ART Central Sites<span style="color: #949494;">"</span>                            tjVYz9cY7I3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">"</span>ART Facility Type<span style="color: #949494;">"</span>                            IwvoiaXmT7G</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">"</span>ASAL Counties<span style="color: #949494;">"</span>                                x8y86riED0O</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">"</span>Beyond Zero Clinics<span style="color: #949494;">"</span>                          cUiz93K15ZU</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">"</span>Facility Ownership<span style="color: #949494;">"</span>                           JlW9OiK1eR4</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">"</span>Facility Type<span style="color: #949494;">"</span>                                FSoqQFDES0U</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">"</span>Health Facilities -Refugee Camp <span style="color: #949494;">"</span>             f0JZ8v0Zxa3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>KEPH Level <span style="color: #949494;">"</span>                                  sytI3XYbxwE</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>Malaria Endemic Zones<span style="color: #949494;">"</span>                        Qhu3PDob3X6</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>Malaria Epidemiological Zones<span style="color: #949494;">"</span>                IgwwNhbzeK7</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> <span style="color: #949494;">"</span>Malaria Vaccine Lake Endemic<span style="color: #949494;">"</span>                 Vo3q0yjOYFv</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> <span style="color: #949494;">"</span>NASCOP Region<span style="color: #949494;">"</span>                                rbvYf4IjcGf</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> <span style="color: #949494;">"</span>Non-Refugee &amp; Refugee camp Health facilities<span style="color: #949494;">"</span> ltZ6C4ckNLl</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> <span style="color: #949494;">"</span>Programme Sponsor<span style="color: #949494;">"</span>                            OE9Qlwr8XFv</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> <span style="color: #949494;">"</span>Supply Chain<span style="color: #949494;">"</span>                                 Vww46znsPsj</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> <span style="color: #949494;">"</span>TB  Lab Subcounty Store Vers 2022<span style="color: #949494;">"</span>            gmsEbbTJReq</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> <span style="color: #949494;">"</span>TB SubCounty Stores<span style="color: #949494;">"</span>                          R0JQ0AqdsZf</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> <span style="color: #949494;">"</span>TB Zone<span style="color: #949494;">"</span>                                      jvksQn3RnbT</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 32 × 2</span></span></span>
+<span><span class="co">#&gt;    name                          id         </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 50 Districts of EPI (P-DLI8)  jH727AfNETY</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Administrative levels of care dSwpdHITQ85</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> DLI-F Facilities              nB8yUjIepnt</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> DLI-F Facilities (baseline)   aUgQuHtJEZT</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> DLIP6 Reporting Units         BjuC5jWB8Iu</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Districts &amp; Provinces         fx6DMnqg5Oo</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> EmONC                         V6zTLQBbhgI</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Functionality                 NUCtvtcCUIZ</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> HIV - STI                     vtYucsXZsGJ</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> HIV - VCT                     r3107KMwLMd</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 22 more rows</span></span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="data-elements-annotated-as-dx">Data Elements (annotated as <em>dx</em>)<a class="anchor" aria-label="anchor" href="#data-elements-annotated-as-dx"></a>
@@ -187,20 +177,20 @@ facility to district to country.</p>
 <code class="sourceCode R"><span><span class="co"># Retrieves all the data elements in DHIS2</span></span>
 <span><span class="va">data_elements</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metadata-helpers.html">get_data_elements</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">data_elements</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 16,185 × 2</span></span></span>
-<span><span class="co">#&gt;    name                                                                    id   </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">""</span>                                                                      ioUh…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">"</span>0000000 INCOME &amp; EXPENDITURE STATEMENT<span style="color: #949494;">"</span>                                RvNJ…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">"</span>1000000 Income/Revenue<span style="color: #949494;">"</span>                                                zo5v…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">"</span>10.1 Residential<span style="color: #949494;">"</span>                                                      tZ3q…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">"</span>10.1 The facility has a sound fnancial plan that is adequately funded<span style="color: #949494;">"</span> oYdx…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">"</span>10.2 Commercial<span style="color: #949494;">"</span>                                                       PQNa…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">"</span>10.2 Financial resources are provided and used towards Quality Manage… OnDA…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>10.3 Availability of updated fee structure, strategically and promine… UXQg…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>10.3 Institutional<span style="color: #949494;">"</span>                                                    FGHs…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>10.4 Facility improvement/ Quality management funds are effciently us… y9ui…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 16,175 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6,166 × 2</span></span></span>
+<span><span class="co">#&gt;    name                                id         </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> AEFI - AEFI outcome                 yRrSDiR5v1M</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> AEFI - AEFI start date              vNGUuAZA2C2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> AEFI - AEFI time                    NyCB1VAOfJd</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> AEFI - Abdominal pain               T6tsxbKzikz</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> AEFI - Abscess                      wce39JmsjIK</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> AEFI - Anaphylaxis                  MkIgCrCTFyE</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> AEFI - Batch/lot number (Vaccine 1) LNqkAlvGplL</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> AEFI - Batch/lot number (Vaccine 2) b1rSwGRcY5W</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> AEFI - Batch/lot number (Vaccine 3) YBnFoNouH6f</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> AEFI - Batch/lot number (Vaccine 4) BHAfwo6JPDa</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 6,156 more rows</span></span></span></code></pre></div>
 <p>Related data elements are grouped into a logical collection referred
 to as <strong>data element groups</strong>. The data element groups do
 not directly contain data but reference members data elements. Therefore
@@ -210,20 +200,20 @@ elements.</p>
 <code class="sourceCode R"><span><span class="co"># Retrieves all the data element groups</span></span>
 <span><span class="va">data_element_groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metadata-helpers.html">get_data_element_groups</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">data_element_groups</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 270 × 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 160 × 2</span></span></span>
 <span><span class="co">#&gt;    name                                           id         </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">"</span>706D Haemovigilance Tool<span style="color: #949494;">"</span>                     EvSFB0kFshj</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">"</span>751_BFCI FORM <span style="color: #949494;">"</span>                               Q3ZqDNTgosn</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">"</span>Adverse Events Following Immunization (AEFI)<span style="color: #949494;">"</span> zHoxBNmNfej</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">"</span>AFP Smear<span style="color: #949494;">"</span>                                    jjm7ipMtusz</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">"</span>AMR - Acinetobacter Isolates<span style="color: #949494;">"</span>                 uqIQDfIInK1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">"</span>AMR - Escherichia coli isolates<span style="color: #949494;">"</span>              VjgPbuOqvBq</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">"</span>AMR - Klebsiella species isolates<span style="color: #949494;">"</span>            SMINXpqL0s5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>AMR - Pseudomonas aeruginosa isolates<span style="color: #949494;">"</span>        NpOK7Em3QRk</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>AMR - Staphylococcus aureus Isolates<span style="color: #949494;">"</span>         B3VgKffq78S</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>Antenatal client first visits<span style="color: #949494;">"</span>                XTHYIz6qsdX</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 260 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> AEFI - Adverse Events                          yhXZIbQuxOt</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Animal Surveillance                            iMNcm8NLZSJ</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Anti-Tuberculosis Drug Resistance Survey (DRS) SfwwoCbB1m3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> CBS                                            EEiZFeswMNd</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> CBS - Alert                                    qacwMhz9mxd</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> CCH - Climate/Weather                          U4ClQbCq7Fv</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> CCH - Environment (Weekly)                     VthVLJyDjsx</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> CH - Adolescent Health                         RwfCEp0aoP5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> CH - Child Health                              byO8RqLkwT5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> CH - Child protection &amp; interpersonal violence alIVe2Y6WRQ</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 150 more rows</span></span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="periods-annotated-as-pe">Periods (annotated as <em>pe</em>)<a class="anchor" aria-label="anchor" href="#periods-annotated-as-pe"></a>
@@ -259,6 +249,12 @@ you.</p>
 <p>For deeper dives into specific dimensions and objects, refer to the
 comprehensive <a href="https://docs.dhis2.org/en/develop/using-the-api/dhis-core-version-240/analytics.html" class="external-link">DHIS2
 API documentation</a></p>
+<p>These dimensions describe <strong>aggregate</strong> data —
+facility/period totals accessed through <code><a href="../reference/get_analytics.html">get_analytics()</a></code>.
+DHIS2 also has a separate, individual-level data model — tracked
+entities, enrollments, and events — with its own dimensions and its own
+retrieval functions; see <a href="https://khisr.damurka.com/articles/tracker.html">Tracker
+Data</a>.</p>
 </div>
 </div>
 </div>
@@ -273,7 +269,7 @@ API documentation</a></p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

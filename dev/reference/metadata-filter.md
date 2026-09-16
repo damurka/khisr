@@ -72,7 +72,7 @@ property %.~in% values
 
 - call:
 
-  description
+  The caller environment.
 
 ## Value
 
@@ -140,6 +140,7 @@ Operator](https://docs.dhis2.org/en/develop/using-the-api/dhis-core-version-mast
 ## Examples
 
 ``` r
+
 # Generate an equality filter
 id %.eq% 'element_id'
 #> <spliced>

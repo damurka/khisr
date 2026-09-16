@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Getting Started">
 <meta name="robots" content="noindex">
@@ -27,7 +27,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">khisr</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.6.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.8.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,6 +43,7 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/data-dimensions.html">Data Dimensions</a></li>
     <li><a class="dropdown-item" href="../articles/date-format.html">Date and Period Format</a></li>
+    <li><a class="dropdown-item" href="../articles/tracker.html">Tracker Data</a></li>
     <li><a class="dropdown-item" href="../articles/set-your-credentials.html">Set your credentials</a></li>
   </ul>
 </li>
@@ -111,6 +112,10 @@ credentials effectively.</p></li>
 <code class="sourceCode R"><span><span class="co"># Set the credentials using username and password</span></span>
 <span><span class="fu"><a href="../reference/khis_cred.html">khis_cred</a></span><span class="op">(</span>username <span class="op">=</span> <span class="st">'your-dhis2-username'</span>, password <span class="op">=</span> <span class="st">'your-dhis2-password'</span>, server <span class="op">=</span> <span class="st">'https://&lt;your dhis2 instance&gt;'</span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># Set the credentials using a Personal Access Token (DHIS2's recommended</span></span>
+<span><span class="co"># method for scripts and integrations) instead of username/password</span></span>
+<span><span class="fu"><a href="../reference/khis_cred.html">khis_cred</a></span><span class="op">(</span>token <span class="op">=</span> <span class="st">'your-dhis2-token'</span>, server <span class="op">=</span> <span class="st">'https://&lt;your dhis2 instance&gt;'</span><span class="op">)</span></span>
+<span></span>
 <span><span class="co"># Set credentials using configuration path</span></span>
 <span><span class="fu"><a href="../reference/khis_cred.html">khis_cred</a></span><span class="op">(</span>config_path <span class="op">=</span> <span class="st">'path/to/secret.json'</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Note</strong>: Replace placeholders like
@@ -127,318 +132,73 @@ dimensions</a> resource for a deeper understanding.</p>
 <div class="section level3">
 <h3 id="metadata-helpers-in-khisr">Metadata helpers in khisr<a class="anchor" aria-label="anchor" href="#metadata-helpers-in-khisr"></a>
 </h3>
-<p><code>khisr</code> provides a set of high-level functions to retrieve
-details about various DHIS2 metadata categories. These functions often
-leverage your R IDE’s auto-complete feature for faster typing.</p>
-<p>The following table summarizes these <code>khisr</code> metadata
-helper functions:</p>
-<table class="table">
-<thead><tr class="header">
-<th align="left">khisr function</th>
-<th align="left">DHIS2 API Endpoint</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_categories()</a></code></td>
-<td align="left">categories</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_category_combos()</a></code></td>
-<td align="left">categoryCombos</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_category_option_combos()</a></code></td>
-<td align="left">categoryOptionCombos</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_category_option_group_sets()</a></code></td>
-<td align="left">categoryOptionGroupSets</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_category_option_groups()</a></code></td>
-<td align="left">categoryOptionGroups</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_category_options()</a></code></td>
-<td align="left">categoryOptions</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_data_element_group_sets()</a></code></td>
-<td align="left">dataElementGroupSets</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_data_element_groups()</a></code></td>
-<td align="left">dataElementGroups</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_data_elements()</a></code></td>
-<td align="left">dataElements</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_data_sets()</a></code></td>
-<td align="left">dataSets</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_indicator_group_sets()</a></code></td>
-<td align="left">indicatorGroupSets</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_indicator_groups()</a></code></td>
-<td align="left">indicatorGroups</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_indicators()</a></code></td>
-<td align="left">indicators</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_option_group_sets()</a></code></td>
-<td align="left">optionGroupSets</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_option_groups()</a></code></td>
-<td align="left">optionGroups</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_option_sets()</a></code></td>
-<td align="left">optionSets</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_options()</a></code></td>
-<td align="left">options</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_organisation_unit_groupsets()</a></code></td>
-<td align="left">organisationUnitGroupSets</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_organisation_unit_groups()</a></code></td>
-<td align="left">organisationUnitGroups</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_organisation_units()</a></code></td>
-<td align="left">organisationUnits</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_dimensions()</a></code></td>
-<td align="left">dimensions</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_user_groups()</a></code></td>
-<td align="left">userGroups</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="../reference/metadata-helpers.html">get_period_types()</a></code></td>
-<td align="left">periodTypes</td>
-</tr>
-</tbody>
-</table>
+<p><code>khisr</code> provides a set of high-level functions — one per
+DHIS2 metadata type (<code><a href="../reference/metadata-helpers.html">get_organisation_units()</a></code>,
+<code><a href="../reference/metadata-helpers.html">get_data_elements()</a></code>, <code><a href="../reference/metadata-helpers.html">get_programs()</a></code>, and
+around 25 others) — that all share the same interface and can be
+filtered the same way. See <a href="https://khisr.damurka.com/reference/metadata-helpers.html"><code>?metadata-helpers</code></a>
+for the full list, and your R IDE’s auto-complete for faster typing.</p>
 </div>
 <div class="section level3">
 <h3 id="metadata-object-filter">Metadata object filter<a class="anchor" aria-label="anchor" href="#metadata-object-filter"></a>
 </h3>
-<p><code>khisr</code> allows you to filter retrieved metadata using a
-straightforward approach. The filter format follows the pattern
-<strong>property:operator:value</strong>. Here’s a breakdown of the
-components:</p>
-<ul>
-<li>
-<strong>property</strong>: The property of the metadata you want to
-filter on.</li>
-<li>
-<strong>operator</strong>: The comparison operator you want to
-perform (examples: <code>eq</code> for equality, <code>like</code> for
-case-sensitive string matching).</li>
-<li>
-<strong>value</strong>: The value to use for comparison (not
-required for all operators).</li>
-</ul>
-<p>The following table provides a summary of the supported
-operators:</p>
-<table class="table">
-<colgroup>
-<col width="19%">
-<col width="19%">
-<col width="60%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">DHIS2 Operator</th>
-<th align="left">Infix Operator</th>
-<th align="left">Description</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left"><code>eq</code></td>
-<td align="left"><code>%.eq%</code></td>
-<td align="left">Equality</td>
-</tr>
-<tr class="even">
-<td align="left"><code>!eq</code></td>
-<td align="left"><code>%.~eq%</code></td>
-<td align="left">Inequality</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>ieq</code></td>
-<td align="left"><code>%.ieq%</code></td>
-<td align="left">Case insensitive string, match exact</td>
-</tr>
-<tr class="even">
-<td align="left"><code>ne</code></td>
-<td align="left"><code>%.ne%</code></td>
-<td align="left">Inequality</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>like</code></td>
-<td align="left"><code>%.Like%</code></td>
-<td align="left">Case sensitive string, match anywhere</td>
-</tr>
-<tr class="even">
-<td align="left"><code>!like</code></td>
-<td align="left"><code>%.~Like%</code></td>
-<td align="left">Case sensitive string, not match anywhere</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>$like</code></td>
-<td align="left"><code>%.^Like%</code></td>
-<td align="left">Case sensitive string, match start</td>
-</tr>
-<tr class="even">
-<td align="left"><code>!$like</code></td>
-<td align="left"><code>%.~^Like%</code></td>
-<td align="left">Case sensitive string, not match start</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>like$</code></td>
-<td align="left"><code>%.Like$%</code></td>
-<td align="left">Case sensitive string, match end</td>
-</tr>
-<tr class="even">
-<td align="left"><code>!like$</code></td>
-<td align="left"><code>%.~Like$%</code></td>
-<td align="left">Case sensitive string, not match end</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>ilike</code></td>
-<td align="left"><code>%.like%</code></td>
-<td align="left">Case insensitive string, match anywhere</td>
-</tr>
-<tr class="even">
-<td align="left"><code>!ilike</code></td>
-<td align="left"><code>%.~like%</code></td>
-<td align="left">Case insensitive string, not match anywhere</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>$ilike</code></td>
-<td align="left"><code>%.^like%</code></td>
-<td align="left">Case insensitive string, match start</td>
-</tr>
-<tr class="even">
-<td align="left"><code>!$ilike</code></td>
-<td align="left"><code>%.~^like%</code></td>
-<td align="left">Case insensitive string, not match start</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>ilike$</code></td>
-<td align="left"><code>%.like$%</code></td>
-<td align="left">Case insensitive string, match end</td>
-</tr>
-<tr class="even">
-<td align="left"><code>!ilike$</code></td>
-<td align="left"><code>%.~like$%</code></td>
-<td align="left">Case insensitive string, not match end</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>gt</code></td>
-<td align="left"><code>%.gt%</code></td>
-<td align="left">Greater than</td>
-</tr>
-<tr class="even">
-<td align="left"><code>ge</code></td>
-<td align="left"><code>%.ge%</code></td>
-<td align="left">Greater than or equal</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>lt</code></td>
-<td align="left"><code>%.lt%</code></td>
-<td align="left">Less than</td>
-</tr>
-<tr class="even">
-<td align="left"><code>le</code></td>
-<td align="left"><code>%.le%</code></td>
-<td align="left">Less than or equal</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>token</code></td>
-<td align="left"><code>%.token%</code></td>
-<td align="left">Match on multiple tokens in search property</td>
-</tr>
-<tr class="even">
-<td align="left"><code>!token</code></td>
-<td align="left"><code>%.~token%</code></td>
-<td align="left">Not match on multiple tokens in search property</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>in</code></td>
-<td align="left"><code>%.in%</code></td>
-<td align="left">Find objects matching 1 or more values</td>
-</tr>
-<tr class="even">
-<td align="left"><code>!in</code></td>
-<td align="left"><code>%.~in%</code></td>
-<td align="left">Find objects not matching 1 or more values</td>
-</tr>
-</tbody>
-</table>
+<p><code>khisr</code> filters retrieved metadata using DHIS2’s
+<strong>property:operator:value</strong> pattern, exposed through <a href="https://khisr.damurka.com/reference/metadata-filter.html"><code>metadata_filter()</code></a>
+and a matching set of infix operators (<code>%.eq%</code>,
+<code>%.like%</code>, <code>%.in%</code>, and about 20 more — see
+<code><a href="../reference/metadata-filter.html">?metadata_filter</a></code> for the complete list with
+descriptions).</p>
 </div>
 <div class="section level3">
 <h3 id="working-with-metadata-filters">Working with metadata filters<a class="anchor" aria-label="anchor" href="#working-with-metadata-filters"></a>
 </h3>
 <p>Basic usage of the metadata filter</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Retrieve organisation units by county (level 2)</span></span>
-<span><span class="va">county</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metadata-helpers.html">get_organisation_units</a></span><span class="op">(</span><span class="va">level</span> <span class="op"><a href="../reference/metadata-filter.html">%.eq%</a></span> <span class="st">'2'</span><span class="op">)</span></span>
-<span><span class="va">county</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 47 × 2</span></span></span>
-<span><span class="co">#&gt;   name                   id         </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Baringo County         vvOK1BxTbet</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Bomet County           HMNARUV2CW4</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Bungoma County         KGHhQ5GLd4k</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Busia County           Tvf1zgVZ0K4</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Elgeyo Marakwet County MqnLxQBigG0</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 42 more rows</span></span></span>
+<code class="sourceCode R"><span><span class="co"># Retrieve organisation units by province (level 2)</span></span>
+<span><span class="va">province</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metadata-helpers.html">get_organisation_units</a></span><span class="op">(</span><span class="va">level</span> <span class="op"><a href="../reference/metadata-filter.html">%.eq%</a></span> <span class="st">'2'</span><span class="op">)</span></span>
+<span><span class="va">province</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 18 × 2</span></span></span>
+<span><span class="co">#&gt;   name                 id         </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 01 Vientiane Capital W6sNfkJcXGC</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 02 Phongsali         YvLOmtTQD6b</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 03 Louangnamtha      XKGgynPS1WZ</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 04 Oudomxai          rO2RVJWHpCe</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 05 Bokeo             FRmrFTE63D0</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 13 more rows</span></span></span>
 <span></span>
-<span><span class="co"># Retrieve county by name (Mombasa)</span></span>
-<span><span class="va">county</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metadata-helpers.html">get_organisation_units</a></span><span class="op">(</span><span class="va">level</span> <span class="op"><a href="../reference/metadata-filter.html">%.eq%</a></span> <span class="st">'2'</span>,</span>
-<span>                                 <span class="va">name</span> <span class="op"><a href="../reference/metadata-filter.html">%.like%</a></span> <span class="st">'mombasa'</span><span class="op">)</span></span>
-<span><span class="va">county</span></span>
+<span><span class="co"># Retrieve province by name (Vientiane Capital)</span></span>
+<span><span class="va">province</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metadata-helpers.html">get_organisation_units</a></span><span class="op">(</span><span class="va">level</span> <span class="op"><a href="../reference/metadata-filter.html">%.eq%</a></span> <span class="st">'2'</span>,</span>
+<span>                                   <span class="va">name</span> <span class="op"><a href="../reference/metadata-filter.html">%.like%</a></span> <span class="st">'vientiane capital'</span><span class="op">)</span></span>
+<span><span class="va">province</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 2</span></span></span>
-<span><span class="co">#&gt;   name           id         </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Mombasa County wsBsC6gjHvn</span></span>
+<span><span class="co">#&gt;   name                 id         </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 01 Vientiane Capital W6sNfkJcXGC</span></span>
 <span></span>
-<span><span class="va">data_element_id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'cXe64Yk0QMY'</span>, <span class="st">'XEX93uLsAm2'</span><span class="op">)</span></span>
+<span><span class="va">data_element_id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'lYsfXxCw6Qi'</span>, <span class="st">'GxlrIgMyEf4'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Retrieve data elements by ID using operator in</span></span>
 <span><span class="va">data_elements</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metadata-helpers.html">get_data_elements</a></span><span class="op">(</span><span class="va">id</span> <span class="op"><a href="../reference/metadata-filter.html">%.in%</a></span> <span class="va">data_element_id</span><span class="op">)</span></span>
 <span><span class="va">data_elements</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
-<span><span class="co">#&gt;   name         id         </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CBE-Abnormal XEX93uLsAm2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> CBE-Normal   cXe64Yk0QMY</span></span>
+<span><span class="co">#&gt;   name                                   id         </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> MAL - Malaria confirmed cases reported lYsfXxCw6Qi</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> MAL - Malaria deaths                   GxlrIgMyEf4</span></span>
 <span></span>
 <span><span class="co"># Retrieve data elements by filtering using dataElementGroups</span></span>
-<span><span class="va">data_elements</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metadata-helpers.html">get_data_elements</a></span><span class="op">(</span><span class="va">dataElementGroups.name</span> <span class="op"><a href="../reference/metadata-filter.html">%.like%</a></span> <span class="st">'moh 705'</span><span class="op">)</span></span>
+<span><span class="va">data_elements</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metadata-helpers.html">get_data_elements</a></span><span class="op">(</span><span class="va">dataElementGroups.name</span> <span class="op"><a href="../reference/metadata-filter.html">%.like%</a></span> <span class="st">'malaria'</span><span class="op">)</span></span>
 <span><span class="va">data_elements</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 96 × 2</span></span></span>
-<span><span class="co">#&gt;   name                        id         </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Abortion                    IrWSgk9GsUm</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> All other diseases          KxT47tbKHsd</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Anaemia cases               kkUHOwGMawD</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Arthritis, Joint pains etc. waNhWrS3HL6</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Asthma                      L82lvvxVaqt</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 91 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 316 × 2</span></span></span>
+<span><span class="co">#&gt;   name                                                            id         </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CH113a - Children (0-4 y) reporting fever in the last two weeks hzstN9blpky</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> CH114 - Households with at least one ITN                        gRT7NXBCkbB</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> CH115a - Households with at least one ITN for every two persons xjGwK4DRHxh</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> CH115b - Total individuals who live in the household            mn8VQbAjlFU</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> CH116a - People sleeping under an ITN the previous night        UXCgJMwfQiG</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 311 more rows</span></span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -455,6 +215,10 @@ resource, let’s explore the key functions and parameters involved:</p>
 <code><a href="../reference/get_analytics.html">get_analytics()</a></code>: Retrieves aggregated data based on
 specified dimensions and filters.</li>
 <li>
+<code><a href="../reference/get_data_value_sets.html">get_data_value_sets()</a></code>: Retrieves the individually
+entered raw data values behind the aggregates — useful for data-quality
+auditing.</li>
+<li>
 <code><a href="../reference/analytics-dimension.html">analytics_dimension()</a></code>: Constructs dimensions for
 queries, ensuring accurate data retrieval.</li>
 <li>
@@ -463,6 +227,10 @@ creating dimension filters.</li>
 <li>
 <code>%.f%</code> (infix operator): Convenient shorthand for
 creating filter dimensions.</li>
+<li>
+<code><a href="../reference/get_event_analytics_aggregate.html">get_event_analytics_aggregate()</a></code>/<code><a href="../reference/get_enrollment_analytics_aggregate.html">get_enrollment_analytics_aggregate()</a></code>:
+pivot-table style totals over Tracker data — see <a href="https://khisr.damurka.com/articles/tracker.html">Tracker
+Data</a>.</li>
 </ul>
 </div>
 <div class="section level3">
@@ -480,8 +248,8 @@ dimension. You can dynamically add dimensions through categories, data
 element group sets and organisation unit group sets.</p>
 <table class="table">
 <colgroup>
-<col width="17%">
-<col width="82%">
+<col width="8%">
+<col width="91%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">Dimension ID</th>
@@ -489,69 +257,35 @@ element group sets and organisation unit group sets.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">dx</td>
+<td align="left"><code>dx</code></td>
 <td align="left">Data elements, indicators, data set reporting rate
-metrics,</td>
+metrics, data element operands, program indicators, program data
+elements, program attributes, validation rules</td>
 </tr>
 <tr class="even">
-<td align="left"></td>
-<td align="left">data element operands, program indicators, program data
-elements,</td>
+<td align="left"><code>pe</code></td>
+<td align="left">ISO periods and relative periods (see <a href="https://khisr.damurka.com/articles/date-format.html">Date and
+Period Format</a>)</td>
 </tr>
 <tr class="odd">
-<td align="left"></td>
-<td align="left">program attributes, validation rules</td>
-</tr>
-<tr class="even">
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">pe</td>
-<td align="left">ISO periods and relative periods (see “date and period
-format”)</td>
-</tr>
-<tr class="even">
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">ou</td>
-<td align="left">Organisation unit hierarchy</td>
-</tr>
-<tr class="even">
-<td align="left"></td>
-<td align="left">Organisation unit identifiers, keywords
-USER_ORGUNIT,</td>
-</tr>
-<tr class="odd">
-<td align="left"></td>
-<td align="left">USER_ORGUNIT_CHILDREN, USER_ORGUNIT_GRANDCHILDREN,
-LEVEL-<level>,</level>
+<td align="left"><code>ou</code></td>
+<td align="left">Organisation unit hierarchy: organisation unit
+identifiers, or keywords <code>USER_ORGUNIT</code>,
+<code>USER_ORGUNIT_CHILDREN</code>,
+<code>USER_ORGUNIT_GRANDCHILDREN</code>,
+<code>LEVEL-&lt;level&gt;</code>, and
+<code>OU_GROUP-&lt;group-id&gt;</code>
 </td>
 </tr>
 <tr class="even">
-<td align="left"></td>
-<td align="left">and OU_GROUP-<group-id></group-id>
-</td>
-</tr>
-<tr class="odd">
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">co</td>
+<td align="left"><code>co</code></td>
 <td align="left">Category option combo identifiers (use <code>all</code>
 to get all items)</td>
 </tr>
 <tr class="odd">
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">ao</td>
-<td align="left">Category option combo identifiers (use <code>all</code>
-to get all items)</td>
+<td align="left"><code>ao</code></td>
+<td align="left">Attribute option combo identifiers (use
+<code>all</code> to get all items)</td>
 </tr>
 </tbody>
 </table>
@@ -597,33 +331,33 @@ Leverage the infix operators %.d% for concise and readable code.</li>
 <span></span>
 <span><span class="co"># showing in the analytics</span></span>
 <span><span class="fu"><a href="../reference/get_analytics.html">get_analytics</a></span><span class="op">(</span></span>
-<span>    <span class="va">dx</span> <span class="op"><a href="../reference/analytics-dimension.html">%.d%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'siOyOiOJpI8'</span>, <span class="st">'Lt0FqtnHraW'</span>, <span class="st">'OoakJhWiyZp'</span><span class="op">)</span>,</span>
+<span>    <span class="va">dx</span> <span class="op"><a href="../reference/analytics-dimension.html">%.d%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'lYsfXxCw6Qi'</span>, <span class="st">'vTRrNdOOT9g'</span>, <span class="st">'GxlrIgMyEf4'</span><span class="op">)</span>,</span>
 <span>    <span class="va">pe</span> <span class="op"><a href="../reference/analytics-dimension.html">%.d%</a></span> <span class="st">'LAST_YEAR'</span>,</span>
-<span>    <span class="va">ou</span> <span class="op"><a href="../reference/analytics-dimension.html">%.d%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'qKzosKQPl6G'</span><span class="op">)</span></span>
+<span>    <span class="va">ou</span> <span class="op"><a href="../reference/analytics-dimension.html">%.d%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'W6sNfkJcXGC'</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 4</span></span></span>
 <span><span class="co">#&gt;   dx          pe    ou          value</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> OoakJhWiyZp 2025  qKzosKQPl6G  <span style="text-decoration: underline;">3</span>628</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Lt0FqtnHraW 2025  qKzosKQPl6G <span style="text-decoration: underline;">27</span>571</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> siOyOiOJpI8 2025  qKzosKQPl6G <span style="text-decoration: underline;">17</span>938</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lYsfXxCw6Qi 2025  W6sNfkJcXGC   120</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> GxlrIgMyEf4 2025  W6sNfkJcXGC   966</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> vTRrNdOOT9g 2025  W6sNfkJcXGC   242</span></span>
 <span></span>
 <span><span class="co"># Using the startDate and endDate with organisation unit keyword 'USER_ORGUNIT'</span></span>
 <span><span class="fu"><a href="../reference/get_analytics.html">get_analytics</a></span><span class="op">(</span></span>
-<span>    <span class="va">dx</span> <span class="op"><a href="../reference/analytics-dimension.html">%.d%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'siOyOiOJpI8'</span>, <span class="st">'Lt0FqtnHraW'</span>, <span class="st">'OoakJhWiyZp'</span><span class="op">)</span>,</span>
+<span>    <span class="va">dx</span> <span class="op"><a href="../reference/analytics-dimension.html">%.d%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'lYsfXxCw6Qi'</span>, <span class="st">'vTRrNdOOT9g'</span>, <span class="st">'GxlrIgMyEf4'</span><span class="op">)</span>,</span>
 <span>    <span class="va">ou</span> <span class="op"><a href="../reference/analytics-dimension.html">%.d%</a></span> <span class="st">'USER_ORGUNIT'</span>,</span>
 <span>    <span class="va">pe</span> <span class="op"><a href="../reference/analytics-dimension.html">%.d%</a></span> <span class="st">'all'</span>,</span>
 <span>    startDate <span class="op">=</span> <span class="st">'2023-07-01'</span>,</span>
 <span>    endDate <span class="op">=</span> <span class="st">'2023-12-31'</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 18 × 4</span></span></span>
-<span><span class="co">#&gt;   dx          ou          pe       value</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> siOyOiOJpI8 HfVjCurKxh2 202310  <span style="text-decoration: underline;">753</span>853</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> siOyOiOJpI8 HfVjCurKxh2 202312  <span style="text-decoration: underline;">653</span>757</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Lt0FqtnHraW HfVjCurKxh2 202307 1<span style="text-decoration: underline;">122</span>346</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> OoakJhWiyZp HfVjCurKxh2 202308  <span style="text-decoration: underline;">367</span>189</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> siOyOiOJpI8 HfVjCurKxh2 202311  <span style="text-decoration: underline;">671</span>809</span></span>
+<span><span class="co">#&gt;   dx          ou          pe     value</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lYsfXxCw6Qi IWp9dQGM0bS 202308  <span style="text-decoration: underline;">2</span>685</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> lYsfXxCw6Qi IWp9dQGM0bS 202309  <span style="text-decoration: underline;">3</span>069</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> GxlrIgMyEf4 IWp9dQGM0bS 202310   178</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> lYsfXxCw6Qi IWp9dQGM0bS 202310  <span style="text-decoration: underline;">2</span>966</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> GxlrIgMyEf4 IWp9dQGM0bS 202307   206</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 13 more rows</span></span></span></code></pre></div>
 <ul>
 <li>
@@ -644,20 +378,180 @@ response.</li>
 <span><span class="co">#&gt; $filter</span></span>
 <span><span class="co">#&gt; [1] "ou:USER_ORGUNIT"</span></span>
 <span></span>
-<span><span class="co"># showing in the analytics. filter by organisation unit with id 'qKzosKQPl6G'</span></span>
+<span><span class="co"># showing in the analytics. filter by organisation unit with id 'W6sNfkJcXGC'</span></span>
 <span><span class="co"># and period 'LAST_YEAR'</span></span>
 <span><span class="fu"><a href="../reference/get_analytics.html">get_analytics</a></span><span class="op">(</span></span>
-<span>    <span class="va">dx</span> <span class="op"><a href="../reference/analytics-dimension.html">%.d%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'siOyOiOJpI8'</span>, <span class="st">'Lt0FqtnHraW'</span>, <span class="st">'OoakJhWiyZp'</span><span class="op">)</span>,</span>
+<span>    <span class="va">dx</span> <span class="op"><a href="../reference/analytics-dimension.html">%.d%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'lYsfXxCw6Qi'</span>, <span class="st">'vTRrNdOOT9g'</span>, <span class="st">'GxlrIgMyEf4'</span><span class="op">)</span>,</span>
 <span>    <span class="va">pe</span> <span class="op"><a href="../reference/analytics-dimension.html">%.f%</a></span> <span class="st">'LAST_YEAR'</span>,</span>
-<span>    <span class="va">ou</span> <span class="op"><a href="../reference/analytics-dimension.html">%.f%</a></span> <span class="st">'qKzosKQPl6G'</span></span>
+<span>    <span class="va">ou</span> <span class="op"><a href="../reference/analytics-dimension.html">%.f%</a></span> <span class="st">'W6sNfkJcXGC'</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 2</span></span></span>
 <span><span class="co">#&gt;   dx          value</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> OoakJhWiyZp  <span style="text-decoration: underline;">3</span>628</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> siOyOiOJpI8 <span style="text-decoration: underline;">17</span>938</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Lt0FqtnHraW <span style="text-decoration: underline;">27</span>571</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lYsfXxCw6Qi   120</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> vTRrNdOOT9g   242</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> GxlrIgMyEf4   966</span></span></code></pre></div>
 </div>
+<div class="section level3">
+<h3 id="data-quality">Data quality<a class="anchor" aria-label="anchor" href="#data-quality"></a>
+</h3>
+<p>Alongside the aggregated values themselves, DHIS2 exposes a few
+endpoints for checking the <em>quality</em> of reported data:</p>
+<table class="table">
+<colgroup>
+<col width="44%">
+<col width="55%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">khisr function</th>
+<th align="left">Retrieves</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code><a href="../reference/get_complete_data_set_registrations.html">get_complete_data_set_registrations()</a></code></td>
+<td align="left">Raw completeness records — who marked a data set
+complete, and when.</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="../reference/get_analytics_outliers.html">get_analytics_outliers()</a></code></td>
+<td align="left">Data values flagged as statistical outliers.</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="../reference/get_validation_results.html">get_validation_results()</a></code></td>
+<td align="left">Violated validation rules for an org unit/period
+range.</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="../reference/get_data_value_audits.html">get_data_value_audits()</a></code></td>
+<td align="left">Change history for a data value.</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Completeness registrations for a data set at a province and everything</span></span>
+<span><span class="co"># below it, for a single period</span></span>
+<span><span class="fu"><a href="../reference/get_complete_data_set_registrations.html">get_complete_data_set_registrations</a></span><span class="op">(</span></span>
+<span>    data_sets <span class="op">=</span> <span class="st">'VEM58nY22sO'</span>,</span>
+<span>    org_units <span class="op">=</span> <span class="st">'W6sNfkJcXGC'</span>,</span>
+<span>    children <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    periods <span class="op">=</span> <span class="st">'202301'</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 16 × 7</span></span></span>
+<span><span class="co">#&gt;   period dataSet  organisationUnit attributeOptionCombo date  storedBy completed</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 202301 VEM58nY… xxBxJFWXtrL      HllvX50cXC0          2023… automat… TRUE     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 202301 VEM58nY… C9ncRif5rMV      HllvX50cXC0          2023… automat… TRUE     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 202301 VEM58nY… v3HIu78Y4Wf      HllvX50cXC0          2023… automat… TRUE     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 202301 VEM58nY… rmJxaV9ggj7      HllvX50cXC0          2022… automat… TRUE     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 202301 VEM58nY… NMDH3yjPLSx      HllvX50cXC0          2022… automat… TRUE     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 11 more rows</span></span></span></code></pre></div>
+<p><code><a href="../reference/get_analytics_outliers.html">get_analytics_outliers()</a></code> and
+<code><a href="../reference/get_validation_results.html">get_validation_results()</a></code> require the authenticated user to
+have the corresponding DHIS2 authority (outlier detection or validation
+analysis); without it, DHIS2 returns an authorisation error rather than
+empty results.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="tracker-data">Tracker data<a class="anchor" aria-label="anchor" href="#tracker-data"></a>
+</h2>
+<p>Alongside aggregate analytics, DHIS2 also stores case-based,
+person-level data through its Tracker API. <code>khisr</code> provides
+<code><a href="../reference/get_tracked_entities.html">get_tracked_entities()</a></code>, <code><a href="../reference/get_enrollments.html">get_enrollments()</a></code>, and
+<code><a href="../reference/get_events.html">get_events()</a></code> for reading it, plus
+<code><a href="../reference/tracked_entity_filter.html">tracked_entity_filter()</a></code> for filtering tracked entities by
+attribute value. See <a href="https://khisr.damurka.com/articles/tracker.html">Tracker Data</a>
+for a full guide.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Tracked entities enrolled in a program, at an org unit and everything below it</span></span>
+<span><span class="fu"><a href="../reference/get_tracked_entities.html">get_tracked_entities</a></span><span class="op">(</span></span>
+<span>    program <span class="op">=</span> <span class="st">'PREnRHSp3be'</span>,</span>
+<span>    org_units <span class="op">=</span> <span class="st">'IWp9dQGM0bS'</span>,</span>
+<span>    org_unit_mode <span class="op">=</span> <span class="st">'DESCENDANTS'</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 270 × 6</span></span></span>
+<span><span class="co">#&gt;   trackedEntity trackedEntityType createdAt           updatedAt orgUnit inactive</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> qkU5JI6SQcd   DnxQe1mgmlp       2024-06-06T10:40:2… 2024-06-… NRcrkS… FALSE   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> ytRUQrTYLFz   DnxQe1mgmlp       2024-06-06T10:40:2… 2024-06-… QoGegg… FALSE   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> xIOlpNNRcNY   DnxQe1mgmlp       2024-06-06T10:40:2… 2024-06-… o0Q54F… FALSE   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> MNUPROje7ZP   DnxQe1mgmlp       2024-06-06T10:40:2… 2024-06-… wQUe9H… FALSE   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> rlTI0qJF8fl   DnxQe1mgmlp       2024-06-06T10:40:2… 2024-06-… mNaSC8… FALSE   </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 265 more rows</span></span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="system-utilities">System &amp; utilities<a class="anchor" aria-label="anchor" href="#system-utilities"></a>
+</h2>
+<p>A handful of functions cover the DHIS2 instance itself, rather than
+its health data:</p>
+<table class="table">
+<colgroup>
+<col width="33%">
+<col width="66%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">khisr function</th>
+<th align="left">Retrieves</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code><a href="../reference/get_system_info.html">get_system_info()</a></code></td>
+<td align="left">DHIS2 version, build, and server info.</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="../reference/get_geo_features.html">get_geo_features()</a></code></td>
+<td align="left">Organisation unit coordinates/boundaries, for
+mapping.</td>
+</tr>
+<tr class="odd">
+<td align="left">
+<code><a href="../reference/get_sql_views.html">get_sql_views()</a></code>/<code><a href="../reference/get_sql_view_data.html">get_sql_view_data()</a></code>
+</td>
+<td align="left">Predefined SQL views, and their data.</td>
+</tr>
+<tr class="even">
+<td align="left">
+<code><a href="../reference/get_data_store_namespaces.html">get_data_store_namespaces()</a></code>/<code><a href="../reference/get_data_store_keys.html">get_data_store_keys()</a></code>/<code><a href="../reference/get_data_store_value.html">get_data_store_value()</a></code>
+</td>
+<td align="left">The system or user key/value data store.</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="../reference/get_file_resources.html">get_file_resources()</a></code></td>
+<td align="left">Metadata (not contents) of files stored in the
+instance.</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/get_system_info.html">get_system_info</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">version</span></span>
+<span><span class="co">#&gt; [1] "2.41.7"</span></span>
+<span></span>
+<span><span class="co"># Coordinates/boundaries for every province (level 2)</span></span>
+<span><span class="fu"><a href="../reference/get_geo_features.html">get_geo_features</a></span><span class="op">(</span>org_units <span class="op">=</span> <span class="st">'LEVEL-2'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 18 × 11</span></span></span>
+<span><span class="co">#&gt;   id      name  code  has_coordinates_down has_coordinates_up level parent_graph</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> W6sNfk… 01 V… ASIL… TRUE                 FALSE                  2 IWp9dQGM0bS </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> YvLOmt… 02 P… ASIL… TRUE                 FALSE                  2 IWp9dQGM0bS </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> XKGgyn… 03 L… ASIL… TRUE                 FALSE                  2 IWp9dQGM0bS </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> rO2RVJ… 04 O… ASIL… TRUE                 FALSE                  2 IWp9dQGM0bS </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> FRmrFT… 05 B… ASIL… TRUE                 FALSE                  2 IWp9dQGM0bS </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 13 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: parent_id &lt;chr&gt;, parent_name &lt;chr&gt;, type &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   coordinates &lt;chr&gt;</span></span></span>
+<span></span>
+<span><span class="co"># Reading the key/value data store</span></span>
+<span><span class="va">namespaces</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_store_namespaces.html">get_data_store_namespaces</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">namespaces</span></span>
+<span><span class="co">#&gt;  [1] "who-dqa"             "bridge"              "CLIMATE_DATA"       </span></span>
+<span><span class="co">#&gt;  [4] "bulk-load"           "WHO_ICD11_COD"       "dataQualityTool"    </span></span>
+<span><span class="co">#&gt;  [7] "DHIS2_MAPS_APP_CORE" "tracker-capture"     "analytics"          </span></span>
+<span><span class="co">#&gt; [10] "Dhis2Transfer"</span></span>
+<span><span class="fu"><a href="../reference/get_data_store_keys.html">get_data_store_keys</a></span><span class="op">(</span><span class="va">namespaces</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "configurations"        "configurationsMaurice" "configurationsTOM"</span></span></code></pre></div>
+<p><code><a href="../reference/get_sql_view_data.html">get_sql_view_data()</a></code> requires the authenticated user to
+be authorised to read the specific SQL view; DHIS2 returns an error
+rather than empty results if not.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -670,7 +564,7 @@ response.</li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

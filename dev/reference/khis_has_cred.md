@@ -24,6 +24,7 @@ A boolean value indicating whether valid credentials are available.
 ## See also
 
 Other credential functions:
+[`khis_api_version()`](https://khisr.damurka.com/dev/reference/khis_api_version.md),
 [`khis_base_url()`](https://khisr.damurka.com/dev/reference/khis_base_url.md),
 [`khis_cred()`](https://khisr.damurka.com/dev/reference/khis_cred.md),
 [`khis_cred_clear()`](https://khisr.damurka.com/dev/reference/khis_cred_clear.md),
@@ -33,11 +34,12 @@ Other credential functions:
 ## Examples
 
 ``` r
+
 if (FALSE) { # \dontrun{
     # Set the credentials using global .auth object
     khis_cred(username = 'DHIS2 username',
               password = 'DHIS2 password',
-              server = 'https://dhis2-instance/api')
+              server = 'https://<dhis2-instance>')
 
     # Check if credentials are available. Should return TRUE
     khis_has_cred()

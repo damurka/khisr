@@ -55,6 +55,16 @@ get_dimensions(...)
 
 get_period_types(...)
 
+get_programs(...)
+
+get_program_stages(...)
+
+get_tracked_entity_types(...)
+
+get_tracked_entity_attributes(...)
+
+get_relationship_types(...)
+
 get_user_profile()
 ```
 
@@ -98,6 +108,15 @@ get_user_profile()
 
 A tibble containing the DHIS2 metadata response.
 
+## See also
+
+[`get_tracked_entities()`](https://khisr.damurka.com/dev/reference/get_tracked_entities.md),
+[`get_events()`](https://khisr.damurka.com/dev/reference/get_events.md),
+[`get_enrollments()`](https://khisr.damurka.com/dev/reference/get_enrollments.md)
+for retrieving tracker data (as opposed to the metadata describing
+programs, program stages, and tracked entity types/attributes retrieved
+here).
+
 ## Examples
 
 ``` r
@@ -110,9 +129,12 @@ get_organisation_units()
 get_data_elements()
 
 # Get data elements by element ids
-get_data_elements(id %.in% c('VR7vdS7P0Gb', 'gQro1y7Rsbq'))
+get_data_elements(id %.in% c('lYsfXxCw6Qi', 'GxlrIgMyEf4'))
 
-# Get datasets by name with the word 'MOH 705'
-get_data_sets(name %.like% 'MOH 705')
+# Get datasets by name with the word 'malaria'
+get_data_sets(name %.like% 'malaria')
+
+# Get all tracker programs
+get_programs()
 }
 ```

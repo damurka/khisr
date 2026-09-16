@@ -2,6 +2,112 @@
 
 ## khisr (development version)
 
+## khisr 1.0.8
+
+- Added a link to DHIS2 (`<https://dhis2.org>`) in `Description:`.
+
+## khisr 1.0.7
+
+This release adds support for DHIS2’s Tracker API, Personal Access Token
+authentication, and a wide range of new endpoints for analytics, data
+quality, and instance metadata — alongside the fix that restores khisr
+to CRAN.
+
+### New features
+
+- **Tracker API support**:
+  [`get_tracked_entities()`](https://khisr.damurka.com/dev/reference/get_tracked_entities.md),
+  [`get_events()`](https://khisr.damurka.com/dev/reference/get_events.md),
+  and
+  [`get_enrollments()`](https://khisr.damurka.com/dev/reference/get_enrollments.md)
+  retrieve tracked entities, program-stage events, and program
+  enrollments, with automatic pagination and attribute-value filtering
+  via
+  [`tracked_entity_filter()`](https://khisr.damurka.com/dev/reference/tracked_entity_filter.md)
+  (and infix operators like `%.teq%`, `%.tin%`, `%.tsw%`).
+  [`get_relationships()`](https://khisr.damurka.com/dev/reference/get_relationships.md)
+  retrieves links between tracker records. Note that
+  [`get_events()`](https://khisr.damurka.com/dev/reference/get_events.md)
+  takes a single `org_unit` (DHIS2’s Tracker API only accepts one),
+  while
+  [`get_tracked_entities()`](https://khisr.damurka.com/dev/reference/get_tracked_entities.md)/[`get_enrollments()`](https://khisr.damurka.com/dev/reference/get_enrollments.md)
+  take `org_units` (one or more). See the new [Tracker
+  Data](https://khisr.damurka.com/articles/tracker.html) article.
+- **Personal Access Token authentication**: `khis_cred(token = ...)` is
+  now a supported alternative to `username`/`password` — DHIS2’s own
+  recommended method for scripts and integrations.
+- **Tracker and event analytics**:
+  [`get_event_analytics()`](https://khisr.damurka.com/dev/reference/get_event_analytics.md)
+  and
+  [`get_enrollment_analytics()`](https://khisr.damurka.com/dev/reference/get_enrollment_analytics.md)
+  retrieve dimensional analytics over Tracker data;
+  [`get_event_analytics_aggregate()`](https://khisr.damurka.com/dev/reference/get_event_analytics_aggregate.md)/[`get_enrollment_analytics_aggregate()`](https://khisr.damurka.com/dev/reference/get_enrollment_analytics_aggregate.md)
+  retrieve pivot-table style totals instead.
+- **Raw data values and completeness**:
+  [`get_data_value_sets()`](https://khisr.damurka.com/dev/reference/get_data_value_sets.md)
+  retrieves individually entered data values behind the aggregates, and
+  [`get_complete_data_set_registrations()`](https://khisr.damurka.com/dev/reference/get_complete_data_set_registrations.md)
+  retrieves completeness registration records — both useful for
+  data-quality auditing alongside the existing
+  [`get_analytics()`](https://khisr.damurka.com/dev/reference/get_analytics.md)/[`get_data_sets_by_level()`](https://khisr.damurka.com/dev/reference/get_data_sets_by_level.md).
+- **Data quality checks**:
+  [`get_analytics_outliers()`](https://khisr.damurka.com/dev/reference/get_analytics_outliers.md)
+  flags statistical outliers,
+  [`get_validation_results()`](https://khisr.damurka.com/dev/reference/get_validation_results.md)
+  retrieves violated validation rules, and
+  [`get_data_value_audits()`](https://khisr.damurka.com/dev/reference/get_data_value_audits.md)
+  retrieves a data value’s change history. (These require the DHIS2
+  account to have the matching authority — outlier detection and SQL
+  views in particular are often restricted.)
+- **Instance and system utilities**:
+  [`get_system_info()`](https://khisr.damurka.com/dev/reference/get_system_info.md)
+  (version/build info),
+  [`get_geo_features()`](https://khisr.damurka.com/dev/reference/get_geo_features.md)
+  (org unit coordinates for mapping),
+  [`get_sql_views()`](https://khisr.damurka.com/dev/reference/get_sql_views.md)/[`get_sql_view_data()`](https://khisr.damurka.com/dev/reference/get_sql_view_data.md)
+  (predefined SQL views), and
+  [`get_data_store_namespaces()`](https://khisr.damurka.com/dev/reference/get_data_store_namespaces.md)/[`get_data_store_keys()`](https://khisr.damurka.com/dev/reference/get_data_store_keys.md)/
+  [`get_data_store_value()`](https://khisr.damurka.com/dev/reference/get_data_store_value.md)
+  (the key/value data store) round out coverage of DHIS2’s REST API.
+- **New metadata helpers** for Tracker configuration:
+  [`get_programs()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md),
+  [`get_program_stages()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md),
+  [`get_tracked_entity_types()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md),
+  [`get_tracked_entity_attributes()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md),
+  [`get_relationship_types()`](https://khisr.damurka.com/dev/reference/metadata-helpers.md),
+  and
+  [`get_file_resources()`](https://khisr.damurka.com/dev/reference/get_file_resources.md).
+- [`get_organisations_by_level()`](https://khisr.damurka.com/dev/reference/get_organisations_by_level.md)
+  now includes an id column for every ancestor level (e.g. `country_id`,
+  `province_id`) alongside the name, so results can be joined back to
+  other data reliably even when two org units share a name.
+
+### Bug fixes
+
+- **Fixed the CRAN check failure that got khisr archived**: a couple of
+  internal helpers relied on `dplyr::id()`, which was removed in dplyr
+  1.2.0.
+- Fixed a crash in
+  [`get_analytics_by_level()`](https://khisr.damurka.com/dev/reference/get_analytics_by_level.md)/[`get_data_sets_by_level()`](https://khisr.damurka.com/dev/reference/get_data_sets_by_level.md)
+  when passing extra query options, the exact usage the documentation
+  invited.
+- Fixed a bug where a failed metadata request produced a garbled, hard
+  to read error instead of the actual failure reason.
+- Large metadata and organisation-unit lists are now fetched with real
+  pagination, instead of relying on a server setting that some instances
+  cap or ignore, which could previously truncate results silently.
+- Network retries now also cover 502/504 Gateway Timeout errors, common
+  behind reverse proxies fronting large DHIS2 instances.
+- [`khis_cred()`](https://khisr.damurka.com/dev/reference/khis_cred.md)’s
+  `api_version` argument now actually works, letting requests be pinned
+  to a specific DHIS2 API version;
+  [`khis_api_version()`](https://khisr.damurka.com/dev/reference/khis_api_version.md)
+  reads back the pinned value.
+- Fixed
+  [`khis_display_name()`](https://khisr.damurka.com/dev/reference/khis_display_name.md)
+  erroring when called with an explicit `auth` argument instead of the
+  default global credentials.
+
 ## khisr 1.0.6
 
 CRAN release: 2024-10-06

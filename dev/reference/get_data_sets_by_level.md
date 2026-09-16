@@ -15,6 +15,7 @@ get_data_sets_by_level(
   level = 1,
   org_ids = NULL,
   ...,
+  auth = NULL,
   call = caller_env()
 )
 ```
@@ -44,7 +45,14 @@ get_data_sets_by_level(
 
 - ...:
 
-  Other options that can be passed onto DHIS2 API.
+  Other analytics query options passed onto the DHIS2 `analytics`
+  endpoint (e.g. additional dimension/filter arguments). Not forwarded
+  to the organisation unit or data set metadata lookups this function
+  also performs.
+
+- auth:
+
+  Optional. The authentication object.
 
 - call:
 
@@ -73,27 +81,27 @@ A tibble with detailed information, including:
 ## Examples
 
 ``` r
-# The MoH 745 Cancer Screening Program Monthly Summary Form
-dataset_id = c('WWh5hbCmvND')
+# The Malaria elimination dataset
+dataset_id = c('VEM58nY22sO')
 
 # Download data from February 2023 to current date
 data <- get_data_sets_by_level(dataset_ids = dataset_id,
                                start_date = '2023-02-01')
 data
-#> # A tibble: 37 × 10
-#>    kenya dataset    period     month  year reporting_rate reporting_rate_on_time
-#>    <chr> <chr>      <date>     <ord> <dbl>          <dbl>                  <dbl>
-#>  1 Kenya MoH 745 C… 2026-02-01 Febr…  2026            0                      0  
-#>  2 Kenya MoH 745 C… 2026-01-01 Janu…  2026           66.7                   64.1
-#>  3 Kenya MoH 745 C… 2024-10-01 Octo…  2024           69.3                   66.4
-#>  4 Kenya MoH 745 C… 2024-11-01 Nove…  2024           67.5                   62.0
-#>  5 Kenya MoH 745 C… 2023-06-01 June   2023           67.6                   63.2
-#>  6 Kenya MoH 745 C… 2023-05-01 May    2023           65.5                   61.7
-#>  7 Kenya MoH 745 C… 2024-05-01 May    2024           66.8                   62.2
-#>  8 Kenya MoH 745 C… 2025-08-01 Augu…  2025           65.2                   60.1
-#>  9 Kenya MoH 745 C… 2025-09-01 Sept…  2025           68.0                   63.8
-#> 10 Kenya MoH 745 C… 2024-03-01 March  2024           66.4                   62.8
-#> # ℹ 27 more rows
+#> # A tibble: 44 × 10
+#>    country dataset  period     month  year reporting_rate reporting_rate_on_time
+#>    <chr>   <chr>    <date>     <ord> <dbl>          <dbl>                  <dbl>
+#>  1 Lao PDR Malaria… 2024-12-01 Dece…  2024           83.1                   83.1
+#>  2 Lao PDR Malaria… 2026-07-01 July   2026           86.3                   86.3
+#>  3 Lao PDR Malaria… 2024-11-01 Nove…  2024           83.2                   83.2
+#>  4 Lao PDR Malaria… 2026-06-01 June   2026           86.1                   86.1
+#>  5 Lao PDR Malaria… 2026-08-01 Augu…  2026           86.3                   86.3
+#>  6 Lao PDR Malaria… 2024-02-01 Febr…  2024           75.7                   75.7
+#>  7 Lao PDR Malaria… 2024-10-01 Octo…  2024           79.1                   79.1
+#>  8 Lao PDR Malaria… 2026-05-01 May    2026           85.9                   85.9
+#>  9 Lao PDR Malaria… 2026-09-01 Sept…  2026           86.4                   86.4
+#> 10 Lao PDR Malaria… 2024-03-01 March  2024           75.9                   75.9
+#> # ℹ 34 more rows
 #> # ℹ 3 more variables: actual_reports <dbl>, actual_reports_on_time <dbl>,
 #> #   expected_reports <dbl>
 ```

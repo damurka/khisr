@@ -1,9 +1,19 @@
 # Date and Period Format
 
-This guide explains how to specify dates and periods when working with
-the `khisr` package, which interacts with the DHIS2 platform.
-Understanding these formats is essential for retrieving the desired data
-effectively.
+This guide explains how to specify dates and periods for DHIS2’s
+**aggregate** Analytics API
+([`get_analytics()`](https://khisr.damurka.com/dev/reference/get_analytics.md),
+[`get_analytics_by_level()`](https://khisr.damurka.com/dev/reference/get_analytics_by_level.md),
+[`get_data_sets_by_level()`](https://khisr.damurka.com/dev/reference/get_data_sets_by_level.md))
+— the fixed/relative period codes below are for the `pe` dimension
+specifically. `khisr`’s Tracker functions
+([`get_tracked_entities()`](https://khisr.damurka.com/dev/reference/get_tracked_entities.md),
+[`get_events()`](https://khisr.damurka.com/dev/reference/get_events.md),
+[`get_enrollments()`](https://khisr.damurka.com/dev/reference/get_enrollments.md))
+use plain ISO-8601 date or datetime strings for their date-range
+arguments instead (e.g. `occurred_after = '2024-03-20'`), not the period
+codes described here — see [Tracker
+Data](https://khisr.damurka.com/articles/tracker.html).
 
 DHIS2 uses the `yyyy-MM-dd` format for dates. For instance, to represent
 March 20, 2024, you would use “2024-03-20”.

@@ -14,6 +14,7 @@ get_analytics_by_level(
   level = 1,
   org_ids = NULL,
   ...,
+  auth = NULL,
   call = caller_env()
 )
 ```
@@ -43,7 +44,14 @@ get_analytics_by_level(
 
 - ...:
 
-  Other options that can be passed onto DHIS2 API.
+  Other analytics query options passed onto the DHIS2 `analytics`
+  endpoint (e.g. additional dimension/filter arguments). Not forwarded
+  to the organisation unit or data element metadata lookups this
+  function also performs.
+
+- auth:
+
+  Optional. The authentication object.
 
 - call:
 
@@ -85,27 +93,27 @@ A tibble with detailed information, including:
 ## Examples
 
 ``` r
-# Clinical Breast Examination data elements
-# XEX93uLsAm2 = CBE Abnormal
-# cXe64Yk0QMY = CBE Normal
-element_id = c('cXe64Yk0QMY', 'XEX93uLsAm2')
+# Malaria data elements
+# lYsfXxCw6Qi = MAL - Malaria confirmed cases reported
+# GxlrIgMyEf4 = MAL - Malaria deaths
+element_id = c('lYsfXxCw6Qi', 'GxlrIgMyEf4')
 
 # Download data from February 2023 to current date
 data <- get_analytics_by_level(element_ids = element_id,
                                start_date = '2023-02-01')
 data
-#> # A tibble: 359 × 7
-#>    value kenya element      category  period     month      year
-#>    <dbl> <chr> <chr>        <chr>     <date>     <ord>     <dbl>
-#>  1    18 Kenya CBE-Abnormal 56-74 yrs 2024-04-01 April      2024
-#>  2   399 Kenya CBE-Abnormal 25-34 yrs 2024-12-01 December   2024
-#>  3   137 Kenya CBE-Abnormal 35-39 yrs 2023-06-01 June       2023
-#>  4     6 Kenya CBE-Abnormal >75 yrs   2025-02-01 February   2025
-#>  5   150 Kenya CBE-Abnormal 35-39 yrs 2023-07-01 July       2023
-#>  6   156 Kenya CBE-Abnormal 35-39 yrs 2023-05-01 May        2023
-#>  7    35 Kenya CBE-Abnormal 56-74 yrs 2024-05-01 May        2024
-#>  8    24 Kenya CBE-Abnormal 56-74 yrs 2024-03-01 March      2024
-#>  9 15177 Kenya CBE-Normal   35-39 yrs 2025-09-01 September  2025
-#> 10   100 Kenya CBE-Abnormal 35-39 yrs 2023-08-01 August     2023
-#> # ℹ 349 more rows
+#> # A tibble: 453 × 7
+#>    value country element                         category period     month  year
+#>    <dbl> <chr>   <chr>                           <chr>    <date>     <ord> <dbl>
+#>  1   253 Lao PDR MAL - Malaria deaths            15+ yea… 2025-08-01 Augu…  2025
+#>  2   237 Lao PDR MAL - Malaria deaths            15+ yea… 2025-09-01 Sept…  2025
+#>  3   189 Lao PDR MAL - Malaria deaths            15+ yea… 2025-07-01 July   2025
+#>  4   644 Lao PDR MAL - Malaria confirmed cases … 15+ yea… 2025-07-01 July   2025
+#>  5    10 Lao PDR NA                              NA       2026-02-01 Febr…  2026
+#>  6   601 Lao PDR MAL - Malaria confirmed cases … 15+ yea… 2025-08-01 Augu…  2025
+#>  7   696 Lao PDR MAL - Malaria confirmed cases … 15+ yea… 2025-06-01 June   2025
+#>  8     8 Lao PDR NA                              NA       2026-01-01 Janu…  2026
+#>  9    10 Lao PDR NA                              NA       2026-03-01 March  2026
+#> 10     8 Lao PDR NA                              NA       2026-04-01 April  2026
+#> # ℹ 443 more rows
 ```

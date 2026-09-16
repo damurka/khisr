@@ -66,55 +66,56 @@ A tibble containing the DHIS2 metadata response.
 ## Examples
 
 ``` r
+
 # Get the categories metadata
 get_metadata('categories')
-#> # A tibble: 543 × 2
-#>    name                                     id         
-#>    <chr>                                    <chr>      
-#>  1 "0-3mths, 4-6mths, 7-18mths"             JI1bCqQ77r1
-#>  2 "1st,2nd"                                NChHyaAC6ls
-#>  3 "2-5yrs"                                 KY9t7YJtAJI
-#>  4 "3. Immunology"                          LQeahngW60z
-#>  5 "6-10 yrs"                               eLTXvFcuiRN
-#>  6 "6-10yrs"                                eZsIWKswsN5
-#>  7 "717 Operations(Booked&Operated) "       OzZClNVHXLV
-#>  8 "749 Total Isolates"                     mXj1e4ycMBt
-#>  9 "751_Child exclusively  breastfed"       oNDNLvqbXtN
-#> 10 "751_Early  initiation to breastfeeding" hghdXcQVx7R
-#> # ℹ 533 more rows
+#> # A tibble: 161 × 2
+#>    name                           id         
+#>    <chr>                          <chr>      
+#>  1 AFI - Screening form age group vuZtG77uNSk
+#>  2 Age (0 days-59 months)         aJTOeHrkHKt
+#>  3 Age (0 days-9 years)           La1iFz5hRWZ
+#>  4 Age (0 months-17 years)        LRbLVRPeWhB
+#>  5 Age (0 months-9 years)         EOllQxIhJ45
+#>  6 Age (0-20+years)               Zh31lLGRQaG
+#>  7 Age (0-27 days)                l3PCpU0xXR3
+#>  8 Age (0-50+years)               xHd2kREtJIQ
+#>  9 Age (0-59 months)              hOERwojXxq7
+#> 10 Age (0-9 years)                avoOKxQrkPC
+#> # ℹ 151 more rows
 
 # Get the datasets metadata with fields 'id,name,organisationUnits' and filter
-# only the datasets with id 'WWh5hbCmvND'
+# only the datasets with id 'VEM58nY22sO'
 get_metadata('dataSets',
              fields = 'id,name,organisationUnits[id,name,path]',
-             id %.eq% 'WWh5hbCmvND')
+             id %.eq% 'VEM58nY22sO')
 #> # A tibble: 1 × 3
-#>   name                                                  id     organisationUnits
-#>   <chr>                                                 <chr>  <list>           
-#> 1 MoH 745 Cancer Screening Program Monthly Summary Form WWh5h… <list [7,006]>   
+#>   name                id          organisationUnits
+#>   <chr>               <chr>       <list>           
+#> 1 Malaria elimination VEM58nY22sO <list [1,385]>   
 
 # Get data elements filtered by dataElementGroups id
 get_metadata('dataElements',
-             dataElementGroups.id %.eq% 'IXd7DXxZqzL',
+             dataElementGroups.id %.eq% 'WdtYaV7o8QV',
              fields = ':all')
-#> # A tibble: 31 × 35
-#>    href       name  created lastUpdated translations externalAccess publicAccess
-#>    <chr>      <chr> <chr>   <chr>       <lgl>        <lgl>          <chr>       
-#>  1 https://h… CBE-… 2020-0… 2020-07-14… NA           FALSE          rw------    
-#>  2 https://h… CBE-… 2020-0… 2020-07-14… NA           FALSE          rw------    
-#>  3 https://h… Colo… 2020-0… 2020-07-14… NA           FALSE          rw------    
-#>  4 https://h… Colo… 2020-0… 2020-07-14… NA           FALSE          rw------    
-#>  5 https://h… Colo… 2020-0… 2020-07-14… NA           FALSE          rw------    
-#>  6 https://h… Colo… 2020-0… 2020-07-14… NA           FALSE          rw------    
-#>  7 https://h… FOBT… 2020-0… 2021-10-08… NA           FALSE          rw------    
-#>  8 https://h… FOBT… 2020-0… 2021-10-08… NA           FALSE          rw------    
-#>  9 https://h… Mamm… 2020-0… 2020-07-14… NA           FALSE          rw------    
-#> 10 https://h… Mamm… 2020-0… 2020-07-14… NA           FALSE          rw------    
-#> # ℹ 21 more rows
-#> # ℹ 28 more variables: createdBy <list>, userGroupAccesses <lgl>,
-#> #   userAccesses <lgl>, access <list>, favorites <lgl>, lastUpdatedBy <list>,
-#> #   sharing <list>, shortName <chr>, dimensionItemType <chr>, legendSets <lgl>,
-#> #   aggregationType <chr>, valueType <chr>, domainType <chr>,
+#> # A tibble: 23 × 34
+#>    code   name           created lastUpdated translations createdBy    favorites
+#>    <chr>  <chr>          <chr>   <chr>       <lgl>        <list>       <lgl>    
+#>  1 CH113a CH113a - Chil… 2022-0… 2022-01-10… NA           <named list> NA       
+#>  2 CH114  CH114 - House… 2022-0… 2022-01-10… NA           <named list> NA       
+#>  3 CH115a CH115a - Hous… 2022-0… 2022-01-10… NA           <named list> NA       
+#>  4 CH115b CH115b - Tota… 2022-0… 2022-01-10… NA           <named list> NA       
+#>  5 CH116a CH116a - Peop… 2022-0… 2022-01-10… NA           <named list> NA       
+#>  6 CH116b CH116b - Indi… 2022-0… 2022-01-10… NA           <named list> NA       
+#>  7 CH117  CH117 - Peopl… 2022-0… 2022-01-10… NA           <named list> NA       
+#>  8 CH118  CH118 - ITNs … 2022-0… 2022-01-10… NA           <named list> NA       
+#>  9 CH119a CH119a - Febr… 2022-0… 2022-01-10… NA           <named list> NA       
+#> 10 CH119b CH119b - Febr… 2022-0… 2022-01-10… NA           <named list> NA       
+#> # ℹ 13 more rows
+#> # ℹ 27 more variables: lastUpdatedBy <list>, sharing <list>, shortName <chr>,
+#> #   description <chr>, formName <chr>, dimensionItemType <chr>,
+#> #   legendSets <lgl>, aggregationType <chr>, valueType <chr>, domainType <chr>,
 #> #   dataSetElements <list>, aggregationLevels <lgl>, zeroIsSignificant <lgl>,
-#> #   optionSetValue <lgl>, dimensionItem <chr>, displayShortName <chr>, …
+#> #   optionSetValue <lgl>, dimensionItem <chr>, displayShortName <chr>,
+#> #   displayDescription <chr>, access <list>, displayName <chr>, …
 ```
