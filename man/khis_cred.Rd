@@ -8,10 +8,9 @@ khis_cred(
   username = NULL,
   password = NULL,
   token = NULL,
-  server = NULL,
+  server,
   api_version = NULL,
-  config_path = NULL,
-  base_url = deprecated()
+  config_path = NULL
 )
 }
 \arguments{
@@ -38,8 +37,6 @@ server's own default API version when not set.}
 \item{config_path}{An optional path to a configuration file containing
 either \code{username}/\code{password} or a \code{token}. This is considered more
 secure than providing credentials directly in code.}
-
-\item{base_url}{Deprecated. The base URL of the DHIS2 instance. Use \code{server} instead.}
 }
 \value{
 Auth object

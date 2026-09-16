@@ -7,9 +7,7 @@
 
 ## usethis namespace: start
 #' @importFrom janitor clean_names
-#' @importFrom lifecycle deprecate_warn
-#' @importFrom lifecycle deprecated
-#' @importFrom lifecycle is_present
+#' @importFrom lifecycle badge
 #' @importFrom lubridate month
 #' @importFrom lubridate today
 #' @importFrom lubridate year
@@ -23,7 +21,6 @@
 #' @importFrom stringr str_dup
 #' @importFrom stringr str_extract
 #' @importFrom stringr str_glue
-#' @importFrom stringr str_remove
 #' @importFrom stringr str_to_upper
 ## usethis namespace: end
 NULL
