@@ -102,7 +102,7 @@ element_id = c('lYsfXxCw6Qi', 'GxlrIgMyEf4')
 data <- get_analytics_by_level(element_ids = element_id,
                                start_date = '2023-02-01')
 data
-#> # A tibble: 453 × 7
+#> # A tibble: 465 × 7
 #>    value country element                         category period     month  year
 #>    <dbl> <chr>   <chr>                           <chr>    <date>     <ord> <dbl>
 #>  1   253 Lao PDR MAL - Malaria deaths            15+ yea… 2025-08-01 Augu…  2025
@@ -115,5 +115,5 @@ data
 #>  8     8 Lao PDR NA                              NA       2026-01-01 Janu…  2026
 #>  9    10 Lao PDR NA                              NA       2026-03-01 March  2026
 #> 10     8 Lao PDR NA                              NA       2026-04-01 April  2026
-#> # ℹ 443 more rows
+#> # ℹ 455 more rows
 ```
