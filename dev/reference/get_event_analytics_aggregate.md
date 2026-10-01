@@ -98,15 +98,16 @@ get_event_analytics_aggregate(program = 'PREnRHSp3be',
                               stage = 'mj1stImcUCi',
                               ou %.d% 'USER_ORGUNIT',
                               pe %.d% 'LAST_12_MONTHS')
-#> # A tibble: 8 × 3
+#> # A tibble: 9 × 3
 #>   pe     ou          value
 #>   <chr>  <chr>       <dbl>
-#> 1 202606 IWp9dQGM0bS     8
-#> 2 202602 IWp9dQGM0bS     3
-#> 3 202608 IWp9dQGM0bS    23
-#> 4 202601 IWp9dQGM0bS     3
-#> 5 202603 IWp9dQGM0bS     9
-#> 6 202604 IWp9dQGM0bS     7
-#> 7 202605 IWp9dQGM0bS    15
-#> 8 202607 IWp9dQGM0bS    19
+#> 1 202609 IWp9dQGM0bS    24
+#> 2 202606 IWp9dQGM0bS     8
+#> 3 202602 IWp9dQGM0bS     3
+#> 4 202608 IWp9dQGM0bS    23
+#> 5 202601 IWp9dQGM0bS     3
+#> 6 202603 IWp9dQGM0bS     9
+#> 7 202604 IWp9dQGM0bS     7
+#> 8 202605 IWp9dQGM0bS    15
+#> 9 202607 IWp9dQGM0bS    19
 ```

@@ -89,15 +89,16 @@ for the event equivalent.
 get_enrollment_analytics_aggregate(program = 'PREnRHSp3be',
                                    ou %.d% 'USER_ORGUNIT',
                                    pe %.d% 'LAST_12_MONTHS')
-#> # A tibble: 8 × 3
+#> # A tibble: 9 × 3
 #>   value ou          pe    
 #>   <dbl> <chr>       <chr> 
 #> 1    12 IWp9dQGM0bS 202606
 #> 2    18 IWp9dQGM0bS 202608
-#> 3     8 IWp9dQGM0bS 202604
-#> 4     4 IWp9dQGM0bS 202601
-#> 5    20 IWp9dQGM0bS 202607
-#> 6    14 IWp9dQGM0bS 202605
-#> 7     5 IWp9dQGM0bS 202602
-#> 8     8 IWp9dQGM0bS 202603
+#> 3    36 IWp9dQGM0bS 202609
+#> 4     8 IWp9dQGM0bS 202604
+#> 5     4 IWp9dQGM0bS 202601
+#> 6    20 IWp9dQGM0bS 202607
+#> 7    14 IWp9dQGM0bS 202605
+#> 8     5 IWp9dQGM0bS 202602
+#> 9     8 IWp9dQGM0bS 202603
 ```

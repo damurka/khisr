@@ -88,7 +88,7 @@ dataset_id = c('VEM58nY22sO')
 data <- get_data_sets_by_level(dataset_ids = dataset_id,
                                start_date = '2023-02-01')
 data
-#> # A tibble: 44 × 10
+#> # A tibble: 45 × 10
 #>    country dataset  period     month  year reporting_rate reporting_rate_on_time
 #>    <chr>   <chr>    <date>     <ord> <dbl>          <dbl>                  <dbl>
 #>  1 Lao PDR Malaria… 2024-12-01 Dece…  2024           83.1                   83.1
@@ -101,7 +101,7 @@ data
 #>  8 Lao PDR Malaria… 2026-05-01 May    2026           85.9                   85.9
 #>  9 Lao PDR Malaria… 2026-09-01 Sept…  2026           86.4                   86.4
 #> 10 Lao PDR Malaria… 2024-03-01 March  2024           75.9                   75.9
-#> # ℹ 34 more rows
+#> # ℹ 35 more rows
 #> # ℹ 3 more variables: actual_reports <dbl>, actual_reports_on_time <dbl>,
 #> #   expected_reports <dbl>
 ```
