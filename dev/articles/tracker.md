@@ -40,7 +40,7 @@ which are metadata rather than data — look them up with the matching
 ``` r
 
 get_programs()
-#> # A tibble: 29 × 2
+#> # A tibble: 30 × 2
 #>   name                                           id         
 #>   <chr>                                          <chr>      
 #> 1 AFI - Acute Febrile Illness                    w0qPtIW0JYu
@@ -48,9 +48,9 @@ get_programs()
 #> 3 Animal Health                                  PREnRHSp3be
 #> 4 Anti-Tuberculosis Drug Resistance Survey (DRS) KYzHf1Ta6C4
 #> 5 Cancer Registry                                AbPGPdlFWqc
-#> # ℹ 24 more rows
+#> # ℹ 25 more rows
 get_program_stages()
-#> # A tibble: 103 × 2
+#> # A tibble: 104 × 2
 #>   name                                                        id         
 #>   <chr>                                                       <chr>      
 #> 1 AEFI                                                        so8YZ9J3MeO
@@ -58,7 +58,7 @@ get_program_stages()
 #> 3 Admission                                                   pigybbQRpbs
 #> 4 Animal exposure                                             JsiWrweuQh5
 #> 5 Availability, trainings and medical clearance - RRT Manager HSngsKadeW4
-#> # ℹ 98 more rows
+#> # ℹ 99 more rows
 get_tracked_entity_types()
 #> # A tibble: 6 × 2
 #>   name                 id         

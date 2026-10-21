@@ -91,7 +91,7 @@ facility to district to country.
 # Retrieves all the data elements in DHIS2
 data_elements <- get_data_elements()
 data_elements
-#> # A tibble: 6,166 × 2
+#> # A tibble: 6,335 × 2
 #>    name                                id         
 #>    <chr>                               <chr>      
 #>  1 AEFI - AEFI outcome                 yRrSDiR5v1M
@@ -104,7 +104,7 @@ data_elements
 #>  8 AEFI - Batch/lot number (Vaccine 2) b1rSwGRcY5W
 #>  9 AEFI - Batch/lot number (Vaccine 3) YBnFoNouH6f
 #> 10 AEFI - Batch/lot number (Vaccine 4) BHAfwo6JPDa
-#> # ℹ 6,156 more rows
+#> # ℹ 6,325 more rows
 ```
 
 Related data elements are grouped into a logical collection referred to
@@ -117,7 +117,7 @@ groups provide a way manage and analyze related data elements.
 # Retrieves all the data element groups
 data_element_groups <- get_data_element_groups()
 data_element_groups
-#> # A tibble: 160 × 2
+#> # A tibble: 161 × 2
 #>    name                                           id         
 #>    <chr>                                          <chr>      
 #>  1 AEFI - Adverse Events                          yhXZIbQuxOt
@@ -130,7 +130,7 @@ data_element_groups
 #>  8 CH - Adolescent Health                         RwfCEp0aoP5
 #>  9 CH - Child Health                              byO8RqLkwT5
 #> 10 CH - Child protection & interpersonal violence alIVe2Y6WRQ
-#> # ℹ 150 more rows
+#> # ℹ 151 more rows
 ```
 
 ### Periods (annotated as *pe*)
