@@ -102,18 +102,18 @@ element_id = c('lYsfXxCw6Qi', 'GxlrIgMyEf4')
 data <- get_analytics_by_level(element_ids = element_id,
                                start_date = '2023-02-01')
 data
-#> # A tibble: 465 × 7
+#> # A tibble: 477 × 7
 #>    value country element                         category period     month  year
 #>    <dbl> <chr>   <chr>                           <chr>    <date>     <ord> <dbl>
-#>  1   253 Lao PDR MAL - Malaria deaths            15+ yea… 2025-08-01 Augu…  2025
-#>  2   237 Lao PDR MAL - Malaria deaths            15+ yea… 2025-09-01 Sept…  2025
-#>  3   189 Lao PDR MAL - Malaria deaths            15+ yea… 2025-07-01 July   2025
-#>  4   644 Lao PDR MAL - Malaria confirmed cases … 15+ yea… 2025-07-01 July   2025
-#>  5    10 Lao PDR NA                              NA       2026-02-01 Febr…  2026
-#>  6   601 Lao PDR MAL - Malaria confirmed cases … 15+ yea… 2025-08-01 Augu…  2025
-#>  7   696 Lao PDR MAL - Malaria confirmed cases … 15+ yea… 2025-06-01 June   2025
-#>  8     8 Lao PDR NA                              NA       2026-01-01 Janu…  2026
-#>  9    10 Lao PDR NA                              NA       2026-03-01 March  2026
-#> 10     8 Lao PDR NA                              NA       2026-04-01 April  2026
-#> # ℹ 455 more rows
+#>  1     8 Lao PDR NA                              NA       2026-10-01 Octo…  2026
+#>  2   253 Lao PDR MAL - Malaria deaths            15+ yea… 2025-08-01 Augu…  2025
+#>  3   237 Lao PDR MAL - Malaria deaths            15+ yea… 2025-09-01 Sept…  2025
+#>  4   189 Lao PDR MAL - Malaria deaths            15+ yea… 2025-07-01 July   2025
+#>  5   644 Lao PDR MAL - Malaria confirmed cases … 15+ yea… 2025-07-01 July   2025
+#>  6    10 Lao PDR NA                              NA       2026-02-01 Febr…  2026
+#>  7   601 Lao PDR MAL - Malaria confirmed cases … 15+ yea… 2025-08-01 Augu…  2025
+#>  8   696 Lao PDR MAL - Malaria confirmed cases … 15+ yea… 2025-06-01 June   2025
+#>  9     8 Lao PDR NA                              NA       2026-01-01 Janu…  2026
+#> 10    10 Lao PDR NA                              NA       2026-03-01 March  2026
+#> # ℹ 467 more rows
 ```
