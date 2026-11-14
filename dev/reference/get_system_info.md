@@ -50,7 +50,7 @@ get_system_info()
 #> [1] "yyyy-mm-dd"
 #> 
 #> $serverDate
-#> [1] "2026-11-13T12:03:24.112"
+#> [1] "2026-11-14T12:03:03.678"
 #> 
 #> $serverTimeZoneId
 #> [1] "Europe/Berlin"
@@ -59,20 +59,20 @@ get_system_info()
 #> [1] "Central European Standard Time"
 #> 
 #> $lastAnalyticsTableSuccess
-#> [1] "2026-11-13T02:00:00.102"
+#> [1] "2026-11-14T02:00:00.076"
 #> 
 #> $intervalSinceLastAnalyticsTableSuccess
-#> [1] "10 h, 3 m, 24 s"
+#> [1] "10 h, 3 m, 3 s"
 #> 
 #> $lastAnalyticsTableRuntime
-#> [1] "01:11:30.072"
+#> [1] "03:42:45.730"
 #> 
 #> $databaseInfo
 #> $databaseInfo$spatialSupport
 #> [1] TRUE
 #> 
 #> $databaseInfo$time
-#> [1] "2026-11-13T12:03:24.112"
+#> [1] "2026-11-14T12:03:03.678"
 #> 
 #> 
 #> $version
